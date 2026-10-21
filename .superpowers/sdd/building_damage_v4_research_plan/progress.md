@@ -22,3 +22,5 @@ Task L7: complete (tests: `python3 -m pytest tests/v4/test_distillation.py -q` -
 
 Task L8: complete (tests: `python3 -m pytest tests/v4/test_task_adapters.py -q` -> 9 passed). Implemented separate five-class post-only typology labels/metric/head, multi-label visible-defect target builders that preserve absent versus explicit-negative supervision, dense overlapping defect channels, grouped structure/photo split checks and specialist configs. Public dataset preparation, expert-label validation and specialist training remain NOT RUN.
 
+Task L9: complete (tests: `python3 -m pytest tests/v4/test_inference_bundle.py -q` -> 5 passed). Implemented a self-contained inference bundle with immutable model/preprocessing/label metadata, copied checkpoint SHA-256 verification, tamper detection and deterministic reference-prediction hashing. Final checkpoint selection, calibration, external evaluation and deployment remain NOT RUN.
+
