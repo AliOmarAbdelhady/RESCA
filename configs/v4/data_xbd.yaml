@@ -1,0 +1,11 @@
+schema_version: v4.0
+adapter: xbd
+source_dataset: xbd
+source_version: official_raw
+raw_root: data/raw/xbd
+audit_output: outputs/v4/audit/xbd
+manifest_name: manifest.jsonl
+evaluation_label_encoding: 0_background_1_no_damage_2_minor_3_major_4_destroyed
+internal_ignore_id: 255
+preserve_original_labels: true
+split_policy: official_split_then_grouped_overlap_audit
