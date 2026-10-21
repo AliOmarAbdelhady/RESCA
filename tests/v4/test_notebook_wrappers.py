@@ -10,6 +10,7 @@ def test_v4_kaggle_notebooks_are_thin_deterministic_wrappers() -> None:
 
     assert {path.name for path in notebooks} == {
         "00_data_and_split_audit.ipynb",
+        "00_gpu_smoke.ipynb",
         "01_dinov3_teacher_profile.ipynb",
         "02_specialist_manifest_audit.ipynb",
         "03_final_bundle_verify.ipynb",
@@ -23,6 +24,13 @@ def test_v4_kaggle_notebooks_are_thin_deterministic_wrappers() -> None:
             if cell["cell_type"] == "code"
             for line in cell["source"]
         )
-        assert "subprocess.run" in source or "load_" in source
+        if path.name == "00_data_and_split_audit.ipynb":
+            assert "INPUT_ROOT" in source
+            assert "label_schema_ok" in source
+        elif path.name == "00_gpu_smoke.ipynb":
+            assert "torch.cuda.is_available" in source
+            assert "refusing a CPU fallback" in source
+        else:
+            assert "subprocess.run" in source or "load_" in source
         assert "kaggle_key" not in source.lower()
         assert "hf_token" not in source.lower()

@@ -15,7 +15,7 @@ datasets:
     supervision: building_footprint_and_four_grade
     label_space: xbd_0_background_1_no_damage_2_minor_3_major_4_destroyed
     split_key: event_scene_building
-    status: awaiting_remote_access
+    status: remote_audited_xbd_train_test_v3
   - id: xbd_tier3
     priority: P0
     task: paired_overhead

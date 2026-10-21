@@ -20,7 +20,11 @@ class NotebookPreflightError(ValueError):
 
 _EXPECTED: dict[str, dict[str, set[str]]] = {
     "00_data_and_split_audit.ipynb": {
-        "required": {"rescuevision.v4.cli", "'audit'", "RV4_CONFIG", "check=True"},
+        "required": {"INPUT_ROOT", "rv4_cpu_audit", "label_schema_ok"},
+        "forbidden": set(),
+    },
+    "00_gpu_smoke.ipynb": {
+        "required": {"torch.cuda.is_available", "rv4_gpu_smoke", "refusing a CPU fallback"},
         "forbidden": set(),
     },
     "01_dinov3_teacher_profile.ipynb": {
@@ -41,7 +45,7 @@ _EXPECTED: dict[str, dict[str, set[str]]] = {
         "forbidden": set(),
     },
 }
-_FORBIDDEN_CODE = (
+_FORBIDDEN_CODE = frozenset((
     "save_notebook",
     "create_notebook_session",
     "kagglehub",
@@ -49,7 +53,7 @@ _FORBIDDEN_CODE = (
     "pip install",
     "hf_token",
     "kaggle_key",
-)
+))
 
 
 def preflight_notebook_directory(directory: Path) -> dict[str, Any]:
