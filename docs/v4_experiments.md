@@ -11,6 +11,7 @@ generalization. No GPU job or model/data download has been started by this entry
 | L3 | Official xView2 pixel scorer parity contract | PASS | `python3 -m pytest tests/v4/test_evaluation.py -q` → 7 passed | Training remains locked until real-data audit |
 | L4 | Paired CNN model, masked losses and epoch-boundary checkpoint resume | PASS | `python3 -m pytest tests/v4/test_resume.py tests/v4/test_losses.py -q` → 5 passed | Baseline code exists; real training remains locked until K2/K3 |
 | L5 | DINOv3 token-grid validation, frozen feature wrapper and native tiled inference | PASS | `python3 -m pytest tests/v4/test_models.py tests/v4/test_tiling.py -q` → 5 passed | Stand-in models only; real DINOv3 load/GPU smoke is NOT RUN |
+| L6 | Thin Kaggle wrappers for audit, teacher profile, specialist manifest audit and bundle verification | PASS | `python3 -m pytest tests/v4/test_notebook_wrappers.py -q` → 1 passed | Notebook execution/submission remains NOT RUN |
 | K0 | Private Kaggle MCP submission specification and V4 CLI surface | PASS | `python3 -m pytest tests/v4/test_submission_spec.py -q` → 2 passed | Spec generation only; no notebook submitted |
 | L7 | Frozen DINOv3 7B teacher cache key, projection and masked feature loss | PASS | `python3 -m pytest tests/v4/test_distillation.py -q` → 5 passed | Gated 7B download/profile NOT RUN; no external model bytes |
 | L8 | Post-only five-class typology and multi-label visible-defect task contracts | PASS | `python3 -m pytest tests/v4/test_task_adapters.py -q` → 12 passed | Heads/metrics/configs/manifest adapters/label semantics are implemented; public dataset preparation and training NOT RUN |
@@ -32,6 +33,11 @@ generalization. No GPU job or model/data download has been started by this entry
 - `rescuevision.v4.task_adapters`: grouped structure/photo split-integrity checks shared by specialist datasets.
 - `rescuevision.v4.specialist_datasets`: strict post-only and defect JSONL adapters that preserve annotation-unit, footprint-source and missing-label provenance.
 - `rescuevision.v4.bundle`: self-contained checkpoint hash, preprocessing identity, label-map/recipe metadata and deterministic reference-prediction digest.
+
+The Kaggle notebooks under `notebooks/kaggle/v4/` are intentionally thin
+wrappers. They read environment-provided immutable inputs and call the V4
+package; they do not clone moving branches, install hidden dependencies,
+submit jobs, tune thresholds or print credentials.
 
 The 7B configuration is a profile-only contract. It deliberately does not
 download or invoke the gated Hugging Face checkpoint. A real run must first

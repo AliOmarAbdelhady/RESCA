@@ -14,6 +14,8 @@ Task L4: complete (tests: `python3 -m pytest tests/v4/test_resume.py tests/v4/te
 
 Task L5: complete (tests: `python3 -m pytest tests/v4/test_models.py tests/v4/test_tiling.py -q` -> 5 passed). Implemented explicit DINOv3 token-grid extraction/frozen wrapper and native overlap-tiled pair inference with TTA inversion. Real model loading and GPU smoke remain NOT RUN.
 
+Task L6: complete locally (tests: `python3 -m pytest tests/v4/test_notebook_wrappers.py -q` -> 1 passed). Added thin V4 Kaggle wrappers for CPU audit, DINOv3 teacher profile preflight, specialist manifest audit and final bundle verification. No notebook has been submitted or executed; K2/K3 remain blocked on authentication and mounted data.
+
 Task K0: complete (tests: `python3 -m pytest tests/v4/test_submission_spec.py -q` -> 2 passed). Implemented the private no-submit Kaggle request specification, unknown-state retry policy, audit CLI surface and one thin CPU-audit notebook wrapper.
 
 Task K1: blocked (read-only Kaggle MCP discovery and local audit). Canonical xBD train/test v3, xBD tier-3 v2 and RescueNet v1 identities were recorded; dataset-status calls returned `Unauthenticated`, and the corrected local CLI reaches `/home/ali/RescueVision/data/raw/xbd` but finds no `split/images` directories. No bytes were downloaded or attached; continue with local code work while preserving K2 as blocked on mounted-input verification.
