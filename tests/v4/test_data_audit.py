@@ -6,10 +6,12 @@ from pathlib import Path
 
 import numpy as np
 import pytest
+import yaml
 from PIL import Image
 
 from rescuevision.v4.data_audit import DatasetAuditError, audit_dataset
 from rescuevision.v4.datasets import load_manifest
+from rescuevision.v4.cli import _resolve
 
 
 def _write_xbd_sample(
@@ -100,3 +102,14 @@ def test_audit_rejects_mismatched_image_dimensions(tmp_path: Path) -> None:
 
     with pytest.raises(DatasetAuditError, match="dimensions"):
         audit_dataset(root, adapter="xbd", out_dir=tmp_path / "audit")
+
+
+def test_repository_xbd_config_resolves_raw_data_from_project_root() -> None:
+    config_path = Path(__file__).parents[2] / "configs/v4/data_xbd.yaml"
+    payload = yaml.safe_load(config_path.read_text(encoding="utf-8"))
+    base = config_path.parent.resolve()
+    project_root = config_path.parents[2]
+    assert _resolve(base, payload["raw_root"]) == (project_root / "data/raw/xbd").resolve()
+    assert _resolve(base, payload["audit_output"]) == (
+        project_root / "outputs/v4/audit/xbd"
+    ).resolve()

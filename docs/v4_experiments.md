@@ -15,7 +15,7 @@ generalization. No GPU job or model/data download has been started by this entry
 | L7 | Frozen DINOv3 7B teacher cache key, projection and masked feature loss | PASS | `python3 -m pytest tests/v4/test_distillation.py -q` → 5 passed | Gated 7B download/profile NOT RUN; no external model bytes |
 | L8 | Post-only five-class typology and multi-label visible-defect task contracts | PASS | `python3 -m pytest tests/v4/test_task_adapters.py -q` → 9 passed | Heads/configs/label semantics are implemented; public dataset preparation and training NOT RUN |
 | L9 | Final inference-bundle integrity and deterministic reference contract | PASS | `python3 -m pytest tests/v4/test_inference_bundle.py -q` → 5 passed | Bundle packaging is tested; final checkpoint selection/evaluation NOT RUN |
-| K1 | Kaggle dataset identity and access discovery | BLOCKED | Read-only metadata/file searches resolved xBD v3, tier-3 v2 and RescueNet v1; `get_dataset_status` returned `Unauthenticated` | No bytes downloaded or attached; mounted audit required |
+| K1 | Kaggle dataset identity and access discovery | BLOCKED | Read-only metadata/file searches resolved xBD v3, tier-3 v2 and RescueNet v1; Kaggle status returned `Unauthenticated`; local CLI reaches `/home/ali/RescueVision/data/raw/xbd` but finds no `split/images` directories | No bytes downloaded or attached; mounted audit required |
 | K2 | Kaggle CPU audit | NOT RUN | No notebook submitted | Blocked until execution is explicitly started |
 | K3 | Kaggle GPU smoke | NOT RUN | No notebook submitted | Blocked on K2 and execution authorization |
 
