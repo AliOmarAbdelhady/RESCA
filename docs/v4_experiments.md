@@ -24,6 +24,7 @@ an authenticated Kaggle/Colab runtime and return verifiable artifacts.
 | K1 | Kaggle dataset identity and access discovery | PASS | xBD train/test dataset attached to the private audit kernel; remote mount root and file inventory verified | Tier-3 and specialist sources remain separate acquisition gates |
 | K2 | Kaggle CPU audit | PASS | Private kernel `aliomarsaleh/rv4-v4-cpu-data-audit`, version 4; status `COMPLETE`; output `rv4_cpu_audit.json` SHA-256 `ddc84dfdafb549538a205e569d9e77263f4a5318f21cd3ee8029ffd37ae79888`; 13,062 files, 7,464 images, 5,598 labels, 1024×1024 PNG and `features.lng_lat` samples | Unlock the one-run GPU smoke gate; do not treat this as model accuracy |
 | K3 | Kaggle GPU smoke | PASS | Private kernel `aliomarsaleh/rv4-v4-gpu-smoke`, version 1; status `COMPLETE`; output `rv4_gpu_smoke.json` SHA-256 `14ecb171f9a057011b743a1c5b1eb5ab5199818e7cbcfb7bdaf1be215b931956`; Tesla T4, CUDA available, real xBD pair, finite loss `1.648593`, backward/optimizer step completed | Unlock real DINOv3 ViT-L profiling; gated HF credentials remain a prerequisite |
+| K4 | Kaggle DINOv3 ViT-L SAT-493M profile | QUEUED | Private kernel `aliomarsaleh/rv4-v4-dinov3-vit-l-profile`, version 2; xBD + packaged DINOv3 repository + pinned Kaggle PyTorch weight attached; exact hub entry point discovery is included after version 1 exposed a callable-name mismatch | Wait for Kaggle scheduling; accept only a 512-pixel paired token-grid and memory PASS |
 
 ## Current V4 interfaces
 
