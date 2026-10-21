@@ -4,6 +4,10 @@ This registry records the V4 implementation gates separately from model scores. 
 passing local test does not imply a Kaggle run, an artifact transfer, or useful
 generalization. No GPU job or model/data download has been started by this entry.
 
+**Current execution policy:** the laptop is source-only. Do not run tests, the
+CLI, notebooks, downloads or training on its CPU/GPU. K2 onward must execute in
+an authenticated Kaggle/Colab runtime and return verifiable artifacts.
+
 | Gate | Scope | Status | Evidence | Decision |
 |---|---|---|---|---|
 | L1 | Strict experiment/artifact contracts, atomic JSON, SHA-256, resume compatibility | PASS | `python3 -m pytest tests/v4/test_artifacts.py -q` → 6 passed | Proceed to dataset adapter |

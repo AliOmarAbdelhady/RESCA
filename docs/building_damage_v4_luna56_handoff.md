@@ -12,6 +12,13 @@
 
 ## Global constraints
 
+**Execution boundary:** the RescueVision laptop is source-only for this project.
+Do not run pytest, the V4 CLI, notebooks, model downloads, data audits, or
+training on its CPU/GPU. Runtime validation and all accelerator work must run
+in an authenticated Kaggle or Colab session, with outputs returned as hashed
+artifacts. Local edits and static review are allowed; a local test command is
+not evidence for a remote gate.
+
 - Current request is **instructions only**. Do not implement, install, submit notebooks, start training, upload datasets or message another chat until the user separately authorizes the relevant execution.
 - Work from `/home/ali/RescueVision`. Inspect current status and applicable instructions again at execution time; multiple people/agents may change this checkout. Preserve their edits and existing output artifacts.
 - Use a `codex/` branch when branch creation is appropriate. Do not reset the repository, resurrect all deleted source, push, publish or deploy without task-scoped authorization.

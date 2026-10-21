@@ -4,6 +4,8 @@ Pre-flight: L1 produces run/data contracts consumed by L2–L3; L2 produces vali
 
 Ruling: work proceeds on `codex/building-damage-v4` from `f89a61f`; the user explicitly authorized implementation in the RescueVision project, and a feature branch preserves reviewability.
 
+Execution boundary: the user has explicitly prohibited local CPU/GPU execution because the laptop cannot hold the workloads. Future tests, audits, notebook runs, model downloads and training must be remote in authenticated Kaggle/Colab sessions; local work is limited to source/document edits and static inspection.
+
 Task L1: complete (tests: `python3 -m pytest tests/v4/test_artifacts.py -q` -> 6 passed). Implemented strict `ExperimentConfig`/`SampleRecord`, SHA-256 verification, atomic finite JSON, complete-file manifests and resume compatibility checks.
 
 Task L2: complete (tests: `python3 -m pytest tests/v4/test_data_audit.py tests/v4/test_datasets.py -q` -> 6 passed). Implemented xBD raw pair auditing, hashed JSONL manifests, polygon rasterization, unknown damage validity, overlap-risk reporting and synchronized paired loading.
