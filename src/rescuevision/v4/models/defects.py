@@ -116,6 +116,58 @@ def build_multilabel_mask_target(
     return target, valid
 
 
+def multilabel_macro_f1(
+    probabilities: Tensor,
+    targets: Tensor,
+    *,
+    valid: Tensor | None = None,
+    threshold: float = 0.5,
+) -> float:
+    """Compute macro F1 over independently supervised defect channels.
+
+    ``valid`` may mark whole classes or individual sample/pixel entries. Classes
+    without any valid annotation are excluded from the mean rather than treated
+    as negative examples.
+    """
+
+    if not 0.0 <= threshold <= 1.0:
+        raise ValueError("threshold must be in [0, 1]")
+    if probabilities.shape != targets.shape or probabilities.ndim not in {2, 4}:
+        raise ValueError("probabilities and targets must share [N,C] or [B,C,H,W] shape")
+    if probabilities.ndim == 4:
+        probabilities = probabilities.permute(0, 2, 3, 1).reshape(-1, probabilities.shape[1])
+        targets = targets.permute(0, 2, 3, 1).reshape(-1, targets.shape[1])
+    else:
+        probabilities = probabilities.reshape(-1, probabilities.shape[-1])
+        targets = targets.reshape(-1, targets.shape[-1])
+    if torch.any((targets < 0) | (targets > 1)):
+        raise ValueError("targets must be binary values")
+    if valid is None:
+        valid_matrix = torch.ones_like(targets, dtype=torch.bool)
+    elif valid.ndim == 1 and valid.shape[0] == targets.shape[1]:
+        valid_matrix = valid.to(dtype=torch.bool).reshape(1, -1).expand_as(targets)
+    elif valid.shape == targets.shape:
+        valid_matrix = valid.to(dtype=torch.bool)
+    else:
+        raise ValueError("valid must have one value per class or per target entry")
+    predicted = probabilities >= threshold
+    scores: list[float] = []
+    for class_id in range(targets.shape[1]):
+        keep = valid_matrix[:, class_id]
+        if not keep.any():
+            continue
+        predicted_class = predicted[keep, class_id]
+        target_class = targets[keep, class_id].to(dtype=torch.bool)
+        true_positive = (predicted_class & target_class).sum().item()
+        false_positive = (predicted_class & ~target_class).sum().item()
+        false_negative = (~predicted_class & target_class).sum().item()
+        denominator = 2 * true_positive + false_positive + false_negative
+        scores.append(0.0 if denominator == 0 else 2.0 * true_positive / denominator)
+    if not scores:
+        raise TaskAdapterError("no valid defect labels are available for macro F1")
+    return sum(scores) / len(scores)
+
+
 class DefectHead(nn.Module):
     """Dense independent logits; callers apply sigmoid per defect channel."""
 

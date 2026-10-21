@@ -10,6 +10,7 @@ from rescuevision.v4.models.defects import (
     DefectHead,
     build_multilabel_classification_target,
     build_multilabel_mask_target,
+    multilabel_macro_f1,
 )
 from rescuevision.v4.models.post_only import (
     POST_ONLY_CLASSES,
@@ -102,6 +103,14 @@ def test_defect_head_returns_independent_sigmoid_channels() -> None:
 
     assert logits.shape == (2, 3, 8, 8)
     assert head.num_classes == 3
+
+
+def test_multilabel_macro_f1_excludes_unlabeled_classes() -> None:
+    probabilities = torch.tensor([[0.9, 0.1, 0.9], [0.1, 0.9, 0.1]])
+    targets = torch.tensor([[1.0, 0.0, 0.0], [0.0, 1.0, 0.0]])
+    valid = torch.tensor([True, True, False])
+
+    assert multilabel_macro_f1(probabilities, targets, valid=valid) == pytest.approx(1.0)
 
 
 def test_specialist_configs_use_their_own_task_and_metric_contracts() -> None:
