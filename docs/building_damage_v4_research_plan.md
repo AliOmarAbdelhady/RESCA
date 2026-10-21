@@ -1,6 +1,6 @@
 # RescueVision building damage V4: research and proposed experiment plan
 
-Research checked: 21 October 2026. Status: **planning only; no training, notebook rewrite, dependency installation, or model/data download performed.** Research PDFs were read separately from the project datasets. This document proposes the next version; it does not report an implemented architecture or a new measured score.
+Research checked: 21 October 2026. At authoring time this was **planning only; no training, notebook rewrite, dependency installation, or model/data download had been performed.** The implementation has since started on the `codex/building-damage-v4` branch; gate status and evidence are tracked in [the V4 experiment registry](v4_experiments.md). Research PDFs were read separately from the project datasets. This document remains the research plan and does not report a new measured score.
 
 Technical execution companion: [Luna 5.6 implementation handoff](building_damage_v4_luna56_handoff.md), with module contracts, L1–L9 tasks, initial experiment settings, targeted checks, Kaggle MCP sequencing and delivery criteria. Read both before a future authorized implementation.
 

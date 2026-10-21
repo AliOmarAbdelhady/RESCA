@@ -217,4 +217,4 @@ After each task, update `docs/v4_experiments.md` with its configuration, validat
 
 ## Handoff status
 
-This document is a technical instruction artifact for Luna 5.6. No Luna session has been created or messaged, and no implementation or training is implied by its delivery.
+This document is a technical instruction artifact for Luna 5.6. The implementation is now in progress on the `codex/building-damage-v4` branch: L1–L5, K0 and L7 have passed local gates, while K1–K3 and real model/GPU execution remain explicitly blocked or not run as recorded in `docs/v4_experiments.md`. No Luna session has been created or messaged, and no training job or external submission has been started.
