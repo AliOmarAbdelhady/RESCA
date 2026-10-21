@@ -1,0 +1,138 @@
+schema_version: v4.dataset-registry.1
+execution_target: kaggle_remote
+local_execution_allowed: false
+policy:
+  use_all_acquired_training_data: true
+  preserve_official_test_splits: true
+  require_grouped_split_audit: true
+  require_license_and_provenance_audit: true
+  allow_label_coercion_between_tasks: false
+datasets:
+  - id: xbd
+    priority: P0
+    task: paired_overhead
+    adapter: xbd
+    supervision: building_footprint_and_four_grade
+    label_space: xbd_0_background_1_no_damage_2_minor_3_major_4_destroyed
+    split_key: event_scene_building
+    status: awaiting_remote_access
+  - id: xbd_tier3
+    priority: P0
+    task: paired_overhead
+    adapter: xbd_tier3
+    supervision: source_specific_xview2_labels
+    label_space: preserve_source_labels_until_audit
+    split_key: event_scene_building
+    status: awaiting_remote_access
+  - id: damage_triage_bench
+    priority: P0
+    task: post_only
+    adapter: damage_triage_photo_atomic
+    supervision: five_class_visible_component_typology
+    label_space: undamaged_partial_roof_total_roof_partial_structural_total_collapse
+    split_key: photo_structure_capture
+    status: awaiting_remote_access
+  - id: rescuenet
+    priority: P1
+    task: post_only_context
+    adapter: rescuenet_source_mask
+    supervision: post_only_uav_semantic_masks
+    label_space: preserve_source_class_map
+    split_key: event_area_capture
+    status: awaiting_remote_access
+  - id: cubit
+    priority: P1
+    task: defects
+    adapter: cubit_source_annotations
+    supervision: building_facade_defects
+    label_space: preserve_source_labels
+    split_key: structure_photo_capture
+    status: awaiting_remote_access
+  - id: dacl10k
+    priority: P1
+    task: defects
+    adapter: dacl10k_multilabel
+    supervision: overlapping_defect_masks
+    label_space: preserve_source_19_class_multilabel
+    split_key: structure_photo_capture
+    status: awaiting_remote_access
+  - id: omnicrack30k
+    priority: P2
+    task: crack_defects
+    adapter: omnicrack_source_masks
+    supervision: crack_masks
+    label_space: crack_only
+    split_key: source_structure_capture
+    status: awaiting_remote_access
+  - id: codebrim
+    priority: P2
+    task: defects
+    adapter: codebrim_source_labels
+    supervision: image_or_box_defect_labels
+    label_space: preserve_source_labels
+    split_key: structure_capture
+    status: awaiting_remote_access
+  - id: bright
+    priority: P2
+    task: paired_multimodal
+    adapter: bright_rgb_sar
+    supervision: three_class_damage_with_rgb_and_sar
+    label_space: preserve_source_three_class_labels
+    split_key: event_scene_building
+    status: awaiting_remote_access
+  - id: 3daerorelief
+    priority: P2
+    task: post_only_3d
+    adapter: 3daerorelief_point_labels
+    supervision: damaged_intact_building_points
+    label_space: preserve_source_point_labels
+    split_key: area_capture
+    status: awaiting_remote_access
+  - id: spacenet8
+    priority: P3
+    task: flood_context
+    adapter: spacenet8_source_labels
+    supervision: flooded_buildings_and_roads
+    label_space: preserve_source_labels
+    split_key: event_scene
+    status: awaiting_remote_access
+  - id: floodnet
+    priority: P3
+    task: flood_context
+    adapter: floodnet_source_labels
+    supervision: uav_flood_scene_semantics
+    label_space: preserve_source_labels
+    split_key: event_scene_capture
+    status: awaiting_remote_access
+  - id: ladi_v2
+    priority: P3
+    task: event_context
+    adapter: ladi_multilabel_image
+    supervision: image_level_disaster_context
+    label_space: preserve_source_multilabel
+    split_key: source_event
+    status: awaiting_remote_access
+  - id: aftermap
+    priority: optional
+    task: post_only
+    adapter: aftermap_source_annotations
+    supervision: uav_building_grades_and_tarp_state
+    label_space: preserve_source_labels
+    split_key: event_capture_building
+    status: optional_request_only
+  - id: google_open_buildings_temporal
+    priority: optional
+    task: building_context
+    adapter: open_buildings_geometry
+    supervision: historical_presence_and_height_context
+    label_space: geometry_context_only
+    split_key: geographic_region_time
+    status: optional_if_coverage_exists
+  - id: noaa_emergency_imagery
+    priority: optional
+    task: event_context
+    adapter: noaa_source_imagery
+    supervision: imagery_requires_expert_labels
+    label_space: no_ground_truth_until_labeled
+    split_key: event_capture_scene
+    status: optional_requires_annotation

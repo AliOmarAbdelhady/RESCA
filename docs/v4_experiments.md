@@ -47,6 +47,11 @@ submit jobs, tune thresholds or print credentials.
 `local_execution_allowed: false`; generating or reviewing a request does not
 launch it.
 
+All acquired sources are tracked in `configs/v4/dataset_registry.yaml`. They
+are combined through task-specific adapters and validity masks according to
+`docs/v4_all_dataset_training_policy.md`; incompatible labels are never merged
+into one target.
+
 The 7B configuration is a profile-only contract. It deliberately does not
 download or invoke the gated Hugging Face checkpoint. A real run must first
 resolve the revision, preprocessing, tile cache and device capability on an

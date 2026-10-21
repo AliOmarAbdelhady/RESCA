@@ -6,6 +6,8 @@ Ruling: work proceeds on `codex/building-damage-v4` from `f89a61f`; the user exp
 
 Execution boundary: the user has explicitly prohibited local CPU/GPU execution because the laptop cannot hold the workloads. Future tests, audits, notebook runs, model downloads and training must be remote in authenticated Kaggle/Colab sessions; local work is limited to source/document edits and static inspection.
 
+Dataset scope update: the user requires all acquired datasets to contribute to training. Added a complete source registry and multi-task policy: use all compatible training partitions, preserve official test splits, keep source-specific label heads/masks, and never coerce incompatible labels or report a contaminated benchmark score.
+
 Task L1: complete (tests: `python3 -m pytest tests/v4/test_artifacts.py -q` -> 6 passed). Implemented strict `ExperimentConfig`/`SampleRecord`, SHA-256 verification, atomic finite JSON, complete-file manifests and resume compatibility checks.
 
 Task L2: complete (tests: `python3 -m pytest tests/v4/test_data_audit.py tests/v4/test_datasets.py -q` -> 6 passed). Implemented xBD raw pair auditing, hashed JSONL manifests, polygon rasterization, unknown damage validity, overlap-risk reporting and synchronized paired loading.
