@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import json
 
 import numpy as np
 import pytest
@@ -18,6 +19,7 @@ from rescuevision.v4.models.post_only import (
     encode_post_only_label,
     post_only_macro_f1,
 )
+from rescuevision.v4.specialist_datasets import load_defect_manifest, load_post_only_manifest
 from rescuevision.v4.contracts import load_experiment
 from rescuevision.v4.task_adapters import TaskAdapterError, assert_grouped_split_integrity
 
@@ -122,3 +124,52 @@ def test_specialist_configs_use_their_own_task_and_metric_contracts() -> None:
     assert post_only.selection_metric == "post_only_macro_f1"
     assert defects.task == "defects"
     assert defects.selection_metric == "defect_macro_f1"
+
+
+def test_post_only_manifest_encodes_typology_and_keeps_fragment_provenance(tmp_path: Path) -> None:
+    manifest = tmp_path / "post_only.jsonl"
+    manifest.write_text(
+        json.dumps(
+            {
+                "sample_id": "photo_01_fragment_1",
+                "image_path": "images/photo_01.jpg",
+                "split": "train",
+                "structure_id": "building-01",
+                "photo_group_id": "photo-01",
+                "annotation_unit": "visible_fragment",
+                "label": "partial roof damage",
+                "footprint_source": "provided",
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    records = load_post_only_manifest(manifest)
+
+    assert records[0].label_id == 1
+    assert records[0].annotation_unit == "visible_fragment"
+    assert records[0].footprint_source == "provided"
+
+
+def test_defect_manifest_preserves_absent_and_explicit_negative_annotations(tmp_path: Path) -> None:
+    manifest = tmp_path / "defects.jsonl"
+    manifest.write_text(
+        json.dumps(
+            {
+                "sample_id": "facade-01",
+                "image_path": "images/facade-01.jpg",
+                "split": "validation",
+                "structure_id": "building-02",
+                "photo_group_id": "photo-02",
+                "annotations": {"crack": {"state": "negative"}},
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    records = load_defect_manifest(manifest)
+
+    assert records[0].annotations["crack"] == {"state": "negative"}
+    assert "spalling" not in records[0].annotations
