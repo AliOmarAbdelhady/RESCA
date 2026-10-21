@@ -16,3 +16,7 @@ Task L5: complete (tests: `python3 -m pytest tests/v4/test_models.py tests/v4/te
 
 Task K0: complete (tests: `python3 -m pytest tests/v4/test_submission_spec.py -q` -> 2 passed). Implemented the private no-submit Kaggle request specification, unknown-state retry policy, audit CLI surface and one thin CPU-audit notebook wrapper.
 
+Task K1: blocked (read-only Kaggle MCP discovery). Canonical xBD train/test v3, xBD tier-3 v2 and RescueNet v1 identities were recorded; dataset-status calls returned `Unauthenticated`, and no bytes were downloaded or attached. Continue with local code work while preserving K2 as blocked on mounted-input verification.
+
+Task L7: complete (tests: `python3 -m pytest tests/v4/test_distillation.py -q` -> 5 passed). Implemented a frozen DINOv3 7B teacher wrapper, trainable student-to-teacher projection, normalized valid-patch feature loss and a stable cache key containing input, revision, preprocessing, tile and layer identities. The gated 7B checkpoint was not downloaded or profiled; the configuration is profile-only until an authorized GPU environment is available.
+
