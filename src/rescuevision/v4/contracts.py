@@ -32,7 +32,16 @@ _REQUIRED_FIELDS = {
     "selection_metric",
     "output_dir",
 }
-_OPTIONAL_FIELDS = {"parent_experiment_id", "source_revision", "data_revision"}
+_OPTIONAL_FIELDS = {
+    "parent_experiment_id",
+    "source_revision",
+    "data_revision",
+    "max_epochs",
+    "microbatch_size",
+    "num_workers",
+    "device",
+    "grad_clip_norm",
+}
 _ALLOWED_FIELDS = _REQUIRED_FIELDS | _OPTIONAL_FIELDS
 _TASKS = {"paired_overhead", "post_only", "defects"}
 
@@ -66,6 +75,11 @@ class ExperimentConfig:
     parent_experiment_id: str | None = None
     source_revision: str | None = None
     data_revision: str | None = None
+    max_epochs: int = 1
+    microbatch_size: int = 1
+    num_workers: int = 0
+    device: str = "auto"
+    grad_clip_norm: float = 1.0
 
     @classmethod
     def from_mapping(cls, mapping: Mapping[str, Any], *, base_dir: Path) -> "ExperimentConfig":
@@ -98,6 +112,15 @@ class ExperimentConfig:
             raise ContractError("effective_batch_size must be a positive integer")
         if isinstance(seed, bool) or not isinstance(seed, int) or seed < 0:
             raise ContractError("seed must be a non-negative integer")
+        max_epochs = _positive_int(values.get("max_epochs", 1), "max_epochs")
+        microbatch_size = _positive_int(values.get("microbatch_size", 1), "microbatch_size")
+        num_workers = _non_negative_int(values.get("num_workers", 0), "num_workers")
+        device = values.get("device", "auto")
+        if not isinstance(device, str) or device not in {"auto", "cpu", "cuda"}:
+            raise ContractError("device must be one of: auto, cpu, cuda")
+        grad_clip_norm = values.get("grad_clip_norm", 1.0)
+        if isinstance(grad_clip_norm, bool) or not isinstance(grad_clip_norm, (int, float)) or grad_clip_norm <= 0:
+            raise ContractError("grad_clip_norm must be positive")
 
         def resolve_path(value: Any) -> Path:
             if not isinstance(value, (str, Path)):
@@ -126,6 +149,11 @@ class ExperimentConfig:
             parent_experiment_id=_optional_string(values.get("parent_experiment_id")),
             source_revision=_optional_string(values.get("source_revision")),
             data_revision=_optional_string(values.get("data_revision")),
+            max_epochs=max_epochs,
+            microbatch_size=microbatch_size,
+            num_workers=num_workers,
+            device=device,
+            grad_clip_norm=float(grad_clip_norm),
         )
 
     def to_dict(self) -> dict[str, Any]:
@@ -220,6 +248,18 @@ def _optional_string(value: Any) -> str | None:
         return None
     if not isinstance(value, str) or not value.strip():
         raise ContractError("optional string fields must be null or non-empty strings")
+    return value
+
+
+def _positive_int(value: Any, name: str) -> int:
+    if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+        raise ContractError(f"{name} must be a positive integer")
+    return value
+
+
+def _non_negative_int(value: Any, name: str) -> int:
+    if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+        raise ContractError(f"{name} must be a non-negative integer")
     return value
 
 

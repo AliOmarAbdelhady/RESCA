@@ -9,6 +9,8 @@ generalization. No GPU job or model/data download has been started by this entry
 | L1 | Strict experiment/artifact contracts, atomic JSON, SHA-256, resume compatibility | PASS | `python3 -m pytest tests/v4/test_artifacts.py -q` → 6 passed | Proceed to dataset adapter |
 | L2 | xBD pair audit, hashed JSONL manifest, polygon target semantics, overlap risks, synchronized loader | PASS | `python3 -m pytest tests/v4/test_data_audit.py tests/v4/test_datasets.py -q` → 6 passed | Proceed to scorer |
 | L3 | Official xView2 pixel scorer parity contract | PASS | `python3 -m pytest tests/v4/test_evaluation.py -q` → 7 passed | Training remains locked until real-data audit |
+| L4 | Paired CNN model, masked losses and epoch-boundary checkpoint resume | PASS | `python3 -m pytest tests/v4/test_resume.py tests/v4/test_losses.py -q` → 5 passed | Baseline code exists; real training remains locked until K2/K3 |
+| L5 | DINOv3 token-grid validation, frozen feature wrapper and native tiled inference | PASS | `python3 -m pytest tests/v4/test_models.py tests/v4/test_tiling.py -q` → 5 passed | Stand-in models only; real DINOv3 load/GPU smoke is NOT RUN |
 | K2 | Kaggle CPU audit | NOT RUN | No notebook submitted | Blocked until execution is explicitly started |
 | K3 | Kaggle GPU smoke | NOT RUN | No notebook submitted | Blocked on K2 and execution authorization |
 

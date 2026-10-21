@@ -10,3 +10,7 @@ Task L2: complete (tests: `python3 -m pytest tests/v4/test_data_audit.py tests/v
 
 Task L3: complete (tests: `python3 -m pytest tests/v4/test_evaluation.py -q` -> 7 passed). Implemented official xView2 pixel-score accumulation and parity fixtures for gating, harmonic damage F1, encoding validation and pooled counts.
 
+Task L4: complete (tests: `python3 -m pytest tests/v4/test_resume.py tests/v4/test_losses.py -q` -> 5 passed). Implemented the shared paired CNN baseline, masked losses, effective-batch step boundary, atomic checkpoint state and RNG restoration.
+
+Task L5: complete (tests: `python3 -m pytest tests/v4/test_models.py tests/v4/test_tiling.py -q` -> 5 passed). Implemented explicit DINOv3 token-grid extraction/frozen wrapper and native overlap-tiled pair inference with TTA inversion. Real model loading and GPU smoke remain NOT RUN.
+
