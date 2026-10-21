@@ -20,3 +20,5 @@ Task K1: blocked (read-only Kaggle MCP discovery). Canonical xBD train/test v3, 
 
 Task L7: complete (tests: `python3 -m pytest tests/v4/test_distillation.py -q` -> 5 passed). Implemented a frozen DINOv3 7B teacher wrapper, trainable student-to-teacher projection, normalized valid-patch feature loss and a stable cache key containing input, revision, preprocessing, tile and layer identities. The gated 7B checkpoint was not downloaded or profiled; the configuration is profile-only until an authorized GPU environment is available.
 
+Task L8: complete (tests: `python3 -m pytest tests/v4/test_task_adapters.py -q` -> 9 passed). Implemented separate five-class post-only typology labels/metric/head, multi-label visible-defect target builders that preserve absent versus explicit-negative supervision, dense overlapping defect channels, grouped structure/photo split checks and specialist configs. Public dataset preparation, expert-label validation and specialist training remain NOT RUN.
+
