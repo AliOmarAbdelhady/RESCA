@@ -43,6 +43,10 @@ wrappers. They read environment-provided immutable inputs and call the V4
 package; they do not clone moving branches, install hidden dependencies,
 submit jobs, tune thresholds or print credentials.
 
+`scripts/v4_submit_spec.py` marks every request as `kaggle_remote` and
+`local_execution_allowed: false`; generating or reviewing a request does not
+launch it.
+
 The 7B configuration is a profile-only contract. It deliberately does not
 download or invoke the gated Hugging Face checkpoint. A real run must first
 resolve the revision, preprocessing, tile cache and device capability on an

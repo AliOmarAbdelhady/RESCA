@@ -44,6 +44,8 @@ def build_submission_spec(config_path: Path, *, stage: str, out_dir: Path) -> Pa
         "visibility": "private",
         "submitted": False,
         "execution_policy": "spec_only_no_network_submission",
+        "execution_target": "kaggle_remote",
+        "local_execution_allowed": False,
         "request": {
             "tool": "mcp__kaggle__save_notebook",
             "kernel_type": "notebook",
