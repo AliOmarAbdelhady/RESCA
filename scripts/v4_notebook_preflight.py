@@ -27,6 +27,10 @@ _EXPECTED: dict[str, dict[str, set[str]]] = {
         "required": {"torch.cuda.is_available", "rv4_gpu_smoke", "refusing a CPU fallback"},
         "forbidden": set(),
     },
+    "01_dinov3_vitl_profile.ipynb": {
+        "required": {"dinov3_vitl16_pretrain_sat493m", "rv4_dinov3_vitl_profile", "torch.hub.load"},
+        "forbidden": set(),
+    },
     "01_dinov3_teacher_profile.ipynb": {
         "required": {"rescuevision.v4.cli", "'profile'", "RV4_CONFIG", "check=True"},
         "forbidden": set(),

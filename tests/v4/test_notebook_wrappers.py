@@ -12,6 +12,7 @@ def test_v4_kaggle_notebooks_are_thin_deterministic_wrappers() -> None:
         "00_data_and_split_audit.ipynb",
         "00_gpu_smoke.ipynb",
         "01_dinov3_teacher_profile.ipynb",
+        "01_dinov3_vitl_profile.ipynb",
         "02_specialist_manifest_audit.ipynb",
         "03_final_bundle_verify.ipynb",
     }
