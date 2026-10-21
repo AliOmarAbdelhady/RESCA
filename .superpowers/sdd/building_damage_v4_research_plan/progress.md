@@ -14,3 +14,5 @@ Task L4: complete (tests: `python3 -m pytest tests/v4/test_resume.py tests/v4/te
 
 Task L5: complete (tests: `python3 -m pytest tests/v4/test_models.py tests/v4/test_tiling.py -q` -> 5 passed). Implemented explicit DINOv3 token-grid extraction/frozen wrapper and native overlap-tiled pair inference with TTA inversion. Real model loading and GPU smoke remain NOT RUN.
 
+Task K0: complete (tests: `python3 -m pytest tests/v4/test_submission_spec.py -q` -> 2 passed). Implemented the private no-submit Kaggle request specification, unknown-state retry policy, audit CLI surface and one thin CPU-audit notebook wrapper.
+

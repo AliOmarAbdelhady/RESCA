@@ -92,6 +92,11 @@ def test_load_experiment_resolves_paths_and_rejects_unknown_fields(tmp_path: Pat
                 "seed: 42",
                 "selection_metric: xview2_official_combined",
                 "output_dir: outputs/v4/cnn_baseline_r1",
+                "max_epochs: 60",
+                "microbatch_size: 2",
+                "num_workers: 0",
+                "device: auto",
+                "grad_clip_norm: 1.0",
             ]
         ),
         encoding="utf-8",
@@ -100,6 +105,8 @@ def test_load_experiment_resolves_paths_and_rejects_unknown_fields(tmp_path: Pat
     loaded = load_experiment(config)
     assert loaded.train_manifest == (tmp_path / "manifests/train.jsonl").resolve()
     assert loaded.output_dir == (tmp_path / "outputs/v4/cnn_baseline_r1").resolve()
+    assert loaded.max_epochs == 60
+    assert loaded.microbatch_size == 2
 
     config.write_text(config.read_text(encoding="utf-8") + "\nunexpected: true\n", encoding="utf-8")
     with pytest.raises(ContractError, match="unknown field"):
