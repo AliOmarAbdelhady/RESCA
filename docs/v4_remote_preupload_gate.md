@@ -39,9 +39,18 @@ Tesla T4 using a real 512×512 xBD pair; it produced `x_norm_patchtokens` with
 shape `[1, 1024, 1024]`. The failed profile attempts were corrected by adding
 the repository root to `sys.path` before importing `hubconf.py` and by using
 the repository's actual `dinov3_vitl16` entry point with the local SAT-493M
-checkpoint path. The next gate is the DINOv3 7B teacher profile on an actual
-Kaggle GPU. Tier-3 and specialist datasets are still separate acquisition and
-annotation gates; they are not silently treated as present because xBD passed.
+checkpoint path.
+
+The 7B teacher profile is now a separate memory/source gate. The approved
+SAT-493M model has no published Kaggle model variation, so the first profile
+completed cleanly with an explicit `BLOCKED_MODEL_ARTIFACT_MISSING` report
+instead of attempting a blind load. A published 26.86 GB LVD1689M 7B
+Transformers variation is attached to the follow-up profile only as a size
+proxy; its identity must not be substituted for SAT-493M. The T4 has about
+15.5 GiB total memory, so a conservative pre-load gate is required before any
+teacher allocation. Tier-3 and specialist datasets remain separate acquisition
+and annotation gates; they are not silently treated as present because xBD
+passed.
 
 The complete source inventory and multi-task mixing policy are recorded in
 `configs/v4/dataset_registry.yaml` and `docs/v4_all_dataset_training_policy.md`.

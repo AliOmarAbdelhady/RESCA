@@ -37,7 +37,13 @@ _EXPECTED: dict[str, dict[str, set[str]]] = {
         "forbidden": set(),
     },
     "01_dinov3_teacher_profile.ipynb": {
-        "required": {"rescuevision.v4.cli", "'profile'", "RV4_CONFIG", "check=True"},
+        "required": {
+            "dinov3_vit7b16",
+            "dinov3_vit7b16_pretrain_sat493m",
+            "torch.cuda.mem_get_info",
+            "PROFILED_INSUFFICIENT_MEMORY",
+            "load_attempted",
+        },
         "forbidden": set(),
     },
     "02_specialist_manifest_audit.ipynb": {
