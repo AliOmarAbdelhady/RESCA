@@ -4,8 +4,9 @@ This registry records the V4 implementation gates separately from model scores. 
 passing local test does not imply a Kaggle run, an artifact transfer, or useful
 generalization. The laptop remains source-only; the first remote xBD audit, a bounded
 DINOv3 ViT-L D0 smoke, and one full-coverage D0 epoch have completed on Kaggle.
-This is still an implementation/coverage gate, not a benchmark accuracy result or
-production training run.
+The resumable two-epoch smoke also completed on Kaggle. This is still an
+implementation/coverage gate, not a benchmark accuracy result or production
+training run.
 
 **Current execution policy:** the laptop is source-only. Do not run tests, the
 CLI, notebooks, downloads or training on its CPU/GPU. K2 onward must execute in
@@ -30,6 +31,7 @@ an authenticated Kaggle/Colab runtime and return verifiable artifacts.
 | K5 | Kaggle DINOv3 7B teacher capability profile | BLOCKED_INSUFFICIENT_MEMORY | Private kernel `aliomarsaleh/rv4-v4-dinov3-7b-teacher-profile`, version 2; completed cleanly on a Tesla T4 with all six LVD1689M proxy shards mounted; 15,526,068,224 bytes free, 15,636,037,632 bytes total, 14,000,000,000-byte fp16/bf16 weight estimate, 23,194,967,296-byte conservative runtime projection, `load_attempted: false`; output `rv4_dinov3_teacher_profile.json` SHA-256 `cf779357d306c8cedf4904d2168b3bf33b2736183a8e17680588c62d967b5bf5` | Do not load the 7B teacher on the T4; use an A100-class or larger GPU, or run a separately validated compression/offload experiment; keep the SAT493M teacher identity separate from the LVD proxy |
 | K6 | Kaggle DINOv3 ViT-L D0 bounded smoke | PASS | Private kernel `aliomarsaleh/rv4-v4-dinov3-vit-l-d0-remote-smoke`, version 2; Tesla T4; real ViT-L SAT-493M weights; event-grouped xBD split with 2,660 train records available; 8 optimizer steps and 2 validation samples; finite train loss mean `0.0663678797`, validation loss mean `0.0297637898`; checkpoint SHA-256 `368f740c0ff927b885604c93d4208929a9b50361f89971b62a1c561a27617e27`; report SHA-256 `2d5fe0c23924dbb81a17497117e17f032c2051e752951f6aac8852ca36080740` | Unlock the full-coverage remote D0 run over the audited xBD training split; do not treat smoke losses as benchmark accuracy |
 | K7 | Kaggle DINOv3 ViT-L D0 full coverage | PASS | Private kernel `aliomarsaleh/rv4-v4-dinov3-vit-l-d0-full-coverage`, version 1; status `COMPLETE`; Tesla T4; one epoch over all 2,660 event-grouped training records with 2,660 optimizer steps and all 139 validation records; finite train loss mean `0.0005021374753`, validation loss mean `0.0000047025923`; elapsed `3546.4283s`; checkpoint SHA-256 `6c282773a94c826082188285605294fd0c250f8dc0a7c758d15ab0c51abfe220`; report SHA-256 `73f4683a63ff5f208dd67a3bbe1bb2fdf850c109c844ca6a936a5768612a9c8f` | Preserve the checkpoint as a remote coverage artifact; next step is resumable multi-epoch training plus official held-out scoring, not an accuracy claim from these losses |
+| K8 | Kaggle DINOv3 ViT-L resumable D0 smoke | PASS | Private kernel `aliomarsaleh/rv4-resumable-d0-smoke`, version 3; status `COMPLETE`; Tesla T4; bounded event-grouped xBD subset with 8 train and 2 validation records; 2 epochs, 16 optimizer steps, two epoch-boundary checkpoints, and `self_resume_test: true`; validation loss decreased from `0.0297637898` to `0.0135776633`; epoch-2 checkpoint SHA-256 `6871001bacf995e37c307a4e5fea4dd8c8b0eb09a2158dcddcd67abff742a3f0`; report SHA-256 `f61345efd86c2f3d184b9c7674b7fab0b743af0586ed83e45c46e311fba19fc9` | Unlock the all-record resumable multi-epoch run; preserve epoch checkpoints and validate official held-out scores separately |
 
 ## Current V4 interfaces
 

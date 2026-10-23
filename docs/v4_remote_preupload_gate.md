@@ -34,8 +34,9 @@ inspected before retrying; a failed run receives a new attempt identity.
 
 Current state: the private xBD CPU audit (kernel version 4), private GPU smoke
 (kernel version 1), real DINOv3 ViT-L profile (kernel version 5), bounded D0
-smoke (kernel version 2), and full-coverage D0 epoch (kernel version 1) have
-completed successfully. The ViT-L reports were retrieved and hash-verified on a
+smoke (kernel version 2), full-coverage D0 epoch (kernel version 1), and
+resumable D0 smoke (kernel version 3) have completed successfully. The ViT-L
+reports were retrieved and hash-verified on a
 Tesla T4 using a real 512×512 xBD pair; it produced `x_norm_patchtokens` with
 shape `[1, 1024, 1024]`. The failed profile attempts were corrected by adding
 the repository root to `sys.path` before importing `hubconf.py` and by using
@@ -62,6 +63,12 @@ coverage, optimizer execution and artifact creation; they are not official
 xView2 accuracy or damage-score results. The next gate is a resumable,
 multi-epoch remote run followed by the official held-out scorer and bundle
 verification.
+
+The resumable smoke also verified two epoch-boundary checkpoints and a
+checkpoint load round-trip on the Tesla T4. It ran 8 bounded training records
+for two epochs with 16 optimizer steps and produced a finite validation-loss
+decrease. The all-record resumable run must keep the same immutable input
+attachments and publish its epoch checkpoints before it can be used for scoring.
 
 The complete source inventory and multi-task mixing policy are recorded in
 `configs/v4/dataset_registry.yaml` and `docs/v4_all_dataset_training_policy.md`.

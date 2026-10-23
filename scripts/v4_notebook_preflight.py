@@ -66,6 +66,32 @@ _EXPECTED: dict[str, dict[str, set[str]]] = {
         },
         "forbidden": set(),
     },
+    "04_dinov3_d0_resumable_smoke.ipynb": {
+        "required": {
+            "dinov3_vitl16",
+            "rv4_dinov3_d0_resumable",
+            "x_norm_patchtokens",
+            "torch.hub.load",
+            "optimizer.step",
+            "torch.load",
+            "epoch_history",
+            "self_resume_test",
+        },
+        "forbidden": set(),
+    },
+    "05_dinov3_d0_resumable_full.ipynb": {
+        "required": {
+            "dinov3_vitl16",
+            "rv4_dinov3_d0_resumable",
+            "x_norm_patchtokens",
+            "torch.hub.load",
+            "optimizer.step",
+            "torch.load",
+            "epoch_history",
+            "self_resume_test",
+        },
+        "forbidden": set(),
+    },
     "02_specialist_manifest_audit.ipynb": {
         "required": {
             "load_post_only_manifest",
