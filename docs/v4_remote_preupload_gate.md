@@ -45,12 +45,14 @@ The 7B teacher profile is now a separate memory/source gate. The approved
 SAT-493M model has no published Kaggle model variation, so the first profile
 completed cleanly with an explicit `BLOCKED_MODEL_ARTIFACT_MISSING` report
 instead of attempting a blind load. A published 26.86 GB LVD1689M 7B
-Transformers variation is attached to the follow-up profile only as a size
-proxy; its identity must not be substituted for SAT-493M. The T4 has about
-15.5 GiB total memory, so a conservative pre-load gate is required before any
-teacher allocation. Tier-3 and specialist datasets remain separate acquisition
-and annotation gates; they are not silently treated as present because xBD
-passed.
+Transformers variation was then attached only as a size proxy; its identity
+was not substituted for SAT-493M. The proxy run completed cleanly with all six
+shards mounted: the Tesla T4 had 15.5 GiB total memory, while the conservative
+runtime projection was 23.2 GB, so `load_attempted` was false and the report
+status was `PROFILED_INSUFFICIENT_MEMORY`. The next executable gate requires
+an A100-class or larger GPU, or a separately validated compression/offload
+experiment. Tier-3 and specialist datasets remain separate acquisition and
+annotation gates; they are not silently treated as present because xBD passed.
 
 The complete source inventory and multi-task mixing policy are recorded in
 `configs/v4/dataset_registry.yaml` and `docs/v4_all_dataset_training_policy.md`.
