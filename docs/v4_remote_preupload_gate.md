@@ -33,8 +33,9 @@ downloaded and verified locally by hash and contract. Unknown session state is
 inspected before retrying; a failed run receives a new attempt identity.
 
 Current state: the private xBD CPU audit (kernel version 4), private GPU smoke
-(kernel version 1), and real DINOv3 ViT-L profile (kernel version 5) have
-completed successfully. The ViT-L report was retrieved and hash-verified on a
+(kernel version 1), real DINOv3 ViT-L profile (kernel version 5), bounded D0
+smoke (kernel version 2), and full-coverage D0 epoch (kernel version 1) have
+completed successfully. The ViT-L reports were retrieved and hash-verified on a
 Tesla T4 using a real 512×512 xBD pair; it produced `x_norm_patchtokens` with
 shape `[1, 1024, 1024]`. The failed profile attempts were corrected by adding
 the repository root to `sys.path` before importing `hubconf.py` and by using
@@ -53,6 +54,14 @@ status was `PROFILED_INSUFFICIENT_MEMORY`. The next executable gate requires
 an A100-class or larger GPU, or a separately validated compression/offload
 experiment. Tier-3 and specialist datasets remain separate acquisition and
 annotation gates; they are not silently treated as present because xBD passed.
+
+The full-coverage D0 epoch ran remotely on the Tesla T4 over all 2,660
+event-grouped xBD training records and all 139 validation records. Its report
+and checkpoint were downloaded and hash-verified. These finite losses verify
+coverage, optimizer execution and artifact creation; they are not official
+xView2 accuracy or damage-score results. The next gate is a resumable,
+multi-epoch remote run followed by the official held-out scorer and bundle
+verification.
 
 The complete source inventory and multi-task mixing policy are recorded in
 `configs/v4/dataset_registry.yaml` and `docs/v4_all_dataset_training_policy.md`.
