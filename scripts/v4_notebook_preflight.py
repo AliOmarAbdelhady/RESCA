@@ -28,7 +28,12 @@ _EXPECTED: dict[str, dict[str, set[str]]] = {
         "forbidden": set(),
     },
     "01_dinov3_vitl_profile.ipynb": {
-        "required": {"dinov3_vitl16_pretrain_sat493m", "rv4_dinov3_vitl_profile", "torch.hub.load"},
+        "required": {
+            "dinov3_vitl16",
+            "dinov3_vitl16_pretrain_sat493m",
+            "rv4_dinov3_vitl_profile",
+            "torch.hub.load",
+        },
         "forbidden": set(),
     },
     "01_dinov3_teacher_profile.ipynb": {
