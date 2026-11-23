@@ -146,3 +146,168 @@ BEGIN
   END IF;
   RAISE NOTICE 'pgRouting detour found: % steps, avoiding closed roads', hops;
 END $$;
+
+-- 8. Security: roles, Row-Level Security, column guards, audit trail.
+-- Runs inside one transaction that is rolled back, acting as the app roles.
+BEGIN;
+
+CREATE FUNCTION pg_temp.act_as(p_role text, p_email text) RETURNS void LANGUAGE plpgsql AS $$
+BEGIN
+  EXECUTE 'RESET ROLE';
+  PERFORM set_config('app.user_id', coalesce((SELECT id::text FROM users WHERE email = p_email), ''), true);
+  EXECUTE format('SET LOCAL ROLE %I', p_role);
+END $$;
+GRANT EXECUTE ON FUNCTION pg_temp.act_as(text, text) TO PUBLIC;
+
+-- An agency that has not joined the demo incident, with its commander.
+INSERT INTO agencies (name, agency_type) VALUES ('Outsider Fire Brigade', 'FIRE');
+INSERT INTO users (agency_id, role_code, full_name, email, password_hash, status)
+SELECT id, 'COMMANDER', 'Outsider Chief', 'chief@outsider.test', 'x', 'ACTIVE'
+FROM agencies WHERE name = 'Outsider Fire Brigade';
+INSERT INTO citizens (phone) VALUES ('+20 100 000 9999');
+
+DO $$
+DECLARE n int; ok boolean;
+BEGIN
+  -- No session user: default deny.
+  PERFORM pg_temp.act_as('rv_app', NULL);
+  IF (SELECT count(*) FROM incidents) + (SELECT count(*) FROM users) + (SELECT count(*) FROM buildings) <> 0 THEN
+    RAISE EXCEPTION 'RLS: rv_app without a session user can read data';
+  END IF;
+
+  -- Outsider agency sees no incident data and only its own people.
+  PERFORM pg_temp.act_as('rv_app', 'chief@outsider.test');
+  IF (SELECT count(*) FROM incidents WHERE NOT is_historical) <> 0
+     OR (SELECT count(*) FROM buildings) <> 0 OR (SELECT count(*) FROM assistance_cases) <> 0
+     OR (SELECT count(*) FROM compound_alerts) <> 0 THEN
+    RAISE EXCEPTION 'RLS: an agency outside the incident can see it';
+  END IF;
+  IF (SELECT count(*) FROM users) <> 1 THEN
+    RAISE EXCEPTION 'RLS: outsider sees % users, expected only themself', (SELECT count(*) FROM users);
+  END IF;
+
+  -- A joined agency sees the incident and its data.
+  PERFORM pg_temp.act_as('rv_app', 'para1@ems.demo');
+  IF (SELECT count(*) FROM incidents) = 0 OR (SELECT count(*) FROM buildings) = 0
+     OR (SELECT count(*) FROM compound_alerts) = 0 THEN
+    RAISE EXCEPTION 'RLS: a participating responder cannot see the incident';
+  END IF;
+  -- Notifications are private to their recipient.
+  IF EXISTS (SELECT 1 FROM notifications WHERE user_id <> app.current_user_id()) THEN
+    RAISE EXCEPTION 'RLS: a user can read someone else''s notifications';
+  END IF;
+  -- A field responder cannot open an incident.
+  BEGIN
+    INSERT INTO incidents (code, name, disaster_type, severity, lead_agency_id, area)
+    VALUES ('X-1', 'x', 'EARTHQUAKE', 1, app.current_agency_id(),
+            ST_Multi(ST_MakeEnvelope(31.23, 30.04, 31.24, 30.05, 4326)));
+    RAISE EXCEPTION 'RLS: a field responder created an incident';
+  EXCEPTION WHEN insufficient_privilege THEN NULL;
+  END;
+
+  -- Draft reports stay inside the authoring agency (GOV analyst wrote it).
+  PERFORM pg_temp.act_as('rv_app', 'chief@fire.demo');
+  IF (SELECT count(*) FROM reports WHERE status = 'DRAFT') <> 0 THEN
+    RAISE EXCEPTION 'RLS: another agency can read a draft report';
+  END IF;
+  PERFORM pg_temp.act_as('rv_app', 'coordinator@gov.demo');
+  IF (SELECT count(*) FROM reports WHERE status = 'DRAFT') = 0 THEN
+    RAISE EXCEPTION 'RLS: the authoring agency cannot read its draft report';
+  END IF;
+
+  -- Password hashes are not readable by the API role.
+  BEGIN
+    PERFORM password_hash FROM users LIMIT 1;
+    RAISE EXCEPTION 'Privileges: rv_app can read password hashes';
+  EXCEPTION WHEN insufficient_privilege THEN NULL;
+  END;
+  IF (SELECT count(*) FROM app.get_login('coordinator@gov.demo')) <> 1 THEN
+    RAISE EXCEPTION 'app.get_login() does not find an active user';
+  END IF;
+
+  -- Partitions cannot be read directly (they would bypass the parent's RLS).
+  BEGIN
+    PERFORM 1 FROM responder_positions_default LIMIT 1;
+    RAISE EXCEPTION 'Privileges: rv_app can read a partition directly';
+  EXCEPTION WHEN insufficient_privilege THEN NULL;
+  END;
+
+  -- Platform Admin sees every incident and the audit trail.
+  PERFORM pg_temp.act_as('rv_app', 'admin@rescuevision.local');
+  SELECT count(*) INTO n FROM incidents;
+  IF n <> (SELECT count(*) FROM incidents) OR n = 0 OR NOT EXISTS (SELECT 1 FROM audit_log) THEN
+    RAISE EXCEPTION 'RLS: platform admin cannot see all incidents / audit log';
+  END IF;
+
+  -- The read-only analytics role never sees citizens' identities.
+  PERFORM pg_temp.act_as('rv_readonly', NULL);
+  IF (SELECT count(*) FROM buildings) = 0 THEN RAISE EXCEPTION 'rv_readonly cannot read buildings'; END IF;
+  BEGIN
+    PERFORM 1 FROM citizens LIMIT 1;
+    RAISE EXCEPTION 'Privileges: rv_readonly can read citizens';
+  EXCEPTION WHEN insufficient_privilege THEN NULL;
+  END;
+
+  EXECUTE 'RESET ROLE';
+END $$;
+
+-- Column guard: an assigned responder may change a mission's status, not its target.
+DO $$
+DECLARE m uuid;
+BEGIN
+  SELECT ma.mission_id INTO m FROM mission_assignments ma JOIN users u ON u.id = ma.user_id
+  WHERE u.email = 'officer@police.demo' LIMIT 1;
+  PERFORM pg_temp.act_as('rv_app', 'officer@police.demo');
+  UPDATE missions SET status = 'IN_PROGRESS' WHERE id = m;
+  IF NOT FOUND THEN RAISE EXCEPTION 'RLS: assignee cannot update their mission status'; END IF;
+  BEGIN
+    UPDATE missions SET title = title || ' (edited)' WHERE id = m;
+    RAISE EXCEPTION 'Column guard: responder retitled a mission';
+  EXCEPTION WHEN insufficient_privilege THEN NULL;
+  END;
+  -- Role escalation through the self-update policy is blocked.
+  BEGIN
+    UPDATE users SET role_code = 'PLATFORM_ADMIN' WHERE id = app.current_user_id();
+    RAISE EXCEPTION 'Column guard: user promoted themself';
+  EXCEPTION WHEN insufficient_privilege THEN NULL;
+  END;
+  EXECUTE 'RESET ROLE';
+  IF NOT EXISTS (SELECT 1 FROM audit_log WHERE entity_table = 'missions' AND action = 'UPDATE'
+                 AND actor_user_id = (SELECT id FROM users WHERE email = 'officer@police.demo')) THEN
+    RAISE EXCEPTION 'Audit: mission update was not logged with its actor';
+  END IF;
+END $$;
+
+-- Citizens see only their own requests.
+DO $$
+DECLARE c uuid;
+BEGIN
+  SELECT id INTO c FROM citizens WHERE phone = '+20 100 000 9999';
+  PERFORM pg_temp.act_as('rv_citizen', NULL);
+  PERFORM app.set_session_citizen(c);
+  IF (SELECT count(*) FROM citizen_requests) <> 0 OR (SELECT count(*) FROM citizens) <> 1 THEN
+    RAISE EXCEPTION 'RLS: a citizen can see other citizens'' data';
+  END IF;
+  BEGIN
+    PERFORM 1 FROM buildings LIMIT 1;
+    RAISE EXCEPTION 'Privileges: rv_citizen can read operational data';
+  EXCEPTION WHEN insufficient_privilege THEN NULL;
+  END;
+  EXECUTE 'RESET ROLE';
+END $$;
+
+-- The hazard engine works for a commander under RLS: resolve the alert, roads re-open.
+DO $$
+DECLARE a uuid; reopened int;
+BEGIN
+  SELECT id INTO a FROM compound_alerts WHERE title LIKE 'Electrified Water%' AND status <> 'RESOLVED' LIMIT 1;
+  PERFORM pg_temp.act_as('rv_app', 'chief@fire.demo');
+  reopened := resolve_compound_alert(a, app.current_user_id(), 'RLS test');
+  IF reopened = 0 THEN RAISE EXCEPTION 'Hazard engine under RLS reopened no roads'; END IF;
+  PERFORM pg_temp.act_as('rv_app', 'analyst@gov.demo');
+  PERFORM evaluate_hazard_rules((SELECT id FROM incidents WHERE code = 'INC-2026-0001'));
+  EXECUTE 'RESET ROLE';
+  RAISE NOTICE 'Security checks passed: RLS isolation, column guards, audit, citizen channel, engine under RLS (% roads reopened)', reopened;
+END $$;
+
+ROLLBACK;

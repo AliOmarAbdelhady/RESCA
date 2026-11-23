@@ -26,7 +26,7 @@ sudo -u postgres createuser --superuser "$USER"     # local development only
 ## Build
 
 ```bash
-./database/build.sh             # schema + reference data + demo scenario + self-checks
+./database/build.sh             # schema + security + reference data + demo scenario + self-checks
 ./database/build.sh --no-demo   # schema + reference data only
 DB_NAME=rv_test ./database/build.sh
 ```
@@ -53,9 +53,92 @@ It uses the standard libpq variables (`PGHOST`, `PGPORT`, `PGUSER`, `PGPASSWORD`
 | `schema/12_hazard_engine.sql` | `evaluate_hazard_rules()`, `resolve_compound_alert()` |
 | `schema/13_views.sql` | dashboard read models |
 | `schema/14_fk_indexes.sql` | supporting indexes for joined / cascading foreign keys |
+| `schema/15_security.sql` | app roles, session context, Row-Level Security on all 56 tables, column guards, audit trail |
 | `seed/01_reference_data.sql` | roles, permissions, hazard rules, cost profile, model registry |
 | `seed/02_demo_scenario.sql` | fictional Downtown Cairo scenario exercising every feature |
 | `tests/checks.sql` | self-checks run by `build.sh` |
+
+## Security model
+
+`15_security.sql` turns on Row-Level Security for **every** table (default
+deny) and adds 4 group roles. Applications never connect as the owner.
+
+| Role | Used by | Sees |
+|---|---|---|
+| `rv_app` | the API, acting for a signed-in agency user | only incidents their agency has **actively joined** (Platform Admin: all); rules per role/permission below |
+| `rv_worker` | AI / Celery pipeline | everything (service account, no user context) |
+| `rv_citizen` | public citizen app | only that citizen's own profile, requests and uploads |
+| `rv_readonly` | analytics / BI | operational data read-only; no credentials, sessions, citizens or audit log |
+
+What the policies enforce (all derived from `users.role_code` →
+`role_permissions`, re-checked on every request, so a suspended user is locked
+out immediately):
+
+- **Incident isolation:** an agency sees an incident, its buildings, roads,
+  cases, alerts, routes, imagery and reports only while its
+  `incident_agencies` row is `ACTIVE`. Invited agencies see the incident header
+  and answer with `app.respond_to_invitation()`.
+- **Who may write:** commanders create/manage their own agency's missions;
+  responders update only missions they are assigned to; analysts run analysis
+  and review assessments; only `alert.resolve` holders resolve alerts.
+- **Column guards:** without the managing permission a user may change only
+  safe columns (a responder can set a mission's status, not its target; a user
+  can edit their name/phone, not their role or agency).
+- **Private data:** notifications, sessions and devices are visible to their
+  owner only; draft reports stay inside the authoring agency until approved or
+  shared; password hashes are unreadable by every app role (sign-in goes
+  through `app.get_login()`); partitions cannot be queried directly.
+- **Audit trail:** inserts/updates/deletes on 27 key tables are written to
+  `audit_log` with the acting user, by a `SECURITY DEFINER` trigger.
+
+Create the login roles once per server (choose your own passwords):
+
+```sql
+CREATE ROLE rescuevision_api      LOGIN PASSWORD '...' IN ROLE rv_app;
+CREATE ROLE rescuevision_worker   LOGIN PASSWORD '...' IN ROLE rv_worker;
+CREATE ROLE rescuevision_citizen  LOGIN PASSWORD '...' IN ROLE rv_citizen;
+CREATE ROLE rescuevision_bi       LOGIN PASSWORD '...' IN ROLE rv_readonly;
+GRANT CONNECT ON DATABASE rescuevision TO rv_app, rv_worker, rv_citizen, rv_readonly;
+```
+
+Per request the API sets who is acting, inside the request's transaction
+(the setting is transaction-local, so pooled connections cannot leak it):
+
+```sql
+BEGIN;
+SELECT app.set_session_user('<users.id from the JWT>');     -- staff
+-- or SELECT app.set_session_citizen('<citizens.id>');      -- citizen app
+SELECT * FROM v_open_cases;                                  -- RLS-filtered
+COMMIT;
+```
+
+Try it in `psql` as the demo paramedic:
+
+```sql
+BEGIN;
+SELECT app.set_session_user((SELECT id FROM users WHERE email = 'para1@ems.demo'));
+SET LOCAL ROLE rv_app;
+SELECT count(*) FROM incidents;          -- 1: their agency joined it
+SELECT count(*) FROM notifications;      -- only their own
+SELECT password_hash FROM users;         -- ERROR: permission denied
+ROLLBACK;
+```
+
+## Regenerating the ERD
+
+`docs/database/rescuevision-erd.drawio` is generated from the live catalog (not
+hand-written). With a built database reachable through the usual libpq variables
+(defaults: `localhost:55432`, user `postgres`, database `rescuevision`):
+
+```bash
+python3 database/tools/generate_drawio_erd.py
+```
+
+The generator reads tables, columns, primary keys, unique columns and foreign
+keys from `pg_class` / `pg_attribute` / `pg_constraint` / `pg_index` using
+`psql`, then writes the 9-page draw.io file (page 1 = full ERD, pages 2-9 = one
+per domain). It validates the XML, the 56-table / foreign-key counts and that no
+two table boxes overlap; a non-zero exit means generation failed.
 
 ## Try the demo
 
