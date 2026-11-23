@@ -86,3 +86,12 @@ mapping/output/thumbs/
 .mypy_cache/
 .coverage
 htmlcov/
+
+# Local graduation report exports and drafts
+/.local-report/
+/docs/Documention/selection/*
+!/docs/Documention/selection/.gitkeep
+!/docs/Documention/selection/Project 1 Docs — Skeleton (Marwan draft).source/
+/docs/Documention/main/*
+!/docs/Documention/main/.gitkeep
+!/docs/Documention/main/Project 1 Docs.source/
