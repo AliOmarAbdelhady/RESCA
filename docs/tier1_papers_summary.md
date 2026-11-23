@@ -11,9 +11,9 @@ Summaries of the seven most important papers for RescueVision (ranks 1–7 in [r
 | 1 | U-Net [1] | Building segmentation, damage segmentation, change detection | `building_seg_unet.yaml`, `damage_seg_unet_6ch.yaml`, `change_siamese_unet.yaml` |
 | 2 | ResNet [2] | ResNet34 encoder for the building U-Net, Siamese U-Net and ChangeFormer | `building_seg_unet.yaml`, `change_siamese_unet.yaml`, `changeformer_xbd.yaml` |
 | 3 | EfficientNet [3] | EfficientNet-B3 encoder for the 6-channel damage U-Net and the crop classifier | `damage_seg_unet_6ch.yaml`, `efficientnet_damage_classifier.yaml` |
-| 4 | DINOv2 [4] | Frozen DINOv2-base backbone for the per-building damage classifier | `dinov2_damage_classifier.yaml` |
+| 4 | DINOv3 [4] | Frozen DINOv3 backbone for the per-building damage classifier (config still loads DINOv2) | `dinov2_damage_classifier.yaml` |
 | 5 | SegFormer [5] | SegFormer-B2/B3 for FloodNet, building and damage segmentation | `floodnet_segformer.yaml`, `segformer_building.yaml`, `segformer_damage.yaml` |
-| 6 | Attention Is All You Need [6] | The Transformer behind SegFormer, DINOv2 and ChangeFormer | (indirect) |
+| 6 | Attention Is All You Need [6] | The Transformer behind SegFormer, DINOv3 and ChangeFormer | (indirect) |
 | 7 | FCN [7] | The idea of pixel-level prediction that all segmentation models follow | (indirect) |
 
 ---
@@ -75,7 +75,7 @@ Starting from ImageNet weights means the encoder already recognises edges, textu
 **How RescueVision uses it.** EfficientNet-B3, pretrained on ImageNet, is used as:
 
 - the encoder of the 6-channel damage segmentation U-Net;
-- the backbone of the per-building damage classifier (4 classes), as an alternative to DINOv2.
+- the backbone of the per-building damage classifier (4 classes), as an alternative to DINOv3.
 
 B3 is a practical middle size: accurate enough for damage levels, small enough to train on a Kaggle GPU.
 
@@ -83,19 +83,21 @@ B3 is a practical middle size: accurate enough for damage levels, small enough t
 
 ---
 
-## 4. DINOv2: Learning Robust Visual Features without Supervision
+## 4. DINOv3
 
-**Reference:** Oquab et al., Transactions on Machine Learning Research, 2024 [4].
+**Reference:** Siméoni et al., Meta AI, arXiv 2025 [4].
 
-**What it's about.** DINOv2 is a "foundation" image model: a Vision Transformer trained without any human labels so that its features work for many tasks out of the box.
+**What it's about.** DINOv3 is a "foundation" image model from Meta: a Vision Transformer trained without any human labels so that its features work for many tasks out of the box. It is the successor to DINOv2, scaled up in model size and training data.
 
-**Key idea.** The model learns by **self-supervision**: it teaches itself to give consistent features for different views of the same image. The authors built a curated dataset of 142 million images (LVD-142M), trained a large model and distilled it into smaller ones. The resulting features can be used **frozen**, with only a small classifier trained on top.
+**Key idea.** The model learns by **self-supervision**: it teaches itself to give consistent features for different views of the same image. Training very large models for a long time normally makes their pixel-level (dense) features degrade. DINOv3 adds **Gram anchoring**, a training step that keeps those dense features stable [4]. The large model is then distilled into smaller ones that can be used **frozen**, with only a small classifier trained on top.
 
-**Main result.** Frozen DINOv2 features matched or beat earlier self-supervised and weakly supervised models on many image- and pixel-level benchmarks, without fine-tuning the backbone [4].
+**Main result.** The authors report that frozen DINOv3 features outperform earlier self-supervised and weakly supervised models across many benchmarks, with the largest gains on dense tasks such as segmentation [4]. Meta also released versions pretrained on **SAT-493M**, a set of 493 million satellite images from Maxar at 0.6 m resolution [4].
 
-**How RescueVision uses it.** The per-building damage classifier uses `facebook/dinov2-base` with the backbone frozen. Only a small MLP head is trained to predict 4 damage levels from building crops. This makes training fast and reduces overfitting when labelled damage examples are limited.
+**How RescueVision uses it.** The per-building damage classifier uses a frozen self-supervised backbone with a small MLP head that predicts 4 damage levels from building crops. This makes training fast and reduces overfitting when labelled damage examples are limited. The satellite-pretrained DINOv3 versions are a closer match to xBD imagery than models trained only on everyday photos.
 
-**What it does not solve.** DINOv2 was trained mostly on natural photos, not satellite images. Frozen features may miss subtle damage signs specific to overhead views. Comparing DINOv2 against the fine-tuned EfficientNet classifier on the same xBD crops would show whether this matters.
+> **Note:** `configs/dinov2_damage_classifier.yaml` still loads `facebook/dinov2-base`. Update the config to a DINOv3 checkpoint before reporting DINOv3 results.
+
+**What it does not solve.** Satellite pretraining is not damage-specific, so frozen features may still miss subtle damage signs. The largest DINOv3 models are also heavy to run. Comparing a DINOv3 version against the fine-tuned EfficientNet classifier on the same xBD crops would show whether the switch helps.
 
 ---
 
@@ -136,7 +138,7 @@ This allows a direct comparison between CNN-based U-Nets and a Transformer-based
 **How RescueVision uses it.** Indirectly, but fundamentally. Three model families in the project are Transformers:
 
 - **SegFormer** (segmentation);
-- **DINOv2** (building damage classifier, a Vision Transformer);
+- **DINOv3** (building damage classifier, a Vision Transformer);
 - **ChangeFormer** (change detection).
 
 This paper is the reason those models exist and should be cited when explaining them.
@@ -169,7 +171,7 @@ This paper is the reason those models exist and should be cited when explaining 
 
 - **FCN [7]** introduced pixel-level prediction → **U-Net [1]** refined it with a symmetric decoder and skip connections.
 - **ResNet [2]** and **EfficientNet [3]** provide the pretrained CNN encoders inside RescueVision's U-Nets.
-- **Attention Is All You Need [6]** introduced the Transformer → **SegFormer [5]** and **DINOv2 [4]** apply it to images.
+- **Attention Is All You Need [6]** introduced the Transformer → **SegFormer [5]** and **DINOv3 [4]** apply it to images.
 - RescueVision uses both lines (CNN U-Nets and Transformers), so the report can compare them on the same xBD [8] and FloodNet [9] data.
 
 ## References
@@ -180,7 +182,7 @@ This paper is the reason those models exist and should be cited when explaining 
 
 [3] M. Tan and Q. V. Le, "EfficientNet: Rethinking model scaling for convolutional neural networks," in *Proc. 36th Int. Conf. Machine Learning (ICML)*, PMLR vol. 97, 2019, pp. 6105–6114. [Online]. Available: https://arxiv.org/abs/1905.11946
 
-[4] M. Oquab et al., "DINOv2: Learning robust visual features without supervision," *Transactions on Machine Learning Research*, 2024. [Online]. Available: https://arxiv.org/abs/2304.07193
+[4] O. Siméoni et al., "DINOv3," arXiv:2508.10104, 2025. [Online]. Available: https://arxiv.org/abs/2508.10104
 
 [5] E. Xie, W. Wang, Z. Yu, A. Anandkumar, J. M. Alvarez, and P. Luo, "SegFormer: Simple and efficient design for semantic segmentation with transformers," in *Advances in Neural Information Processing Systems (NeurIPS)*, vol. 34, 2021, pp. 12077–12090. [Online]. Available: https://arxiv.org/abs/2105.15203
 
