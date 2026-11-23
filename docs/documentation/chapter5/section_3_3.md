@@ -60,7 +60,7 @@ The Project I guide asks for the alternatives that were considered, the reasons 
 Table: Table 3-39: Main design decisions and their justification
 | No. | Decision | Alternative considered | Reason and trade-off | Requirements |
 | D-01 | One shared incident that agencies join and leave. | A separate copy of the incident for each agency, synchronised between agencies. | One record means one version of the facts and no reconciliation. Access must then be filtered per agency on every read. This follows the unity of effort described in the Incident Command System [20]. | FR-AC-04, FR-AC-05 |
-| D-02 | A modular application with background workers, deployed as a small number of services. | Many independent microservices. | Fewer moving parts suit a student team and a pilot. Module boundaries follow the data domains, so a module can be separated later if load requires it. | NFR-MT-01 to NFR-MT-03 |
+| D-02 | A modular application with background workers, deployed as a small number of services. | Many independent microservices. | Fewer moving parts suit a student team and a pilot. Module boundaries follow the data domains, so a module can be separated later if load requires it. | NFR-MT-02, NFR-RL-04, NFR-PF-06 |
 | D-03 | Analysis runs as queued background jobs. | Analysis inside the user's request. | Stitching and model inference can take minutes. Jobs report progress, can be retried and do not block interactive work. Results arrive later instead of immediately. | FR-IM-06, NFR-PF-05, NFR-RL-04 |
 | D-04 | Access rules are enforced inside the database with row-level security, in addition to checks in the application. | Checks in application code only. | A missed check in one endpoint cannot expose another agency's incident, because the database itself filters rows [29]. Policies must be written and tested for every table. | NFR-SC-02, NFR-PV-02 |
 | D-05 | Hazard rules, cost profiles, roles and permissions are stored as data. | Rules written into program code. | A new hazard combination or a new region's unit costs can be added without a software release. Rule data must be validated before it is used. | FR-HZ-13, FR-DC-09, NFR-MT-01 |
@@ -191,7 +191,7 @@ Table: Table 3-43: Database roles and what they may access
 | rv_citizen | The citizen request channel. | Only the citizen's own profile, requests and photos. |
 | rv_readonly | Analytics and reporting. | Read-only operational data; no credentials, sessions, citizen identities or audit log. |
 
-At the start of each request, the application interface records the identifier of the signed-in user for the duration of that transaction only, so a pooled connection cannot carry one user's identity into another user's request. Every policy derives the user's agency, role and permissions from that identifier at the time of the request. A suspended user therefore loses access on the next request, and an agency loses access to an incident as soon as its participation is withdrawn (FR-AC-05, NFR-PV-02). Draft reports remain visible only inside the authoring agency until they are approved or shared (FR-RP-06).
+At the start of each request, the application interface records the identifier of the signed-in user for the duration of that transaction only, so a pooled connection cannot carry one user's identity into another user's request. Every policy derives the user's agency, role and permissions from that identifier at the time of the request. A suspended user therefore loses access on the next request, and an agency loses access to an incident as soon as its participation is withdrawn (FR-AC-05, NFR-PV-02). Draft reports remain visible only inside the authoring agency until they are approved or shared (FR-RP-04, FR-RP-06).
 
 Policies decide which rows a user may change; column guards decide which fields. A field responder may change the status of a mission they are assigned to but not its target or priority, and users may edit their own name and phone number but not their role or agency. Password hashes cannot be read by any application role; sign-in uses a single protected function. Inserts, updates and deletes on 27 operational tables are written to the audit log with the acting user and the values before and after the change (NFR-SC-05), and no application role can modify the log (NFR-SC-06). The design will be reviewed against the OWASP Application Security Verification Standard before any field trial, as NFR-SC-07 requires [25].
 
@@ -376,18 +376,18 @@ Table 3-48 links each figure and table of this section to the requirements and u
 
 Table: Table 3-48: Traceability from design elements to requirements and use cases
 | Design element | Purpose | Requirements | Use cases |
-| Figures 3-2 to 3-4 | Architecture: context, logical and deployment views | IR-HW-01, IR-SW-01 to IR-SW-06, IR-CM-01, IR-CM-02, NFR-RL-04, NFR-RL-05 | All |
+| Figures 3-2 to 3-4 | Architecture: context, logical and deployment views | IR-HW-01, IR-SW-01 to IR-SW-06, IR-CM-01, IR-CM-02, NFR-RL-01, NFR-RL-02, NFR-RL-04, NFR-RL-05, NFR-PF-06 | All |
 | Tables 3-39, 3-40 | Design decisions and constraint responses | NFR-SC-02, NFR-SF-01, NFR-MT-01, FR-RP-02 | All |
 | Figure 3-5, Table 3-41 | Conceptual model and domains | FR-AC-04, FR-PT-07, FR-HZ-07 | UC-01, UC-06, UC-07 |
 | Figures 3-6, 3-7 | Identity, incidents and operations | FR-AC-01 to FR-AC-09 | UC-01, UC-09 |
-| Figure 3-8 | Imagery and analysis provenance | FR-IM-01 to FR-IM-08 | UC-02 |
-| Figure 3-9 | Buildings and cost | FR-DC-01 to FR-DC-13 | UC-03 |
-| Figure 3-10 | Roads and routing | FR-MR-06 to FR-MR-13 | UC-04 |
+| Figure 3-8 | Imagery and analysis provenance | FR-IM-01 to FR-IM-08, IR-HW-04, NFR-MT-02, NFR-DQ-05 | UC-02 |
+| Figure 3-9 | Buildings and cost | FR-DC-01 to FR-DC-13, NFR-SF-04 | UC-03 |
+| Figure 3-10 | Roads and routing | FR-MR-06 to FR-MR-13, NFR-PF-03, IR-CM-05 | UC-04 |
 | Figure 3-11 | Persons and cases | FR-PD-01 to FR-PD-10, FR-PT-01 to FR-PT-12 | UC-05, UC-06 |
 | Figure 3-12 | Hazards and alerts | FR-HZ-01 to FR-HZ-13 | UC-07 |
-| Figures 3-13, 3-14 | Field, citizens, reports and audit | FR-FC-01 to FR-FC-11, FR-RP-01 to FR-RP-10, NFR-SC-05 | UC-08, UC-09, UC-10 |
+| Figures 3-13, 3-14 | Field, citizens, reports and audit | FR-FC-01 to FR-FC-11, FR-RP-01 to FR-RP-10, NFR-SC-05, IR-HW-03, NFR-DQ-02, NFR-MT-03 | UC-08, UC-09, UC-10 |
 | Tables 3-42 to 3-44 | Integrity, data protection, file storage | NFR-SC-01 to NFR-SC-06, NFR-PV-01 to NFR-PV-04, IR-SW-01, NFR-RL-03 | All |
-| Figure 3-15, Tables 3-45, 3-46, Figures 3-16 to 3-22 | User interface design | IR-UI-01 to IR-UI-07, NFR-US-01 to NFR-US-05 | All |
+| Figure 3-15, Tables 3-45, 3-46, Figures 3-16 to 3-22 | User interface design | IR-UI-01 to IR-UI-07, NFR-US-01 to NFR-US-05, NFR-PF-01, NFR-MT-04 | All |
 | Figures 3-23 to 3-25 | Class diagrams | FR-AC, FR-IM, FR-DC, FR-PD, FR-PT, FR-HZ, FR-MR, FR-RP groups | All |
 | Figures 3-26, 3-27 | Sequence: track to assistance case | FR-PT-04 to FR-PT-10 | UC-06 |
 | Figure 3-28 | Sequence: route planning | FR-MR-08 to FR-MR-13 | UC-04 |

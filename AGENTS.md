@@ -24,13 +24,13 @@ Use the [team documentation plan](docs/team-plan/documentation-work-plan.md) for
 
 ## Team and report ownership
 
-Team roster: Mesbah, Mahmoud, Ali, Bela, Yassin, and Youssef. Mesbah confirmed Yassin as Person 1, Bela as Person 2, Mahmoud as Person 4, Ali as Person 5, and himself as Person 6. Confirm the Person 3 assignment with the team. Person numbers identify writing assignments. Chapter numbers follow the university report outline.
+Team roster: Mesbah, Mahmoud, Ali, Bela, Yassin, and Youssef. Mesbah confirmed Yassin as Person 1, Bela as Person 2, Mahmoud as Person 4, Ali as Person 5, and himself as Person 6. Joe is Person 3. Person numbers identify writing assignments. Chapter numbers follow the university report outline.
 
 | Person | Confirmed owner | Report responsibility | Reviewed by |
 | --- | --- | --- | --- |
 | 1 | Yassin | Chapter 1 introduction, objectives, scope, glossary, and constraints. Co-writes Chapter 5 with Mesbah. | Ali |
 | 2 | Bela | Chapter 2 Literature Review and Background, including related systems, the research gap, and references. Coordinates appendices and citations with Mesbah. | Mesbah |
-| 3 | Pending | Section 3.1 System Description, including workflow, user roles, assumptions, and limitations. | Yassin |
+| 3 | Joe | Section 3.1 System Description, including workflow, user roles, assumptions, and limitations. | Yassin |
 | 4 | Mahmoud | Section 3.2 User and System Requirements, including functional and quality requirements, interfaces, written use cases, and traceability. | Person 3 |
 | 5 | Ali | Section 3.3 System Design, including diagrams, design rationale, and screen illustrations. | Mahmoud |
 | 6 | Mesbah (Marwan Mesbah) | Chapter 4 System Prototype, front matter, Chapter 5 with Person 1, and final report assembly and review. | Person 2 |
@@ -40,11 +40,12 @@ Team roster: Mesbah, Mahmoud, Ali, Bela, Yassin, and Youssef. Mesbah confirmed Y
 | Teammate | Contribution or current evidence |
 | --- | --- |
 | Mesbah | Authored the mapping prototype and research notes (`f0b600f`), then the Person 6 plan and six prototype figures (`03b3fb0`). Git records his name as `Marwan` and `Marwan Mesbah`. |
-| Ali | Section 3.3 System Design is in progress, as confirmed by Mesbah. Ali authored the documentation work plan (`22bc575`) and the database and ERD materials (`6815a05`, `3640e18`). Section 3.3 is now in Main: 26 figures, Tables 3-39 to 3-48, references [27] to [31], and empty slots for screen illustrations (Figures 3-16 to 3-22). Sources and the builder are in `docs/documentation/chapter5/`; the plan is [`person5_plan.md`](docs/team-plan/person5_plan.md). A generated data dictionary for the appendices is in `docs/documentation/chapter5/appendix_data_dictionary.md`. Git records his name as `AliOmarAbdelhady`. |
+| Ali | Section 3.3 System Design is in progress, as confirmed by Mesbah. Ali authored the documentation work plan (`22bc575`) and the database and ERD materials (`6815a05`, `3640e18`). Section 3.3 is now in Main: 26 figures, Tables 3-39 to 3-48, references [27] to [31], and empty slots for screen illustrations (Figures 3-16 to 3-22). Sources and the builder are in `docs/documentation/chapter5/`; the team review with requests per person is in [`docs/team-plan/review/`](docs/team-plan/review/README.md); the plan is [`person5_plan.md`](docs/team-plan/person5_plan.md). A generated data dictionary for the appendices is in `docs/documentation/chapter5/appendix_data_dictionary.md`. Git records his name as `AliOmarAbdelhady`. |
 | Mahmoud | Authored the 23 November 2026 requirements draft, `RescueVision_Person4_Requirements_SRS_Section3.pdf`, as confirmed by Mesbah. The PDF is stored locally for reference. |
 | Bela | Authored the [ranked paper list](docs/research_papers.md) and [Tier 1 summaries](docs/tier1_papers_summary.md) as `Mohamed Belal` (`c327c26`, `b7c0b68`). Main integrates the seven core studies into Chapter 2 and records all 28 ranked papers in Appendix D. The classifier configuration uses DINOv2. Chapter 2 describes DINOv3 as an evaluation candidate. |
 | Yassin | Owns Chapter 1. Main has a full draft with the objectives, scope, glossary, and constraints. Yassin and Ali should confirm its wording and review status. Yassin co-writes Chapter 5 with Mesbah. |
 | Youssef | No commits attributable to this name in the visible history. |
+| Joe | Person 3, owner of Section 3.1 System Description (not started). Review items: [`person3_joe.md`](docs/team-plan/review/person3_joe.md). |
 
 History checked through `origin/main` at `22bc575` and `origin/feature/mapping-routing` at `03b3fb0`. Use Git authorship to credit specific contributions and confirm chapter ownership with the team. Add shared-document contributions when their author and section are confirmed.
 
