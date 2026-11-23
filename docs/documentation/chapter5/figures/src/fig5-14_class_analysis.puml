@@ -1,0 +1,74 @@
+@startuml
+!include _style.iuml
+skinparam nodesep 40
+skinparam ranksep 55
+
+class CaptureSession {
+  source : CaptureSource
+  phase : PRE_EVENT | POST_EVENT
+  status : SessionStatus
+}
+class Image {
+  storageKey : text
+  sha256 : text
+  footprint : Polygon
+  gsdCm : number
+}
+class AIModel {
+  task : ModelTask
+  version : text
+  metrics : json
+  isActive : boolean
+}
+class ProcessingJob {
+  jobType : JobType
+  status : JobStatus
+  progress : 0..100
+  +retry()
+}
+class InferenceRun {
+  startedAt / finishedAt
+}
+class Building {
+  footprint : MultiPolygon
+  floors : integer
+  occupancy : OccupancyType
+  construction : ConstructionType
+}
+class BuildingAssessment {
+  grade : DamageGrade
+  probabilities : 4 values
+  method : AssessmentMethod
+  reviewStatus : ReviewStatus
+  isCurrent : boolean
+  +confirm() / correct(grade, reason)
+}
+class CostEstimate {
+  lowAmount / highAmount
+  currency : text
+  assumptions : json (snapshot)
+}
+class PersonDetection {
+  confidence : 0..1
+  visibility : VisibilityLevel
+  occlusionRatio : 0..1
+  posture : Posture
+  groundPoint : Point
+  uncertaintyM : number
+  reviewStatus : ReviewStatus
+}
+class PersonTrack {
+  trackKey : text
+  movementState : MovementState
+  lastSeenAt : timestamp
+}
+CaptureSession "1" *-- "1..*" Image
+ProcessingJob "0..*" --> "1" CaptureSession
+ProcessingJob "1" *-- "0..*" InferenceRun
+InferenceRun "0..*" --> "1" AIModel : uses version >
+Building "1" *-- "1..*" BuildingAssessment
+BuildingAssessment "0..*" --> "0..1" InferenceRun : produced by
+BuildingAssessment "1" *-- "0..*" CostEstimate
+PersonDetection "1..*" --o "0..1" PersonTrack
+PersonDetection "0..*" --> "1" InferenceRun : produced by
+@enduml

@@ -1,0 +1,60 @@
+@startuml
+!include _style.iuml
+hide members
+hide methods
+skinparam nodesep 30
+skinparam ranksep 52
+
+class Agency #DCE7F2
+class User #DCE7F2
+class Team #DCE7F2
+class Incident #DDEFD9
+class Participation #DDEFD9
+class Mission #DDEFD9
+class Assignment #DDEFD9
+class "AI result\n(model version)" as AIResult #E9E0F0
+class Building #FCE8CF
+class "Damage assessment\nand cost estimate" as Assessment #FCE8CF
+class "Road segment" as Road #FFF3C4
+class Route #FFF3C4
+class "Person track\n(detections)" as Track #F8D9D6
+class "Assistance case" as Case #F8D9D6
+class "Status update" as Event #F8D9D6
+class Hazard #F6DDEB
+class "Compound alert" as Alert #F6DDEB
+class "Citizen request" as Request #E6E6E6
+class Report #E6E6E6
+
+Agency "1" -- "0..*" User : employs >
+Agency "1" -- "0..*" Team : owns >
+Team "0..1" -- "0..*" User : active member >
+Agency "1" -- "0..*" Participation : takes part >
+Participation "1..*" -- "1" Incident : in >
+Incident "1" -- "0..*" Mission : runs >
+Mission "1" -- "1..*" Assignment : staffed by >
+Assignment "0..*" -- "0..1" Team : team or >
+Assignment "0..*" -- "0..1" User : one responder >
+Incident "1" -- "0..*" AIResult : analysed into >
+Incident "1" -- "0..*" Building : contains >
+Building "1" -- "1..*" Assessment : graded by >
+AIResult "0..1" -- "0..*" Assessment : proposes >
+AIResult "0..1" -- "0..*" Track : detects >
+Incident "1" -- "0..*" Road : contains >
+Route "0..*" -- "1..*" Road : follows >
+Mission "0..1" -- "0..*" Route : uses >
+Track "0..1" -- "0..1" Case : becomes >
+Request "0..1" -- "0..1" Case : becomes >
+Case "1" -- "0..*" Event : history >
+Case "0..*" -- "0..1" Mission : handled by >
+Incident "1" -- "0..*" Hazard : contains >
+Alert "0..*" -- "1..*" Hazard : combines >
+Alert "0..1" -- "0..*" Road : closes >
+Alert "0..1" -- "0..*" Route : invalidates >
+Request "0..*" -- "0..1" Incident : matched to >
+Report "0..*" -- "1" Incident : summarises >
+
+legend bottom
+  Colour shows the information domain: blue organisations, green operations,
+  purple analysis, orange F1, yellow F2, red F3/F4, pink F5, grey field and reports.
+endlegend
+@enduml

@@ -1,0 +1,84 @@
+@startuml
+!include _style.iuml
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 45
+
+entity "incidents" as incidents {
+  <size:10>PK</size> <b>id</b> : uuid
+  code : text
+  name : text
+  disaster_type : disaster_type
+  status : incident_status
+  severity : smallint
+  <size:10>FK</size> lead_agency_id : uuid<color:#7a8ba0> → agencies</color>
+  area : geom MultiPolygon
+  is_historical : boolean
+  started_at : timestamptz
+  closed_at : timestamptz <color:#7a8ba0>?</color>
+  <size:10>FK</size> created_by : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  created_at : timestamptz
+  updated_at : timestamptz
+}
+entity "incident_agencies" as incident_agencies {
+  <size:10>PK,FK</size> <b>incident_id</b> : uuid
+  <size:10>PK,FK</size> <b>agency_id</b> : uuid<color:#7a8ba0> → agencies</color>
+  participation : participation_role
+  status : participation_status
+  <size:10>FK</size> invited_by : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  invited_at : timestamptz
+  joined_at : timestamptz <color:#7a8ba0>?</color>
+}
+entity "zones" as zones {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> incident_id : uuid
+  name : text
+  zone_type : zone_type
+  geom : geom Geometry
+  <size:10>FK</size> created_by : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  created_at : timestamptz
+}
+entity "missions" as missions {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> incident_id : uuid
+  <size:10>FK</size> agency_id : uuid<color:#7a8ba0> → agencies</color>
+  code : text
+  title : text
+  mission_type : mission_type
+  priority : smallint
+  status : mission_status
+  <size:10>FK</size> target_zone_id : uuid <color:#7a8ba0>?</color>
+  target_geom : geom Geometry <color:#7a8ba0>?</color>
+  <size:10>FK</size> created_by : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  created_at : timestamptz
+  updated_at : timestamptz
+  started_at : timestamptz <color:#7a8ba0>?</color>
+  completed_at : timestamptz <color:#7a8ba0>?</color>
+}
+entity "mission_assignments" as mission_assignments {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> mission_id : uuid
+  <size:10>FK</size> team_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → teams</color>
+  <size:10>FK</size> user_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  <size:10>FK</size> vehicle_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → vehicles</color>
+  <size:10>FK</size> assigned_by : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  assigned_at : timestamptz
+  released_at : timestamptz <color:#7a8ba0>?</color>
+  response : assignment_response
+}
+entity "mission_status_history" as mission_status_history {
+  <size:10>PK</size> <b>id</b> : bigint
+  <size:10>FK</size> mission_id : uuid
+  from_status : mission_status <color:#7a8ba0>?</color>
+  to_status : mission_status
+  <size:10>FK</size> changed_by : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  changed_at : timestamptz
+  note : text <color:#7a8ba0>?</color>
+}
+incident_agencies }o--|| incidents : incident_id
+zones }o--|| incidents : incident_id
+mission_status_history }o--|| missions : mission_id
+missions }o--|| incidents : incident_id
+missions }o--o| zones : target_zone_id
+mission_assignments }o--|| missions : mission_id
+@enduml

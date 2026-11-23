@@ -1,0 +1,49 @@
+@startuml
+!include _style.iuml
+skinparam maxMessageSize 115
+hide footbox
+skinparam defaultFontSize 11
+skinparam ParticipantFontSize 11
+skinparam sequenceMessageAlign left
+autonumber
+actor "Analyst" as AN
+participant "Console" as WEB
+participant "API" as API
+collections "Object\nstorage" as OBJ
+database "Database\n(job table)" as DB
+participant "GPU\nworker" as W
+participant "Live\nupdates" as LIVE
+
+AN -> WEB : create capture session (drone, post-event)
+WEB -> API : POST session
+API -> DB : insert session UPLOADING
+loop each image
+  WEB -> OBJ : upload (resumable, NFR-RL-03)
+  WEB -> API : register image (key, checksum)
+  API -> DB : reject duplicate checksum;\nread GPS metadata
+  alt no location metadata
+    API --> WEB : ask Analyst to supply or exclude
+  end
+end
+AN -> WEB : start stitching and analysis
+WEB -> API : POST processing jobs
+API -> DB : insert jobs QUEUED
+API --> WEB : accepted (interactive work continues)
+W -> DB : claim next job (skip locked)
+W -> OBJ : read images
+W -> W : stitch orthomosaic; run models\n(registered model versions only)
+loop at least every 30 s (NFR-PF-05)
+  W -> DB : progress
+  DB -> LIVE : job progress
+  LIVE -> WEB : progress bar
+end
+alt job succeeds
+  W -> OBJ : write orthomosaic and masks
+  W -> DB : write AI results with model version\nand input images (FR-IM-07); status SUCCEEDED
+  DB -> LIVE : new layers available
+  LIVE -> WEB : add layers to map
+else job fails
+  W -> DB : status FAILED with error
+  LIVE -> WEB : show error and Retry
+end
+@enduml

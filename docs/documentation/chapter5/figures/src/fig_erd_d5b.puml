@@ -1,0 +1,99 @@
+@startuml
+!include _style.iuml
+skinparam linetype ortho
+left to right direction
+skinparam nodesep 16
+skinparam ranksep 34
+
+entity "citizens" as citizens {
+  <size:10>PK</size> <b>id</b> : uuid
+  phone : text
+  full_name : text <color:#7a8ba0>?</color>
+  preferred_language : text
+  phone_verified_at : timestamptz <color:#7a8ba0>?</color>
+  is_blocked : boolean
+  created_at : timestamptz
+}
+entity "citizen_requests" as citizen_requests {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> citizen_id : uuid
+  <size:10>FK</size> incident_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → incidents</color>
+  request_type : citizen_request_type
+  location : geom Point
+  location_accuracy_m : numeric(7,2) <color:#7a8ba0>?</color>
+  people_count : smallint <color:#7a8ba0>?</color>
+  description : text <color:#7a8ba0>?</color>
+  status : citizen_request_status
+  <size:10>FK</size> duplicate_of_id : uuid <color:#7a8ba0>?</color>
+  <size:10>FK</size> verified_by : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  verified_at : timestamptz <color:#7a8ba0>?</color>
+  created_at : timestamptz
+}
+entity "media_files" as media_files {
+  <size:10>PK</size> <b>id</b> : uuid
+  storage_key : text
+  mime_type : text
+  sha256 : text
+  <size:10>FK</size> uploaded_by_user : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  <size:10>FK</size> uploaded_by_citizen : uuid <color:#7a8ba0>?</color>
+  created_at : timestamptz
+}
+entity "citizen_request_media" as citizen_request_media {
+  <size:10>PK,FK</size> <b>request_id</b> : uuid
+  <size:10>PK,FK</size> <b>media_id</b> : uuid
+}
+entity "reports" as reports {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> incident_id : uuid<color:#7a8ba0> → incidents</color>
+  report_type : report_type
+  title : text
+  period_from : timestamptz <color:#7a8ba0>?</color>
+  period_to : timestamptz <color:#7a8ba0>?</color>
+  <size:10>FK</size> scope_zone_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → zones</color>
+  status : report_status
+  stats_snapshot : jsonb
+  pdf_storage_key : text <color:#7a8ba0>?</color>
+  html_storage_key : text <color:#7a8ba0>?</color>
+  <size:10>FK</size> job_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → processing_jobs</color>
+  <size:10>FK</size> generated_by : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  <size:10>FK</size> approved_by : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  approved_at : timestamptz <color:#7a8ba0>?</color>
+  created_at : timestamptz
+  disclaimer : text
+}
+entity "report_shares" as report_shares {
+  <size:10>PK,FK</size> <b>report_id</b> : uuid
+  <size:10>PK,FK</size> <b>agency_id</b> : uuid<color:#7a8ba0> → agencies</color>
+  <size:10>FK</size> shared_by : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  shared_at : timestamptz
+}
+entity "image_embeddings" as image_embeddings {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> model_id : uuid<color:#7a8ba0> → ai_models</color>
+  <size:10>FK</size> incident_id : uuid<color:#7a8ba0> → incidents</color>
+  source_kind : embedding_source
+  <size:10>FK</size> building_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → buildings</color>
+  <size:10>FK</size> image_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → images</color>
+  embedding : vector(768)
+  created_at : timestamptz
+}
+entity "audit_log" as audit_log {
+  <size:10>PK</size> <b>id</b> : bigint
+  actor_user_id : uuid <color:#7a8ba0>?</color>
+  action : text
+  entity_table : text
+  entity_id : text <color:#7a8ba0>?</color>
+  before : jsonb <color:#7a8ba0>?</color>
+  after : jsonb <color:#7a8ba0>?</color>
+  ip : inet <color:#7a8ba0>?</color>
+  <size:10>PK</size> <b>created_at</b> : timestamptz
+}
+media_files }o--o| citizens : uploaded_by_citizen
+citizen_requests }o--|| citizens : citizen_id
+citizen_requests }o--o| citizen_requests : duplicate_of_id
+citizen_request_media }o--|| citizen_requests : request_id
+citizen_request_media }o--|| media_files : media_id
+report_shares }o--|| reports : report_id
+report_shares -[hidden]down- audit_log
+citizen_request_media -[hidden]down- image_embeddings
+@enduml

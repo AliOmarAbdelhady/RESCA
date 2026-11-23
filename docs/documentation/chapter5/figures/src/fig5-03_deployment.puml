@@ -1,0 +1,26 @@
+@startuml
+!include _style.iuml
+skinparam nodesep 40
+skinparam ranksep 55
+
+node "Desktop browser\n(command console)" as B
+node "Smartphone\n(field app, citizen form)" as P
+node "Edge node\nTLS termination,\nload balancing" as EDGE
+node "Application server(s)\napplication interface,\nlive-update channel" as API
+node "Tile server\nmap-tile service" as TILE
+node "Analysis worker(s)\nwith GPU" as W
+database "Database server\nspatial database" as DB
+database "Backup location\ndaily backups\n(NFR-RL-05)" as BK
+storage "Object storage\nservice" as OBJ
+
+B --> EDGE : HTTPS, TLS 1.2+
+P --> EDGE : HTTPS, TLS 1.2+
+EDGE --> API
+EDGE --> TILE
+API --> DB
+API --> OBJ : signed links
+W --> DB : claim jobs,\nwrite results
+W --> OBJ
+TILE --> OBJ
+DB --> BK
+@enduml

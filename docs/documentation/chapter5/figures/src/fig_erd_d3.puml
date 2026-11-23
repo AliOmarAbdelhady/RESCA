@@ -1,0 +1,96 @@
+@startuml
+!include _style.iuml
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 45
+
+entity "capture_sessions" as capture_sessions {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> incident_id : uuid<color:#7a8ba0> → incidents</color>
+  <size:10>FK</size> mission_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → missions</color>
+  source_type : capture_source
+  phase : capture_phase
+  provider : text <color:#7a8ba0>?</color>
+  captured_from : timestamptz <color:#7a8ba0>?</color>
+  captured_to : timestamptz <color:#7a8ba0>?</color>
+  coverage : geom Polygon <color:#7a8ba0>?</color>
+  <size:10>FK</size> uploaded_by : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  status : session_status
+  created_at : timestamptz
+}
+entity "images" as images {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> session_id : uuid
+  media_kind : media_kind
+  frame_index : integer <color:#7a8ba0>?</color>
+  storage_key : text
+  sha256 : text
+  width_px : integer
+  height_px : integer
+  spectral_band : spectral_band
+  captured_at : timestamptz <color:#7a8ba0>?</color>
+  camera_position : geom PointZ <color:#7a8ba0>?</color>
+  altitude_agl_m : numeric(7,2) <color:#7a8ba0>?</color>
+  gimbal_pitch : numeric(6,2) <color:#7a8ba0>?</color>
+  gimbal_yaw : numeric(6,2) <color:#7a8ba0>?</color>
+  gimbal_roll : numeric(6,2) <color:#7a8ba0>?</color>
+  gsd_cm : numeric(7,2) <color:#7a8ba0>?</color>
+  gps_accuracy_m : numeric(7,2) <color:#7a8ba0>?</color>
+  footprint : geom Polygon <color:#7a8ba0>?</color>
+  exif : jsonb <color:#7a8ba0>?</color>
+}
+entity "raster_products" as raster_products {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> session_id : uuid
+  <size:10>FK</size> produced_by_run_id : uuid <color:#7a8ba0>?</color>
+  product_type : raster_type
+  storage_key : text
+  resolution_m : numeric(8,3) <color:#7a8ba0>?</color>
+  bounds : geom Polygon
+  created_at : timestamptz
+}
+entity "ai_models" as ai_models {
+  <size:10>PK</size> <b>id</b> : uuid
+  name : text
+  version : text
+  task : model_task
+  architecture : text
+  training_datasets : text[]
+  metrics : jsonb <color:#7a8ba0>?</color>
+  weights_uri : text <color:#7a8ba0>?</color>
+  is_active : boolean
+  created_at : timestamptz
+}
+entity "processing_jobs" as processing_jobs {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> incident_id : uuid<color:#7a8ba0> → incidents</color>
+  <size:10>FK</size> session_id : uuid <color:#7a8ba0>?</color>
+  job_type : job_type
+  status : job_status
+  progress_pct : smallint
+  error_message : text <color:#7a8ba0>?</color>
+  <size:10>FK</size> requested_by : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  queued_at : timestamptz
+  started_at : timestamptz <color:#7a8ba0>?</color>
+  finished_at : timestamptz <color:#7a8ba0>?</color>
+}
+entity "inference_runs" as inference_runs {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> job_id : uuid
+  <size:10>FK</size> model_id : uuid
+  <size:10>FK</size> pre_raster_id : uuid <color:#7a8ba0>?</color>
+  <size:10>FK</size> post_raster_id : uuid
+  params : jsonb
+  status : job_status
+  started_at : timestamptz <color:#7a8ba0>?</color>
+  finished_at : timestamptz <color:#7a8ba0>?</color>
+}
+images }o--|| capture_sessions : session_id
+processing_jobs }o--o| capture_sessions : session_id
+raster_products }o--|| capture_sessions : session_id
+inference_runs }o--|| processing_jobs : job_id
+inference_runs }o--|| ai_models : model_id
+inference_runs }o--o| raster_products : pre_raster_id
+inference_runs }o--|| raster_products : post_raster_id
+raster_products }o--o| inference_runs : produced_by_run_id
+@enduml

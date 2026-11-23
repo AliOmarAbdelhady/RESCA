@@ -1,0 +1,54 @@
+@startuml
+!include _style.iuml
+left to right direction
+skinparam nodesep 14
+skinparam ranksep 60
+skinparam usecase {
+  FontSize 12
+}
+
+actor "Commander" as CMD
+actor "Analyst" as AN
+actor "Field Responder" as FR
+actor "Citizen" as CZ
+actor "Platform\nAdministrator" as PA
+actor "System" as SYS
+
+rectangle "RescueVision" {
+  usecase "UC-01 Open an incident and\nbring in partner agencies" as UC01
+  usecase "UC-02 Upload imagery\nand run analysis" as UC02
+  usecase "UC-03 Review building damage\nand restoration cost" as UC03
+  usecase "UC-04 Plan a rescue route\nfor a vehicle" as UC04
+  usecase "UC-05 Review a partially\nvisible person detection" as UC05
+  usecase "UC-06 Turn a stationary track\ninto an assistance case" as UC06
+  usecase "UC-07 Respond to an\nElectrified Water alert" as UC07
+  usecase "UC-08 Generate, approve\nand share a report" as UC08
+  usecase "UC-09 Carry out a mission\nin the field" as UC09
+  usecase "UC-10 Submit and verify\na citizen request" as UC10
+  usecase "Raise an SOS\n(FR-FC-03)" as SOS
+}
+
+CMD -- UC01
+CMD -- UC03
+CMD -- UC04
+CMD -- UC06
+CMD -- UC07
+CMD -- UC08
+AN -- UC02
+AN -- UC03
+AN -- UC04
+AN -- UC05
+AN -- UC06
+AN -- UC08
+AN -- UC10
+FR -- UC09
+FR -- UC07
+CZ -- UC10
+PA -- UC10
+SYS -- UC07
+
+UC09 .> UC04 : <<include>>\nroute delivered
+SOS .> UC09 : <<extend>>\nresponder in danger
+UC06 .> UC04 : <<include>>\nroute to case
+UC05 .> UC02 : <<include>>\ndetections
+@enduml

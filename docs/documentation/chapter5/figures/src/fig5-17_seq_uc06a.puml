@@ -1,0 +1,39 @@
+@startuml
+!include _style.iuml
+skinparam maxMessageSize 115
+hide footbox
+skinparam defaultFontSize 11
+skinparam ParticipantFontSize 11
+skinparam sequenceMessageAlign left
+autonumber
+actor "Analyst" as AN
+participant "Console" as WEB
+participant "API" as API
+participant "Cases\nmodule" as CASES
+database "Database" as DB
+participant "Live\nupdates" as LIVE
+
+== Track flagged ==
+DB -> LIVE : track marked STATIONARY
+LIVE -> WEB : highlight track for review (FR-PT-04)
+== Analyst review ==
+AN -> WEB : open track
+WEB -> API : GET track (path, last position, last seen)
+API -> DB : read track and detections\n(row-level security: incident participants only)
+DB --> API : track
+API --> WEB : track with age of last sighting
+alt last sighting older than freshness limit (FR-PT-05)
+  WEB --> AN : show "last known position" warning
+end
+AN -> WEB : create assistance case (people count)
+WEB -> API : POST case from track
+API -> CASES : create case (source AI_DETECTION)
+alt citizen request already describes this person
+  CASES --> API : suggest linking the request
+  API --> WEB : offer link instead of a new case
+else new case
+  CASES -> DB : insert case, status VERIFIED\n+ case event (who, when)
+end
+DB -> LIVE : case created
+LIVE -> WEB : case appears in queue
+@enduml

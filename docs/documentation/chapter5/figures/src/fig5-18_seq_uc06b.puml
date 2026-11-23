@@ -1,0 +1,31 @@
+@startuml
+!include _style.iuml
+skinparam maxMessageSize 115
+hide footbox
+skinparam defaultFontSize 11
+skinparam ParticipantFontSize 11
+skinparam sequenceMessageAlign left
+autonumber
+actor "Commander" as CMD
+participant "Console" as WEB
+participant "API" as API
+participant "Cases\nmodule" as CASES
+database "Database" as DB
+participant "Live\nupdates" as LIVE
+actor "Field\nResponder" as FR
+
+== Commander assigns ==
+CMD -> WEB : assign case to mission
+WEB -> API : PATCH case.mission
+API -> CASES : assignTo(mission)
+CASES -> DB : status ASSIGNED + case event
+DB -> LIVE : case assigned
+LIVE -> FR : notification with case and route (UC-04)
+== Field update ==
+FR -> API : record START triage, status ON_SCENE
+API -> DB : update case + case event
+FR -> API : status RESCUED, facility = receiving hospital
+API -> DB : update case + case event
+DB -> LIVE : case closed
+LIVE -> WEB : queue and map updated
+@enduml

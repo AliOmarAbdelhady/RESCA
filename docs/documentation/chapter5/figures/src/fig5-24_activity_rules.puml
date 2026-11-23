@@ -1,0 +1,28 @@
+@startuml
+!include _style.iuml
+start
+:Hazard or infrastructure asset\nadded or changed (FR-HZ-04);
+:Load active compound-hazard rules\nfor the incident;
+repeat :Next rule (operand A, operand B,\nmax distance, buffer);
+  :Find pairs of active hazards / assets / roads\nwithin max distance (metres on WGS 84);
+  if (Asset confirmed\nde-energised?) then (yes)
+    :Skip pair;
+  else (no: energised\nor unknown)
+    if (Active alert already exists\nfor this pair?) then (yes)
+      :Keep existing alert\n(idempotent);
+    else (no)
+      :Create compound alert;
+      :Buffer both geometries into a danger zone\nand display it as a no-entry zone;
+      if (Rule closes roads?) then (yes)
+        :Close intersecting road segments;\nstore previous condition and cost;
+        :Invalidate active routes\nthat use a closed segment;
+      else (no)
+      endif
+      :Notify assigned teams and responders\nin or near the zone;
+    endif
+  endif
+repeat while (More rules?) is (yes)
+->no;
+:Push changes to consoles\nand mobile devices;
+stop
+@enduml

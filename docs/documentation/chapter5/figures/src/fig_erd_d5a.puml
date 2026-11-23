@@ -1,0 +1,58 @@
+@startuml
+!include _style.iuml
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 45
+
+entity "responder_positions" as responder_positions {
+  <size:10>PK</size> <b>id</b> : bigint
+  <size:10>FK</size> user_id : uuid<color:#7a8ba0> → users</color>
+  <size:10>FK</size> incident_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → incidents</color>
+  <size:10>FK</size> mission_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → missions</color>
+  <size:10>PK</size> <b>recorded_at</b> : timestamptz
+  geom : geom Point
+  accuracy_m : numeric(7,2)
+  speed_mps : numeric(6,2) <color:#7a8ba0>?</color>
+  heading_deg : numeric(5,2) <color:#7a8ba0>?</color>
+  battery_pct : smallint <color:#7a8ba0>?</color>
+}
+entity "responder_last_positions" as responder_last_positions {
+  <size:10>PK,FK</size> <b>user_id</b> : uuid<color:#7a8ba0> → users</color>
+  geom : geom Point
+  accuracy_m : numeric(7,2)
+  recorded_at : timestamptz
+  <size:10>FK</size> incident_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → incidents</color>
+  <size:10>FK</size> mission_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → missions</color>
+}
+entity "sos_alerts" as sos_alerts {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> incident_id : uuid<color:#7a8ba0> → incidents</color>
+  <size:10>FK</size> user_id : uuid<color:#7a8ba0> → users</color>
+  location : geom Point
+  message : text <color:#7a8ba0>?</color>
+  <size:10>FK</size> media_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → media_files</color>
+  status : sos_status
+  triggered_at : timestamptz
+  <size:10>FK</size> acknowledged_by : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  acknowledged_at : timestamptz <color:#7a8ba0>?</color>
+  resolved_at : timestamptz <color:#7a8ba0>?</color>
+}
+entity "notifications" as notifications {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> user_id : uuid<color:#7a8ba0> → users</color>
+  <size:10>FK</size> incident_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → incidents</color>
+  kind : notification_kind
+  title : text
+  body : text
+  severity : smallint
+  <size:10>FK</size> alert_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → compound_alerts</color>
+  <size:10>FK</size> mission_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → missions</color>
+  <size:10>FK</size> case_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → assistance_cases</color>
+  <size:10>FK</size> sos_id : uuid <color:#7a8ba0>?</color>
+  <size:10>FK</size> route_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → routes</color>
+  created_at : timestamptz
+  delivered_at : timestamptz <color:#7a8ba0>?</color>
+  read_at : timestamptz <color:#7a8ba0>?</color>
+}
+notifications }o--o| sos_alerts : sos_id
+@enduml

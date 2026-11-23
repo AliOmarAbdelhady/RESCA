@@ -1,0 +1,42 @@
+@startuml
+!include _style.iuml
+skinparam maxMessageSize 115
+hide footbox
+skinparam defaultFontSize 11
+skinparam ParticipantFontSize 11
+skinparam sequenceMessageAlign left
+autonumber
+actor "Analyst" as AN
+participant "Console" as WEB
+participant "API" as API
+participant "Route\nplanner" as RP
+database "Database\n(road graph)" as DB
+participant "Live\nupdates" as LIVE
+actor "Field\nResponder" as FR
+
+AN -> WEB : select mission and destination\n(case or hospital)
+WEB -> API : POST route request
+API -> DB : read mission vehicle\n(type, max safe water depth)
+API -> RP : plan(origin, destination, vehicle)
+RP -> DB : build usable graph: exclude closed segments\nand flooded segments deeper than the vehicle limit
+RP -> DB : shortest-path search (A* or Dijkstra)
+alt a safe route exists
+  DB --> RP : primary path + up to two alternatives
+  RP --> API : routes with length and estimated time
+  API --> WEB : show routes in 2D/3D\n(unverified segments marked)
+  AN -> WEB : choose route
+  WEB -> API : confirm route
+  API -> DB : store route ACTIVE with ordered segments
+  DB -> LIVE : route assigned
+  LIVE -> FR : route on device (FR-MR-13)
+else no safe route
+  RP --> API : no path
+  API --> WEB : "No safe route" with blocking closures (FR-MR-12)
+  AN -> WEB : choose another vehicle or a staging point
+end
+== later: a road on the route closes ==
+DB -> DB : segment closed by an alert\nroute marked INVALIDATED
+DB -> LIVE : route invalidated
+LIVE -> FR : priority warning and re-planned route offer (FR-MR-11)
+LIVE -> WEB : route shown as invalid
+@enduml

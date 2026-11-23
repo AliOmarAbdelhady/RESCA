@@ -1,0 +1,91 @@
+' Shared style for the Chapter Five figures (print-friendly RescueVision palette).
+' Ink #1A2538, slate #5C7A96, panel tint #EAF1F8, accent cyan #0091A8 (print-safe),
+' alert amber #E07400. Text is never smaller than 11 pt at the exported size.
+skinparam dpi 200
+skinparam defaultFontName "Liberation Sans"
+skinparam defaultFontSize 12
+skinparam defaultFontColor #1A2538
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundCorner 6
+skinparam ArrowColor #3B4F6B
+skinparam ArrowFontSize 11
+skinparam ArrowFontColor #33445E
+skinparam ArrowThickness 1.2
+skinparam NoteBackgroundColor #FFF6E8
+skinparam NoteBorderColor #E07400
+skinparam NoteFontSize 11
+skinparam TitleFontSize 1
+skinparam LegendBackgroundColor #F6F8FB
+skinparam LegendBorderColor #9AAFC4
+skinparam LegendFontSize 11
+
+skinparam class {
+  BackgroundColor #F6F9FC
+  BorderColor #3B4F6B
+  HeaderBackgroundColor #DCE7F2
+  AttributeFontSize 11
+  AttributeFontColor #1A2538
+  StereotypeFontSize 10
+}
+skinparam entity {
+  BackgroundColor #F6F9FC
+  BorderColor #3B4F6B
+}
+skinparam package {
+  BackgroundColor #FBFCFE
+  BorderColor #8EA3B8
+  FontSize 13
+  FontStyle bold
+}
+skinparam rectangle {
+  BackgroundColor #F6F9FC
+  BorderColor #3B4F6B
+}
+skinparam component {
+  BackgroundColor #EAF1F8
+  BorderColor #3B4F6B
+}
+skinparam database {
+  BackgroundColor #EAF1F8
+  BorderColor #3B4F6B
+}
+skinparam node {
+  BackgroundColor #FBFCFE
+  BorderColor #3B4F6B
+}
+skinparam actor {
+  BackgroundColor #EAF1F8
+  BorderColor #1A2538
+}
+skinparam usecase {
+  BackgroundColor #EAF1F8
+  BorderColor #3B4F6B
+}
+skinparam sequence {
+  ParticipantBackgroundColor #EAF1F8
+  ParticipantBorderColor #3B4F6B
+  ActorBackgroundColor #EAF1F8
+  ActorBorderColor #1A2538
+  LifeLineBorderColor #8EA3B8
+  LifeLineBackgroundColor #DCE7F2
+  GroupBackgroundColor #DCE7F2
+  GroupBorderColor #8EA3B8
+  GroupHeaderFontColor #1A2538
+  DividerBackgroundColor #F6F8FB
+  BoxBackgroundColor #FBFCFE
+  BoxBorderColor #C9D6E3
+}
+skinparam state {
+  BackgroundColor #EAF1F8
+  BorderColor #3B4F6B
+  StartColor #1A2538
+  EndColor #1A2538
+}
+skinparam activity {
+  BackgroundColor #EAF1F8
+  BorderColor #3B4F6B
+  DiamondBackgroundColor #FFF6E8
+  DiamondBorderColor #E07400
+}
+hide circle

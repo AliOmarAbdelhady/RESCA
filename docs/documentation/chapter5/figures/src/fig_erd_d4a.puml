@@ -1,0 +1,82 @@
+@startuml
+!include _style.iuml
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 45
+
+entity "buildings" as buildings {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> incident_id : uuid<color:#7a8ba0> → incidents</color>
+  external_ref : text <color:#7a8ba0>?</color>
+  footprint : geom Polygon
+  area_m2 : numeric <color:#7a8ba0>?</color>
+  floors : smallint <color:#7a8ba0>?</color>
+  height_m : numeric(6,2) <color:#7a8ba0>?</color>
+  occupancy : occupancy_type
+  construction : construction_type
+  est_occupants : integer <color:#7a8ba0>?</color>
+  address : text <color:#7a8ba0>?</color>
+  source : building_source
+  created_at : timestamptz
+}
+entity "building_assessments" as building_assessments {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> building_id : uuid
+  <size:10>FK</size> inference_run_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → inference_runs</color>
+  <size:10>FK</size> assessed_by : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  method : assessment_method
+  damage_grade : damage_grade
+  p_no_damage : numeric(4,3) <color:#7a8ba0>?</color>
+  p_minor : numeric(4,3) <color:#7a8ba0>?</color>
+  p_major : numeric(4,3) <color:#7a8ba0>?</color>
+  p_destroyed : numeric(4,3) <color:#7a8ba0>?</color>
+  <size:10>FK</size> pre_image_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → images</color>
+  <size:10>FK</size> post_image_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → images</color>
+  review_status : review_status
+  <size:10>FK</size> reviewed_by : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  reviewed_at : timestamptz <color:#7a8ba0>?</color>
+  is_current : boolean
+  created_at : timestamptz
+}
+entity "cost_profiles" as cost_profiles {
+  <size:10>PK</size> <b>id</b> : uuid
+  name : text
+  region : text
+  currency : character(3)
+  source : text
+  valid_from : date
+}
+entity "cost_profile_unit_rates" as cost_profile_unit_rates {
+  <size:10>PK,FK</size> <b>profile_id</b> : uuid
+  <size:10>PK</size> <b>occupancy</b> : occupancy_type
+  <size:10>PK</size> <b>construction</b> : construction_type
+  cost_per_m2_low : numeric(12,2)
+  cost_per_m2_high : numeric(12,2)
+}
+entity "cost_profile_repair_ratios" as cost_profile_repair_ratios {
+  <size:10>PK,FK</size> <b>profile_id</b> : uuid
+  <size:10>PK</size> <b>damage_grade</b> : damage_grade
+  ratio_low : numeric(4,3)
+  ratio_high : numeric(4,3)
+}
+entity "cost_estimates" as cost_estimates {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> building_id : uuid
+  <size:10>FK</size> assessment_id : uuid
+  <size:10>FK</size> cost_profile_id : uuid
+  floor_area_m2 : numeric(12,2)
+  repair_ratio_low : numeric(4,3)
+  repair_ratio_high : numeric(4,3)
+  cost_low : numeric(14,2)
+  cost_high : numeric(14,2)
+  currency : character(3)
+  assumptions : jsonb
+  computed_at : timestamptz
+}
+building_assessments }o--|| buildings : building_id
+cost_profile_unit_rates }o--|| cost_profiles : profile_id
+cost_profile_repair_ratios }o--|| cost_profiles : profile_id
+cost_estimates }o--|| buildings : building_id
+cost_estimates }o--|| building_assessments : assessment_id
+cost_estimates }o--|| cost_profiles : cost_profile_id
+@enduml

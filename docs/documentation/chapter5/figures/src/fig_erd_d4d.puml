@@ -1,0 +1,73 @@
+@startuml
+!include _style.iuml
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 45
+
+entity "infrastructure_assets" as infrastructure_assets {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> incident_id : uuid<color:#7a8ba0> → incidents</color>
+  asset_type : asset_type
+  geom : geom Geometry
+  voltage_kv : numeric(7,2) <color:#7a8ba0>?</color>
+  operator : text <color:#7a8ba0>?</color>
+  power_state : power_state
+  state_updated_at : timestamptz <color:#7a8ba0>?</color>
+}
+entity "hazards" as hazards {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> incident_id : uuid<color:#7a8ba0> → incidents</color>
+  hazard_type : hazard_type
+  geom : geom Geometry
+  severity : smallint
+  confidence : numeric(4,3) <color:#7a8ba0>?</color>
+  origin : hazard_origin
+  <size:10>FK</size> inference_run_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → inference_runs</color>
+  <size:10>FK</size> reported_by : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  <size:10>FK</size> citizen_request_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → citizen_requests</color>
+  status : hazard_status
+  attributes : jsonb
+  observed_at : timestamptz
+  expires_at : timestamptz <color:#7a8ba0>?</color>
+}
+entity "hazard_rules" as hazard_rules {
+  <size:10>PK</size> <b>id</b> : uuid
+  code : text
+  name : text
+  description : text
+  primary_hazard_type : hazard_type
+  secondary_kind : rule_operand
+  secondary_types : text[]
+  max_distance_m : numeric(7,2)
+  danger_buffer_m : numeric(7,2)
+  resulting_severity : smallint
+  closes_roads : boolean
+  warning_template : text
+  is_active : boolean
+}
+entity "compound_alerts" as compound_alerts {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> incident_id : uuid<color:#7a8ba0> → incidents</color>
+  <size:10>FK</size> rule_id : uuid
+  title : text
+  danger_zone : geom MultiPolygon
+  severity : smallint
+  status : alert_status
+  triggered_at : timestamptz
+  <size:10>FK</size> acknowledged_by : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  acknowledged_at : timestamptz <color:#7a8ba0>?</color>
+  <size:10>FK</size> resolved_by : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  resolved_at : timestamptz <color:#7a8ba0>?</color>
+  resolution_note : text <color:#7a8ba0>?</color>
+}
+entity "compound_alert_sources" as compound_alert_sources {
+  <size:10>PK</size> <b>id</b> : bigint
+  <size:10>FK</size> alert_id : uuid
+  <size:10>FK</size> hazard_id : uuid <color:#7a8ba0>?</color>
+  <size:10>FK</size> asset_id : uuid <color:#7a8ba0>?</color>
+}
+compound_alerts }o--|| hazard_rules : rule_id
+compound_alert_sources }o--|| compound_alerts : alert_id
+compound_alert_sources }o--o| hazards : hazard_id
+compound_alert_sources }o--o| infrastructure_assets : asset_id
+@enduml

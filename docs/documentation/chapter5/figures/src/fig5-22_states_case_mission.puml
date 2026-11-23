@@ -1,0 +1,33 @@
+@startuml
+!include _style.iuml
+skinparam nodesep 30
+skinparam ranksep 30
+
+state "Assistance case" as AC {
+  [*] --> DETECTED : from track
+  [*] --> VERIFIED : from verified request\nor responder report
+  DETECTED --> VERIFIED : Analyst confirms
+  DETECTED --> FALSE_ALARM : Analyst dismisses
+  VERIFIED --> ASSIGNED : Commander assigns mission
+  ASSIGNED --> EN_ROUTE
+  EN_ROUTE --> ON_SCENE
+  ON_SCENE --> RESCUED
+  RESCUED --> TRANSPORTED : facility recorded
+  ON_SCENE --> DECEASED
+  TRANSPORTED --> [*]
+  DECEASED --> [*]
+  FALSE_ALARM --> [*]
+}
+
+state "Mission" as MS {
+  [*] --> PLANNED
+  PLANNED --> ASSIGNED_M : team or responder
+  state "ASSIGNED" as ASSIGNED_M
+  ASSIGNED_M --> IN_PROGRESS
+  IN_PROGRESS --> COMPLETED
+  PLANNED --> CANCELLED
+  ASSIGNED_M --> CANCELLED
+  COMPLETED --> [*]
+  CANCELLED --> [*]
+}
+@enduml

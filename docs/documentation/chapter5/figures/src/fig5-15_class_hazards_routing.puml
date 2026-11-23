@@ -1,0 +1,59 @@
+@startuml
+!include _style.iuml
+skinparam nodesep 36
+skinparam ranksep 55
+
+class Hazard {
+  hazardType : HazardType
+  status : HazardStatus
+  origin : HazardOrigin
+  geom : Geometry
+}
+class InfrastructureAsset {
+  assetType : AssetType
+  powerState : PowerState
+}
+class HazardRule {
+  name : text
+  maxDistanceM / bufferM
+  closesRoads : boolean
+}
+class CompoundAlert {
+  status : AlertStatus
+  dangerZone : MultiPolygon
+  +acknowledge()
+  +resolve(note, falseAlarm)
+}
+class RoadSegment {
+  condition : RoadCondition
+  waterDepthCm : number
+  cost / reverseCost
+}
+class Route {
+  status : RouteStatus
+  algorithm : ASTAR | DIJKSTRA
+  lengthM / etaS
+}
+class "<<service>>\nRoutePlanner" as RoutePlanner {
+  +plan(origin, destination, vehicle) : Route[0..3]
+}
+class "<<service>>\nHazardRuleEngine" as Engine {
+  +evaluate(incident) : CompoundAlert[*]
+}
+class Report {
+  reportType : ReportType
+  status : ReportStatus
+  snapshot : json
+  +approve() / publish() / shareWith(agency)
+}
+Engine ..> HazardRule : reads
+Engine ..> CompoundAlert : raises
+CompoundAlert "0..*" --> "1..*" Hazard : sources
+CompoundAlert "0..*" --> "0..*" InfrastructureAsset : sources
+CompoundAlert "0..1" --> "0..*" RoadSegment : closes
+CompoundAlert "0..1" --> "0..*" Route : invalidates
+RoutePlanner ..> RoadSegment : searches
+RoutePlanner ..> Route : creates
+Route "0..*" --> "1..*" RoadSegment : ordered segments
+Report ..> CompoundAlert : summarises
+@enduml

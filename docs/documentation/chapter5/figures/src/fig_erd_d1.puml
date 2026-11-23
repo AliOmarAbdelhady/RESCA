@@ -1,0 +1,102 @@
+@startuml
+!include _style.iuml
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 45
+
+entity "agencies" as agencies {
+  <size:10>PK</size> <b>id</b> : uuid
+  name : text
+  agency_type : agency_type
+  <size:10>FK</size> parent_agency_id : uuid <color:#7a8ba0>?</color>
+  jurisdiction : geom MultiPolygon <color:#7a8ba0>?</color>
+  phone : text <color:#7a8ba0>?</color>
+  is_active : boolean
+  created_at : timestamptz
+  updated_at : timestamptz
+}
+entity "roles" as roles {
+  <size:10>PK</size> <b>code</b> : text
+  name : text
+  scope : role_scope
+}
+entity "permissions" as permissions {
+  <size:10>PK</size> <b>code</b> : text
+  description : text
+}
+entity "role_permissions" as role_permissions {
+  <size:10>PK,FK</size> <b>role_code</b> : text
+  <size:10>PK,FK</size> <b>permission_code</b> : text
+}
+entity "users" as users {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> agency_id : uuid <color:#7a8ba0>?</color>
+  <size:10>FK</size> role_code : text
+  full_name : text
+  email : citext
+  phone : text <color:#7a8ba0>?</color>
+  password_hash : text
+  job_title : text <color:#7a8ba0>?</color>
+  badge_number : text <color:#7a8ba0>?</color>
+  status : user_status
+  last_login_at : timestamptz <color:#7a8ba0>?</color>
+  created_at : timestamptz
+  updated_at : timestamptz
+  deleted_at : timestamptz <color:#7a8ba0>?</color>
+}
+entity "user_sessions" as user_sessions {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> user_id : uuid
+  refresh_token_hash : text
+  device_info : text <color:#7a8ba0>?</color>
+  created_at : timestamptz
+  expires_at : timestamptz
+  revoked_at : timestamptz <color:#7a8ba0>?</color>
+}
+entity "user_devices" as user_devices {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> user_id : uuid
+  platform : device_platform
+  push_token : text
+  last_seen_at : timestamptz
+}
+entity "teams" as teams {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> agency_id : uuid
+  name : text
+  team_type : team_type
+  home_base : geom Point <color:#7a8ba0>?</color>
+  status : team_status
+  created_at : timestamptz
+}
+entity "team_members" as team_members {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> team_id : uuid
+  <size:10>FK</size> user_id : uuid
+  is_leader : boolean
+  joined_at : timestamptz
+  left_at : timestamptz <color:#7a8ba0>?</color>
+}
+entity "vehicles" as vehicles {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> agency_id : uuid
+  <size:10>FK</size> team_id : uuid <color:#7a8ba0>?</color>
+  call_sign : text
+  vehicle_type : vehicle_type
+  plate_number : text <color:#7a8ba0>?</color>
+  max_water_depth_cm : integer <color:#7a8ba0>?</color>
+  status : vehicle_status
+}
+agencies }o--o| agencies : parent_agency_id
+role_permissions }o--|| roles : role_code
+role_permissions }o--|| permissions : permission_code
+users }o--o| agencies : agency_id
+users }o--|| roles : role_code
+user_sessions }o--|| users : user_id
+user_devices }o--|| users : user_id
+teams }o--|| agencies : agency_id
+team_members }o--|| teams : team_id
+team_members }o--|| users : user_id
+vehicles }o--|| agencies : agency_id
+vehicles }o--o| teams : team_id
+@enduml

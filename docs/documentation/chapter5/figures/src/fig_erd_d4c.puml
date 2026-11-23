@@ -1,0 +1,87 @@
+@startuml
+!include _style.iuml
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 45
+
+entity "person_tracks" as person_tracks {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> incident_id : uuid<color:#7a8ba0> → incidents</color>
+  <size:10>FK</size> inference_run_id : uuid<color:#7a8ba0> → inference_runs</color>
+  tracker_local_id : integer
+  first_seen_at : timestamptz
+  last_seen_at : timestamptz
+  last_position : geom Point
+  last_position_error_m : numeric(7,2) <color:#7a8ba0>?</color>
+  movement_state : movement_state
+  max_confidence : numeric(4,3) <color:#7a8ba0>?</color>
+  detection_count : integer
+}
+entity "person_detections" as person_detections {
+  <size:10>PK</size> <b>id</b> : bigint
+  <size:10>FK</size> incident_id : uuid<color:#7a8ba0> → incidents</color>
+  <size:10>FK</size> inference_run_id : uuid<color:#7a8ba0> → inference_runs</color>
+  <size:10>FK</size> image_id : uuid<color:#7a8ba0> → images</color>
+  <size:10>FK</size> track_id : uuid <color:#7a8ba0>?</color>
+  bbox_x : integer
+  bbox_y : integer
+  bbox_w : integer
+  bbox_h : integer
+  confidence : numeric(4,3)
+  visibility : visibility_level
+  occlusion_ratio : numeric(3,2) <color:#7a8ba0>?</color>
+  posture : posture
+  location : geom Point
+  location_error_m : numeric(7,2)
+  detected_at : timestamptz
+}
+entity "facilities" as facilities {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> agency_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → agencies</color>
+  name : text
+  facility_type : facility_type
+  geom : geom Point
+  capacity_total : integer <color:#7a8ba0>?</color>
+  capacity_available : integer <color:#7a8ba0>?</color>
+  updated_at : timestamptz
+}
+entity "assistance_cases" as assistance_cases {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> incident_id : uuid<color:#7a8ba0> → incidents</color>
+  code : text
+  source : case_source
+  <size:10>FK</size> track_id : uuid <color:#7a8ba0>?</color>
+  <size:10>FK</size> citizen_request_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → citizen_requests</color>
+  <size:10>FK</size> reported_by : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  location : geom Point
+  location_error_m : numeric(7,2) <color:#7a8ba0>?</color>
+  <size:10>FK</size> building_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → buildings</color>
+  people_count : smallint
+  triage : triage_category
+  status : case_status
+  priority_score : numeric(6,2)
+  <size:10>FK</size> assigned_mission_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → missions</color>
+  <size:10>FK</size> transported_to_facility_id : uuid <color:#7a8ba0>?</color>
+  <size:10>FK</size> verified_by : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  verified_at : timestamptz <color:#7a8ba0>?</color>
+  created_at : timestamptz
+  updated_at : timestamptz
+  closed_at : timestamptz <color:#7a8ba0>?</color>
+}
+entity "case_events" as case_events {
+  <size:10>PK</size> <b>id</b> : bigint
+  <size:10>FK</size> case_id : uuid
+  event_type : case_event_type
+  from_status : case_status <color:#7a8ba0>?</color>
+  to_status : case_status <color:#7a8ba0>?</color>
+  triage : triage_category <color:#7a8ba0>?</color>
+  note : text <color:#7a8ba0>?</color>
+  <size:10>FK</size> media_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → media_files</color>
+  <size:10>FK</size> actor_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  created_at : timestamptz
+}
+person_detections }o--o| person_tracks : track_id
+assistance_cases }o--o| person_tracks : track_id
+assistance_cases }o--o| facilities : transported_to_facility_id
+case_events }o--|| assistance_cases : case_id
+@enduml

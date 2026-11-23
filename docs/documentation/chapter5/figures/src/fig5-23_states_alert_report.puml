@@ -1,0 +1,26 @@
+@startuml
+!include _style.iuml
+skinparam nodesep 30
+skinparam ranksep 30
+
+state "Compound alert" as CA {
+  [*] --> ACTIVE : rule fires
+  ACTIVE --> ACKNOWLEDGED : Commander\nacknowledges
+  ACTIVE --> RESOLVED : Commander\nresolves
+  ACKNOWLEDGED --> RESOLVED : hazard removed;\nroads reopen
+  ACTIVE --> FALSE_ALARM_A : Commander:\nfalse alarm
+  ACKNOWLEDGED --> FALSE_ALARM_A : Commander:\nfalse alarm
+  state "FALSE_ALARM" as FALSE_ALARM_A
+  RESOLVED --> [*]
+  FALSE_ALARM_A --> [*]
+}
+
+state "Report" as RP {
+  [*] --> DRAFT : figures frozen
+  DRAFT --> PENDING_APPROVAL : Analyst submits
+  PENDING_APPROVAL --> DRAFT : changes requested
+  PENDING_APPROVAL --> APPROVED : Commander
+  APPROVED --> PUBLISHED : Commander shares
+  PUBLISHED --> [*]
+}
+@enduml

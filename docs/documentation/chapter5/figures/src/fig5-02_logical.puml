@@ -1,0 +1,70 @@
+@startuml
+!include _style.iuml
+skinparam nodesep 14
+skinparam ranksep 38
+
+package "Presentation" as PRES {
+  component "Web command\nconsole" as WEB
+  component "Mobile field app\n(offline queue)" as MOB
+  component "Citizen request\nchannel" as CIT
+}
+
+package "Access" as ACC {
+  component "Application interface\n(HTTPS, sign-in, permission checks)" as API
+  component "Live-update channel\n(persistent connection)" as LIVE
+}
+
+package "Domain modules" as DOM {
+  component "Identity and\nAccess" as M1
+  component "Incidents and\nOperations" as M2
+  component "Field and\nCitizen Requests" as M9
+  component "F1 Damage\nand Cost" as M4
+  component "F2 Mapping\nand Routing" as M5
+  component "F3/F4 Persons\nand Cases" as M6
+  component "F5 Hazards\nand Alerts" as M7
+  component "F6 Reports" as M8
+  component "Imagery and\nAnalysis Jobs" as M3
+}
+M1 -[hidden]right- M2
+M2 -[hidden]right- M9
+M4 -[hidden]right- M5
+M5 -[hidden]right- M6
+M7 -[hidden]right- M8
+M8 -[hidden]right- M3
+M1 -[hidden]down- M4
+M4 -[hidden]down- M7
+
+package "Analysis pipeline (background jobs)" as PIPE {
+  queue "Job queue" as Q
+  component "Photogrammetry\n(orthomosaic, 3D)" as W1
+  component "Damage\nassessment" as W2
+  component "Person detection\nand tracking" as W3
+  component "Hazard and road\nextraction" as W4
+  component "Model\nregistry" as REG
+}
+W1 -[hidden]right- W2
+W3 -[hidden]right- W4
+W1 -[hidden]down- W3
+
+package "Data" as DATA {
+  database "Spatial database\n(records, geometry, road graph,\nembeddings; row-level security)" as DB
+  storage "Object storage\n(images, rasters,\n3D tiles, PDFs)" as OBJ
+  component "Map-tile\nservice" as TILE
+}
+
+WEB --> API
+MOB --> API
+CIT --> API
+LIVE --> WEB
+LIVE --> MOB
+API --> M2
+M3 --> Q
+Q --> W1
+Q --> W2
+W2 ..> REG
+W3 ..> REG
+W3 --> DB
+M8 --> DB
+DB --> LIVE : change events
+TILE --> OBJ
+@enduml

@@ -1,0 +1,105 @@
+@startuml
+!include _style.iuml
+skinparam nodesep 30
+skinparam ranksep 48
+
+class Agency {
+  name : text
+  agencyType : AgencyType
+  isActive : boolean
+}
+class User {
+  fullName : text
+  email : text
+  roleCode : text
+  status : UserStatus
+  +hasPermission(code) : boolean
+}
+class Role {
+  code : text
+  scope : RoleScope
+}
+class Team {
+  name : text
+  teamType : TeamType
+  status : TeamStatus
+}
+class Vehicle {
+  vehicleType : VehicleType
+  maxWaterDepthCm : integer
+  status : VehicleStatus
+}
+class Incident {
+  code : text
+  disasterType : DisasterType
+  severity : 1..5
+  area : MultiPolygon
+  status : IncidentStatus
+  +invite(agency)
+  +close()
+}
+class Participation {
+  role : LEAD | SUPPORT
+  status : ParticipationStatus
+  +accept()
+  +withdraw()
+}
+class Mission {
+  code : text
+  missionType : MissionType
+  priority : 1..4
+  status : MissionStatus
+  +assign(team | responder, vehicle)
+  +changeStatus(newStatus)
+}
+class Assignment {
+  response : AssignmentResponse
+  releasedAt : timestamp
+  +respond(accept)
+}
+class "AssistanceCase" as AssistanceCase {
+  source : CaseSource
+  status : CaseStatus
+  triage : TriageCategory
+  peopleCount : integer
+  location : Point
+  locationErrorM : number
+  +verify()
+  +assignTo(mission)
+  +changeStatus(newStatus)
+}
+class CaseEvent {
+  eventType : CaseEventType
+  fromStatus / toStatus : CaseStatus
+  occurredAt : timestamp
+}
+class Facility {
+  facilityType : FacilityType
+  bedsAvailable : integer
+}
+class Notification {
+  kind : NotificationKind
+  priority : integer
+  readAt : timestamp
+  +markRead()
+}
+
+Agency "1" *-- "0..*" User
+Role "1" -- "0..*" User : grants >
+Agency "1" *-- "0..*" Team
+Agency "1" *-- "0..*" Vehicle
+Team "0..1" o-- "0..*" User : active member
+Incident "1" *-- "1..*" Participation
+Agency "1" -- "0..*" Participation
+Incident "1" *-- "0..*" Mission
+Agency "1" -- "0..*" Mission : owns >
+Mission "1" *-- "1..*" Assignment
+Assignment "0..*" --> "0..1" Team
+Assignment "0..*" --> "0..1" User
+Assignment "0..*" --> "0..1" Vehicle
+Incident "1" *-- "0..*" AssistanceCase
+AssistanceCase "0..*" --> "0..1" Mission : handled by
+AssistanceCase "1" *-- "0..*" CaseEvent : history
+AssistanceCase "0..*" --> "0..1" Facility : transported to
+User "1" -- "0..*" Notification : receives >
+@enduml

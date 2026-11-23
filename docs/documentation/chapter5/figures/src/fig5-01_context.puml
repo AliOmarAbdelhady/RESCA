@@ -1,0 +1,40 @@
+@startuml
+!include _style.iuml
+skinparam nodesep 30
+skinparam ranksep 55
+
+actor "Agency staff\n(Commander, Analyst,\nAgency Administrator)" as staff
+actor "Platform\nAdministrator" as pa
+actor "Field Responder" as fr
+actor "Citizen" as cz
+
+rectangle "<b>RescueVision platform (proposed)</b>" as RV #EAF1F8 {
+  rectangle "Web command\nconsole" as web
+  rectangle "Mobile field\napplication" as mob
+  rectangle "Citizen request\nchannel" as cit
+  rectangle "Shared incident services and analysis pipeline" as core #DCE7F2
+}
+
+rectangle "Drones and satellite\nimagery sources" as img #FFFFFF
+rectangle "Open map data\n(OSM, Overture)" as osm #FFFFFF
+rectangle "Utility power-state\nfeed (where agreed)" as util #FFFFFF
+rectangle "Push-notification\nservices" as push #FFFFFF
+rectangle "SMS gateway" as sms #FFFFFF
+
+staff --> web
+pa --> web
+fr --> mob
+cz --> cit
+web --> core
+mob --> core
+cit --> core
+core <-- img : images, rasters
+core <-- osm : footprints, roads
+core <-- util : power state
+core --> push : mobile alerts
+core --> sms : one-time codes
+img -[hidden]right- osm
+osm -[hidden]right- util
+util -[hidden]right- push
+push -[hidden]right- sms
+@enduml

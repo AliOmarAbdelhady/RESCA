@@ -1,0 +1,43 @@
+@startuml
+!include _style.iuml
+skinparam maxMessageSize 115
+hide footbox
+skinparam defaultFontSize 11
+skinparam ParticipantFontSize 11
+skinparam sequenceMessageAlign left
+autonumber
+actor "Field\nResponder" as FR
+participant "Mobile\napp" as MOB
+participant "API" as API
+participant "Rule\nengine" as ENG
+database "Database" as DB
+participant "Live updates\nand push" as LIVE
+actor "Commander" as CMD
+
+FR -> MOB : report flooding with photo
+MOB -> API : POST hazard (FLOOD_WATER, location)
+API -> DB : insert hazard
+API -> ENG : evaluate(incident)
+ENG -> DB : find assets within rule distance (30 m default)\nwhose power state is not DE_ENERGIZED
+note right of ENG : UNKNOWN power state\nis treated as energised\n(FR-HZ-06, NFR-SF-02)
+alt match found and no active alert for this pair
+  ENG -> DB : create compound alert with buffered danger zone
+  ENG -> DB : close road segments inside the zone\n(keep previous condition and cost)
+  ENG -> DB : invalidate active routes that use them
+  ENG -> DB : notifications for assigned teams and\nresponders whose last position is in or near the zone
+  DB -> LIVE : alert raised (target: within 60 s, NFR-PF-04)
+  LIVE -> MOB : priority warning on device
+  LIVE -> CMD : persistent alert banner on every console screen
+else nothing to raise
+  ENG --> API : no new alert (evaluation is idempotent)
+end
+CMD -> API : acknowledge alert, contact utility
+API -> DB : status ACKNOWLEDGED
+...utility confirms the line is de-energised...
+CMD -> API : resolve alert
+API -> ENG : resolve(alert)
+ENG -> DB : reopen closed segments,\nunless another active alert still covers them
+ENG -> DB : status RESOLVED
+DB -> LIVE : roads reopened
+LIVE -> MOB : map updated
+@enduml

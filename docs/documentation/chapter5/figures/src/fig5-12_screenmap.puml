@@ -1,0 +1,49 @@
+@startuml
+!include _style.iuml
+skinparam nodesep 22
+skinparam ranksep 36
+
+rectangle "Web command console" as W {
+  rectangle "Sign-in" as w0
+  rectangle "Incident list" as w1
+  rectangle "Incident map (2D/3D)\nlayers, legend, alert banner" as w2 #DCE7F2
+  rectangle "Detection review" as w3
+  rectangle "Assistance-case view" as w4
+  rectangle "Route planner" as w5
+  rectangle "Response status board\n(missions, teams, cases)" as w6
+  rectangle "Alert detail" as w7 #FFE3C2
+  rectangle "Report workspace" as w8
+  rectangle "Administration\n(users, teams, vehicles,\nrules, cost profiles)" as w9
+}
+rectangle "Mobile field application" as M {
+  rectangle "Sign-in" as m0
+  rectangle "My missions" as m1
+  rectangle "Mission detail\nand route" as m2
+  rectangle "Case update\n(triage, status)" as m3
+  rectangle "Field report" as m4
+  rectangle "SOS" as m5 #FFE3C2
+}
+rectangle "Citizen channel" as C {
+  rectangle "Phone and\none-time code" as c0
+  rectangle "Request form\n(type, location, photo)" as c1
+  rectangle "Request status" as c2
+}
+w0 --> w1
+w1 --> w2
+w2 --> w3
+w2 --> w4
+w2 --> w7
+w4 --> w5
+w2 --> w6
+w6 --> w4
+w1 --> w8
+w1 --> w9
+m0 --> m1
+m1 --> m2
+m2 --> m3
+m2 --> m4
+m1 --> m5
+c0 --> c1
+c1 --> c2
+W -[hidden]down- M
+@enduml

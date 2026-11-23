@@ -1,0 +1,83 @@
+@startuml
+!include _style.iuml
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 45
+
+entity "road_nodes" as road_nodes {
+  <size:10>PK</size> <b>id</b> : bigint
+  <size:10>FK</size> incident_id : uuid<color:#7a8ba0> → incidents</color>
+  geom : geom Point
+}
+entity "road_segments" as road_segments {
+  <size:10>PK</size> <b>id</b> : bigint
+  <size:10>FK</size> incident_id : uuid<color:#7a8ba0> → incidents</color>
+  osm_way_id : bigint <color:#7a8ba0>?</color>
+  <size:10>FK</size> source : bigint
+  <size:10>FK</size> target : bigint
+  geom : geom LineString
+  name : text <color:#7a8ba0>?</color>
+  road_class : road_class
+  width_m : numeric(5,2) <color:#7a8ba0>?</color>
+  is_bridge : boolean
+  oneway : boolean
+  length_m : numeric(10,2)
+  base_travel_s : numeric(10,2)
+  condition : road_condition
+  water_depth_cm : integer <color:#7a8ba0>?</color>
+  condition_confidence : numeric(4,3) <color:#7a8ba0>?</color>
+  condition_updated_at : timestamptz <color:#7a8ba0>?</color>
+  cost : float8
+  reverse_cost : float8
+}
+entity "road_condition_observations" as road_condition_observations {
+  <size:10>PK</size> <b>id</b> : bigint
+  <size:10>FK</size> segment_id : bigint
+  condition : road_condition
+  water_depth_cm : integer <color:#7a8ba0>?</color>
+  confidence : numeric(4,3) <color:#7a8ba0>?</color>
+  <size:10>FK</size> inference_run_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → inference_runs</color>
+  <size:10>FK</size> reported_by : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  <size:10>FK</size> citizen_request_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → citizen_requests</color>
+  observed_at : timestamptz
+}
+entity "routes" as routes {
+  <size:10>PK</size> <b>id</b> : uuid
+  <size:10>FK</size> incident_id : uuid<color:#7a8ba0> → incidents</color>
+  <size:10>FK</size> mission_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → missions</color>
+  <size:10>FK</size> requested_by : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → users</color>
+  vehicle_type : vehicle_type
+  origin : geom Point
+  destination : geom Point
+  <size:10>FK</size> destination_case_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → assistance_cases</color>
+  <size:10>FK</size> destination_facility_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → facilities</color>
+  algorithm : route_algorithm
+  rank : smallint
+  geom : geom LineString
+  length_m : numeric(10,2)
+  est_travel_s : numeric(10,2)
+  risk_score : numeric(6,3)
+  status : route_status
+  <size:10>FK</size> invalidated_by_alert_id : uuid <color:#7a8ba0>?</color><color:#7a8ba0> → compound_alerts</color>
+  computed_at : timestamptz
+}
+entity "route_segments" as route_segments {
+  <size:10>PK,FK</size> <b>route_id</b> : uuid
+  <size:10>PK</size> <b>seq</b> : integer
+  <size:10>FK</size> segment_id : bigint
+}
+entity "alert_closed_segments" as alert_closed_segments {
+  <size:10>PK,FK</size> <b>alert_id</b> : uuid<color:#7a8ba0> → compound_alerts</color>
+  <size:10>PK,FK</size> <b>segment_id</b> : bigint
+  prev_condition : road_condition
+  prev_cost : float8
+  prev_reverse_cost : float8
+  closed_at : timestamptz
+}
+road_condition_observations }o--|| road_segments : segment_id
+road_segments }o--|| road_nodes : source
+road_segments }o--|| road_nodes : target
+route_segments }o--|| road_segments : segment_id
+route_segments }o--|| routes : route_id
+alert_closed_segments }o--|| road_segments : segment_id
+@enduml
