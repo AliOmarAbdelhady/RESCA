@@ -1,6 +1,6 @@
 # RescueVision — Database & ERD Design
 
-**Date:** 2026-11-23 · **Status:** Approved design (pre-implementation) · **Target:** PostgreSQL 16 + PostGIS 3 + pgRouting 3 + pgvector
+**Date:** 2026-11-23 · **Status:** Approved and implemented in `database/` (PostgreSQL 18.7) · **Target:** PostgreSQL 16 + PostGIS 3 + pgRouting 3 + pgvector
 
 RescueVision is a multi-agency disaster-response platform for **Government, Police, Ambulance (EMS) and Fire** services. This document defines the product features and the complete relational data model that supports them.
 
@@ -219,7 +219,7 @@ Notation: `PK` primary key, `FK` foreign key, `?` nullable, `UQ` unique.
 **hazards**: `id uuid PK` · `incident_id FK` · `hazard_type hazard_type` (FLOOD_WATER | FIRE | SMOKE | DOWNED_POWER_LINE | GAS_LEAK | COLLAPSE_RISK | DEBRIS | SINKHOLE | CHEMICAL_SPILL) · `geom geometry(Geometry,4326)` · `severity smallint 1–5` · `confidence?` · `origin hazard_origin` (AI_DETECTED | RESPONDER_REPORTED | CITIZEN_REPORTED) · `inference_run_id?` · `reported_by?` · `citizen_request_id?` · `status hazard_status` (SUSPECTED | CONFIRMED | MITIGATED | EXPIRED) · `attributes jsonb` · `observed_at` · `expires_at?`
 - `CHECK (num_nonnulls(inference_run_id, reported_by, citizen_request_id) = 1)`
 
-**hazard_rules**: `id uuid PK` · `code text UQ` · `name text` · `description text` · `primary_hazard_type hazard_type` · `secondary_kind rule_operand` (HAZARD | ASSET) · `secondary_type text` · `max_distance_m numeric` · `danger_buffer_m numeric` · `resulting_severity smallint` · `closes_roads bool` · `warning_template text` · `is_active bool`
+**hazard_rules**: `id uuid PK` · `code text UQ` · `name text` · `description text` · `primary_hazard_type hazard_type` · `secondary_kind rule_operand` (HAZARD | ASSET | ROAD) · `secondary_types text[]` · `max_distance_m numeric` · `danger_buffer_m numeric` · `resulting_severity smallint` · `closes_roads bool` · `warning_template text` · `is_active bool`
 
 Seed rules:
 
@@ -230,11 +230,11 @@ Seed rules:
 | FIRE_GAS_EXPLOSION | FIRE | HAZARD: GAS_LEAK or ASSET: GAS_PIPELINE / FUEL_STATION | 50 m | yes |
 | COLLAPSE_ON_ROAD | COLLAPSE_RISK | road segment within building height | height of building | yes |
 
-**compound_alerts**: `id uuid PK` · `incident_id FK` · `rule_id FK→hazard_rules` · `title text` · `danger_zone geometry(Polygon,4326)` · `severity` · `status alert_status` (ACTIVE | ACKNOWLEDGED | RESOLVED | FALSE_ALARM) · `triggered_at` · `acknowledged_by?` · `resolved_by?` · `resolved_at?` · `resolution_note?`
+**compound_alerts**: `id uuid PK` · `incident_id FK` · `rule_id FK→hazard_rules` · `title text` · `danger_zone geometry(MultiPolygon,4326)` · `severity` · `status alert_status` (ACTIVE | ACKNOWLEDGED | RESOLVED | FALSE_ALARM) · `triggered_at` · `acknowledged_by?` · `resolved_by?` · `resolved_at?` · `resolution_note?`
 
-**compound_alert_sources**: `alert_id FK` · `hazard_id uuid? FK` · `asset_id uuid? FK` · `CHECK (num_nonnulls(hazard_id, asset_id) = 1)`
+**compound_alert_sources**: `id bigint PK` · `alert_id FK` · `hazard_id uuid? FK` · `asset_id uuid? FK` · `CHECK (num_nonnulls(hazard_id, asset_id) = 1)`
 
-**alert_closed_segments**: `alert_id FK` · `segment_id bigint FK` · `PK(alert_id, segment_id)`
+**alert_closed_segments**: `alert_id FK` · `segment_id bigint FK` · `prev_condition` · `prev_cost` · `prev_reverse_cost` (restored when the alert is resolved) · `closed_at` · `PK(alert_id, segment_id)`
 
 ### D5 · Field Channel, Citizens, Notifications, Reports, Similar Cases, Audit
 
