@@ -133,7 +133,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[DEPARTMENT NAME: confirm]</w:t>
+        <w:t xml:space="preserve"/>
       </w:r>
       <w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000">
         <w:rPr>
@@ -675,7 +675,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[MONTH – YEAR]</w:t>
+        <w:t xml:space="preserve"/>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000014">
@@ -733,7 +733,7 @@
           <w:szCs w:val="24"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[DEGREE TITLE: confirm]</w:t>
+        <w:t xml:space="preserve">____________________</w:t>
       </w:r>
       <w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000">
         <w:rPr>
@@ -898,7 +898,7 @@
                 <w:szCs w:val="24"/>
                 <w:rtl w:val="0"/>
               </w:rPr>
-              <w:t xml:space="preserve"> DD, MM, YYYY.</w:t>
+              <w:t xml:space="preserve"> ________________</w:t>
             </w:r>
           </w:p>
         </w:tc>
@@ -1027,7 +1027,7 @@
                 <w:szCs w:val="24"/>
                 <w:rtl w:val="0"/>
               </w:rPr>
-              <w:t xml:space="preserve"> DD, MM, YYYY.</w:t>
+              <w:t xml:space="preserve"> ________________</w:t>
             </w:r>
           </w:p>
         </w:tc>
@@ -1161,7 +1161,7 @@
                 <w:szCs w:val="24"/>
                 <w:rtl w:val="0"/>
               </w:rPr>
-              <w:t xml:space="preserve"> DD, MM, YYYY.</w:t>
+              <w:t xml:space="preserve"> ________________</w:t>
             </w:r>
           </w:p>
         </w:tc>
@@ -1290,7 +1290,7 @@
                 <w:szCs w:val="24"/>
                 <w:rtl w:val="0"/>
               </w:rPr>
-              <w:t xml:space="preserve"> DD, MM, YYYY.</w:t>
+              <w:t xml:space="preserve"> ________________</w:t>
             </w:r>
           </w:p>
         </w:tc>
@@ -1424,7 +1424,7 @@
                 <w:szCs w:val="24"/>
                 <w:rtl w:val="0"/>
               </w:rPr>
-              <w:t xml:space="preserve"> DD, MM, YYYY.</w:t>
+              <w:t xml:space="preserve"> ________________</w:t>
             </w:r>
           </w:p>
         </w:tc>
@@ -1553,7 +1553,7 @@
                 <w:szCs w:val="24"/>
                 <w:rtl w:val="0"/>
               </w:rPr>
-              <w:t xml:space="preserve"> DD, MM, YYYY.</w:t>
+              <w:t xml:space="preserve"> ________________</w:t>
             </w:r>
             <w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000">
               <w:rPr>
@@ -1583,7 +1583,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[Optional dedication: no heading, centred on the page. Team to decide, or delete this page.]</w:t>
+        <w:t xml:space="preserve"/>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000033">
@@ -1613,35 +1613,25 @@
         <w:t xml:space="preserve">ACKNOWLEDGMENT</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000034">
-      <w:pPr>
-        <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
+    <w:p><w:pPr>
+        <w:keepNext w:val="0"/>
+        <w:keepLines w:val="0"/>
+        <w:pageBreakBefore w:val="0"/>
+        <w:spacing w:after="0" w:before="240" w:line="360" w:lineRule="auto"/>
         <w:ind w:left="0" w:firstLine="0"/>
         <w:jc w:val="both"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
           <w:sz w:val="24"/>
           <w:szCs w:val="24"/>
-          <w:shd w:fill="fff299" w:val="clear"/>
         </w:rPr>
       </w:pPr>
-      <w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000">
-        <w:rPr>
+      <w:r><w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
           <w:sz w:val="24"/>
           <w:szCs w:val="24"/>
-          <w:shd w:fill="fff299" w:val="clear"/>
-          <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P6 · Acknowledgments: thank the supervisor and anyone who actually contributed. Status: NOT STARTED]</w:t>
-      </w:r>
-      <w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000">
-        <w:rPr>
-          <w:rtl w:val="0"/>
-        </w:rPr>
-      </w:r>
-    </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000036">
+      <w:t>We thank Dr. Mohamed Moheeb for supervising RescueVision. We also acknowledge the team members who developed the report, prepared the research and design materials, and built the mapping prototype.</w:t></w:r></w:p><w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000036">
       <w:pPr>
         <w:keepNext w:val="1"/>
         <w:keepLines w:val="1"/>
@@ -1687,7 +1677,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P6 · Abstract: problem, proposed solution, scope and contribution in about 200 words. Write last, after Chapters 1-5 are stable. Status: WAITING]</w:t>
+        <w:t xml:space="preserve"/>
       </w:r>
       <w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000">
         <w:rPr>
@@ -2025,7 +2015,7 @@
             </w:rPr>
             <w:t>Figure C-1: SWOT analysis of the proposed RescueVision platform</w:t>
             <w:tab/>
-            <w:t>73</w:t>
+            <w:t>74</w:t>
           </w:r>
           <w:r>
             <w:fldChar w:fldCharType="end"/>
@@ -2896,9 +2886,26 @@
               <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" w:cs="Times New Roman"/>
               <w:sz w:val="24"/>
             </w:rPr>
+            <w:t>Table B-1: Report contributions and assigned reviewers</w:t>
+            <w:tab/>
+            <w:t>73</w:t>
+          </w:r>
+        </w:p>
+        <w:p>
+          <w:pPr>
+            <w:tabs>
+              <w:tab w:val="right" w:leader="dot" w:pos="8900"/>
+            </w:tabs>
+            <w:spacing w:before="0" w:after="100" w:line="240" w:lineRule="auto"/>
+          </w:pPr>
+          <w:r>
+            <w:rPr>
+              <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" w:cs="Times New Roman"/>
+              <w:sz w:val="24"/>
+            </w:rPr>
             <w:t>Table C-1: Requirements that address the weaknesses and threats</w:t>
             <w:tab/>
-            <w:t>75</w:t>
+            <w:t>76</w:t>
           </w:r>
         </w:p>
         <w:p>
@@ -2924,7 +2931,7 @@
       <w:pPr>
         <w:keepNext w:val="1"/>
         <w:keepLines w:val="1"/>
-        <w:spacing w:after="240" w:line="360" w:lineRule="auto" w:before="360"/>
+        <w:pageBreakBefore w:val="1"/><w:spacing w:after="240" w:line="360" w:lineRule="auto" w:before="360"/>
         <w:jc w:val="center"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -2946,131 +2953,7 @@
         <w:t xml:space="preserve">LIST OF ACRONYMS/ABBREVIATIONS</w:t>
       </w:r>
     </w:p>
-    <w:tbl>
-      <w:tblPr>
-        <w:tblStyle w:val="Table2"/>
-        <w:tblW w:w="8524" w:type="dxa"/>
-        <w:jc w:val="left"/>
-        <w:tblInd w:w="-108" w:type="dxa"/>
-        <w:tblLayout w:type="fixed"/>
-        <w:tblLook w:val="0000"/>
-      </w:tblPr>
-      <w:tblGrid>
-        <w:gridCol w:w="1526"/>
-        <w:gridCol w:w="6998"/>
-        <w:tblGridChange w:id="2">
-          <w:tblGrid>
-            <w:gridCol w:w="1526"/>
-            <w:gridCol w:w="6998"/>
-          </w:tblGrid>
-        </w:tblGridChange>
-      </w:tblGrid>
-      <w:tr>
-        <w:trPr>
-          <w:cantSplit w:val="off"/>
-          <w:tblHeader w:val="off"/>
-        </w:trPr>
-        <w:tc>
-          <w:tcPr>
-            <w:vAlign w:val="top"/>
-          </w:tcPr>
-          <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="0000005A">
-            <w:pPr>
-              <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-              <w:jc w:val="both"/>
-              <w:rPr>
-                <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
-                <w:sz w:val="24"/>
-                <w:szCs w:val="24"/>
-              </w:rPr>
-            </w:pPr>
-            <w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000">
-              <w:rPr>
-                <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
-                <w:sz w:val="24"/>
-                <w:szCs w:val="24"/>
-                <w:rtl w:val="0"/>
-              </w:rPr>
-              <w:t xml:space="preserve">ACRONYM</w:t>
-            </w:r>
-          </w:p>
-        </w:tc>
-        <w:tc>
-          <w:tcPr>
-            <w:vAlign w:val="top"/>
-          </w:tcPr>
-          <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="0000005B">
-            <w:pPr>
-              <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-              <w:jc w:val="both"/>
-              <w:rPr>
-                <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
-                <w:sz w:val="24"/>
-                <w:szCs w:val="24"/>
-              </w:rPr>
-            </w:pPr>
-            <w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000">
-              <w:rPr>
-                <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
-                <w:sz w:val="24"/>
-                <w:szCs w:val="24"/>
-                <w:rtl w:val="0"/>
-              </w:rPr>
-              <w:t xml:space="preserve">Definition of Acronym</w:t>
-            </w:r>
-          </w:p>
-        </w:tc>
-      </w:tr>
-      <w:tr>
-        <w:trPr>
-          <w:cantSplit w:val="off"/>
-          <w:tblHeader w:val="off"/>
-        </w:trPr>
-        <w:tc>
-          <w:tcPr>
-            <w:vAlign w:val="top"/>
-          </w:tcPr>
-          <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="0000005C">
-            <w:pPr>
-              <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-              <w:jc w:val="both"/>
-              <w:rPr>
-                <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
-                <w:sz w:val="24"/>
-                <w:szCs w:val="24"/>
-              </w:rPr>
-            </w:pPr>
-            <w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000">
-              <w:rPr>
-                <w:rtl w:val="0"/>
-              </w:rPr>
-            </w:r>
-          </w:p>
-        </w:tc>
-        <w:tc>
-          <w:tcPr>
-            <w:vAlign w:val="top"/>
-          </w:tcPr>
-          <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="0000005D">
-            <w:pPr>
-              <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-              <w:jc w:val="both"/>
-              <w:rPr>
-                <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
-                <w:sz w:val="24"/>
-                <w:szCs w:val="24"/>
-              </w:rPr>
-            </w:pPr>
-            <w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000">
-              <w:rPr>
-                <w:rtl w:val="0"/>
-              </w:rPr>
-            </w:r>
-          </w:p>
-        </w:tc>
-      </w:tr>
-    </w:tbl>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="0000005E">
+    <w:tbl><w:tblPr><w:tblW w:w="9029" w:type="dxa"/><w:jc w:val="center"/><w:tblBorders><w:top w:val="single" w:sz="4" w:color="B8B8B8"/><w:left w:val="single" w:sz="4" w:color="B8B8B8"/><w:bottom w:val="single" w:sz="4" w:color="B8B8B8"/><w:right w:val="single" w:sz="4" w:color="B8B8B8"/><w:insideH w:val="single" w:sz="4" w:color="B8B8B8"/><w:insideV w:val="single" w:sz="4" w:color="B8B8B8"/></w:tblBorders><w:tblLayout w:type="fixed"/><w:tblCellMar><w:top w:w="25" w:type="dxa"/><w:left w:w="90" w:type="dxa"/><w:bottom w:w="25" w:type="dxa"/><w:right w:w="90" w:type="dxa"/></w:tblCellMar></w:tblPr><w:tblGrid><w:gridCol w:w="2000"/><w:gridCol w:w="7029"/></w:tblGrid><w:tr><w:trPr><w:cantSplit/><w:tblHeader/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/><w:shd w:val="clear" w:fill="E6E6E6"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Abbreviation</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/><w:shd w:val="clear" w:fill="E6E6E6"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Meaning</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>2D</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Two-dimensional</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>3D</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Three-dimensional</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>AI</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Artificial intelligence</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>EMS</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Emergency medical services</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>EPSG</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>European Petroleum Survey Group</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>FCN</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Fully convolutional network</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>FEMA</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Federal Emergency Management Agency</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>FR</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Functional requirement</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>GDAL</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Geospatial Data Abstraction Library</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>GPS</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Global Positioning System</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>GPU</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Graphics processing unit</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>HTTPS</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Hypertext Transfer Protocol Secure</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>ID</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Identifier</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>IEC</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>International Electrotechnical Commission</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>IEEE</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Institute of Electrical and Electronics Engineers</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>IR</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Interface requirement</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>ISO</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>International Organization for Standardization</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>JPEG</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Joint Photographic Experts Group</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>NFR</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Nonfunctional requirement</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>OCHA</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>United Nations Office for the Coordination of Humanitarian Affairs</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>OWASP</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Open Worldwide Application Security Project</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>PDF</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Portable Document Format</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>RGB</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Red, green, and blue</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>SDD</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Software Design Description</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>SMS</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Short Message Service</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>SRS</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Software Requirements Specification</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>START</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Simple Triage and Rapid Treatment</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>SWOT</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Strengths, weaknesses, opportunities, and threats</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>TLS</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Transport Layer Security</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>UAV</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Unmanned aerial vehicle</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>UC</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Use case</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>W3C</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>World Wide Web Consortium</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>WCAG</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Web Content Accessibility Guidelines</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>WGS 84</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="7029" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="15" w:after="15" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>World Geodetic System 1984</w:t></w:r></w:p></w:tc></w:tr></w:tbl><w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="0000005E">
       <w:pPr>
         <w:spacing w:line="240" w:lineRule="auto"/>
         <w:rPr>
@@ -39623,7 +39506,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P6 + P1 · For each objective in Table 1-2: how the report addresses it (requirements, design figures, prototype evidence). Value of the proposal and how the design responds to the constraints. Status: WAITING FOR CHAPTERS 1-4]</w:t>
+        <w:t xml:space="preserve"/>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000106">
@@ -39681,7 +39564,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P6 + P1 · Evidence limits, data uncertainty, privacy of person-related information, need for human judgment. Status: WAITING FOR CHAPTERS 1-4]</w:t>
+        <w:t xml:space="preserve"/>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000108">
@@ -39739,7 +39622,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P6 + P1 · Restate the problem, what Project I delivered, and what the evidence does and does not show. Not too short. Status: WAITING FOR CHAPTERS 1-4]</w:t>
+        <w:t xml:space="preserve"/>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="0000010A">
@@ -39797,7 +39680,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P6 + P1 · Work planned for Project II. Status: WAITING FOR CHAPTERS 1-4]</w:t>
+        <w:t xml:space="preserve"/>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="0000010C">
@@ -40275,7 +40158,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P2 / P6 · Only material referred to from the main text. Status: NOT STARTED]</w:t>
+        <w:t xml:space="preserve"/>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000111">
@@ -40306,8 +40189,7 @@
         <w:t xml:space="preserve">Appendix B: Contribution Record</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000112">
-      <w:pPr>
+    <w:p><w:pPr>
         <w:keepNext w:val="0"/>
         <w:keepLines w:val="0"/>
         <w:pageBreakBefore w:val="0"/>
@@ -40318,21 +40200,14 @@
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
           <w:sz w:val="24"/>
           <w:szCs w:val="24"/>
-          <w:shd w:fill="fff299" w:val="clear"/>
         </w:rPr>
       </w:pPr>
-      <w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000">
-        <w:rPr>
+      <w:r><w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
           <w:sz w:val="24"/>
           <w:szCs w:val="24"/>
-          <w:shd w:fill="fff299" w:val="clear"/>
-          <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P6 · Who wrote and reviewed each section. Status: NOT STARTED]</w:t>
-      </w:r>
-    </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000F3">
+      <w:t>Table B-1 records the agreed report assignments and the work available for review.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="ReportTableCaption"/><w:keepNext w:val="1"/></w:pPr><w:r><w:t>Table B-1: Report contributions and assigned reviewers</w:t></w:r></w:p><w:tbl><w:tblPr><w:tblW w:w="9029" w:type="dxa"/><w:jc w:val="center"/><w:tblBorders><w:top w:val="single" w:sz="4" w:color="B8B8B8"/><w:left w:val="single" w:sz="4" w:color="B8B8B8"/><w:bottom w:val="single" w:sz="4" w:color="B8B8B8"/><w:right w:val="single" w:sz="4" w:color="B8B8B8"/><w:insideH w:val="single" w:sz="4" w:color="B8B8B8"/><w:insideV w:val="single" w:sz="4" w:color="B8B8B8"/></w:tblBorders><w:tblLayout w:type="fixed"/><w:tblCellMar><w:top w:w="70" w:type="dxa"/><w:left w:w="90" w:type="dxa"/><w:bottom w:w="70" w:type="dxa"/><w:right w:w="90" w:type="dxa"/></w:tblCellMar></w:tblPr><w:tblGrid><w:gridCol w:w="1900"/><w:gridCol w:w="5630"/><w:gridCol w:w="1499"/></w:tblGrid><w:tr><w:trPr><w:cantSplit/><w:tblHeader/></w:trPr><w:tc><w:tcPr><w:tcW w:w="1900" w:type="dxa"/><w:shd w:val="clear" w:fill="E6E6E6"/></w:tcPr><w:p><w:pPr><w:spacing w:before="120" w:after="120" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Owner</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="5630" w:type="dxa"/><w:shd w:val="clear" w:fill="E6E6E6"/></w:tcPr><w:p><w:pPr><w:spacing w:before="120" w:after="120" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Report contribution and status</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="1499" w:type="dxa"/><w:shd w:val="clear" w:fill="E6E6E6"/></w:tcPr><w:p><w:pPr><w:spacing w:before="120" w:after="120" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Assigned review</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="1900" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="120" w:after="120" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Yassin (Person 1)</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="5630" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="120" w:after="120" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Chapter 1 introduction, objectives, scope, glossary, and constraints are drafted. Chapter 5 is a joint assignment with Mesbah.</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="1499" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="120" w:after="120" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Ali</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="1900" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="120" w:after="120" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Bela (Person 2)</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="5630" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="120" w:after="120" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Chapter 2 literature review and Appendix D research shortlist are merged. Supports reference review.</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="1499" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="120" w:after="120" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Mesbah</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="1900" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="120" w:after="120" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Person 3</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="5630" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="120" w:after="120" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Section 3.1 system description, including user roles, workflow, assumptions, and limitations. Draft and assignment confirmation pending.</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="1499" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="120" w:after="120" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Yassin</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="1900" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="120" w:after="120" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Mahmoud (Person 4)</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="5630" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="120" w:after="120" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Section 3.2 requirements, interfaces, use cases, and traceability are merged. Appendix C contains the SWOT analysis.</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="1499" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="120" w:after="120" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Person 3</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="1900" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="120" w:after="120" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Ali (Person 5)</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="5630" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="120" w:after="120" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Section 3.3 system design is in progress. Database design and ERD materials are available for the chapter draft.</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="1499" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="120" w:after="120" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Mahmoud</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:cantSplit/></w:trPr><w:tc><w:tcPr><w:tcW w:w="1900" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="120" w:after="120" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Mesbah (Person 6)</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="5630" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="120" w:after="120" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Chapter 4 prototype, front matter, and report assembly. Chapter 5 is a joint assignment with Yassin.</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="1499" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:spacing w:before="120" w:after="120" w:line="240" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>Bela</w:t></w:r></w:p></w:tc></w:tr></w:tbl><w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000F3">
       <w:pPr>
         <w:pStyle w:val="Heading2"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
@@ -41691,8 +41566,7 @@
         <w:t xml:space="preserve">EDITORIAL TRACKER (DELETE BEFORE SUBMISSION)</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000114">
-      <w:pPr>
+    <w:p><w:pPr>
         <w:keepNext w:val="0"/>
         <w:keepLines w:val="0"/>
         <w:pageBreakBefore w:val="0"/>
@@ -41703,22 +41577,14 @@
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
           <w:sz w:val="24"/>
           <w:szCs w:val="24"/>
-          <w:shd w:fill="fff299" w:val="clear"/>
         </w:rPr>
       </w:pPr>
-      <w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000">
-        <w:rPr>
+      <w:r><w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
           <w:sz w:val="24"/>
           <w:szCs w:val="24"/>
-          <w:shd w:fill="fff299" w:val="clear"/>
-          <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P6 · Open questions for the supervisor: abstract length (150-200 or 200-250 words); whether the 50-page minimum applies to Project I; final chapter arrangement; expected prototype evidence; department name, degree title and submission month.]</w:t>
-      </w:r>
-    </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000115">
-      <w:pPr>
+      <w:t>Chapter 1 review. Yassin to confirm the project definition, objectives, and scope in the draft. Ali to review them against the system design.</w:t></w:r></w:p><w:p><w:pPr>
         <w:keepNext w:val="0"/>
         <w:keepLines w:val="0"/>
         <w:pageBreakBefore w:val="0"/>
@@ -41729,22 +41595,14 @@
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
           <w:sz w:val="24"/>
           <w:szCs w:val="24"/>
-          <w:shd w:fill="fff299" w:val="clear"/>
         </w:rPr>
       </w:pPr>
-      <w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000">
-        <w:rPr>
+      <w:r><w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
           <w:sz w:val="24"/>
           <w:szCs w:val="24"/>
-          <w:shd w:fill="fff299" w:val="clear"/>
-          <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P6 · Team details to confirm: spelling of Youssef's name (cover and declaration differ); order of names; each student's signature and date.]</w:t>
-      </w:r>
-    </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000116">
-      <w:pPr>
+      <w:t>Chapter 2 review. Review the literature chapter with Bela. If a market assessment is required, collect evidence on comparable tools and intended adopters.</w:t></w:r></w:p><w:p><w:pPr>
         <w:keepNext w:val="0"/>
         <w:keepLines w:val="0"/>
         <w:pageBreakBefore w:val="0"/>
@@ -41755,31 +41613,86 @@
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
           <w:sz w:val="24"/>
           <w:szCs w:val="24"/>
-          <w:shd w:fill="fff299" w:val="clear"/>
         </w:rPr>
       </w:pPr>
-      <w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000">
+      <w:r><w:rPr>
+          <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
+          <w:sz w:val="24"/>
+          <w:szCs w:val="24"/>
+        </w:rPr>
+      <w:t>Chapter 3 inputs. Confirm the Person 3 owner and collect the system description. Obtain approved requirement IDs from Mahmoud. Ali is drafting Section 3.3. Collect his design text, diagrams, and captions when ready. Replace the empty figure boxes when the team supplies the visuals.</w:t></w:r></w:p><w:p><w:pPr>
+        <w:keepNext w:val="0"/>
+        <w:keepLines w:val="0"/>
+        <w:pageBreakBefore w:val="0"/>
+        <w:spacing w:after="0" w:before="240" w:line="360" w:lineRule="auto"/>
+        <w:ind w:left="0" w:firstLine="0"/>
+        <w:jc w:val="both"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
           <w:sz w:val="24"/>
           <w:szCs w:val="24"/>
-          <w:shd w:fill="fff299" w:val="clear"/>
-          <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P6 · Final assembly: export to Word, apply template styles, generate List of Figures and List of Tables, update the Table of Contents, read the PDF page by page.]</w:t>
-      </w:r>
-    </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000117">
-      <w:pPr>
-        <w:rPr/>
       </w:pPr>
-      <w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000">
-        <w:rPr>
-          <w:rtl w:val="0"/>
+      <w:r><w:rPr>
+          <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
+          <w:sz w:val="24"/>
+          <w:szCs w:val="24"/>
         </w:rPr>
-      </w:r>
-    </w:p>
-    <w:sectPr>
+      <w:t>Chapter 4 review. Confirm terminology and scope with Yassin and Person 3. Check the prototype coverage table against Mahmoud’s approved requirements and ask Bela to review the evidence and citations.</w:t></w:r></w:p><w:p><w:pPr>
+        <w:keepNext w:val="0"/>
+        <w:keepLines w:val="0"/>
+        <w:pageBreakBefore w:val="0"/>
+        <w:spacing w:after="0" w:before="240" w:line="360" w:lineRule="auto"/>
+        <w:ind w:left="0" w:firstLine="0"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
+          <w:sz w:val="24"/>
+          <w:szCs w:val="24"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r><w:rPr>
+          <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
+          <w:sz w:val="24"/>
+          <w:szCs w:val="24"/>
+        </w:rPr>
+      <w:t>Chapter 5 and abstract. Mesbah and Yassin to write the discussion, limitations, conclusion, and future work once the objectives and Chapter 3 drafts are agreed. Draft the abstract after the chapters are stable. Confirm the word limit with the supervisor.</w:t></w:r></w:p><w:p><w:pPr>
+        <w:keepNext w:val="0"/>
+        <w:keepLines w:val="0"/>
+        <w:pageBreakBefore w:val="0"/>
+        <w:spacing w:after="0" w:before="240" w:line="360" w:lineRule="auto"/>
+        <w:ind w:left="0" w:firstLine="0"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
+          <w:sz w:val="24"/>
+          <w:szCs w:val="24"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r><w:rPr>
+          <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
+          <w:sz w:val="24"/>
+          <w:szCs w:val="24"/>
+        </w:rPr>
+      <w:t>Front matter and approvals. Confirm the department, formal degree title, submission month and year, Youssef’s name spelling, and author order. Collect all six signatures and dates. Decide whether to include a dedication. Add material to Appendix A only when the report refers to it. Confirm the contributions and reviews in Appendix B.</w:t></w:r></w:p><w:p><w:pPr>
+        <w:keepNext w:val="0"/>
+        <w:keepLines w:val="0"/>
+        <w:pageBreakBefore w:val="0"/>
+        <w:spacing w:after="0" w:before="240" w:line="360" w:lineRule="auto"/>
+        <w:ind w:left="0" w:firstLine="0"/>
+        <w:jc w:val="both"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
+          <w:sz w:val="24"/>
+          <w:szCs w:val="24"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r><w:rPr>
+          <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
+          <w:sz w:val="24"/>
+          <w:szCs w:val="24"/>
+        </w:rPr>
+      <w:t>Submission. Confirm the required template, chapter arrangement, minimum length, prototype evidence, and submission files with the supervisor. Complete the final terminology, first-use abbreviations, and citation review. Refresh the contents and figure/table lists, check the exported PDF page by page, and obtain all six authors’ approval.</w:t></w:r></w:p><w:sectPr>
       <w:footerReference w:type="default" r:id="rIdReportPage"/>
       <w:type w:val="nextPage"/>
       <w:pgSz w:h="16834" w:w="11909" w:orient="portrait"/>

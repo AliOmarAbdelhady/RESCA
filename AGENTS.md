@@ -24,15 +24,15 @@ Use the [team documentation plan](docs/team-plan/documentation-work-plan.md) for
 
 ## Team and report ownership
 
-Team roster: Mesbah, Mahmoud, Ali, Bela, Yassin, and Youssef. Mesbah is Person 6. Bela is Person 2 and Mahmoud is Person 4, as confirmed by Mesbah. The owners of Persons 1, 3, and 5 still need team confirmation. Person numbers identify writing assignments. Chapter numbers follow the university report outline.
+Team roster: Mesbah, Mahmoud, Ali, Bela, Yassin, and Youssef. Mesbah confirmed Yassin as Person 1, Bela as Person 2, Mahmoud as Person 4, Ali as Person 5, and himself as Person 6. Confirm the Person 3 assignment with the team. Person numbers identify writing assignments. Chapter numbers follow the university report outline.
 
 | Person | Confirmed owner | Report responsibility | Reviewed by |
 | --- | --- | --- | --- |
-| 1 | Pending | Introduction, objectives, scope, glossary, and constraints. Co-writes the closing sections with Mesbah. | Person 5 |
+| 1 | Yassin | Chapter 1 introduction, objectives, scope, glossary, and constraints. Co-writes Chapter 5 with Mesbah. | Ali |
 | 2 | Bela | Chapter 2 Literature Review and Background, including related systems, the research gap, and references. Coordinates appendices and citations with Mesbah. | Mesbah |
-| 3 | Pending | Section 3.1 System Description, including workflow, user roles, assumptions, and limitations. | Person 1 |
+| 3 | Pending | Section 3.1 System Description, including workflow, user roles, assumptions, and limitations. | Yassin |
 | 4 | Mahmoud | Section 3.2 User and System Requirements, including functional and quality requirements, interfaces, written use cases, and traceability. | Person 3 |
-| 5 | Pending | Section 3.3 System Design, including diagrams, design rationale, and screen illustrations. | Person 4 |
+| 5 | Ali | Section 3.3 System Design, including diagrams, design rationale, and screen illustrations. | Mahmoud |
 | 6 | Mesbah (Marwan Mesbah) | Chapter 4 System Prototype, front matter, Chapter 5 with Person 1, and final report assembly and review. | Person 2 |
 
 ### Contributions and evidence
@@ -40,10 +40,10 @@ Team roster: Mesbah, Mahmoud, Ali, Bela, Yassin, and Youssef. Mesbah is Person 6
 | Teammate | Contribution or current evidence |
 | --- | --- |
 | Mesbah | Authored the mapping prototype and research notes (`f0b600f`), then the Person 6 plan and six prototype figures (`03b3fb0`). Git records his name as `Marwan` and `Marwan Mesbah`. |
-| Ali | Authored the six-person documentation work plan (`22bc575`) and merged the mapping branch into `main` (`6bb10b4`). Git records his name as `AliOmarAbdelhady`. His assigned report section is pending confirmation. |
+| Ali | Section 3.3 System Design is in progress, as confirmed by Mesbah. Ali authored the documentation work plan (`22bc575`) and the database and ERD materials (`6815a05`, `3640e18`). The design draft, diagrams, and captions are pending in Main. Git records his name as `AliOmarAbdelhady`. |
 | Mahmoud | Authored the 23 November 2026 requirements draft, `RescueVision_Person4_Requirements_SRS_Section3.pdf`, as confirmed by Mesbah. The PDF is stored locally for reference. |
 | Bela | Authored the [ranked paper list](docs/research_papers.md) and [Tier 1 summaries](docs/tier1_papers_summary.md) as `Mohamed Belal` (`c327c26`, `b7c0b68`). Main integrates the seven core studies into Chapter 2 and records all 28 ranked papers in Appendix D. The classifier configuration uses DINOv2. Chapter 2 describes DINOv3 as an evaluation candidate. |
-| Yassin | No commits attributable to this name in the visible history. |
+| Yassin | Owns Chapter 1. Main has a full draft with the objectives, scope, glossary, and constraints. Yassin and Ali should confirm its wording and review status. Yassin co-writes Chapter 5 with Mesbah. |
 | Youssef | No commits attributable to this name in the visible history. |
 
 History checked through `origin/main` at `22bc575` and `origin/feature/mapping-routing` at `03b3fb0`. Use Git authorship to credit specific contributions and confirm chapter ownership with the team. Add shared-document contributions when their author and section are confirmed.
@@ -58,7 +58,8 @@ The repository has the plan, prototype evidence, and a merged editable Main draf
 ### Start now
 
 - [x] Merge the Word reports into one editable Main draft with heading styles and contents and figure/table fields.
-- [ ] Check the editable draft against the university requirements guide and complete the abbreviations list.
+- [x] Compile the abbreviations list from the current Main draft.
+- [ ] Check the editable draft against the university requirements guide and review first-use acronym definitions after the remaining chapters arrive.
 - [x] Draft the System Prototype chapter using the existing figures, captions, imagery credits, and an evidence coverage table.
 - [x] Link Chapter 4's dated imagery, 2D map, and comparison evidence to the relevant IDs in Person 4's 23 November 2026 SRS draft.
 - [ ] Confirm Chapter 4 scope and terminology with Persons 1 and 3, verify the IDs against Person 4's approved version, and have Person 2 check the evidence claims and citations.
@@ -66,15 +67,16 @@ The repository has the plan, prototype evidence, and a merged editable Main draf
 - [x] Merge Bela's literature review into Chapter 2, verify the cited core studies against the original sources, and consolidate references in first-citation order.
 - [ ] Review Chapter 2 with Bela. Collect evidence on comparable operational tools and adopters if a market assessment is required.
 - [ ] Review the provisional nonfunctional targets, hazard rule distances, and bilingual interface scope with the team and supervisor. Confirm the role wording in Section 3.1.3 against Table 3-5 and have Person 2 verify the consolidated references.
-- [ ] Draft the cover, declaration, and acknowledgments. Confirm the official project and institution details and collect the team details and signatures required by the template.
-- [ ] Start a contribution record and an open-items list. Track supervisor decisions on chapter order, expected prototype depth, abstract length, page minimum, and submission files.
+- [x] Draft the acknowledgments and add the contribution record to Appendix B. Record unresolved items in Main's editorial tracker.
+- [ ] Confirm the department, formal degree title, submission month and year, name spelling and author order. Collect signatures and dates. Decide whether to include the optional dedication.
+- [ ] Confirm the supervisor's decisions on chapter order, expected prototype depth, abstract length, page minimum, and submission files.
 
 ### As chapter drafts arrive
 
 - [ ] Collect reviewed chapters and figures, merge them into the master, and make terminology, tense, headings, captions, and numbering consistent.
 - [ ] Get objectives and scope from Person 1, features and limitations from Person 3, requirement IDs from Person 4, and design figures and captions from Person 5.
 - [ ] Review Person 2's literature chapter for clarity, structure, and formatting. Have Person 2 review the prototype and closing sections for claims and citations. Coordinate reference order and appendices with Person 2.
-- [ ] Write the discussion, conclusion, and future work with Person 1 once the chapters are stable. Draft the roughly 200-word abstract after that and confirm the final length with the supervisor.
+- [ ] Write Chapter 5 with Yassin once the objectives and Chapter 3 drafts are agreed. Draft the roughly 200-word abstract after that and confirm the final length with the supervisor. Main keeps these sections empty until the inputs are ready.
 
 ### Before submission
 
