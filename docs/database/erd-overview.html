@@ -1,0 +1,843 @@
+<title>RescueVision Data Model</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a briefing document — sticky domain index, then one band per domain: notes left, ERD right. */
+:root{
+  --bg:#ECEEF2; --surface:#FFFFFF; --ink:#1A2538; --muted:#5C7A96; --line:#C9D3DE;
+  --signal:#007C8C; --amber:#C25E00; --chip:#E1E8EF; --codebg:#E4E9EF;
+  --crit:#B42318;
+  --display:"Oswald","Arial Narrow",Impact,sans-serif;
+  --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#080E1A; --surface:#0D1626; --ink:#ECEEF2; --muted:#8EA8C0; --line:#22324A;
+  --signal:#00E5FF; --amber:#FF8C1A; --chip:#15233A; --codebg:#050810; --crit:#FF6B5B; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#080E1A; --surface:#0D1626; --ink:#ECEEF2; --muted:#8EA8C0; --line:#22324A;
+  --signal:#00E5FF; --amber:#FF8C1A; --chip:#15233A; --codebg:#050810; --crit:#FF6B5B; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1180px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);text-transform:uppercase;letter-spacing:-.01em;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.05}
+h2{font-size:1.55rem;line-height:1.15}
+h3{font-size:1.05rem;letter-spacing:.02em}
+p{margin:0;max-width:68ch}
+code,.mono{font-family:var(--mono);font-size:.86em}
+.eyebrow{font-family:var(--display);font-weight:500;font-size:.78rem;letter-spacing:.42em;text-transform:uppercase;color:var(--muted)}
+a{color:var(--signal)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+
+header.top{padding-block:40px 28px;display:grid;gap:18px;border-bottom:1px solid var(--line)}
+header.top .lede{font-size:1.05rem;color:var(--muted)}
+.facts{display:flex;flex-wrap:wrap;gap:8px}
+.fact{font-family:var(--mono);font-size:.78rem;padding:4px 10px;border:1px solid var(--line);border-radius:4px;background:var(--surface)}
+.fact b{color:var(--signal);font-weight:500}
+
+nav.index{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  padding-block:10px;overflow-x:auto;white-space:nowrap}
+nav.index a{display:inline-block;font-family:var(--mono);font-size:.78rem;color:var(--ink);text-decoration:none;
+  padding:4px 10px;border-radius:4px;margin-right:4px}
+nav.index a:hover{background:var(--chip)}
+nav.index a span{color:var(--muted)}
+
+section{padding-block:44px;border-bottom:1px solid var(--line);display:grid;gap:22px}
+.sec-head{display:grid;gap:8px}
+
+.features{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.feat{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px;display:grid;gap:10px;align-content:start}
+.feat .id{font-family:var(--mono);font-size:.78rem;color:var(--amber)}
+.feat p{font-size:.92rem}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--mono);font-size:.72rem;background:var(--chip);border-radius:3px;padding:2px 7px}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:620px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.08em;font-size:.78rem;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td.code{font-family:var(--mono);font-size:.8rem;white-space:nowrap}
+
+.domain{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:900px){.domain{grid-template-columns:minmax(0,1fr)}}
+.notes{display:grid;gap:14px}
+.notes ul{margin:0;padding-left:18px;display:grid;gap:8px;font-size:.92rem}
+.diagram{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px;overflow-x:auto;min-width:0}
+.diagram pre.mermaid{margin:0;background:transparent;font-family:var(--mono);font-size:12px}
+.badge{display:inline-block;font-family:var(--mono);font-size:.72rem;border:1px solid var(--signal);color:var(--signal);border-radius:3px;padding:1px 6px}
+
+pre.sql{background:var(--codebg);border:1px solid var(--line);border-radius:6px;padding:16px;overflow-x:auto;margin:0;
+  font-family:var(--mono);font-size:.82rem;line-height:1.55;color:var(--ink)}
+.kw{color:var(--signal)} .str{color:var(--amber)}
+ol.steps{margin:0;padding-left:20px;display:grid;gap:8px;max-width:72ch}
+.alert-strip{border-left:4px solid var(--crit);background:var(--surface);border-radius:0 6px 6px 0;padding:14px 16px;display:grid;gap:6px}
+.alert-strip strong{font-family:var(--display);text-transform:uppercase;letter-spacing:.04em;color:var(--crit)}
+footer{padding-block:28px 48px;color:var(--muted);font-size:.85rem}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">Rescue Vision · Aerial Rescue Systems</div>
+  <h1>Platform Data Model</h1>
+  <p class="lede">The PostgreSQL design behind a multi-agency disaster-response platform for Government, Police, Ambulance and Fire services. One shared incident and one georeferenced map. Every AI result can be traced to the model and image that produced it.</p>
+  <div class="facts">
+    <span class="fact"><b>56</b> tables</span>
+    <span class="fact"><b>8</b> domains</span>
+    <span class="fact">PostgreSQL <b>16</b></span>
+    <span class="fact"><b>PostGIS</b> · SRID 4326</span>
+    <span class="fact"><b>pgRouting</b> road graph</span>
+    <span class="fact"><b>pgvector</b> HNSW</span>
+  </div>
+</header>
+
+<nav class="index" aria-label="Sections">
+  <a href="#features">Features</a>
+  <a href="#roles">Roles</a>
+  <a href="#d1"><span>D1</span> Identity</a>
+  <a href="#d2"><span>D2</span> Incidents</a>
+  <a href="#d3"><span>D3</span> Imagery &amp; AI</a>
+  <a href="#d4a"><span>F1</span> Buildings &amp; Cost</a>
+  <a href="#d4b"><span>F2</span> Routing</a>
+  <a href="#d4c"><span>F3·F4</span> Persons</a>
+  <a href="#d4d"><span>F5</span> Hazards</a>
+  <a href="#d5"><span>D5</span> Field &amp; Reports</a>
+  <a href="#conventions">Conventions</a>
+</nav>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="sec-head">
+    <div class="eyebrow">What the data serves</div>
+    <h2>Six features</h2>
+  </div>
+  <div class="features">
+    <article class="feat">
+      <div class="id">F1</div>
+      <h3>Before/After Damage &amp; Restoration Cost</h3>
+      <p>Each building footprint gets an xBD damage grade (No Damage, Minor, Major, Destroyed) with a probability per grade. Indicative restoration cost = HAZUS repair ratio × floor area × local cost per m², shown as a low–high range with editable assumptions.</p>
+      <div class="tags"><span class="tag">buildings</span><span class="tag">building_assessments</span><span class="tag">cost_estimates</span></div>
+    </article>
+    <article class="feat">
+      <div class="id">F2</div>
+      <h3>2D/3D Mapping &amp; Rescue Routing</h3>
+      <p>Stitched orthomosaic plus a 3D city view share the same layers. Blocked, flooded and debris-covered roads change edge costs. pgRouting returns the safest fastest route for the specific vehicle, plus alternatives.</p>
+      <div class="tags"><span class="tag">raster_products</span><span class="tag">road_segments</span><span class="tag">routes</span></div>
+    </article>
+    <article class="feat">
+      <div class="id">F3</div>
+      <h3>Aerial Person Detection, Partial Visibility</h3>
+      <p>Finds people from any drone altitude or angle, also when only head or limbs show. Every detection stores visibility level, occlusion ratio, posture, GPS position and an uncertainty radius in metres.</p>
+      <div class="tags"><span class="tag">person_detections</span><span class="tag">images</span></div>
+    </article>
+    <article class="feat">
+      <div class="id">F4</div>
+      <h3>Multi-Object Person Tracking</h3>
+      <p>Detections are linked into tracks with a stable ID, path, last-known position and movement state. A stationary person may be injured. Tracks become assistance cases that a team can be sent to.</p>
+      <div class="tags"><span class="tag">person_tracks</span><span class="tag">assistance_cases</span><span class="tag">case_events</span></div>
+    </article>
+    <article class="feat">
+      <div class="id">F5</div>
+      <h3>Compound Hazard Alerts</h3>
+      <p>A rule engine watches how hazards interact in space. <em>Electrified Water</em>: floodwater within 30 m of an energized power line opens a no-entry zone, closes roads, re-plans routes and warns responders.</p>
+      <div class="tags"><span class="tag">hazards</span><span class="tag">hazard_rules</span><span class="tag">compound_alerts</span></div>
+    </article>
+    <article class="feat">
+      <div class="id">F6</div>
+      <h3>General Reports</h3>
+      <p>Situation, damage and cost, casualty, mission after-action and full-incident reports. Statistics are frozen at generation. Reports go through approval and can be shared between agencies.</p>
+      <div class="tags"><span class="tag">reports</span><span class="tag">report_shares</span></div>
+    </article>
+  </div>
+</section>
+
+<!-- ROLES -->
+<section id="roles">
+  <div class="sec-head">
+    <div class="eyebrow">Agency + Role</div>
+    <h2>Who uses it</h2>
+    <p>Users belong to one agency (Government, Police, EMS or Fire) and hold one of four roles that are the same in every agency. The Platform Admin sits above all agencies and is the only user without one. A CHECK constraint enforces that rule.</p>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Role</th><th>Scope</th><th>Main permissions</th></tr></thead>
+      <tbody>
+        <tr><td class="code">PLATFORM_ADMIN</td><td>Whole system</td><td>Create agencies, manage agency admins, model registry, global hazard rules</td></tr>
+        <tr><td class="code">AGENCY_ADMIN</td><td>Own agency</td><td>Users, teams and vehicles of the agency</td></tr>
+        <tr><td class="code">COMMANDER</td><td>Joined incidents</td><td>Create incidents and missions, invite agencies, assign teams, approve reports, resolve alerts</td></tr>
+        <tr><td class="code">ANALYST</td><td>Joined incidents</td><td>Upload imagery, run analysis, review AI results, plan routes, verify citizen requests</td></tr>
+        <tr><td class="code">FIELD_RESPONDER</td><td>Assigned missions</td><td>Mobile app: tasks, live GPS, SOS, field reports, case status</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- D1 -->
+<section id="d1">
+  <div class="sec-head"><div class="eyebrow">Domain D1 · 10 tables</div><h2>Identity &amp; Access</h2></div>
+  <div class="domain">
+    <div class="notes">
+      <ul>
+        <li>Agency and role are two independent axes. Permissions are rows in <code>role_permissions</code>, editable without code.</li>
+        <li><code>users</code> CHECK: role is <code>PLATFORM_ADMIN</code> exactly when <code>agency_id</code> is null.</li>
+        <li>One active team per responder (partial unique index on <code>team_members.user_id WHERE left_at IS NULL</code>). This follows the ICS unity-of-command rule.</li>
+        <li><code>vehicles.max_water_depth_cm</code> feeds routing: a 4x4 may cross shallow water, an ambulance may not.</li>
+      </ul>
+    </div>
+    <div class="diagram"><pre class="mermaid">
+erDiagram
+  agencies ||--o{ agencies : "parent of"
+  agencies ||--o{ users : employs
+  roles ||--o{ users : grants
+  roles ||--o{ role_permissions : has
+  permissions ||--o{ role_permissions : "granted in"
+  users ||--o{ user_sessions : opens
+  users ||--o{ user_devices : registers
+  agencies ||--o{ teams : owns
+  teams ||--o{ team_members : has
+  users ||--o{ team_members : joins
+  agencies ||--o{ vehicles : owns
+  teams |o--o{ vehicles : crews
+  agencies {
+    uuid id PK
+    text name
+    enum agency_type "GOVERNMENT POLICE EMS FIRE"
+    uuid parent_agency_id FK
+    multipolygon jurisdiction
+  }
+  roles {
+    text code PK
+    enum scope "PLATFORM or AGENCY"
+  }
+  permissions {
+    text code PK
+  }
+  role_permissions {
+    text role_code PK, FK
+    text permission_code PK, FK
+  }
+  users {
+    uuid id PK
+    uuid agency_id FK "null only for PLATFORM_ADMIN"
+    text role_code FK
+    citext email UK
+    text job_title "display only"
+    enum status
+  }
+  user_sessions {
+    uuid id PK
+    uuid user_id FK
+    text refresh_token_hash UK
+  }
+  user_devices {
+    uuid id PK
+    uuid user_id FK
+    text push_token UK
+  }
+  teams {
+    uuid id PK
+    uuid agency_id FK
+    enum team_type
+    point home_base
+    enum status
+  }
+  team_members {
+    uuid id PK
+    uuid team_id FK
+    uuid user_id FK
+    bool is_leader
+    timestamptz left_at
+  }
+  vehicles {
+    uuid id PK
+    uuid agency_id FK
+    uuid team_id FK
+    enum vehicle_type
+    int max_water_depth_cm
+  }
+</pre></div>
+  </div>
+</section>
+
+<!-- D2 -->
+<section id="d2">
+  <div class="sec-head"><div class="eyebrow">Domain D2 · 6 tables</div><h2>Incidents &amp; Operations</h2></div>
+  <div class="domain">
+    <div class="notes">
+      <ul>
+        <li>One shared <code>incident</code> per disaster. The lead agency invites others through <code>incident_agencies</code>. Only agencies with an <code>ACTIVE</code> row can see incident data.</li>
+        <li>Each agency runs its own <code>missions</code> inside the incident.</li>
+        <li><code>mission_assignments</code> targets a team <em>or</em> an individual: <code>CHECK (num_nonnulls(team_id, user_id) = 1)</code>.</li>
+        <li><code>incidents.area</code> is the area of interest that everything else lives inside. <code>is_historical</code> marks reference events such as Palu 2018 for similar-case search.</li>
+      </ul>
+    </div>
+    <div class="diagram"><pre class="mermaid">
+erDiagram
+  agencies ||--o{ incidents : leads
+  incidents ||--o{ incident_agencies : "joined by"
+  agencies ||--o{ incident_agencies : joins
+  incidents ||--o{ zones : contains
+  incidents ||--o{ missions : has
+  agencies ||--o{ missions : runs
+  zones |o--o{ missions : targets
+  missions ||--o{ mission_assignments : "assigned via"
+  teams |o--o{ mission_assignments : receives
+  users |o--o{ mission_assignments : receives
+  vehicles |o--o{ mission_assignments : uses
+  missions ||--o{ mission_status_history : logs
+  incidents {
+    uuid id PK
+    text code UK
+    enum disaster_type
+    enum status "ACTIVE CONTAINED CLOSED"
+    smallint severity
+    uuid lead_agency_id FK
+    multipolygon area
+    bool is_historical
+  }
+  incident_agencies {
+    uuid incident_id PK, FK
+    uuid agency_id PK, FK
+    enum participation "LEAD or SUPPORT"
+    enum status "INVITED ACTIVE WITHDRAWN"
+  }
+  zones {
+    uuid id PK
+    uuid incident_id FK
+    enum zone_type "SECTOR STAGING SAFE EVAC NO_ENTRY"
+    geometry geom
+  }
+  missions {
+    uuid id PK
+    uuid incident_id FK
+    uuid agency_id FK
+    enum mission_type
+    smallint priority
+    enum status
+    uuid target_zone_id FK
+  }
+  mission_assignments {
+    uuid id PK
+    uuid mission_id FK
+    uuid team_id FK "team OR user"
+    uuid user_id FK
+    uuid vehicle_id FK
+    enum response
+  }
+  mission_status_history {
+    bigint id PK
+    uuid mission_id FK
+    enum to_status
+    uuid changed_by FK
+  }
+</pre></div>
+  </div>
+</section>
+
+<!-- D3 -->
+<section id="d3">
+  <div class="sec-head"><div class="eyebrow">Domain D3 · 6 tables</div><h2>Imagery &amp; AI Pipeline</h2></div>
+  <div class="domain">
+    <div class="notes">
+      <ul>
+        <li>The provenance backbone. Every AI output row carries <code>inference_run_id</code>, which points to the model version, job and input rasters.</li>
+        <li><code>capture_sessions.phase</code> (PRE_EVENT or POST_EVENT) is the before/after axis of F1, so pre-event satellite plus post-event drone imagery also works.</li>
+        <li>Files live in MinIO. Postgres keeps <code>storage_key</code> and <code>sha256</code> (unique, so the same photo is never uploaded twice).</li>
+        <li><code>gsd_cm</code> and <code>gps_accuracy_m</code> drive the uncertainty radius, and they block person detection on images taken from too high.</li>
+      </ul>
+    </div>
+    <div class="diagram"><pre class="mermaid">
+erDiagram
+  incidents ||--o{ capture_sessions : "imaged by"
+  missions |o--o{ capture_sessions : produces
+  capture_sessions ||--o{ images : contains
+  capture_sessions ||--o{ raster_products : yields
+  incidents ||--o{ processing_jobs : runs
+  capture_sessions |o--o{ processing_jobs : "input of"
+  processing_jobs ||--o{ inference_runs : executes
+  ai_models ||--o{ inference_runs : "used in"
+  raster_products |o--o{ inference_runs : "pre / post input"
+  inference_runs |o--o{ raster_products : "produces masks"
+  capture_sessions {
+    uuid id PK
+    uuid incident_id FK
+    uuid mission_id FK
+    enum source_type "DRONE SATELLITE SIMULATION PHONE"
+    enum phase "PRE_EVENT or POST_EVENT"
+    polygon coverage
+  }
+  images {
+    uuid id PK
+    uuid session_id FK
+    enum media_kind "PHOTO or VIDEO_FRAME"
+    text sha256 UK
+    enum spectral_band "RGB or THERMAL"
+    pointz camera_position
+    numeric gsd_cm
+    numeric gps_accuracy_m
+    jsonb exif
+  }
+  raster_products {
+    uuid id PK
+    uuid session_id FK
+    uuid produced_by_run_id FK
+    enum product_type "ORTHO DSM DTM MESH_3D_TILES MASKS"
+    polygon bounds
+  }
+  ai_models {
+    uuid id PK
+    text name UK
+    text version UK
+    enum task
+    jsonb metrics
+  }
+  processing_jobs {
+    uuid id PK
+    uuid incident_id FK
+    enum job_type "STITCH ANALYZE ROUTE REPORT"
+    enum status
+    smallint progress_pct
+  }
+  inference_runs {
+    uuid id PK
+    uuid job_id FK
+    uuid model_id FK
+    uuid pre_raster_id FK
+    uuid post_raster_id FK
+    jsonb params
+  }
+</pre></div>
+  </div>
+</section>
+
+<!-- D4a -->
+<section id="d4a">
+  <div class="sec-head"><div class="eyebrow">Feature F1 · 6 tables</div><h2>Buildings, Damage &amp; Cost</h2></div>
+  <div class="domain">
+    <div class="notes">
+      <ul>
+        <li><code>area_m2</code> is a generated column: <code>ST_Area(footprint::geography)</code>.</li>
+        <li>Assessments keep full history. A partial unique index allows exactly one <code>is_current</code> verdict per building.</li>
+        <li>Each verdict comes from AI or from a person: <code>CHECK (inference_run_id IS NOT NULL OR assessed_by IS NOT NULL)</code>. A human <code>review_status</code> confirms or corrects it.</li>
+        <li>Cost = floor area × unit rate × repair ratio, from editable cost-profile tables. <code>cost_estimates</code> are snapshots, so a published report never changes silently.</li>
+      </ul>
+    </div>
+    <div class="diagram"><pre class="mermaid">
+erDiagram
+  incidents ||--o{ buildings : contains
+  buildings ||--o{ building_assessments : "assessed by"
+  inference_runs |o--o{ building_assessments : produces
+  images |o--o{ building_assessments : evidence
+  buildings ||--o{ cost_estimates : "priced by"
+  building_assessments ||--o{ cost_estimates : basis
+  cost_profiles ||--o{ cost_profile_unit_rates : defines
+  cost_profiles ||--o{ cost_profile_repair_ratios : defines
+  cost_profiles ||--o{ cost_estimates : applied
+  buildings {
+    uuid id PK
+    uuid incident_id FK
+    polygon footprint
+    numeric area_m2 "generated"
+    smallint floors
+    enum occupancy
+    enum construction
+    enum source "OSM OVERTURE AI MANUAL"
+  }
+  building_assessments {
+    uuid id PK
+    uuid building_id FK
+    uuid inference_run_id FK
+    uuid assessed_by FK
+    enum method "BEFORE_AFTER POST_ONLY FIELD"
+    enum damage_grade
+    numeric p_destroyed "plus 3 more probs"
+    enum review_status
+    bool is_current "one per building"
+  }
+  cost_profiles {
+    uuid id PK
+    text region
+    char currency
+  }
+  cost_profile_unit_rates {
+    uuid profile_id PK, FK
+    enum occupancy PK
+    enum construction PK
+    numeric cost_per_m2_low
+    numeric cost_per_m2_high
+  }
+  cost_profile_repair_ratios {
+    uuid profile_id PK, FK
+    enum damage_grade PK
+    numeric ratio_low
+    numeric ratio_high
+  }
+  cost_estimates {
+    uuid id PK
+    uuid building_id FK
+    uuid assessment_id FK
+    uuid cost_profile_id FK
+    numeric cost_low
+    numeric cost_high
+    jsonb assumptions
+  }
+</pre></div>
+  </div>
+</section>
+
+<!-- D4b -->
+<section id="d4b">
+  <div class="sec-head"><div class="eyebrow">Feature F2 · 5 tables</div><h2>Road Network &amp; Routing</h2></div>
+  <div class="domain">
+    <div class="notes">
+      <ul>
+        <li><code>road_segments</code> follows the pgRouting edge contract: <code>id, source, target, cost, reverse_cost</code>. A negative cost means closed, so closing a road is one <code>UPDATE</code>.</li>
+        <li>Btree indexes on <code>source</code> and <code>target</code>, GiST on <code>geom</code>.</li>
+        <li>Current condition is cached on the segment. <code>road_condition_observations</code> keeps who reported it: AI, a responder or a citizen (exactly one).</li>
+        <li><code>route_segments</code> lets the system find every active route through a closed road with one indexed join.</li>
+      </ul>
+    </div>
+    <div class="diagram"><pre class="mermaid">
+erDiagram
+  incidents ||--o{ road_nodes : has
+  road_nodes ||--o{ road_segments : "source / target"
+  road_segments ||--o{ road_condition_observations : observed
+  incidents ||--o{ routes : plans
+  missions |o--o{ routes : uses
+  assistance_cases |o--o{ routes : destination
+  facilities |o--o{ routes : destination
+  routes ||--o{ route_segments : follows
+  road_segments ||--o{ route_segments : "part of"
+  compound_alerts |o--o{ routes : invalidates
+  road_nodes {
+    bigint id PK
+    uuid incident_id FK
+    point geom
+  }
+  road_segments {
+    bigint id PK
+    bigint source FK
+    bigint target FK
+    linestring geom
+    enum road_class
+    enum condition "CLEAR DEBRIS FLOODED BLOCKED HAZARD_CLOSED"
+    int water_depth_cm
+    float8 cost "negative means closed"
+    float8 reverse_cost
+  }
+  road_condition_observations {
+    bigint id PK
+    bigint segment_id FK
+    enum condition
+    uuid inference_run_id FK "exactly one source"
+    uuid reported_by FK
+    uuid citizen_request_id FK
+  }
+  routes {
+    uuid id PK
+    uuid mission_id FK
+    enum vehicle_type
+    enum algorithm "ASTAR or DIJKSTRA"
+    smallint rank "1 is primary"
+    linestring geom
+    enum status "ACTIVE SUPERSEDED INVALIDATED"
+  }
+  route_segments {
+    uuid route_id PK, FK
+    int seq PK
+    bigint segment_id FK
+  }
+</pre></div>
+  </div>
+</section>
+
+<!-- D4c -->
+<section id="d4c">
+  <div class="sec-head"><div class="eyebrow">Features F3 · F4 · 5 tables</div><h2>Persons, Tracks &amp; Assistance Cases</h2></div>
+  <div class="domain">
+    <div class="notes">
+      <ul>
+        <li>Three levels: raw AI <strong>detection</strong>, then a <strong>track</strong> (the same person across frames), then an <strong>assistance case</strong> (a person a human decided needs help).</li>
+        <li><code>visibility</code> and <code>occlusion_ratio</code> record partial sightings (head only, limbs only). The scope is visible persons only, never persons under rubble.</li>
+        <li>AI tracks, citizen requests and responder reports all end up in <code>assistance_cases</code>, triaged with START tags: red, yellow, green, black.</li>
+        <li><code>person_detections</code> is high volume, with a BRIN index on <code>detected_at</code> and GiST on <code>location</code>.</li>
+      </ul>
+    </div>
+    <div class="diagram"><pre class="mermaid">
+erDiagram
+  inference_runs ||--o{ person_detections : detects
+  images ||--o{ person_detections : "seen in"
+  person_tracks |o--o{ person_detections : links
+  inference_runs ||--o{ person_tracks : tracks
+  person_tracks |o--o{ assistance_cases : becomes
+  citizen_requests |o--o{ assistance_cases : becomes
+  buildings |o--o{ assistance_cases : "trapped in"
+  missions |o--o{ assistance_cases : handles
+  facilities |o--o{ assistance_cases : "transported to"
+  assistance_cases ||--o{ case_events : logs
+  person_detections {
+    bigint id PK
+    uuid image_id FK
+    uuid track_id FK
+    numeric confidence
+    enum visibility "FULL PARTIAL HEAD_ONLY LIMBS_ONLY"
+    numeric occlusion_ratio
+    enum posture
+    point location
+    numeric location_error_m
+  }
+  person_tracks {
+    uuid id PK
+    int tracker_local_id
+    point last_position
+    enum movement_state "MOVING or STATIONARY"
+    int detection_count
+  }
+  assistance_cases {
+    uuid id PK
+    enum source "AI CITIZEN RESPONDER"
+    uuid track_id FK
+    uuid citizen_request_id FK
+    point location
+    smallint people_count
+    enum triage "IMMEDIATE DELAYED MINOR EXPECTANT"
+    enum status "DETECTED to RESCUED"
+    uuid assigned_mission_id FK
+  }
+  facilities {
+    uuid id PK
+    enum facility_type "HOSPITAL SHELTER STATION"
+    point geom
+    int capacity_available
+  }
+  case_events {
+    bigint id PK
+    uuid case_id FK
+    enum event_type
+    uuid actor_id FK
+  }
+</pre></div>
+  </div>
+</section>
+
+<!-- D4d -->
+<section id="d4d">
+  <div class="sec-head"><div class="eyebrow">Feature F5 · 6 tables</div><h2>Hazards &amp; Compound Alerts</h2></div>
+  <div class="domain">
+    <div class="notes">
+      <ul>
+        <li><code>hazards</code> keeps observed and inferred dangers apart through <code>origin</code>: AI, responder or citizen.</li>
+        <li><code>infrastructure_assets</code> holds power lines, transformers and gas pipelines, with <code>power_state</code> updated by the utility.</li>
+        <li><code>hazard_rules</code> are data: two hazard types, a distance, a buffer, and whether roads close.</li>
+        <li><code>alert_closed_segments</code> records which roads an alert closed, so they re-open when it is resolved.</li>
+      </ul>
+    </div>
+    <div class="diagram"><pre class="mermaid">
+erDiagram
+  incidents ||--o{ hazards : has
+  incidents ||--o{ infrastructure_assets : has
+  inference_runs |o--o{ hazards : detects
+  hazard_rules ||--o{ compound_alerts : fires
+  compound_alerts ||--o{ compound_alert_sources : "built from"
+  hazards |o--o{ compound_alert_sources : feeds
+  infrastructure_assets |o--o{ compound_alert_sources : feeds
+  compound_alerts ||--o{ alert_closed_segments : closes
+  road_segments ||--o{ alert_closed_segments : "closed by"
+  compound_alerts ||--o{ notifications : warns
+  hazards {
+    uuid id PK
+    enum hazard_type "FLOOD FIRE GAS COLLAPSE"
+    geometry geom
+    smallint severity
+    enum origin "AI RESPONDER CITIZEN"
+    enum status
+    jsonb attributes
+  }
+  infrastructure_assets {
+    uuid id PK
+    enum asset_type "POWER_LINE TRANSFORMER GAS_PIPELINE"
+    geometry geom
+    numeric voltage_kv
+    enum power_state "ENERGIZED DE_ENERGIZED"
+  }
+  hazard_rules {
+    uuid id PK
+    text code UK "ELECTRIFIED_WATER"
+    enum primary_hazard_type
+    text secondary_type
+    numeric max_distance_m
+    numeric danger_buffer_m
+    bool closes_roads
+  }
+  compound_alerts {
+    uuid id PK
+    uuid rule_id FK
+    polygon danger_zone
+    enum status "ACTIVE ACK RESOLVED"
+  }
+  compound_alert_sources {
+    uuid alert_id FK
+    uuid hazard_id FK "hazard OR asset"
+    uuid asset_id FK
+  }
+  alert_closed_segments {
+    uuid alert_id PK, FK
+    bigint segment_id PK, FK
+  }
+</pre></div>
+  </div>
+
+  <div class="alert-strip">
+    <strong>Electrified Water</strong>
+    <p>Floodwater within 30 m of an energized power line or transformer. One spatial query finds it.</p>
+  </div>
+<pre class="sql"><span class="kw">SELECT</span> h.id <span class="kw">AS</span> hazard_id, a.id <span class="kw">AS</span> asset_id
+<span class="kw">FROM</span> hazards h
+<span class="kw">JOIN</span> infrastructure_assets a
+  <span class="kw">ON</span> a.incident_id = h.incident_id
+ <span class="kw">AND</span> ST_DWithin(h.geom::geography, a.geom::geography, 30)
+<span class="kw">WHERE</span> h.hazard_type = <span class="str">'FLOOD_WATER'</span>
+  <span class="kw">AND</span> h.status <span class="kw">IN</span> (<span class="str">'SUSPECTED'</span>, <span class="str">'CONFIRMED'</span>)
+  <span class="kw">AND</span> a.asset_type <span class="kw">IN</span> (<span class="str">'POWER_LINE'</span>, <span class="str">'TRANSFORMER'</span>)
+  <span class="kw">AND</span> a.power_state &lt;&gt; <span class="str">'DE_ENERGIZED'</span>;</pre>
+  <div class="sec-head"><h3>Then, in one transaction</h3></div>
+  <ol class="steps">
+    <li>Insert the <code>compound_alert</code> with a buffered <code>danger_zone</code>, and its <code>compound_alert_sources</code>.</li>
+    <li>Close intersecting roads: record them in <code>alert_closed_segments</code> and set <code>cost = reverse_cost = -1</code>.</li>
+    <li>Mark active routes through those segments <code>INVALIDATED</code>, found via <code>route_segments</code>, and queue re-planning.</li>
+    <li>Notify assigned teams and every responder whose last position is inside the zone.</li>
+  </ol>
+</section>
+
+<!-- D5 -->
+<section id="d5">
+  <div class="sec-head"><div class="eyebrow">Domain D5 · 12 tables</div><h2>Field, Citizens, Reports &amp; Audit</h2></div>
+  <div class="domain">
+    <div class="notes">
+      <ul>
+        <li><code>responder_positions</code> is partitioned by month, with a BRIN index on time. The live map reads only <code>responder_last_positions</code> (one row per user, upserted).</li>
+        <li>Citizens sign in by phone OTP and store minimal personal data. Requests are auto-matched to an incident with <code>ST_Contains(incidents.area, location)</code>, de-duplicated, then verified by an analyst.</li>
+        <li>Reports freeze their numbers in <code>stats_snapshot</code> and go DRAFT → APPROVED → PUBLISHED.</li>
+        <li>Similar past cases: <code>vector(768)</code> DINOv2 embeddings with an HNSW cosine index.</li>
+      </ul>
+    </div>
+    <div class="diagram"><pre class="mermaid">
+erDiagram
+  users ||--o{ responder_positions : pings
+  users ||--|| responder_last_positions : "latest fix"
+  users ||--o{ sos_alerts : raises
+  citizens ||--o{ citizen_requests : submits
+  citizen_requests |o--o{ citizen_requests : "duplicate of"
+  citizen_requests ||--o{ citizen_request_media : attaches
+  media_files ||--o{ citizen_request_media : "in"
+  users ||--o{ notifications : receives
+  incidents ||--o{ reports : "summarized in"
+  reports ||--o{ report_shares : "shared with"
+  agencies ||--o{ report_shares : sees
+  ai_models ||--o{ image_embeddings : encodes
+  users |o--o{ audit_log : performs
+  responder_positions {
+    bigint id PK
+    timestamptz recorded_at PK "partition key"
+    uuid user_id FK
+    point geom
+    numeric accuracy_m
+  }
+  responder_last_positions {
+    uuid user_id PK, FK
+    point geom
+    timestamptz recorded_at
+  }
+  sos_alerts {
+    uuid id PK
+    uuid user_id FK
+    point location
+    enum status "TRIGGERED ACK RESOLVED"
+  }
+  citizens {
+    uuid id PK
+    text phone UK
+    bool is_blocked
+  }
+  citizen_requests {
+    uuid id PK
+    uuid citizen_id FK
+    uuid incident_id FK
+    enum request_type "TRAPPED INJURED HAZARD"
+    point location
+    enum status "RECEIVED to CONVERTED"
+    uuid duplicate_of_id FK
+  }
+  media_files {
+    uuid id PK
+    text storage_key
+    text sha256
+  }
+  citizen_request_media {
+    uuid request_id PK, FK
+    uuid media_id PK, FK
+  }
+  notifications {
+    uuid id PK
+    uuid user_id FK
+    enum kind
+    uuid alert_id FK
+    timestamptz read_at
+  }
+  reports {
+    uuid id PK
+    uuid incident_id FK
+    enum report_type
+    enum status "DRAFT to PUBLISHED"
+    jsonb stats_snapshot
+  }
+  report_shares {
+    uuid report_id PK, FK
+    uuid agency_id PK, FK
+  }
+  image_embeddings {
+    uuid id PK
+    uuid model_id FK
+    vector embedding "768 dims HNSW"
+  }
+  audit_log {
+    bigint id PK
+    timestamptz created_at PK
+    text entity_table
+    jsonb before
+    jsonb after
+  }
+</pre></div>
+  </div>
+</section>
+
+<!-- CONVENTIONS -->
+<section id="conventions">
+  <div class="sec-head"><div class="eyebrow">Applied everywhere</div><h2>Conventions</h2></div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Concern</th><th>Mechanism</th></tr></thead>
+      <tbody>
+        <tr><td>Keys</td><td>UUID v7 for business entities, which the offline mobile app can generate. <code>bigint</code> for high-volume tables and the pgRouting graph.</td></tr>
+        <tr><td>Spatial</td><td>SRID 4326 everywhere. GiST on every geometry. Metres via <code>ST_DWithin(a::geography, b::geography, m)</code>, never <code>ST_Distance &lt; x</code>.</td></tr>
+        <tr><td>Volume</td><td>Monthly partitions plus BRIN for GPS and audit. Cache tables for live views.</td></tr>
+        <tr><td>Provenance</td><td><code>inference_run_id</code> + <code>confidence</code> on every AI row. A human <code>review_status</code> or <code>verified_by</code> alongside.</td></tr>
+        <tr><td>Exactly one source</td><td><code>CHECK (num_nonnulls(...) = 1)</code> on observations, hazards, assignments and alert sources.</td></tr>
+        <tr><td>Current + history</td><td>Fast current-state columns, plus append-only history tables for the full timeline.</td></tr>
+        <tr><td>Vocabularies</td><td>Postgres enums for fixed statuses. Lookup tables for anything an agency may edit: roles, rules, cost profiles.</td></tr>
+        <tr><td>Access</td><td>An agency sees an incident only with an ACTIVE <code>incident_agencies</code> row. Enforced in the API, optionally with Row-Level Security.</td></tr>
+        <tr><td>Files</td><td>MinIO object storage. Postgres keeps <code>storage_key</code>, <code>sha256</code> and metadata.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>Rescue Vision · Platform data model, design approved 23 Nov 2026 · Full column list in the design spec in the repository.</footer>
+</div>
