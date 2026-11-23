@@ -50,13 +50,13 @@ The Project I guide asks for a merged requirements/design report [1]. The Word t
 | Report part | What belongs there | Owner |
 |---|---|---|
 | Front matter | Cover, declaration, acknowledgments, abstract, contents, lists of figures/tables and abbreviations; optional dedication. | P6; P1 summary |
-| Introduction | Problem, background, motivation, proposed project, objectives, scope and report organization. | P1 |
-| Literature Review and Background | Research themes, related studies and systems, comparisons, market/use context, and the gap the proposal addresses. | P2 + all |
-| System Description / Proposed Work | A plain-language account of the proposed approach, users, main features, assumptions and boundaries. | P3 |
-| User and System Requirements | Numbered requirements, interface descriptions, use cases and quality expectations. | P4 |
-| System Design | Conceptual diagrams, design choices, information relationships, screen illustrations and explanations. | P5 |
-| System Prototype | Describe and label genuine preliminary material already available; explain its relevance and limits. | P6; all supply |
-| Discussion, Conclusion and Future Work | Explain the proposal's value, evidence limits, objectives addressed, and remaining work. | P6 + P1 |
+| Chapter 1 Introduction | Problem, background, motivation, proposed project, objectives, scope and report organization. | P1 |
+| Chapter 2 Literature Review and Background | Research themes, related studies and systems, comparisons, market/use context, and the gap the proposal addresses. | P2 + all |
+| Chapter 3 Methodology and Proposed Work, Section 3.1 System Description | A plain-language account of the proposed approach, users, main features, assumptions and boundaries. | P3 |
+| Chapter 3, Section 3.2 User and System Requirements | Numbered requirements, interface descriptions, use cases and quality expectations. | P4 |
+| Chapter 3, Section 3.3 System Design | Conceptual diagrams, design choices, information relationships, screen illustrations and explanations. | P5 |
+| Chapter 4 System Prototype | Describe and label genuine preliminary material already available; explain its relevance and limits. | P6; all supply |
+| Chapter 5 Discussion, Conclusion and Future Work | Explain the proposal's value, evidence limits, objectives addressed, and remaining work. | P6 + P1 |
 | References and Appendices | Numbered bibliography; extended tables, glossary, review notes and supplementary report figures. | P2/P6 |
 
 > The Word template labels one chapter **Implementation and Testing / Experiments and Results**. For this assignment, the team prepares the written section and any available evidence; it does not perform development work. Confirm the appropriate Project I heading and depth with the supervisor.

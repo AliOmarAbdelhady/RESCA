@@ -15,33 +15,34 @@ Use the [team documentation plan](docs/team-plan/documentation-work-plan.md) for
 
 ### Report versions
 
-- [Selection](<docs/Documention/selection/Project 1 Docs — Skeleton (Marwan draft).docx>) has the seven project chapters, including Chapter 6 System Prototype and Chapter 7 Discussion, Conclusion and Future Work. Most sections contain author prompts and figure placeholders. The original Selection snapshot is in commit `dac7162`.
-- [Main](<docs/Documention/main/Project 1 Docs.docx>) is the merged local working draft. It combines Selection's seven-chapter structure with Main's authored Chapter 1, eight tables, and five numbered references. The previous Main snapshot is in commit `dac7162`.
+- [Selection](<docs/Documention/selection/Project 1 Docs — Skeleton (Marwan draft).docx>) is the five-chapter outline with author prompts and figure placeholders. Its Chapter 2 points to Bela's merged draft in Main. The original Selection snapshot is in commit `dac7162`.
+- [Main](<docs/Documention/main/Project 1 Docs.docx>) is the merged working draft. It contains the authored Chapter 1, Bela's Chapter 2 literature review, Mahmoud's requirements in Section 3.2, Mesbah's Chapter 4 prototype draft, and supporting material in Appendices C and D.
 - Use the same margins as page 1 throughout the working report, including equal 2.54 cm left and right margins. Keep the declaration signatures in one two-column table.
 - Each DOCX has an editable `.source/` folder beside it. Edit `package/word/document.xml` for content or `package/word/styles.xml` for styles, then run `python3 docs/Documention/build_docx.py build "<path to DOCX>"`. After editing directly in Word, run the same command with `extract` to refresh the corresponding source package.
-- The System Prototype chapter still needs prose, figures, captions, and citations. Refresh the contents and caption lists in Word after editing and before exporting the submission PDF.
+- Chapter 4 has six evidence figures, two tables, the Maxar Open Data citation, and links to Mahmoud's draft requirement IDs. Refresh the contents and caption lists in Word after editing and before exporting the submission PDF.
+- Keep empty bordered boxes above the captions for pending screenshots and diagrams. Replace the corresponding box paragraph when the actual visual is ready.
 
 ## Team and report ownership
 
-Team roster: Mesbah, Mahmoud, Ali, Bela, Yassin, and Youssef. Mesbah is confirmed as Person 6 by the owner line in his plan. The names for Persons 1–5 still need team confirmation.
+Team roster: Mesbah, Mahmoud, Ali, Bela, Yassin, and Youssef. Mesbah is Person 6. Bela is Person 2 and Mahmoud is Person 4, as confirmed by Mesbah. The owners of Persons 1, 3, and 5 still need team confirmation. Person numbers identify writing assignments. Chapter numbers follow the university report outline.
 
 | Person | Confirmed owner | Report responsibility | Reviewed by |
 | --- | --- | --- | --- |
 | 1 | Pending | Introduction, objectives, scope, glossary, and constraints. Co-writes the closing sections with Mesbah. | Person 5 |
-| 2 | Pending | Literature review, related systems, research gap, and references. Coordinates appendices and citations with Mesbah. | Mesbah |
-| 3 | Pending | System description, proposed workflow, user roles, assumptions, and limitations. | Person 1 |
-| 4 | Pending | Functional and quality requirements, interfaces, and written use cases. | Person 3 |
-| 5 | Pending | System design chapter, diagrams, design rationale, and screen illustrations. | Person 4 |
-| 6 | Mesbah (Marwan Mesbah) | System Prototype chapter, front matter, closing sections with Person 1, and final report assembly and review. | Person 2 |
+| 2 | Bela | Chapter 2 Literature Review and Background, including related systems, the research gap, and references. Coordinates appendices and citations with Mesbah. | Mesbah |
+| 3 | Pending | Section 3.1 System Description, including workflow, user roles, assumptions, and limitations. | Person 1 |
+| 4 | Mahmoud | Section 3.2 User and System Requirements, including functional and quality requirements, interfaces, written use cases, and traceability. | Person 3 |
+| 5 | Pending | Section 3.3 System Design, including diagrams, design rationale, and screen illustrations. | Person 4 |
+| 6 | Mesbah (Marwan Mesbah) | Chapter 4 System Prototype, front matter, Chapter 5 with Person 1, and final report assembly and review. | Person 2 |
 
-### Contributions verified in Git
+### Contributions and evidence
 
 | Teammate | Contribution or current evidence |
 | --- | --- |
 | Mesbah | Authored the mapping prototype and research notes (`f0b600f`), then the Person 6 plan and six prototype figures (`03b3fb0`). Git records his name as `Marwan` and `Marwan Mesbah`. |
 | Ali | Authored the six-person documentation work plan (`22bc575`) and merged the mapping branch into `main` (`6bb10b4`). Git records his name as `AliOmarAbdelhady`. His assigned report section is pending confirmation. |
-| Mahmoud | No commits attributable to this name in the visible history. |
-| Bela | No commits attributable to this name in the visible history. |
+| Mahmoud | Authored the 23 November 2026 requirements draft, `RescueVision_Person4_Requirements_SRS_Section3.pdf`, as confirmed by Mesbah. The PDF is stored locally for reference. |
+| Bela | Authored the [ranked paper list](docs/research_papers.md) and [Tier 1 summaries](docs/tier1_papers_summary.md) as `Mohamed Belal` (`c327c26`, `b7c0b68`). Main integrates the seven core studies into Chapter 2 and records all 28 ranked papers in Appendix D. The classifier configuration uses DINOv2. Chapter 2 describes DINOv3 as an evaluation candidate. |
 | Yassin | No commits attributable to this name in the visible history. |
 | Youssef | No commits attributable to this name in the visible history. |
 
@@ -49,7 +50,7 @@ History checked through `origin/main` at `22bc575` and `origin/feature/mapping-r
 
 ## Person 6 progress
 
-The repository has the plan, prototype evidence, and a merged editable Main draft. The finished prototype chapter and submission PDF have yet to be produced.
+The repository has the plan, prototype evidence, and a merged editable Main draft with a prototype chapter ready for review. The submission PDF remains pending.
 
 - [x] Commit the 2D satellite mapping prototype (`f0b600f`).
 - [x] Commit the Person 6 plan and six [prototype figures](docs/team-plan/figures/) (`03b3fb0`).
@@ -58,7 +59,13 @@ The repository has the plan, prototype evidence, and a merged editable Main draf
 
 - [x] Merge the Word reports into one editable Main draft with heading styles and contents and figure/table fields.
 - [ ] Check the editable draft against the university requirements guide and complete the abbreviations list.
-- [ ] Draft the System Prototype chapter using the existing figures. Explain its purpose, imagery and study area, 2D map and comparison views, data preparation, and limitations. Add captions and imagery credits, refer to each figure in the text, and add requirement IDs once Person 4 supplies them.
+- [x] Draft the System Prototype chapter using the existing figures, captions, imagery credits, and an evidence coverage table.
+- [x] Link Chapter 4's dated imagery, 2D map, and comparison evidence to the relevant IDs in Person 4's 23 November 2026 SRS draft.
+- [ ] Confirm Chapter 4 scope and terminology with Persons 1 and 3, verify the IDs against Person 4's approved version, and have Person 2 check the evidence claims and citations.
+- [x] Merge Mahmoud's requirements into Main as Section 3.2. Keep the original requirement and use-case IDs, map the working goals to the Chapter 1 objectives, and place the SWOT analysis in Appendix C.
+- [x] Merge Bela's literature review into Chapter 2, verify the cited core studies against the original sources, and consolidate references in first-citation order.
+- [ ] Review Chapter 2 with Bela. Collect evidence on comparable operational tools and adopters if a market assessment is required.
+- [ ] Review the provisional nonfunctional targets, hazard rule distances, and bilingual interface scope with the team and supervisor. Confirm the role wording in Section 3.1.3 against Table 3-5 and have Person 2 verify the consolidated references.
 - [ ] Draft the cover, declaration, and acknowledgments. Confirm the official project and institution details and collect the team details and signatures required by the template.
 - [ ] Start a contribution record and an open-items list. Track supervisor decisions on chapter order, expected prototype depth, abstract length, page minimum, and submission files.
 

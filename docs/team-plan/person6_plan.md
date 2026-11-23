@@ -69,7 +69,7 @@ Rule from the plan: *show only genuine material, say what it demonstrates and wh
 5. Limitations of the prototype evidence
 6. Next prototype steps (replace pixel-change overlay with model output, compute real routes, add 3D, etc.), which feed into Future Work
 
-Figure numbering: chapter-hyphen (e.g. Figure 6-1). Caption below the figure, bold 10 pt, centred. Every figure must be mentioned in the text.
+Number figures by chapter, as in Figure 4-1 for the first prototype figure. Place captions below the figure in centred, bold 10 pt type. Refer to every figure in the text.
 
 ---
 

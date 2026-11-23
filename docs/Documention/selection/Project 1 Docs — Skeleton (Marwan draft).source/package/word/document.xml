@@ -1687,7 +1687,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P6 · Abstract: problem, proposed solution, scope and contribution in about 200 words. Write last, after Chapters 1-7 are stable. Status: WAITING]</w:t>
+        <w:t xml:space="preserve">[P6 · Abstract: problem, proposed solution, scope and contribution in about 200 words. Write last, after Chapters 1-5 are stable. Status: WAITING]</w:t>
       </w:r>
       <w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000">
         <w:rPr>
@@ -1786,7 +1786,7 @@
               <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" w:cs="Times New Roman"/>
               <w:sz w:val="24"/>
             </w:rPr>
-            <w:t>3. SYSTEM DESCRIPTION</w:t>
+            <w:t>3. METHODOLOGY AND PROPOSED WORK</w:t>
             <w:tab/>
             <w:t>6</w:t>
           </w:r>
@@ -1803,9 +1803,9 @@
               <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" w:cs="Times New Roman"/>
               <w:sz w:val="24"/>
             </w:rPr>
-            <w:t>4. USER AND SYSTEM REQUIREMENTS</w:t>
+            <w:t>4. SYSTEM PROTOTYPE</w:t>
             <w:tab/>
-            <w:t>8</w:t>
+            <w:t>14</w:t>
           </w:r>
         </w:p>
         <w:p>
@@ -1820,58 +1820,7 @@
               <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" w:cs="Times New Roman"/>
               <w:sz w:val="24"/>
             </w:rPr>
-            <w:t>5. SYSTEM DESIGN</w:t>
-            <w:tab/>
-            <w:t>11</w:t>
-          </w:r>
-        </w:p>
-        <w:p>
-          <w:pPr>
-            <w:tabs>
-              <w:tab w:val="right" w:leader="dot" w:pos="8900"/>
-            </w:tabs>
-            <w:spacing w:before="0" w:after="100" w:line="240" w:lineRule="auto"/>
-          </w:pPr>
-          <w:r>
-            <w:rPr>
-              <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" w:cs="Times New Roman"/>
-              <w:sz w:val="24"/>
-            </w:rPr>
-            <w:t>6. SYSTEM PROTOTYPE</w:t>
-            <w:tab/>
-            <w:t>13</w:t>
-          </w:r>
-        </w:p>
-        <w:p>
-          <w:pPr>
-            <w:tabs>
-              <w:tab w:val="right" w:leader="dot" w:pos="8900"/>
-            </w:tabs>
-            <w:spacing w:before="0" w:after="100" w:line="240" w:lineRule="auto"/>
-          </w:pPr>
-          <w:r>
-            <w:rPr>
-              <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" w:cs="Times New Roman"/>
-              <w:sz w:val="24"/>
-            </w:rPr>
-            <w:t>7. DISCUSSION, CONCLUSION AND FUTURE WORK</w:t>
-            <w:tab/>
-            <w:t>15</w:t>
-          </w:r>
-        </w:p>
-        <w:p>
-          <w:pPr>
-            <w:tabs>
-              <w:tab w:val="right" w:leader="dot" w:pos="8900"/>
-            </w:tabs>
-            <w:spacing w:before="0" w:after="100" w:line="240" w:lineRule="auto"/>
-          </w:pPr>
-          <w:r>
-            <w:rPr>
-              <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" w:cs="Times New Roman"/>
-              <w:sz w:val="24"/>
-            </w:rPr>
-            <w:t>REFERENCES</w:t>
+            <w:t>5. DISCUSSION, CONCLUSION AND FUTURE WORK</w:t>
             <w:tab/>
             <w:t>16</w:t>
           </w:r>
@@ -1888,9 +1837,26 @@
               <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" w:cs="Times New Roman"/>
               <w:sz w:val="24"/>
             </w:rPr>
-            <w:t>APPENDICES</w:t>
+            <w:t>REFERENCES</w:t>
             <w:tab/>
             <w:t>17</w:t>
+          </w:r>
+        </w:p>
+        <w:p>
+          <w:pPr>
+            <w:tabs>
+              <w:tab w:val="right" w:leader="dot" w:pos="8900"/>
+            </w:tabs>
+            <w:spacing w:before="0" w:after="100" w:line="240" w:lineRule="auto"/>
+          </w:pPr>
+          <w:r>
+            <w:rPr>
+              <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="Times New Roman" w:cs="Times New Roman"/>
+              <w:sz w:val="24"/>
+            </w:rPr>
+            <w:t>APPENDICES</w:t>
+            <w:tab/>
+            <w:t>18</w:t>
           </w:r>
           <w:r>
             <w:fldChar w:fldCharType="end"/>
@@ -3222,7 +3188,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P2 + all · Short introduction: the review questions and how the chapter is organized. Status: NOT STARTED]</w:t>
+        <w:t xml:space="preserve">[P2 · Bela’s literature review is drafted in Main. Main includes the review method, model and dataset comparisons, and the ranked shortlist in Appendix D. Status: DRAFT MERGED IN MAIN]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000083">
@@ -3280,7 +3246,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P2 · Search terms, databases, date range and selection criteria. Status: NOT STARTED]</w:t>
+        <w:t xml:space="preserve">[P2 · Search terms, databases, date range and selection criteria. Status: DRAFT MERGED IN MAIN]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000085">
@@ -3338,7 +3304,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P2 · Theme review: compare several sources, state agreements, differences and what it means for RescueVision. Status: NOT STARTED]</w:t>
+        <w:t xml:space="preserve">[P2 · Theme review: compare several sources, state agreements, differences and what it means for RescueVision. Status: DRAFT MERGED IN MAIN]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000087">
@@ -3396,7 +3362,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P2 · Theme review, same pattern as above. Status: NOT STARTED]</w:t>
+        <w:t xml:space="preserve">[P2 · Theme review, same pattern as above. Status: DRAFT MERGED IN MAIN]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000089">
@@ -3454,7 +3420,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P2 · Theme review, same pattern as above. Status: NOT STARTED]</w:t>
+        <w:t xml:space="preserve">[P2 · Theme review, same pattern as above. Status: DRAFT MERGED IN MAIN]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="0000008B">
@@ -3512,7 +3478,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P2 · Theme review: how hazards affect access and route choice. Status: NOT STARTED]</w:t>
+        <w:t xml:space="preserve">[P2 · Theme review: how hazards affect access and route choice. Status: DRAFT MERGED IN MAIN]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="0000008D">
@@ -3570,7 +3536,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P2 · Theme review, same pattern as above. Status: NOT STARTED]</w:t>
+        <w:t xml:space="preserve">[P2 · Theme review, same pattern as above. Status: DRAFT MERGED IN MAIN]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="0000008F">
@@ -3628,7 +3594,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P2 · Comparable systems and commercial tools. Mark unknown information as not established by the source. Status: NOT STARTED]</w:t>
+        <w:t xml:space="preserve">[P2 · Main compares disaster imagery resources. A market assessment would require evidence on operational tools and adopters. Status: PARTIAL DRAFT IN MAIN]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000091">
@@ -3656,7 +3622,7 @@
           <w:szCs w:val="24"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Table 2-1: Comparison of related systems. [P2 · table goes below · columns: System | Purpose | Intended users | Relevant capabilities | Documented limitations | Source]</w:t>
+        <w:t xml:space="preserve">Table 2-1: Disaster imagery resources and their uses. [P2 · Drafted in Main]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000092">
@@ -3684,7 +3650,7 @@
           <w:szCs w:val="24"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Table 2-2: Summary of reviewed studies. [P2 · table goes below · columns: Study | Aim | Approach | Findings | Limitations | Relevance]</w:t>
+        <w:t xml:space="preserve">Table 2-2: Core studies and applicability to RescueVision. [P2 · Drafted in Main]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000093">
@@ -3742,7 +3708,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P2 · The supported gap that justifies RescueVision. No claim that it is unique or better than every system. Status: NOT STARTED]</w:t>
+        <w:t xml:space="preserve">[P2 · The supported gap that justifies RescueVision. No claim that it is unique or better than every system. Status: DRAFT MERGED IN MAIN]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000095">
@@ -3803,7 +3769,33 @@
           <w:szCs w:val="32"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">SYSTEM DESCRIPTION</w:t>
+        <w:t xml:space="preserve">METHODOLOGY AND PROPOSED WORK</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000">
+      <w:pPr>
+        <w:pStyle w:val="Heading2"/>
+        <w:keepNext w:val="1"/>
+        <w:spacing w:after="720" w:before="240" w:line="240" w:lineRule="auto"/>
+        <w:jc w:val="center"/>
+        <w:rPr>
+          <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
+          <w:b w:val="1"/>
+          <w:bCs w:val="1"/>
+          <w:sz w:val="28"/>
+          <w:szCs w:val="28"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000">
+        <w:rPr>
+          <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
+          <w:b w:val="1"/>
+          <w:bCs w:val="1"/>
+          <w:sz w:val="28"/>
+          <w:szCs w:val="28"/>
+          <w:rtl w:val="0"/>
+        </w:rPr>
+        <w:t xml:space="preserve">3.1 SYSTEM DESCRIPTION</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000097">
@@ -3829,18 +3821,13 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P3 · Short chapter introduction. Status: NOT STARTED]</w:t>
+        <w:t xml:space="preserve">[P3 · Short section introduction. Status: NOT STARTED]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000098">
       <w:pPr>
-        <w:pStyle w:val="Heading2"/>
-        <w:numPr>
-          <w:ilvl w:val="1"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading3"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="580" w:hanging="580"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -3861,7 +3848,7 @@
           <w:szCs w:val="28"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">SYSTEM OVERVIEW</w:t>
+        <w:t xml:space="preserve">3.1.1 SYSTEM OVERVIEW</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000099">
@@ -3890,7 +3877,7 @@
         <w:t xml:space="preserve">[P3 · What the platform is for and how a user moves from viewing an affected area to coordinating assistance. Status: NOT STARTED]</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="0000009A">
+    <w:p><w:pPr><w:keepNext/><w:keepLines/><w:pBdr><w:top w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:left w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:bottom w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:right w:val="single" w:sz="6" w:space="0" w:color="808080"/></w:pBdr><w:spacing w:before="150" w:after="95" w:line="1800" w:lineRule="exact"/><w:ind w:left="1500" w:right="1500"/></w:pPr></w:p><w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="0000009A">
       <w:pPr>
         <w:keepNext w:val="0"/>
         <w:keepLines w:val="0"/>
@@ -3920,13 +3907,8 @@
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="0000009B">
       <w:pPr>
-        <w:pStyle w:val="Heading2"/>
-        <w:numPr>
-          <w:ilvl w:val="1"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading3"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="580" w:hanging="580"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -3947,7 +3929,7 @@
           <w:szCs w:val="28"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">METHODOLOGY</w:t>
+        <w:t xml:space="preserve">3.1.2 METHODOLOGY</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="0000009C">
@@ -3978,13 +3960,8 @@
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="0000009D">
       <w:pPr>
-        <w:pStyle w:val="Heading2"/>
-        <w:numPr>
-          <w:ilvl w:val="1"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading3"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="580" w:hanging="580"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -4005,7 +3982,7 @@
           <w:szCs w:val="28"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">USER REQUIREMENTS AND SYSTEM PRIVILEGES</w:t>
+        <w:t xml:space="preserve">3.1.3 USER REQUIREMENTS AND SYSTEM PRIVILEGES</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="0000009E">
@@ -4092,13 +4069,8 @@
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000A1">
       <w:pPr>
-        <w:pStyle w:val="Heading2"/>
-        <w:numPr>
-          <w:ilvl w:val="1"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading3"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="580" w:hanging="580"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -4119,7 +4091,7 @@
           <w:szCs w:val="28"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">ASSUMPTIONS, CONSTRAINTS, LIMITATIONS AND DEPENDENCIES</w:t>
+        <w:t xml:space="preserve">3.1.4 ASSUMPTIONS, CONSTRAINTS, LIMITATIONS AND DEPENDENCIES</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000A2">
@@ -4150,13 +4122,8 @@
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000A3">
       <w:pPr>
-        <w:pStyle w:val="Heading3"/>
-        <w:numPr>
-          <w:ilvl w:val="2"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading4"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="900" w:hanging="700"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -4175,7 +4142,7 @@
           <w:color w:val="000000"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Assumptions</w:t>
+        <w:t xml:space="preserve">3.1.4.1 Assumptions</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000A4">
@@ -4206,13 +4173,8 @@
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000A5">
       <w:pPr>
-        <w:pStyle w:val="Heading3"/>
-        <w:numPr>
-          <w:ilvl w:val="2"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading4"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="900" w:hanging="700"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -4231,7 +4193,7 @@
           <w:color w:val="000000"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Constraints</w:t>
+        <w:t xml:space="preserve">3.1.4.2 Constraints</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000A6">
@@ -4262,13 +4224,8 @@
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000A7">
       <w:pPr>
-        <w:pStyle w:val="Heading3"/>
-        <w:numPr>
-          <w:ilvl w:val="2"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading4"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="900" w:hanging="700"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -4287,7 +4244,7 @@
           <w:color w:val="000000"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Limitations</w:t>
+        <w:t xml:space="preserve">3.1.4.3 Limitations</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000A8">
@@ -4318,13 +4275,8 @@
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000A9">
       <w:pPr>
-        <w:pStyle w:val="Heading3"/>
-        <w:numPr>
-          <w:ilvl w:val="2"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading4"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="900" w:hanging="700"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -4343,7 +4295,7 @@
           <w:color w:val="000000"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Dependencies</w:t>
+        <w:t xml:space="preserve">3.1.4.4 Dependencies</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000AA">
@@ -4374,13 +4326,8 @@
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000AB">
       <w:pPr>
-        <w:pStyle w:val="Heading2"/>
-        <w:numPr>
-          <w:ilvl w:val="1"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading3"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="580" w:hanging="580"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -4401,7 +4348,7 @@
           <w:szCs w:val="28"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">INTENDED TECHNOLOGIES</w:t>
+        <w:t xml:space="preserve">3.1.5 INTENDED TECHNOLOGIES</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000AC">
@@ -4430,51 +4377,18 @@
         <w:t xml:space="preserve">[P3 · SRS 2.4 · Brief agreed description of the intended website, mobile application and mapping environment. Status: NOT STARTED]</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000AD">
-      <w:pPr>
-        <w:keepNext w:val="1"/>
-        <w:keepLines w:val="0"/>
-        <w:pageBreakBefore w:val="1"/>
-        <w:spacing w:after="480" w:before="0" w:line="240" w:lineRule="auto"/>
-        <w:ind w:left="0" w:firstLine="0"/>
-        <w:jc w:val="center"/>
-        <w:rPr>
-          <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
-          <w:i w:val="1"/>
-          <w:iCs w:val="1"/>
-          <w:sz w:val="28"/>
-          <w:szCs w:val="28"/>
-        </w:rPr>
-      </w:pPr>
-      <w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000">
-        <w:rPr>
-          <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
-          <w:i w:val="1"/>
-          <w:iCs w:val="1"/>
-          <w:sz w:val="28"/>
-          <w:szCs w:val="28"/>
-          <w:rtl w:val="0"/>
-        </w:rPr>
-        <w:t xml:space="preserve">Chapter Four</w:t>
-      </w:r>
-    </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000AE">
       <w:pPr>
-        <w:pStyle w:val="Heading1"/>
+        <w:pStyle w:val="Heading2"/>
         <w:keepNext w:val="1"/>
-        <w:numPr>
-          <w:ilvl w:val="0"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
         <w:spacing w:after="720" w:before="240" w:line="240" w:lineRule="auto"/>
-        <w:ind w:left="720" w:hanging="720"/>
         <w:jc w:val="center"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
           <w:b w:val="1"/>
           <w:bCs w:val="1"/>
-          <w:sz w:val="32"/>
-          <w:szCs w:val="32"/>
+          <w:sz w:val="28"/>
+          <w:szCs w:val="28"/>
         </w:rPr>
       </w:pPr>
       <w:bookmarkStart w:colFirst="0" w:colLast="0" w:name="_ypicv5ca0u15" w:id="34"/>
@@ -4484,11 +4398,11 @@
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
           <w:b w:val="1"/>
           <w:bCs w:val="1"/>
-          <w:sz w:val="32"/>
-          <w:szCs w:val="32"/>
+          <w:sz w:val="28"/>
+          <w:szCs w:val="28"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">USER AND SYSTEM REQUIREMENTS</w:t>
+        <w:t xml:space="preserve">3.2 USER AND SYSTEM REQUIREMENTS</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000AF">
@@ -4514,18 +4428,13 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P4 · Short chapter introduction. Status: NOT STARTED]</w:t>
+        <w:t xml:space="preserve">[P4 · Short section introduction. Status: NOT STARTED]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000B0">
       <w:pPr>
-        <w:pStyle w:val="Heading2"/>
-        <w:numPr>
-          <w:ilvl w:val="1"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading3"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="580" w:hanging="580"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -4546,7 +4455,7 @@
           <w:szCs w:val="28"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">FUNCTIONAL REQUIREMENTS</w:t>
+        <w:t xml:space="preserve">3.2.1 FUNCTIONAL REQUIREMENTS</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000B1">
@@ -4600,18 +4509,13 @@
           <w:szCs w:val="24"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Table 4-1: Functional requirements. [P4 · table goes below · columns: ID (FR-xx) | Requirement | User | Priority | How it can be checked]</w:t>
+        <w:t xml:space="preserve">Table 3-3: Functional requirements. [P4 · table goes below · columns: ID (FR-xx) | Requirement | User | Priority | How it can be checked]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000B3">
       <w:pPr>
-        <w:pStyle w:val="Heading2"/>
-        <w:numPr>
-          <w:ilvl w:val="1"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading3"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="580" w:hanging="580"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -4632,7 +4536,7 @@
           <w:szCs w:val="28"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">EXTERNAL INTERFACE REQUIREMENTS</w:t>
+        <w:t xml:space="preserve">3.2.2 EXTERNAL INTERFACE REQUIREMENTS</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000B4">
@@ -4663,13 +4567,8 @@
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000B5">
       <w:pPr>
-        <w:pStyle w:val="Heading3"/>
-        <w:numPr>
-          <w:ilvl w:val="2"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading4"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="900" w:hanging="700"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -4688,7 +4587,7 @@
           <w:color w:val="000000"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">User Interfaces</w:t>
+        <w:t xml:space="preserve">3.2.2.1 User Interfaces</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000B6">
@@ -4719,13 +4618,8 @@
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000B7">
       <w:pPr>
-        <w:pStyle w:val="Heading3"/>
-        <w:numPr>
-          <w:ilvl w:val="2"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading4"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="900" w:hanging="700"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -4744,7 +4638,7 @@
           <w:color w:val="000000"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Hardware Interfaces</w:t>
+        <w:t xml:space="preserve">3.2.2.2 Hardware Interfaces</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000B8">
@@ -4775,13 +4669,8 @@
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000B9">
       <w:pPr>
-        <w:pStyle w:val="Heading3"/>
-        <w:numPr>
-          <w:ilvl w:val="2"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading4"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="900" w:hanging="700"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -4800,7 +4689,7 @@
           <w:color w:val="000000"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Software Interfaces</w:t>
+        <w:t xml:space="preserve">3.2.2.3 Software Interfaces</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000BA">
@@ -4831,13 +4720,8 @@
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000BB">
       <w:pPr>
-        <w:pStyle w:val="Heading3"/>
-        <w:numPr>
-          <w:ilvl w:val="2"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading4"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="900" w:hanging="700"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -4856,7 +4740,7 @@
           <w:color w:val="000000"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Communications Interfaces</w:t>
+        <w:t xml:space="preserve">3.2.2.4 Communications Interfaces</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000BC">
@@ -4887,13 +4771,8 @@
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000BD">
       <w:pPr>
-        <w:pStyle w:val="Heading2"/>
-        <w:numPr>
-          <w:ilvl w:val="1"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading3"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="580" w:hanging="580"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -4914,7 +4793,7 @@
           <w:szCs w:val="28"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">SYSTEM FEATURES AND USE CASES</w:t>
+        <w:t xml:space="preserve">3.2.3 SYSTEM FEATURES AND USE CASES</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000BE">
@@ -4945,13 +4824,8 @@
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000BF">
       <w:pPr>
-        <w:pStyle w:val="Heading3"/>
-        <w:numPr>
-          <w:ilvl w:val="2"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading4"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="900" w:hanging="700"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -4970,7 +4844,7 @@
           <w:color w:val="000000"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">View the Affected Area in 2D and 3D</w:t>
+        <w:t xml:space="preserve">3.2.3.1 View the Affected Area in 2D and 3D</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000C0">
@@ -5001,13 +4875,8 @@
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000C1">
       <w:pPr>
-        <w:pStyle w:val="Heading3"/>
-        <w:numPr>
-          <w:ilvl w:val="2"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading4"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="900" w:hanging="700"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -5026,7 +4895,7 @@
           <w:color w:val="000000"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Examine a Person or Hazard Marker</w:t>
+        <w:t xml:space="preserve">3.2.3.2 Examine a Person or Hazard Marker</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000C2">
@@ -5057,13 +4926,8 @@
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000C3">
       <w:pPr>
-        <w:pStyle w:val="Heading3"/>
-        <w:numPr>
-          <w:ilvl w:val="2"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading4"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="900" w:hanging="700"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -5082,7 +4946,7 @@
           <w:color w:val="000000"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Review Person-Tracking Information</w:t>
+        <w:t xml:space="preserve">3.2.3.3 Review Person-Tracking Information</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000C4">
@@ -5113,13 +4977,8 @@
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000C5">
       <w:pPr>
-        <w:pStyle w:val="Heading3"/>
-        <w:numPr>
-          <w:ilvl w:val="2"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading4"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="900" w:hanging="700"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -5138,7 +4997,7 @@
           <w:color w:val="000000"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Confirm an Assistance Need</w:t>
+        <w:t xml:space="preserve">3.2.3.4 Confirm an Assistance Need</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000C6">
@@ -5169,13 +5028,8 @@
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000C7">
       <w:pPr>
-        <w:pStyle w:val="Heading3"/>
-        <w:numPr>
-          <w:ilvl w:val="2"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading4"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="900" w:hanging="700"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -5194,7 +5048,7 @@
           <w:color w:val="000000"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Coordinate a Response</w:t>
+        <w:t xml:space="preserve">3.2.3.5 Coordinate a Response</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000C8">
@@ -5225,13 +5079,8 @@
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000C9">
       <w:pPr>
-        <w:pStyle w:val="Heading3"/>
-        <w:numPr>
-          <w:ilvl w:val="2"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading4"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="900" w:hanging="700"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -5250,7 +5099,7 @@
           <w:color w:val="000000"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">View Route Guidance</w:t>
+        <w:t xml:space="preserve">3.2.3.6 View Route Guidance</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000CA">
@@ -5281,13 +5130,8 @@
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000CB">
       <w:pPr>
-        <w:pStyle w:val="Heading3"/>
-        <w:numPr>
-          <w:ilvl w:val="2"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading4"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="900" w:hanging="700"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -5306,7 +5150,7 @@
           <w:color w:val="000000"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Update Response Status</w:t>
+        <w:t xml:space="preserve">3.2.3.7 Update Response Status</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000CC">
@@ -5337,13 +5181,8 @@
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000CD">
       <w:pPr>
-        <w:pStyle w:val="Heading2"/>
-        <w:numPr>
-          <w:ilvl w:val="1"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading3"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="580" w:hanging="580"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -5364,7 +5203,7 @@
           <w:szCs w:val="28"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">NONFUNCTIONAL REQUIREMENTS</w:t>
+        <w:t xml:space="preserve">3.2.4 NONFUNCTIONAL REQUIREMENTS</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000CE">
@@ -5418,18 +5257,13 @@
           <w:szCs w:val="24"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Table 4-2: Nonfunctional requirements. [P4 · table goes below · columns: ID (NFR-xx) | Category | Requirement | How it can be checked]</w:t>
+        <w:t xml:space="preserve">Table 3-4: Nonfunctional requirements. [P4 · table goes below · columns: ID (NFR-xx) | Category | Requirement | How it can be checked]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000D0">
       <w:pPr>
-        <w:pStyle w:val="Heading2"/>
-        <w:numPr>
-          <w:ilvl w:val="1"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading3"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="580" w:hanging="580"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -5450,7 +5284,7 @@
           <w:szCs w:val="28"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">MAPPING OBJECTIVES TO REQUIREMENTS</w:t>
+        <w:t xml:space="preserve">3.2.5 MAPPING OBJECTIVES TO REQUIREMENTS</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000D1">
@@ -5478,54 +5312,21 @@
           <w:szCs w:val="24"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Table 4-3: Objectives mapped to requirements. [P4 · table goes below · columns: Objective | Related requirement IDs]</w:t>
-      </w:r>
-    </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000D2">
-      <w:pPr>
-        <w:keepNext w:val="1"/>
-        <w:keepLines w:val="0"/>
-        <w:pageBreakBefore w:val="1"/>
-        <w:spacing w:after="480" w:before="0" w:line="240" w:lineRule="auto"/>
-        <w:ind w:left="0" w:firstLine="0"/>
-        <w:jc w:val="center"/>
-        <w:rPr>
-          <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
-          <w:i w:val="1"/>
-          <w:iCs w:val="1"/>
-          <w:sz w:val="28"/>
-          <w:szCs w:val="28"/>
-        </w:rPr>
-      </w:pPr>
-      <w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000">
-        <w:rPr>
-          <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
-          <w:i w:val="1"/>
-          <w:iCs w:val="1"/>
-          <w:sz w:val="28"/>
-          <w:szCs w:val="28"/>
-          <w:rtl w:val="0"/>
-        </w:rPr>
-        <w:t xml:space="preserve">Chapter Five</w:t>
+        <w:t xml:space="preserve">Table 3-5: Objectives mapped to requirements. [P4 · table goes below · columns: Objective | Related requirement IDs]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000D3">
       <w:pPr>
-        <w:pStyle w:val="Heading1"/>
+        <w:pStyle w:val="Heading2"/>
         <w:keepNext w:val="1"/>
-        <w:numPr>
-          <w:ilvl w:val="0"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
         <w:spacing w:after="720" w:before="240" w:line="240" w:lineRule="auto"/>
-        <w:ind w:left="720" w:hanging="720"/>
         <w:jc w:val="center"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
           <w:b w:val="1"/>
           <w:bCs w:val="1"/>
-          <w:sz w:val="32"/>
-          <w:szCs w:val="32"/>
+          <w:sz w:val="28"/>
+          <w:szCs w:val="28"/>
         </w:rPr>
       </w:pPr>
       <w:bookmarkStart w:colFirst="0" w:colLast="0" w:name="_gcfbldg4f2do" w:id="51"/>
@@ -5535,11 +5336,11 @@
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
           <w:b w:val="1"/>
           <w:bCs w:val="1"/>
-          <w:sz w:val="32"/>
-          <w:szCs w:val="32"/>
+          <w:sz w:val="28"/>
+          <w:szCs w:val="28"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">SYSTEM DESIGN</w:t>
+        <w:t xml:space="preserve">3.3 SYSTEM DESIGN</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000D4">
@@ -5565,18 +5366,13 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P5 · Short chapter introduction. Every figure is introduced before it appears and explained after it. Status: NOT STARTED]</w:t>
+        <w:t xml:space="preserve">[P5 · Short section introduction. Every figure is introduced before it appears and explained after it. Status: NOT STARTED]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000D5">
       <w:pPr>
-        <w:pStyle w:val="Heading2"/>
-        <w:numPr>
-          <w:ilvl w:val="1"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading3"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="580" w:hanging="580"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -5597,7 +5393,7 @@
           <w:szCs w:val="28"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">SYSTEM ARCHITECTURAL DESIGN</w:t>
+        <w:t xml:space="preserve">3.3.1 SYSTEM ARCHITECTURAL DESIGN</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000D6">
@@ -5626,7 +5422,7 @@
         <w:t xml:space="preserve">[P5 · Major functions and the relationships between the website, field application and emergency users. Status: NOT STARTED]</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000D7">
+    <w:p><w:pPr><w:keepNext/><w:keepLines/><w:pBdr><w:top w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:left w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:bottom w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:right w:val="single" w:sz="6" w:space="0" w:color="808080"/></w:pBdr><w:spacing w:before="150" w:after="95" w:line="1800" w:lineRule="exact"/><w:ind w:left="1500" w:right="1500"/></w:pPr></w:p><w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000D7">
       <w:pPr>
         <w:keepNext w:val="0"/>
         <w:keepLines w:val="0"/>
@@ -5651,18 +5447,13 @@
           <w:szCs w:val="20"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Figure 5-1: Conceptual architecture of RescueVision. [P5 · editable diagram · goes above this caption]</w:t>
+        <w:t xml:space="preserve">Figure 3-2: Conceptual architecture of RescueVision. [P5 · editable diagram · goes above this caption]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000D8">
       <w:pPr>
-        <w:pStyle w:val="Heading2"/>
-        <w:numPr>
-          <w:ilvl w:val="1"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading3"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="580" w:hanging="580"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -5683,7 +5474,7 @@
           <w:szCs w:val="28"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">DESIGN RATIONALE AND JUSTIFICATION</w:t>
+        <w:t xml:space="preserve">3.3.2 DESIGN RATIONALE AND JUSTIFICATION</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000D9">
@@ -5714,13 +5505,8 @@
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000DA">
       <w:pPr>
-        <w:pStyle w:val="Heading2"/>
-        <w:numPr>
-          <w:ilvl w:val="1"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading3"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="580" w:hanging="580"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -5741,7 +5527,7 @@
           <w:szCs w:val="28"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">DATABASE DESIGN AND FILE STRUCTURES</w:t>
+        <w:t xml:space="preserve">3.3.3 DATABASE DESIGN AND FILE STRUCTURES</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000DB">
@@ -5770,7 +5556,7 @@
         <w:t xml:space="preserve">[P5 · Information categories (incidents, people requiring assistance, hazards, response assignments, status updates) and their relationships. Status: NOT STARTED]</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000DC">
+    <w:p><w:pPr><w:keepNext/><w:keepLines/><w:pBdr><w:top w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:left w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:bottom w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:right w:val="single" w:sz="6" w:space="0" w:color="808080"/></w:pBdr><w:spacing w:before="150" w:after="95" w:line="1800" w:lineRule="exact"/><w:ind w:left="1500" w:right="1500"/></w:pPr></w:p><w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000DC">
       <w:pPr>
         <w:keepNext w:val="0"/>
         <w:keepLines w:val="0"/>
@@ -5795,18 +5581,13 @@
           <w:szCs w:val="20"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Figure 5-2: Information relationship diagram. [P5 · editable diagram · goes above this caption]</w:t>
+        <w:t xml:space="preserve">Figure 3-3: Information relationship diagram. [P5 · editable diagram · goes above this caption]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000DD">
       <w:pPr>
-        <w:pStyle w:val="Heading2"/>
-        <w:numPr>
-          <w:ilvl w:val="1"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading3"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="580" w:hanging="580"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -5827,7 +5608,7 @@
           <w:szCs w:val="28"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">USER INTERFACE DESIGN</w:t>
+        <w:t xml:space="preserve">3.3.4 USER INTERFACE DESIGN</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000DE">
@@ -5856,7 +5637,7 @@
         <w:t xml:space="preserve">[P5 · Label every screen as a design illustration, not a screenshot. Include warnings and unavailable-information states. Status: NOT STARTED]</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000DF">
+    <w:p><w:pPr><w:keepNext/><w:keepLines/><w:pBdr><w:top w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:left w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:bottom w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:right w:val="single" w:sz="6" w:space="0" w:color="808080"/></w:pBdr><w:spacing w:before="150" w:after="95" w:line="1800" w:lineRule="exact"/><w:ind w:left="1500" w:right="1500"/></w:pPr></w:p><w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000DF">
       <w:pPr>
         <w:keepNext w:val="0"/>
         <w:keepLines w:val="0"/>
@@ -5881,10 +5662,10 @@
           <w:szCs w:val="20"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Figure 5-3: Design illustration: 2D/3D map of the affected area. [P5 · design illustration · goes above this caption]</w:t>
+        <w:t xml:space="preserve">Figure 3-4: Design illustration: 2D/3D map of the affected area. [P5 · design illustration · goes above this caption]</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000E0">
+    <w:p><w:pPr><w:keepNext/><w:keepLines/><w:pBdr><w:top w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:left w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:bottom w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:right w:val="single" w:sz="6" w:space="0" w:color="808080"/></w:pBdr><w:spacing w:before="150" w:after="95" w:line="1800" w:lineRule="exact"/><w:ind w:left="1500" w:right="1500"/></w:pPr></w:p><w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000E0">
       <w:pPr>
         <w:keepNext w:val="0"/>
         <w:keepLines w:val="0"/>
@@ -5909,10 +5690,10 @@
           <w:szCs w:val="20"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Figure 5-4: Design illustration: selected hazard or person marker. [P5 · design illustration · goes above this caption]</w:t>
+        <w:t xml:space="preserve">Figure 3-5: Design illustration: selected hazard or person marker. [P5 · design illustration · goes above this caption]</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000E1">
+    <w:p><w:pPr><w:keepNext/><w:keepLines/><w:pBdr><w:top w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:left w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:bottom w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:right w:val="single" w:sz="6" w:space="0" w:color="808080"/></w:pBdr><w:spacing w:before="150" w:after="95" w:line="1800" w:lineRule="exact"/><w:ind w:left="1500" w:right="1500"/></w:pPr></w:p><w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000E1">
       <w:pPr>
         <w:keepNext w:val="0"/>
         <w:keepLines w:val="0"/>
@@ -5937,10 +5718,10 @@
           <w:szCs w:val="20"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Figure 5-5: Design illustration: assistance-case view. [P5 · design illustration · goes above this caption]</w:t>
+        <w:t xml:space="preserve">Figure 3-6: Design illustration: assistance-case view. [P5 · design illustration · goes above this caption]</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000E2">
+    <w:p><w:pPr><w:keepNext/><w:keepLines/><w:pBdr><w:top w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:left w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:bottom w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:right w:val="single" w:sz="6" w:space="0" w:color="808080"/></w:pBdr><w:spacing w:before="150" w:after="95" w:line="1800" w:lineRule="exact"/><w:ind w:left="1500" w:right="1500"/></w:pPr></w:p><w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000E2">
       <w:pPr>
         <w:keepNext w:val="0"/>
         <w:keepLines w:val="0"/>
@@ -5965,10 +5746,10 @@
           <w:szCs w:val="20"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Figure 5-6: Design illustration: route guidance. [P5 · design illustration · goes above this caption]</w:t>
+        <w:t xml:space="preserve">Figure 3-7: Design illustration: route guidance. [P5 · design illustration · goes above this caption]</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000E3">
+    <w:p><w:pPr><w:keepNext/><w:keepLines/><w:pBdr><w:top w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:left w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:bottom w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:right w:val="single" w:sz="6" w:space="0" w:color="808080"/></w:pBdr><w:spacing w:before="150" w:after="95" w:line="1800" w:lineRule="exact"/><w:ind w:left="1500" w:right="1500"/></w:pPr></w:p><w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000E3">
       <w:pPr>
         <w:keepNext w:val="0"/>
         <w:keepLines w:val="0"/>
@@ -5993,18 +5774,13 @@
           <w:szCs w:val="20"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Figure 5-7: Design illustration: response-status view. [P5 · design illustration · goes above this caption]</w:t>
+        <w:t xml:space="preserve">Figure 3-8: Design illustration: response-status view. [P5 · design illustration · goes above this caption]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000E4">
       <w:pPr>
-        <w:pStyle w:val="Heading2"/>
-        <w:numPr>
-          <w:ilvl w:val="1"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading3"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="580" w:hanging="580"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -6025,7 +5801,7 @@
           <w:szCs w:val="28"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">CLASS DIAGRAM</w:t>
+        <w:t xml:space="preserve">3.3.5 CLASS DIAGRAM</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000E5">
@@ -6051,10 +5827,10 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P5 · Explain main responsibilities and relationships. Same terms as Chapters 3 and 4. Status: NOT STARTED]</w:t>
+        <w:t xml:space="preserve">[P5 · Explain main responsibilities and relationships. Same terms as the system description and requirements in Chapter 3. Status: NOT STARTED]</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000E6">
+    <w:p><w:pPr><w:keepNext/><w:keepLines/><w:pBdr><w:top w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:left w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:bottom w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:right w:val="single" w:sz="6" w:space="0" w:color="808080"/></w:pBdr><w:spacing w:before="150" w:after="95" w:line="1800" w:lineRule="exact"/><w:ind w:left="1500" w:right="1500"/></w:pPr></w:p><w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000E6">
       <w:pPr>
         <w:keepNext w:val="0"/>
         <w:keepLines w:val="0"/>
@@ -6079,18 +5855,13 @@
           <w:szCs w:val="20"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Figure 5-8: Class diagram. [P5 · editable diagram · goes above this caption]</w:t>
+        <w:t xml:space="preserve">Figure 3-9: Class diagram. [P5 · editable diagram · goes above this caption]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000E7">
       <w:pPr>
-        <w:pStyle w:val="Heading2"/>
-        <w:numPr>
-          <w:ilvl w:val="1"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading3"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="580" w:hanging="580"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -6111,7 +5882,7 @@
           <w:szCs w:val="28"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">SEQUENCE DIAGRAMS</w:t>
+        <w:t xml:space="preserve">3.3.6 SEQUENCE DIAGRAMS</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000E8">
@@ -6137,10 +5908,10 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P5 · Order of user actions and system responses for selected use cases from Section 4.3. Status: NOT STARTED]</w:t>
+        <w:t xml:space="preserve">[P5 · Order of user actions and system responses for selected use cases from Section 3.2.3. Status: NOT STARTED]</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000E9">
+    <w:p><w:pPr><w:keepNext/><w:keepLines/><w:pBdr><w:top w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:left w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:bottom w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:right w:val="single" w:sz="6" w:space="0" w:color="808080"/></w:pBdr><w:spacing w:before="150" w:after="95" w:line="1800" w:lineRule="exact"/><w:ind w:left="1500" w:right="1500"/></w:pPr></w:p><w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000E9">
       <w:pPr>
         <w:keepNext w:val="0"/>
         <w:keepLines w:val="0"/>
@@ -6165,10 +5936,10 @@
           <w:szCs w:val="20"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Figure 5-9: Sequence diagram: review an assistance case. [P5 · editable diagram · goes above this caption]</w:t>
+        <w:t xml:space="preserve">Figure 3-10: Sequence diagram: review an assistance case. [P5 · editable diagram · goes above this caption]</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000EA">
+    <w:p><w:pPr><w:keepNext/><w:keepLines/><w:pBdr><w:top w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:left w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:bottom w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:right w:val="single" w:sz="6" w:space="0" w:color="808080"/></w:pBdr><w:spacing w:before="150" w:after="95" w:line="1800" w:lineRule="exact"/><w:ind w:left="1500" w:right="1500"/></w:pPr></w:p><w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000EA">
       <w:pPr>
         <w:keepNext w:val="0"/>
         <w:keepLines w:val="0"/>
@@ -6193,18 +5964,13 @@
           <w:szCs w:val="20"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Figure 5-10: Sequence diagram: view route guidance. [P5 · editable diagram · goes above this caption]</w:t>
+        <w:t xml:space="preserve">Figure 3-11: Sequence diagram: view route guidance. [P5 · editable diagram · goes above this caption]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000EB">
       <w:pPr>
-        <w:pStyle w:val="Heading2"/>
-        <w:numPr>
-          <w:ilvl w:val="1"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading3"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="580" w:hanging="580"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -6225,7 +5991,7 @@
           <w:szCs w:val="28"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">USE CASE DIAGRAM</w:t>
+        <w:t xml:space="preserve">3.3.7 USE CASE DIAGRAM</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000EC">
@@ -6251,10 +6017,10 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P5 · Reference the narratives in Section 4.3; do not write a second version. Status: NOT STARTED]</w:t>
+        <w:t xml:space="preserve">[P5 · Reference the narratives in Section 3.2.3; do not write a second version. Status: NOT STARTED]</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000ED">
+    <w:p><w:pPr><w:keepNext/><w:keepLines/><w:pBdr><w:top w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:left w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:bottom w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:right w:val="single" w:sz="6" w:space="0" w:color="808080"/></w:pBdr><w:spacing w:before="150" w:after="95" w:line="1800" w:lineRule="exact"/><w:ind w:left="1500" w:right="1500"/></w:pPr></w:p><w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000ED">
       <w:pPr>
         <w:keepNext w:val="0"/>
         <w:keepLines w:val="0"/>
@@ -6279,18 +6045,13 @@
           <w:szCs w:val="20"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Figure 5-11: Use case diagram. [P5 · editable diagram · goes above this caption]</w:t>
+        <w:t xml:space="preserve">Figure 3-12: Use case diagram. [P5 · editable diagram · goes above this caption]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000EE">
       <w:pPr>
-        <w:pStyle w:val="Heading2"/>
-        <w:numPr>
-          <w:ilvl w:val="1"/>
-          <w:numId w:val="1"/>
-        </w:numPr>
+        <w:pStyle w:val="Heading3"/>
         <w:spacing w:before="240" w:line="360" w:lineRule="auto"/>
-        <w:ind w:left="580" w:hanging="580"/>
         <w:jc w:val="left"/>
         <w:rPr>
           <w:rFonts w:ascii="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman" w:hAnsi="Times New Roman"/>
@@ -6311,7 +6072,7 @@
           <w:szCs w:val="28"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">DETAILED DESIGN</w:t>
+        <w:t xml:space="preserve">3.3.8 DETAILED DESIGN</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000EF">
@@ -6365,7 +6126,7 @@
           <w:szCs w:val="28"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Chapter Six</w:t>
+        <w:t xml:space="preserve">Chapter Four</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000F1">
@@ -6598,10 +6359,10 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P6 · One paragraph before and after each figure, with linked requirement IDs from Table 4-1. Status: WAITING FOR PROTOTYPE]</w:t>
+        <w:t xml:space="preserve">[P6 · One paragraph before and after each figure, with linked requirement IDs from Table 3-3. Status: WAITING FOR PROTOTYPE]</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000F9">
+    <w:p><w:pPr><w:keepNext/><w:keepLines/><w:pBdr><w:top w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:left w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:bottom w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:right w:val="single" w:sz="6" w:space="0" w:color="808080"/></w:pBdr><w:spacing w:before="150" w:after="95" w:line="1800" w:lineRule="exact"/><w:ind w:left="1500" w:right="1500"/></w:pPr></w:p><w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000F9">
       <w:pPr>
         <w:keepNext w:val="0"/>
         <w:keepLines w:val="0"/>
@@ -6626,10 +6387,10 @@
           <w:szCs w:val="20"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Figure 6-1: Prototype screen: [name]. [P6 · all supply · real screenshot from the working prototype · goes above this caption]</w:t>
+        <w:t xml:space="preserve">Figure 4-1: Prototype screen: [name]. [P6 · all supply · real screenshot from the working prototype · goes above this caption]</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000FA">
+    <w:p><w:pPr><w:keepNext/><w:keepLines/><w:pBdr><w:top w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:left w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:bottom w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:right w:val="single" w:sz="6" w:space="0" w:color="808080"/></w:pBdr><w:spacing w:before="150" w:after="95" w:line="1800" w:lineRule="exact"/><w:ind w:left="1500" w:right="1500"/></w:pPr></w:p><w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000FA">
       <w:pPr>
         <w:keepNext w:val="0"/>
         <w:keepLines w:val="0"/>
@@ -6654,10 +6415,10 @@
           <w:szCs w:val="20"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Figure 6-2: Prototype screen: [name]. [P6 · all supply · real screenshot from the working prototype · goes above this caption]</w:t>
+        <w:t xml:space="preserve">Figure 4-2: Prototype screen: [name]. [P6 · all supply · real screenshot from the working prototype · goes above this caption]</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000FB">
+    <w:p><w:pPr><w:keepNext/><w:keepLines/><w:pBdr><w:top w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:left w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:bottom w:val="single" w:sz="6" w:space="0" w:color="808080"/><w:right w:val="single" w:sz="6" w:space="0" w:color="808080"/></w:pBdr><w:spacing w:before="150" w:after="95" w:line="1800" w:lineRule="exact"/><w:ind w:left="1500" w:right="1500"/></w:pPr></w:p><w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000FB">
       <w:pPr>
         <w:keepNext w:val="0"/>
         <w:keepLines w:val="0"/>
@@ -6682,7 +6443,7 @@
           <w:szCs w:val="20"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Figure 6-3: Prototype screen: [name]. [P6 · all supply · real screenshot from the working prototype · goes above this caption]</w:t>
+        <w:t xml:space="preserve">Figure 4-3: Prototype screen: [name]. [P6 · all supply · real screenshot from the working prototype · goes above this caption]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000FC">
@@ -6742,7 +6503,7 @@
           <w:szCs w:val="24"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Table 6-1: Planned features covered by the prototype. [P6 · table goes below · columns: Feature | Requirement IDs | Shown in prototype (yes / partly / not yet) | Figure]</w:t>
+        <w:t xml:space="preserve">Table 4-1: Planned features covered by the prototype. [P6 · table goes below · columns: Feature | Requirement IDs | Shown in prototype (yes / partly / not yet) | Figure]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000FE">
@@ -6858,7 +6619,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P6 · Feeds into Section 7.4. Status: NOT STARTED]</w:t>
+        <w:t xml:space="preserve">[P6 · Feeds into Section 5.4. Status: NOT STARTED]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000102">
@@ -6886,7 +6647,7 @@
           <w:szCs w:val="28"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Chapter Seven</w:t>
+        <w:t xml:space="preserve">Chapter Five</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000103">
@@ -6977,7 +6738,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P6 + P1 · For each objective in Section 1.7: how the report addresses it (requirements, design figures, prototype evidence). Value of the proposal and how the design responds to the constraints. Status: WAITING FOR CHAPTERS 1-6]</w:t>
+        <w:t xml:space="preserve">[P6 + P1 · For each objective in Section 1.7: how the report addresses it (requirements, design figures, prototype evidence). Value of the proposal and how the design responds to the constraints. Status: WAITING FOR CHAPTERS 1-4]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000106">
@@ -7035,7 +6796,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P6 + P1 · Evidence limits, data uncertainty, privacy of person-related information, need for human judgment. Status: WAITING FOR CHAPTERS 1-6]</w:t>
+        <w:t xml:space="preserve">[P6 + P1 · Evidence limits, data uncertainty, privacy of person-related information, need for human judgment. Status: WAITING FOR CHAPTERS 1-4]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000108">
@@ -7093,7 +6854,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P6 + P1 · Restate the problem, what Project I delivered, and what the evidence does and does not show. Not too short. Status: WAITING FOR CHAPTERS 1-6]</w:t>
+        <w:t xml:space="preserve">[P6 + P1 · Restate the problem, what Project I delivered, and what the evidence does and does not show. Not too short. Status: WAITING FOR CHAPTERS 1-4]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="0000010A">
@@ -7151,7 +6912,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P6 + P1 · Work planned for Project II. Status: WAITING FOR CHAPTERS 1-6]</w:t>
+        <w:t xml:space="preserve">[P6 + P1 · Work planned for Project II. Status: WAITING FOR CHAPTERS 1-4]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="0000010C">
