@@ -8,17 +8,17 @@ Use the [team documentation plan](docs/team-plan/documentation-work-plan.md) for
 
 ## Local report workspace
 
-- Put the Selection Word export in [`docs/Documention/selection/`](docs/Documention/selection/) and the Main Word export in [`docs/Documention/main/`](docs/Documention/main/). Keep the original filenames so the two versions can be compared.
+- Put the Skeleton Word export in [`docs/documentation/skeleton/`](docs/documentation/skeleton/) and the Main Word export in [`docs/documentation/main/`](docs/documentation/main/). Keep the original filenames so the two versions can be compared.
 - Keep the university template and requirements guide in `.local-report/source/` and use `.local-report/working/` for edits. Confirm the team's master before working from it.
 - For layout, preserve the university template specified in the team plan. For citations, use IEEE bracketed numbers in first-citation order and reuse the same number for each source. Confirm with the supervisor if an IEEE publication template is also expected.
-- New Word exports and local drafts are Git-ignored by default. The two original snapshots under `docs/Documention/` were explicitly selected for Git. Merge local edits into the shared report after checking the latest team copy.
+- New Word exports and local drafts are Git-ignored by default. The two original snapshots under `docs/documentation/` were explicitly selected for Git. Merge local edits into the shared report after checking the latest team copy.
 
 ### Report versions
 
-- [Selection](<docs/Documention/selection/Project 1 Docs — Skeleton (Marwan draft).docx>) is the five-chapter outline with author prompts and figure placeholders. Its Chapter 2 points to Bela's merged draft in Main. The original Selection snapshot is in commit `dac7162`.
-- [Main](<docs/Documention/main/Project 1 Docs.docx>) is the merged working draft. It contains the authored Chapter 1, Bela's Chapter 2 literature review, Mahmoud's requirements in Section 3.2, Mesbah's Chapter 4 prototype draft, and supporting material in Appendices C and D.
+- [Skeleton](<docs/documentation/skeleton/Project 1 Docs — Skeleton (Marwan draft).docx>) is the five-chapter outline with author prompts and figure placeholders. Its Chapter 2 points to Bela's merged draft in Main. The original Skeleton snapshot is in commit `dac7162`.
+- [Main](<docs/documentation/main/Project 1 Docs.docx>) is the merged working draft. It contains the authored Chapter 1, Bela's Chapter 2 literature review, Mahmoud's requirements in Section 3.2, Mesbah's Chapter 4 prototype draft, and supporting material in Appendices C and D.
 - Use the same margins as page 1 throughout the working report, including equal 2.54 cm left and right margins. Keep the declaration signatures in one two-column table.
-- Each DOCX has an editable `.source/` folder beside it. Edit `package/word/document.xml` for content or `package/word/styles.xml` for styles, then run `python3 docs/Documention/build_docx.py build "<path to DOCX>"`. After editing directly in Word, run the same command with `extract` to refresh the corresponding source package.
+- Each DOCX has an editable `.source/` folder beside it. Edit `package/word/document.xml` for content or `package/word/styles.xml` for styles, then run `python3 docs/documentation/build_docx.py build "<path to DOCX>"`. After editing directly in Word, run the same command with `extract` to refresh the corresponding source package.
 - Chapter 4 has six evidence figures, two tables, the Maxar Open Data citation, and links to Mahmoud's draft requirement IDs. Refresh the contents and caption lists in Word after editing and before exporting the submission PDF.
 - Keep empty bordered boxes above the captions for pending screenshots and diagrams. Replace the corresponding box paragraph when the actual visual is ready.
 
