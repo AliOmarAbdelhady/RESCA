@@ -136,9 +136,19 @@ python3 database/tools/generate_drawio_erd.py
 
 The generator reads tables, columns, primary keys, unique columns and foreign
 keys from `pg_class` / `pg_attribute` / `pg_constraint` / `pg_index` using
-`psql`, then writes the 9-page draw.io file (page 1 = full ERD, pages 2-9 = one
-per domain). It validates the XML, the 56-table / foreign-key counts and that no
-two table boxes overlap; a non-zero exit means generation failed.
+`psql`, then writes a 10-page draw.io file:
+
+1. **Overview**: the 8 domains with their table names and one labelled link per
+   pair of related domains (fits one screen; start here).
+2. **Pages 2-9**: one per domain, full columns, parents above children; tables
+   from other domains appear as grey stubs above the tables that use them.
+3. **Full ERD**: all 56 tables grouped in domain clusters.
+
+"Who did it" columns that point at `users` (`created_by`, `approved_by`, ...)
+are shown as `FK → users` rows instead of lines, so the real relationships stay
+readable. Lines are coloured by the parent table's domain. The generator checks
+the XML, the table/FK counts, and that no boxes overlap; a non-zero exit means
+generation failed.
 
 ## Try the demo
 
