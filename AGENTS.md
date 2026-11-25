@@ -36,7 +36,7 @@ Each folder has its own short `AGENTS.md` with its gate and its most-broken rule
 ## Every task: before and after
 
 Before you edit:
-1. Pull `main` and work on a branch (`<github-user>/<topic>`), never on `main`.
+1. Your base is `dev`, never `main`. Pull `dev`, create your branch from it (`<github-user>/<topic>`), and open the PR into `dev`. Only the owner merges `dev` into `main`.
 2. Read this file, the folder's `AGENTS.md`, and the area doc. Write a short plan naming the rule IDs and tests you will satisfy.
 
 After you edit, check every item and report each one:
@@ -57,7 +57,7 @@ Only the owner may change the files in `.github/locked-paths.txt`: all `AGENTS.m
 
 ## Never
 
-- Push to `main`, force-push a shared branch, or merge your own PR.
+- Push to `main` or `dev`, branch from `main`, open a PR into `main` from anything but `dev`, force-push a shared branch, or merge your own PR.
 - Change architecture, decisions, the workflow, CI, gates or the database security model.
 - Add the `owner-approved` label or set `RESCA_LOCKED_CHANGE_APPROVED`.
 - Weaken, skip or delete a test; add `eslint-disable`, `noqa` or `type: ignore` to get green (P2).

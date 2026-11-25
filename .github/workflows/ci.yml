@@ -35,6 +35,15 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+      - name: Only dev merges into main (DEC-14)
+        env:
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+        run: |
+          if [ "$HEAD_REF" != "dev" ] || [ "$HEAD_REPO" != "$GITHUB_REPOSITORY" ]; then
+            echo "::error::pull requests into main must come from this repository's dev branch (got ${HEAD_REPO}:${HEAD_REF}); open the PR into dev instead"
+            exit 1
+          fi
       - name: Was the owner-approved label added by the owner?
         id: approval
         env:

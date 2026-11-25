@@ -17,11 +17,11 @@ Locked. Each line is a decision (DEC-nn) the owner took on 25 November 2026. The
 | DEC-11 | Migrations | Plain forward-only SQL with dbmate; current schema files are the frozen baseline | SQL stays the only schema source | ORM-generated migrations |
 | DEC-12 | Dashboards | Same page renders per agency and role from view presets (widgets, positions, agency accent, default layers and filters); role presets only, users cannot rearrange; safety colours identical everywhere | Police, EMS, fire and government need different views; predictable in a crisis | Free per-user layouts |
 | DEC-13 | Repo | `backend/ frontend/ database/ contracts/ ai/ deploy/ docs/ prototypes/` | Clear software and AI split | `services/` tree |
-| DEC-14 | Git | Trunk-based: short branches into protected `main`, squash merge, one required check `ci/ok` | Small reviewed changes | Long-lived feature branches |
+| DEC-14 | Git | Short branches from `dev`, squash-merged into `dev`; only `dev` merges (merge commit) into protected `main`; one required check `ci/ok` | Owner chose a tested integration branch before `main` (25 November 2026) | Branches straight into `main`, long-lived feature branches |
 | DEC-15 | CI | GitHub Actions, run only for `main` (pull requests into main and pushes to main) | Owner rule | CI on every branch push |
 | DEC-16 | Hosting | One CPU-only Contabo server, Docker Compose + Caddy, single-user demo | No GPU and no budget | Kubernetes, GPU cloud |
 | DEC-17 | Secrets | SOPS + age encrypted files; per-service secret mounts | Secrets never in Git or images | Plain `.env` in the repo |
-| DEC-18 | Training | Free Kaggle or Colab GPUs; notebooks in `ai/kaggle/<feature>/vN/` | Free compute | Training on the server |
+| DEC-18 | Training | Free Kaggle or Colab GPUs, or teammates' own GPU laptops (local training and testing allowed); notebooks in `ai/kaggle/<feature>/vN/` | Free compute | Training on the server |
 | DEC-19 | Agent rules | Strict rules with automatic gates in the area docs; owner-only files listed in `.github/locked-paths.txt` | Written rules alone get broken | Rules in prose only |
 | DEC-20 | Name | RESCA (Real-time Emergency Sensing, Coordination & Assessment) for now; resca.com costs about US$1,000, so a name with a free .com is being chosen | No domain budget | |
 

@@ -4,10 +4,12 @@ Locked. How every change, by a person or an AI agent, gets from idea to `main`.
 
 ## Git
 
-- `main` is protected. Nobody pushes to it directly; changes arrive by pull request with `ci/ok` green.
-- Branch from the latest `main`: `<github-user>/<short-topic>`, for example `AliOmarAbdelhady/sos-idempotency`. Pull before you start and before you open the PR.
+- Two long-lived branches. `dev` is where all work comes together; `main` is the stable branch that only receives `dev`.
+- Every piece of work starts from the latest `dev`: `git switch dev && git pull`, then `git switch -c <github-user>/<short-topic>`, for example `AliOmarAbdelhady/sos-idempotency`. Pull `dev` again before you open the PR.
+- The PR goes into `dev`. When `dev` holds a set of finished, working changes, the owner opens a PR from `dev` into `main` and merges it.
+- Nobody pushes to `dev` or `main` directly, and no branch other than `dev` is merged into `main`. A hotfix also goes through `dev`.
 - One change per PR, about 400 changed lines at most (generated files excluded). Larger needs a reason in the PR.
-- Conventional Commits in the PR title (`feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`). PRs are squash-merged.
+- Conventional Commits in the PR title (`feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`). Branch PRs into `dev` are squash-merged; `dev` into `main` uses a merge commit so the two branches stay in step.
 - Never commit secrets, `.env` files, model weights, datasets, notebook outputs or large binaries (pre-commit blocks files over 1 MB).
 - Never delete or rewrite a teammate's work (`mahmoudERD/`, `mapping/`, `docs/documentation/`); move it with `git mv` only after the owner agrees.
 
@@ -25,7 +27,7 @@ An API, event or AI-service contract change is its own PR and merges before the 
 
 ## CI
 
-GitHub Actions run **only for `main`**: pull requests into `main` and pushes to `main`. One required check, `ci/ok`, passes only when every gate passed or had nothing to check. A gate whose area has code but no implementation fails (fail closed).
+GitHub Actions run **only for `main`**: pull requests into `main` (which come only from `dev`) and pushes to `main`. PRs into `dev` run no CI, so run `make check` yourself before opening one. One required check, `ci/ok`, passes only when every gate passed or had nothing to check. A gate whose area has code but no implementation fails (fail closed).
 
 | Gate | Command | Where | Rules |
 |---|---|---|---|
@@ -82,6 +84,7 @@ The list is `.github/locked-paths.txt`: agent guides, `ARCHITECTURE.md`, `DECISI
 | G3 | `ci/ok` on the exact commit being merged; skipped or cancelled jobs count as failures. |
 | G4 | Third-party actions pinned to full commit SHAs; workflow token read-only by default; PR jobs never see deploy secrets. |
 | G5 | Release only a reviewed commit with lockfiles, image and model digests, test results and a rehearsed rollback. |
+| G6 | Work branches from `dev` and merges into `dev`; only `dev` merges into `main` (CI fails any other PR into `main`). |
 
 ## How AI agents work here
 

@@ -12,7 +12,7 @@ Locked. Every rule ID, the one document that defines it, and how it is enforced.
 | A1 to A6 | AI: reproducibility, splits, promotion, ONNX parity, serving template, human confirmation | [AI.md](AI.md#rules) | `make check-ml` |
 | C1 to C4 | Contracts: OpenAPI, events, AI service, compatibility | [ARCHITECTURE.md](ARCHITECTURE.md#contracts) | contract gate (to build) |
 | T1 to T6 | Testing | [DEV_WORKFLOW.md](DEV_WORKFLOW.md#testing) | every gate |
-| G1 to G5 | Review, locked files, CI, supply chain, release | [DEV_WORKFLOW.md](DEV_WORKFLOW.md#review-and-release) | `make check-policy`, `ci/ok` |
+| G1 to G6 | Review, locked files, CI, supply chain, release, branch flow | [DEV_WORKFLOW.md](DEV_WORKFLOW.md#review-and-release) | `make check-policy`, `ci/ok` |
 | P1 to P4 | How AI agents work | [DEV_WORKFLOW.md](DEV_WORKFLOW.md#how-ai-agents-work-here) | review, `make check-policy` |
 | O1 to O6 | Docker, secrets, backups, monitoring, release and rollback | [DEPLOY.md](DEPLOY.md#rules) | image, edge and restore gates (to build) |
 | DEC-01 to DEC-20 | Owner decisions | [DECISIONS.md](DECISIONS.md) | owner review |

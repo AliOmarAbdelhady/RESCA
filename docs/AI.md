@@ -1,6 +1,8 @@
 # AI
 
-Training happens on free Kaggle or Colab GPUs. The server is CPU-only: models run as ONNX (or OpenVINO) inside small FastAPI services. A model never decides alone; a person confirms consequential results.
+Training and testing happen on GPUs: Kaggle, Colab, or a teammate's own laptop or desktop with CUDA. Training and running notebooks and tests locally is allowed, and tests may need PyTorch and a GPU. The CPU-only limit applies to production serving only, which starts in about five months (from around April 2027); until then do not restrict experiments to CPU.
+
+In production the server is CPU-only: models run as ONNX (or OpenVINO) inside small FastAPI services. A model never decides alone; a person confirms consequential results.
 
 ## Layout
 
@@ -14,9 +16,9 @@ ai/
   model-cards/<model>-<version>.md
 ```
 
-Features: `building-damage` (F1), `flood-road-segmentation` (F2), `person-detection` (F3), `person-tracking` (F4), `compound-hazards` (F5), `reports-retrieval` (F6). Existing notebooks move into these folders with history when the owner approves the cleanup.
+Features: `building-damage` (F1), `flood-road-segmentation` (F2), `person-detection` (F3), `person-tracking` (F4), `compound-hazards` (F5), `reports-retrieval` (F6). Today: `building-damage` has v1 to v4 and `flood-road-segmentation` has v1 and v2. Each version folder has a README listing its notebooks. v1 to v3 hold several notebooks each and predate the layout below. v4 also holds its own research code (`src/`, `tests/`, `configs/`, `scripts/`, `notes/`) because it is still an experiment. Code moves into `ai/src/resca_ai` only once it has proved itself, and from then on it must pass every gate.
 
-### What a version folder holds
+### What a new version folder holds
 
 ```
 ai/kaggle/building-damage/v3/
@@ -44,6 +46,6 @@ Notebooks are committed without outputs. Weights and datasets never enter Git; w
 
 Request: job ID, input object key and its hash, coordinate system, units, requested model and digest, deadline. Response: results with provenance (model, version, digest), confidence per item, or a typed failure. The service rejects unknown models, external URLs and unit mismatches before doing work (C3). It holds no database credentials.
 
-## CPU notes
+## CPU notes (for production, later)
 
 Benchmarks on a 4-core laptop CPU (Intel i5-1135G7, ONNX Runtime 1.32, OpenVINO 2026.4, 25 November 2026): static int8 helped convolution models 2 to 8 times; dynamic int8 made SegFormer 4 times slower. Set threads to physical cores, never hyperthreads. Contabo's AMD CPUs lack AVX-512, so re-measure there.
