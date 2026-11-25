@@ -1,4 +1,4 @@
-# apps/web — RescueVision Ops Dashboard (React + Vite SPA)
+# apps/web — RESCA Ops Dashboard (React + Vite SPA)
 
 The command center: **dashboard & statistics, buildings explorer, cases, reports,
 analytics, emergency routing, live map of responders**. Authenticated internal tool —
@@ -33,7 +33,7 @@ src/
 
 ## Rules
 
-- No `fetch`/`axios` anywhere — data flows through `@rescuevision/api` hooks.
+- No `fetch`/`axios` anywhere — data flows through `@resca/api` hooks.
 - Server state only in TanStack Query; Zustand only for UI/session state.
 - Maps render with MapLibre GL JS (same style spec as the mobile app).
 - Dev proxy in `vite.config.ts` forwards `/api` + `/ws` to FastAPI `:8000`.

@@ -2,7 +2,7 @@
 
 ## xBD / xView2 (Required)
 
-The xBD dataset is the primary dataset for RescueVision.
+The xBD dataset is the primary dataset for RESCA.
 
 ### Download
 

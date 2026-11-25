@@ -41,7 +41,7 @@ Send this table to the group early. Add a deadline for each item before it goes 
 
 ## 3. System Prototype chapter — what actually exists in the repo
 
-Rule from the plan: *show only genuine material, say what it demonstrates and what it does not.* Here's what's in `RescueVision` (branch `feature/mapping-routing`) right now:
+Rule from the plan: *show only genuine material, say what it demonstrates and what it does not.* Here's what's in `RESCA` (branch `feature/mapping-routing`) right now:
 
 | # | Evidence | File(s) | What it demonstrates | What it does NOT establish |
 |---|---|---|---|---|
@@ -117,7 +117,7 @@ The template says the conclusions "should not be very short". Structure:
 ## 6. Reviewing Person 2 (clarity, structure, formatting)
 
 - [ ] Organised by themes/questions, not a list of paper summaries
-- [ ] Each theme ends with "what this means for RescueVision"
+- [ ] Each theme ends with "what this means for RESCA"
 - [ ] Related-systems comparison table present; unknowns marked
 - [ ] Gap statement supported by the cited sources
 - [ ] Citation style and order correct
@@ -142,7 +142,7 @@ Apply these to every text before it goes into the master:
 - Write in a plain academic register. Prefer passive or "we" consistently, as the template allows.
 - Vary sentence length. Avoid the same opening word across consecutive sentences.
 - Delete filler and AI tells: "delve", "crucial", "pivotal", "seamless", "robust", "leverage", "in today's world", "it is important to note", "plays a vital role", "a testament to", "furthermore/moreover" at every paragraph start, triplet lists everywhere, em-dash chains.
-- One idea per paragraph. Topic sentence → evidence/citation → link to RescueVision.
+- One idea per paragraph. Topic sentence → evidence/citation → link to RESCA.
 - Make concrete claims with numbers and citations. If there's no source, soften the claim or cut it.
 - Keep hedging honest: "is intended to", "the prototype shows…, but does not establish…".
 - Read each section aloud once. If a sentence sounds like a brochure, rewrite it.

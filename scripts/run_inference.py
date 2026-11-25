@@ -7,8 +7,8 @@ import logging
 import sys
 from pathlib import Path
 
-from rescuevision.inference.predictor import DisasterPredictor
-from rescuevision.utils.config import load_config
+from resca.inference.predictor import DisasterPredictor
+from resca.utils.config import load_config
 
 
 def main():
@@ -43,8 +43,8 @@ def main():
     # Generate report
     enable_report = args.enable_report and not args.no_report
     if enable_report:
-        from rescuevision.reporting.template_report import generate_report
-        from rescuevision.reporting.pdf_export import export_report_pdf
+        from resca.reporting.template_report import generate_report
+        from resca.reporting.pdf_export import export_report_pdf
 
         artifacts = {
             "building_mask": str(out_dir / "building_mask.png"),
@@ -71,7 +71,7 @@ def main():
         faiss_dir = Path(config.get("faiss_dir", "outputs/faiss"))
         index_path = faiss_dir / "disaster_cases.index"
         if index_path.exists():
-            from rescuevision.retrieval.search import search_index
+            from resca.retrieval.search import search_index
             similar = search_index(
                 str(index_path),
                 str(faiss_dir / "disaster_cases_metadata.json"),

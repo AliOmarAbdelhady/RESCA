@@ -1,4 +1,4 @@
--- RescueVision database: extensions
+-- RESCA database: extensions
 -- Target: PostgreSQL 18 + PostGIS 3.6 + pgRouting 4 + pgvector 0.8
 
 CREATE EXTENSION IF NOT EXISTS postgis;
@@ -12,7 +12,7 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 DO $$
 BEGIN
   IF current_setting('server_version_num')::int < 180000 THEN
-    RAISE EXCEPTION 'RescueVision requires PostgreSQL 18+ (uuidv7). Found %', version();
+    RAISE EXCEPTION 'RESCA requires PostgreSQL 18+ (uuidv7). Found %', version();
   END IF;
 END $$;
 

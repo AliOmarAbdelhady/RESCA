@@ -1,4 +1,4 @@
-"""Smoke tests for the RescueVision API."""
+"""Smoke tests for the RESCA API."""
 
 import sys
 from pathlib import Path

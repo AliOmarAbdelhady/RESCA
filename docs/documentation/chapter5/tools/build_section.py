@@ -160,7 +160,7 @@ def table(cap, rows):
     header, data = rows[0], rows[1:]
     n = len(header)
     # Each column is at least as wide as its longest word (IDs such as "NFR-DQ-04"
-    # or "rv_readonly" must never break), and the remaining width is shared in
+    # or "resca_readonly" must never break), and the remaining width is shared in
     # proportion to the amount of text in the column.
     def plain(t):
         return re.sub(r"\*\*|\*|_\{|\^\{|\}", "", t)

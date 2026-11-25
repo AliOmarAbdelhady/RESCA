@@ -1,13 +1,13 @@
-# RescueVision — Complete Project Analysis
+# RESCA — Complete Project Analysis
 
 ## Context
-This document provides a comprehensive analysis of the RescueVision project, covering its purpose, architecture, pipeline, models, and an evaluation of its suitability as a CS graduation project. The analysis is based on a thorough exploration of the entire codebase (~8,500 lines of Python + ~560 lines of TypeScript).
+This document provides a comprehensive analysis of the RESCA project, covering its purpose, architecture, pipeline, models, and an evaluation of its suitability as a CS graduation project. The analysis is based on a thorough exploration of the entire codebase (~8,500 lines of Python + ~560 lines of TypeScript).
 
 ---
 
-## 1. What is RescueVision?
+## 1. What is RESCA?
 
-RescueVision is a **multimodal deep learning system for automated post-disaster damage assessment** using satellite and UAV (drone) imagery. It takes **before** and **after** disaster images and automatically:
+RESCA is a **multimodal deep learning system for automated post-disaster damage assessment** using satellite and UAV (drone) imagery. It takes **before** and **after** disaster images and automatically:
 
 1. Detects buildings in the area
 2. Identifies which buildings have changed
@@ -16,14 +16,14 @@ RescueVision is a **multimodal deep learning system for automated post-disaster 
 5. Produces emergency assessment reports with urgency scores
 6. Supports emergency route planning avoiding blocked roads
 
-**Real-world use case**: When an earthquake, hurricane, or flood hits a region, first responders need to quickly know which buildings are damaged and how severely. Manual assessment takes days. RescueVision automates this in seconds using satellite imagery.
+**Real-world use case**: When an earthquake, hurricane, or flood hits a region, first responders need to quickly know which buildings are damaged and how severely. Manual assessment takes days. RESCA automates this in seconds using satellite imagery.
 
 ---
 
 ## 2. Project Structure
 
 ```
-RescueVision/
+RESCA/
 ├── configs/                 # 11 YAML experiment configurations
 ├── data/                    # Raw and processed datasets (xBD, FloodNet)
 ├── notebooks/               # Kaggle-ready training notebooks (GPU)
@@ -37,7 +37,7 @@ RescueVision/
 │   ├── export_report.py
 │   ├── prepare_xbd.py
 │   └── build_retrieval_index.py
-├── src/rescuevision/        # Core Python package (~6,080 lines)
+├── src/resca/        # Core Python package (~6,080 lines)
 │   ├── data/                # Dataset parsing, preprocessing, transforms
 │   ├── models/              # Model architectures
 │   ├── training/            # Training loops, optimizers, callbacks
@@ -362,7 +362,7 @@ The project also provides configs for:
 
 **5. Code Quality**
 - ~8,500+ lines of well-structured, modular code
-- Proper package structure (`src/rescuevision/`)
+- Proper package structure (`src/resca/`)
 - Configuration-driven experiments (YAML)
 - Unit tests
 - Documentation and Kaggle-ready notebooks

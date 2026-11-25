@@ -1,4 +1,4 @@
-# RescueVision Frontend Platform
+# RESCA Frontend Platform
 
 Monorepo for everything the user touches: the **Expo field app** (emergency, SOS,
 tracking, missions), the **React web dashboard** (statistics, buildings, cases,

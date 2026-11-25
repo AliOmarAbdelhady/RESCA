@@ -29,10 +29,10 @@ bash mapping/start_map_server.sh          # http://localhost:8000/satellite_city
 - `data/city_{before,after}[_utm].tif` and `output/city_{before,after}.png` — large
   rasters, **git-ignored**. Keep them locally; regenerate from the Maxar bucket if lost.
 - `output/damage_overlay.png` — current "GENERATED" layer: a pixel-change baseline,
-  to be replaced by RescueVision's trained damage/change models.
+  to be replaced by RESCA's trained damage/change models.
 
 ## Next steps (routing)
 
-- Replace `damage_overlay.png` with output from `src/rescuevision` inference.
+- Replace `damage_overlay.png` with output from `src/resca` inference.
 - Extract roads (OSM / FloodNet SegFormer), mark segments blocked by damage,
   compute entry/exit routes (networkx), and feed them to `dashboard/src/components/RouteMap.tsx`.

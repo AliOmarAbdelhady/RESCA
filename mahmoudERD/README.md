@@ -1,12 +1,12 @@
-# RescueVision ERD (draw.io)
+# RESCA ERD (draw.io)
 
-Entity-relationship diagram of the RescueVision PostgreSQL schema
+Entity-relationship diagram of the RESCA PostgreSQL schema
 (`database/schema`): 56 tables, 140 foreign keys, 9 subject areas.
 
 | File | Contents |
 |---|---|
-| `rescuevision-erd.drawio` | Editable diagram (open in draw.io / diagrams.net) |
-| `rescuevision-erd.pdf` | All pages as one PDF |
+| `resca-erd.drawio` | Editable diagram (open in draw.io / diagrams.net) |
+| `resca-erd.pdf` | All pages as one PDF |
 | `png/page-00.png` … `page-10.png` | High-resolution page exports |
 | `tools/gen_erd.py`, `tools/parse_schema.py` | Generator: parses the SQL and rebuilds the diagram |
 
@@ -28,5 +28,5 @@ Entity-relationship diagram of the RescueVision PostgreSQL schema
 ## Regenerate
 
 ```bash
-python3 mahmoudERD/tools/gen_erd.py database/schema mahmoudERD/rescuevision-erd.drawio
+python3 mahmoudERD/tools/gen_erd.py database/schema mahmoudERD/resca-erd.drawio
 ```

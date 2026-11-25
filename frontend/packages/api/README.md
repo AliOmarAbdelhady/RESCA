@@ -29,7 +29,7 @@ src/
 - **No platform code here**: no `localStorage`, no `expo-*`. Apps inject
   `{ baseUrl, wsUrl, tokenStore }` at bootstrap.
 - React appears only in `query/` (hooks shared by both apps).
-- Realtime payloads are validated with zod schemas from `@rescuevision/contracts`
+- Realtime payloads are validated with zod schemas from `@resca/contracts`
   at the socket boundary.
 
 ## After any backend schema change

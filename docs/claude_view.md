@@ -1,13 +1,13 @@
-# RescueVision → Full Disaster-Response Graduation Project
+# RESCA → Full Disaster-Response Graduation Project
 
 ## Context
 
-RescueVision today is a **clean but untrained scaffold**: PyTorch + FastAPI + React + Docker, ~8.5k lines, six real model implementations (U-Net, Siamese U-Net, ChangeFormer, DINOv2 & EfficientNet classifiers, SegFormer). Critical facts about the starting point:
+RESCA today is a **clean but untrained scaffold**: PyTorch + FastAPI + React + Docker, ~8.5k lines, six real model implementations (U-Net, Siamese U-Net, ChangeFormer, DINOv2 & EfficientNet classifiers, SegFormer). Critical facts about the starting point:
 
 - **Zero trained weights, zero data, zero benchmarks.** All checkpoint/FAISS/data dirs are empty; the two "demo" outputs were produced with no models loaded.
 - **Before/after is hard-wired everywhere** — CLI, FastAPI `/predict`, React uploader, and `DisasterPredictor.predict(pre, post)` all *require* a pre-disaster image. There is **no code path** for single-image (no-before) assessment.
 - **"Multimodal" is marketing** — only xBD satellite RGB + FloodNet drone RGB. No SAR/thermal/DEM/GPS. Text is output-only (a VLM report that silently falls back to a template).
-- **Geospatial is scaffolding only** — [routing/geo_utils.py](src/rescuevision/routing/geo_utils.py) has `pixel_to_geo`/`haversine_distance`, but nothing reads EXIF, no CRS/pyproj, no GeoTIFF, no map library. The route planner runs in **pixel space**.
+- **Geospatial is scaffolding only** — [routing/geo_utils.py](src/resca/routing/geo_utils.py) has `pixel_to_geo`/`haversine_distance`, but nothing reads EXIF, no CRS/pyproj, no GeoTIFF, no map library. The route planner runs in **pixel space**.
 - **Zero 3D or simulation.** Git is broken (empty `.git/`) — no commit history.
 
 **Goal:** Expand this into a unique, defensible graduation project covering 8 capabilities — (1) single-image damage assessment, (2) AI reconstruction-cost estimation, (3) victim detection (SARD-style), (4) UAV pixel→GPS localization, (5) 2D+3D area reconstruction, (6) people-in-danger counting, (7) AI rescue/evacuation routing, (8) Gazebo/ROS simulation — with **honest feasibility and limitations** baked in.
@@ -87,14 +87,14 @@ The engineering novelty that makes this project coherent and defensible:
    └─────────────┘   └────────────────┘    └──────────────┘
 ```
 
-**New top-level modules** (all under `src/rescuevision/`, following existing package conventions):
-- `geo/` — EXIF/XMP/telemetry reader + collinearity projector + co-registration helpers. **Extends** [routing/geo_utils.py](src/rescuevision/routing/geo_utils.py) (which already has `pixel_to_geo`, `compute_pixel_scale`, `haversine_distance`).
+**New top-level modules** (all under `src/resca/`, following existing package conventions):
+- `geo/` — EXIF/XMP/telemetry reader + collinearity projector + co-registration helpers. **Extends** [routing/geo_utils.py](src/resca/routing/geo_utils.py) (which already has `pixel_to_geo`, `compute_pixel_scale`, `haversine_distance`).
 - `post_only/` — single-image damage triage (sits *alongside* the existing paired branch; invoked only when no pre-image is given).
 - `reconstruction/` — thin client over NodeODM REST API + an optional nerfstudio/gsplat wrapper.
 - `victims/` — Ultralytics YOLOv8 wrapper fine-tuned on SARD + thermal-anomaly flagger.
 - `counting/` — detector + ByteTrack + danger-zone geofence.
 - `cost/` — deterministic post-processing module (damage class × footprint area × unit-cost table).
-- `routing/` — **extend** the existing pixel-space [route_planner.py](src/rescuevision/routing/route_planner.py) to geo-space; wire it into the predictor (it is currently standalone/orphaned).
+- `routing/` — **extend** the existing pixel-space [route_planner.py](src/resca/routing/route_planner.py) to geo-space; wire it into the predictor (it is currently standalone/orphaned).
 - `sim/` (top-level, outside the Python package) — Gazebo Harmonic worlds + PX4 SITL + ROS 2 bridge + synthetic-capture scripts.
 
 ---
@@ -113,7 +113,7 @@ The engineering novelty that makes this project coherent and defensible:
 | Simulation | **ROS 2 Jazzy + Gazebo Harmonic + PX4 SITL** | Gazebo Classic is EOL (Jan 2025); this is the only forward-looking 2026 choice |
 | Serving | FastAPI (already) + `docker-compose` adding `nodeodm` + (optional) `gazebo` services | One `docker compose up` for the demo |
 
-**Fix-first housekeeping (Phase 0):** re-init git (`git init` + first commit); fix the `str / Path` bug in [scripts/train_damage_seg.py](scripts/train_damage_seg.py):110 and [train_building_seg.py](scripts/train_building_seg.py):98; add `weasyprint` to requirements (used by [reporting/pdf_export.py](src/rescuevision/reporting/pdf_export.py) but not declared).
+**Fix-first housekeeping (Phase 0):** re-init git (`git init` + first commit); fix the `str / Path` bug in [scripts/train_damage_seg.py](scripts/train_damage_seg.py):110 and [train_building_seg.py](scripts/train_building_seg.py):98; add `weasyprint` to requirements (used by [reporting/pdf_export.py](src/resca/reporting/pdf_export.py) but not declared).
 
 ---
 
@@ -191,7 +191,7 @@ The engineering novelty that makes this project coherent and defensible:
 
 ## The unique angle (for examiners)
 
-> **"RescueVision: a georeferenced UAV disaster-response co-pilot with simulation-validated localization."**
+> **"RESCA: a georeferenced UAV disaster-response co-pilot with simulation-validated localization."**
 
 Three defensible novelty pillars:
 

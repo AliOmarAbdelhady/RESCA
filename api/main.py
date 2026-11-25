@@ -1,4 +1,4 @@
-"""RescueVision FastAPI backend."""
+"""RESCA FastAPI backend."""
 
 from __future__ import annotations
 
@@ -33,7 +33,7 @@ from api.schemas import (
 from api.services import inference_service, report_service, retrieval_service
 
 app = FastAPI(
-    title="RescueVision API",
+    title="RESCA API",
     description="Multimodal Deep Learning System for Disaster Damage Assessment",
     version="0.1.0",
 )
@@ -46,9 +46,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-CONFIG_PATH = os.environ.get("RESCUEVISION_CONFIG", "configs/inference.yaml")
-OUTPUTS_DIR = os.environ.get("RESCUEVISION_OUTPUTS", "outputs")
-FAISS_DIR = os.environ.get("RESCUEVISION_FAISS", "outputs/faiss")
+CONFIG_PATH = os.environ.get("RESCA_CONFIG", "configs/inference.yaml")
+OUTPUTS_DIR = os.environ.get("RESCA_OUTPUTS", "outputs")
+FAISS_DIR = os.environ.get("RESCA_FAISS", "outputs/faiss")
 
 
 @app.on_event("startup")

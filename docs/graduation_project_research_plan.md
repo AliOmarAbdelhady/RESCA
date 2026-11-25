@@ -1,4 +1,4 @@
-# RescueVision Graduation Project Research Plan
+# RESCA Graduation Project Research Plan
 
 Research date: 2026-07-03
 
@@ -6,11 +6,11 @@ Research date: 2026-07-03
 
 This project can become a strong graduation project, but it should be framed as a **decision-support and simulation system**, not as a fully autonomous lifesaving system. The realistic version is:
 
-> RescueVision-X: a geospatial AI system that analyzes post-disaster UAV/satellite imagery, maps damaged buildings and blocked roads, estimates approximate building loss, detects visible victims, localizes detections on a map, plans safer rescue routes, and validates the pipeline in Gazebo/PX4 simulation.
+> RESCA-X: a geospatial AI system that analyzes post-disaster UAV/satellite imagery, maps damaged buildings and blocked roads, estimates approximate building loss, detects visible victims, localizes detections on a map, plans safer rescue routes, and validates the pipeline in Gazebo/PX4 simulation.
 
 The critical correction is this: **SARD-style person detection can detect visible or partly visible people in UAV imagery. It cannot reliably detect people buried under collapsed buildings from RGB images.** Under-rubble detection needs other sensing modalities such as radar, acoustic/seismic sensors, CO2 sensors, thermal cameras in favorable cases, or UGV-mounted sensors. That can be included as a research extension or simulated module, but it should not be promised as an operational UAV-photo feature.
 
-## What RescueVision Already Has
+## What RESCA Already Has
 
 The current project already includes a good base:
 
@@ -316,10 +316,10 @@ This is already large and unique enough for a graduation project.
 
 ## Suggested Project Title Options
 
-- RescueVision-X: Geospatial AI for Post-Disaster Damage Mapping and Rescue Route Planning
-- RescueVision 3D: UAV-Based Disaster Scene Understanding, Victim Localization, and Safe Routing
-- RescueVision-GIS: A Simulation-Tested AI System for Post-Disaster Mapping and Response Prioritization
-- RescueVision SAR: UAV Disaster Intelligence for Damage, Road Blockage, Visible Victim Detection, and Rescue Routing
+- RESCA-X: Geospatial AI for Post-Disaster Damage Mapping and Rescue Route Planning
+- RESCA 3D: UAV-Based Disaster Scene Understanding, Victim Localization, and Safe Routing
+- RESCA-GIS: A Simulation-Tested AI System for Post-Disaster Mapping and Response Prioritization
+- RESCA SAR: UAV Disaster Intelligence for Damage, Road Blockage, Visible Victim Detection, and Rescue Routing
 
 ## Evaluation Plan
 

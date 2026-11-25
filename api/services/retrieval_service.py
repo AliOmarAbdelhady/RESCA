@@ -26,7 +26,7 @@ def search_similar(query_image_path: str, top_k: int = 5) -> list[dict]:
         return []
 
     try:
-        from rescuevision.retrieval.search import search_index
+        from resca.retrieval.search import search_index
         results = search_index(
             index_path=str(_index_path),
             metadata_path=str(_metadata_path),

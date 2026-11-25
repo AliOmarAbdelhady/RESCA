@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate a multi-page, publication-quality draw.io ERD for RescueVision.
+"""Generate a multi-page, publication-quality draw.io ERD for RESCA.
 
 Usage: python3 -I gen_erd.py <schema_dir> <out.drawio>
 """
@@ -428,7 +428,7 @@ def legend(p, x0, y0):
 # ---------- Page: cover
 def cover():
     p = Page("cover", "00 · Overview & Legend")
-    header_band(p, 40, 40, 1500, "RescueVision · Database Entity-Relationship Model",
+    header_band(p, 40, 40, 1500, "RESCA · Database Entity-Relationship Model",
                 f"PostgreSQL 18 · PostGIS 3.6 · pgRouting 4.0 · pgvector 0.8   —   {len(tables)} tables · "
                 f"{len(fks)} foreign keys · {len(ENUMS)} enum types · {len(DOMAINS)} subject areas   —   "
                 f"generated from database/schema{(' @ ' + COMMIT) if COMMIT else ''}", "#1D2733")
@@ -494,7 +494,7 @@ def cover():
 # ---------- Page: full ERD
 def full_erd():
     p = Page("full", "01 · Full ERD")
-    header_band(p, 40, 40, 2000, "RescueVision · Full Entity-Relationship Diagram",
+    header_band(p, 40, 40, 2000, "RESCA · Full Entity-Relationship Diagram",
                 f"All {len(tables)} tables and {len(fks)} relationships grouped by subject area. "
                 "Links into users / incidents (shared backbone) are drawn lighter.", "#1D2733")
     boxes = {n: Box(tables[n], ordered_cols(tables[n])) for n in tables}
@@ -650,6 +650,6 @@ pages.append(full_erd())
 for i, d in enumerate(DOMAINS):
     pages.append(domain_page(i + 2, d))
 
-OUT.write_text('<mxfile host="Electron" agent="RescueVision ERD generator" version="24.7.17" pages="'
+OUT.write_text('<mxfile host="Electron" agent="RESCA ERD generator" version="24.7.17" pages="'
                f'{len(pages)}">' + "".join(p.xml() for p in pages) + "</mxfile>")
 print("wrote", OUT, len(pages), "pages")

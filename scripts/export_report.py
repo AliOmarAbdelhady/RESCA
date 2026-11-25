@@ -5,7 +5,7 @@ import argparse
 import logging
 import sys
 
-from rescuevision.reporting.pdf_export import export_report_pdf_from_json
+from resca.reporting.pdf_export import export_report_pdf_from_json
 
 
 def main():

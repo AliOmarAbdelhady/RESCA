@@ -13,7 +13,7 @@ Figures are numbered from 3-2 (3-1 is reserved for Person 3's workflow figure);
 tables from 3-39 (Section 3.2 ends at Table 3-38).
 -->
 
-This section describes how the proposed RescueVision platform is organised to meet the requirements in Section 3.2. It covers the System Analysis and Design topics listed in the Project I guide [4]: architecture, design rationale, database and file design, user interface design, class, sequence and use case diagrams, and the detailed design of the parts that carry the most risk. Each figure is linked to the requirement and use-case identifiers of Section 3.2, and Table 3-48 at the end of the section collects those links. The design is a proposal. Diagrams describe intended behaviour, and the screen illustrations in Section 3.3.4 are design illustrations, not screenshots of working software; the evidence produced so far is reported in Chapter 4.
+This section describes how the proposed RESCA platform is organised to meet the requirements in Section 3.2. It covers the System Analysis and Design topics listed in the Project I guide [4]: architecture, design rationale, database and file design, user interface design, class, sequence and use case diagrams, and the detailed design of the parts that carry the most risk. Each figure is linked to the requirement and use-case identifiers of Section 3.2, and Table 3-48 at the end of the section collects those links. The design is a proposal. Diagrams describe intended behaviour, and the screen illustrations in Section 3.3.4 are design illustrations, not screenshots of working software; the evidence produced so far is reported in Chapter 4.
 
 Two sources of notation are used throughout. Structural and behavioural diagrams follow the Unified Modeling Language (UML) 2.5.1 [27]. The architecture is described through several views (context, logical and deployment), in the manner of ISO/IEC/IEEE 42010 [28], because no single diagram can show both what the platform does and where it runs.
 
@@ -21,9 +21,9 @@ Two sources of notation are used throughout. Structural and behavioural diagrams
 
 #### 3.3.1.1 Context View
 
-Figure 3-2 places RescueVision among the people and services it depends on. Staff of the four agency types (Government, Police, EMS and Fire) use the web command console. Field responders use the mobile field application, and members of the public use the citizen request channel. All three surfaces work on one set of shared incident services. Five external parties exchange information with the platform: the drones and satellites that supply imagery (IR-HW-01, IR-HW-02), open map data that supplies building footprints and roads (IR-SW-02), a utility feed that reports whether power lines are energised where such a feed can be agreed (IR-SW-04), the push-notification services of Android and iOS (IR-SW-05), and an SMS gateway for citizen one-time codes (IR-SW-06).
+Figure 3-2 places RESCA among the people and services it depends on. Staff of the four agency types (Government, Police, EMS and Fire) use the web command console. Field responders use the mobile field application, and members of the public use the citizen request channel. All three surfaces work on one set of shared incident services. Five external parties exchange information with the platform: the drones and satellites that supply imagery (IR-HW-01, IR-HW-02), open map data that supplies building footprints and roads (IR-SW-02), a utility feed that reports whether power lines are energised where such a feed can be agreed (IR-SW-04), the push-notification services of Android and iOS (IR-SW-05), and an SMS gateway for citizen one-time codes (IR-SW-06).
 
-!fig[fig5-01_context.png|Figure 3-2: Context view of the proposed RescueVision platform|Context diagram: agency staff, platform administrator, field responder and citizen use three client surfaces that share one set of incident services; imagery sources, open map data and a utility feed send data in; push and SMS services receive notifications.]
+!fig[fig5-01_context.png|Figure 3-2: Context view of the proposed RESCA platform|Context diagram: agency staff, platform administrator, field responder and citizen use three client surfaces that share one set of incident services; imagery sources, open map data and a utility feed send data in; push and SMS services receive notifications.]
 
 The context view fixes the system boundary. The platform does not fly drones or control the power network. It receives what drones capture and what a utility reports, and it treats both as inputs whose quality may vary. This boundary is the reason the design records the source and age of every observation (Section 3.3.3).
 
@@ -31,7 +31,7 @@ The context view fixes the system boundary. The platform does not fly drones or 
 
 Figure 3-3 shows the main software components and the direction in which information moves between them. The design has five layers.
 
-!fig[fig5-02_logical.png|Figure 3-3: Logical architecture of RescueVision|Layered component diagram: presentation clients, an access layer with the application interface and live-update channel, nine domain modules, a background analysis pipeline with a job queue, workers and a model registry, and a data layer with the spatial database, object storage and map-tile service.]
+!fig[fig5-02_logical.png|Figure 3-3: Logical architecture of RESCA|Layered component diagram: presentation clients, an access layer with the application interface and live-update channel, nine domain modules, a background analysis pipeline with a job queue, workers and a model registry, and a data layer with the spatial database, object storage and map-tile service.]
 
 The **presentation layer** contains the three client surfaces. The mobile application keeps a local queue so that a responder can read tasks and record reports without coverage and send them later without duplicates (FR-FC-05, IR-CM-03).
 
@@ -107,7 +107,7 @@ The **assistance case** is where the person-related information meets the respon
 
 The 56 tables of the logical design are grouped into eight domains. Table 3-41 lists them; the domain names match the modules of Figure 3-3.
 
-Table: Table 3-41: Information domains of the RescueVision database
+Table: Table 3-41: Information domains of the RESCA database
 | Domain | Purpose | Main tables | Tables | Serves |
 | D1 Identity and Access | Agencies, roles, permissions, users, sessions, devices, teams and vehicles. | agencies, users, roles, teams, vehicles | 10 | FR-AC, NFR-SC |
 | D2 Incidents and Operations | The shared incident, agency participation, zones, missions and assignments. | incidents, incident_agencies, missions, mission_assignments | 6 | FR-AC, FR-MR-05 |
@@ -186,10 +186,10 @@ Decision D-04 places access control in the database. The design uses PostgreSQL 
 
 Table: Table 3-43: Database roles and what they may access
 | Role | Used by | Access |
-| rv_app | The application interface, acting for a signed-in agency user. | Rows allowed by the policies for that user's agency, role and incident participation. |
-| rv_worker | The analysis pipeline. | All operational rows; it acts for the platform, not for a user. |
-| rv_citizen | The citizen request channel. | Only the citizen's own profile, requests and photos. |
-| rv_readonly | Analytics and reporting. | Read-only operational data; no credentials, sessions, citizen identities or audit log. |
+| resca_app | The application interface, acting for a signed-in agency user. | Rows allowed by the policies for that user's agency, role and incident participation. |
+| resca_worker | The analysis pipeline. | All operational rows; it acts for the platform, not for a user. |
+| resca_citizen | The citizen request channel. | Only the citizen's own profile, requests and photos. |
+| resca_readonly | Analytics and reporting. | Read-only operational data; no credentials, sessions, citizen identities or audit log. |
 
 At the start of each request, the application interface records the identifier of the signed-in user for the duration of that transaction only, so a pooled connection cannot carry one user's identity into another user's request. Every policy derives the user's agency, role and permissions from that identifier at the time of the request. A suspended user therefore loses access on the next request, and an agency loses access to an incident as soon as its participation is withdrawn (FR-AC-05, NFR-PV-02). Draft reports remain visible only inside the authoring agency until they are approved or shared (FR-RP-04, FR-RP-06).
 
@@ -308,7 +308,7 @@ UC-02 shows decision D-03 at work. The API accepts the analysis request and retu
 
 Figure 3-31 gives an overview of the ten use cases of Section 3.2.3 and the actors who take part in them. The narratives, with their main and alternative flows, are in Section 3.2.3 and are not repeated here.
 
-!fig[fig5-16_usecase.png|Figure 3-31: Use case diagram of RescueVision|UML use case diagram with actors Commander, Analyst, Field Responder, Citizen, Platform Administrator and System, connected to use cases UC-01 to UC-10 and Raise an SOS, with include and extend relationships.]
+!fig[fig5-16_usecase.png|Figure 3-31: Use case diagram of RESCA|UML use case diagram with actors Commander, Analyst, Field Responder, Citizen, Platform Administrator and System, connected to use cases UC-01 to UC-10 and Raise an SOS, with include and extend relationships.]
 
 The diagram shows three relationships between use cases. UC-09 includes UC-04, because a responder carrying out a mission receives the route planned for it; UC-06 includes UC-04 for the route to a new case; and UC-05 includes UC-02, because detections exist only after analysis has run. Raising an SOS extends UC-09: it can interrupt any step of a mission when the responder is in danger. The System actor initiates UC-07, which is the only use case started by the platform itself.
 

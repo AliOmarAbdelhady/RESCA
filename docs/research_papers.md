@@ -1,6 +1,6 @@
-# Research Papers for RescueVision
+# Research Papers for RESCA
 
-Foundational deep learning papers behind the models and methods used in RescueVision, ranked by importance to the project (1 = most important).
+Foundational deep learning papers behind the models and methods used in RESCA, ranked by importance to the project (1 = most important).
 
 > Links have not been checked yet. Open each one to confirm the title and authors before citing it in the report.
 

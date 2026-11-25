@@ -9,12 +9,12 @@ import pandas as pd
 import torch
 from torch.utils.data import DataLoader
 
-from rescuevision.data.datasets import XBDDamageCropDataset
-from rescuevision.data.transforms import get_classification_transforms
-from rescuevision.models.losses import FocalLoss, compute_class_weights
-from rescuevision.training.train_damage_classifier import train_damage_classifier
-from rescuevision.utils.config import load_config
-from rescuevision.utils.seed import set_seed
+from resca.data.datasets import XBDDamageCropDataset
+from resca.data.transforms import get_classification_transforms
+from resca.models.losses import FocalLoss, compute_class_weights
+from resca.training.train_damage_classifier import train_damage_classifier
+from resca.utils.config import load_config
+from resca.utils.seed import set_seed
 
 
 def main():
@@ -84,7 +84,7 @@ def main():
     # Create model based on config
     model_name = config.get("model", {}).get("name", "dinov2_classifier")
     if model_name == "dinov2_classifier":
-        from rescuevision.models.dinov2_classifier import DINOv2Classifier
+        from resca.models.dinov2_classifier import DINOv2Classifier
 
         model = DINOv2Classifier(
             backbone=config["model"].get("backbone", "facebook/dinov2-base"),
@@ -94,7 +94,7 @@ def main():
             dropout=config["model"].get("dropout", 0.3),
         )
     elif model_name == "efficientnet_classifier":
-        from rescuevision.models.efficientnet_classifier import EfficientNetClassifier
+        from resca.models.efficientnet_classifier import EfficientNetClassifier
 
         model = EfficientNetClassifier(
             backbone=config["model"].get("backbone", "efficientnet_b3"),

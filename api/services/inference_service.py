@@ -9,8 +9,8 @@ import uuid
 from pathlib import Path
 from typing import Any
 
-from rescuevision.utils.config import load_config
-from rescuevision.utils.io import ensure_dir
+from resca.utils.config import load_config
+from resca.utils.io import ensure_dir
 
 logger = logging.getLogger(__name__)
 
@@ -28,7 +28,7 @@ def init_service(config_path: str, outputs_root: str) -> None:
     device = config.get("device", "cuda")
 
     try:
-        from rescuevision.inference.predictor import DisasterPredictor
+        from resca.inference.predictor import DisasterPredictor
         _predictor = DisasterPredictor(config, device=device)
         logger.info("Inference service initialized successfully")
     except Exception as e:
@@ -90,8 +90,8 @@ def run_prediction(
 
     # Generate report if requested
     if enable_report:
-        from rescuevision.reporting.template_report import generate_report
-        from rescuevision.reporting.pdf_export import export_report_pdf
+        from resca.reporting.template_report import generate_report
+        from resca.reporting.pdf_export import export_report_pdf
 
         report, md_text = generate_report(
             summary,

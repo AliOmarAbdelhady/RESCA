@@ -8,7 +8,7 @@ actor "Platform\nAdministrator" as pa
 actor "Field Responder" as fr
 actor "Citizen" as cz
 
-rectangle "<b>RescueVision platform (proposed)</b>" as RV #EAF1F8 {
+rectangle "<b>RESCA platform (proposed)</b>" as RV #EAF1F8 {
   rectangle "Web command\nconsole" as web
   rectangle "Mobile field\napplication" as mob
   rectangle "Citizen request\nchannel" as cit

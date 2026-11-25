@@ -14,7 +14,7 @@ actor "Citizen" as CZ
 actor "Platform\nAdministrator" as PA
 actor "System" as SYS
 
-rectangle "RescueVision" {
+rectangle "RESCA" {
   usecase "UC-01 Open an incident and\nbring in partner agencies" as UC01
   usecase "UC-02 Upload imagery\nand run analysis" as UC02
   usecase "UC-03 Review building damage\nand restoration cost" as UC03

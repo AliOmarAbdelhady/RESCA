@@ -1,4 +1,4 @@
-# apps/mobile — RescueVision Field App (Expo / React Native)
+# apps/mobile — RESCA Field App (Expo / React Native)
 
 The responder's tool: **emergency/SOS, live location tracking, missions, imagery
 capture, offline maps**. Built with Expo + Expo Router.
@@ -31,7 +31,7 @@ metro.config.js         # monorepo watchFolders + nodeModulesPaths
 
 ## Rules
 
-- No `fetch`/`axios` anywhere — data flows through `@rescuevision/api` hooks.
+- No `fetch`/`axios` anywhere — data flows through `@resca/api` hooks.
 - Native modules are called only inside `src/services/` — features import interfaces.
 - Env via `EXPO_PUBLIC_*` vars, injected once in `src/lib/` bootstrap.
 - Deep links (`case/{id}`, SOS alerts) resolve through typed Expo Router routes.

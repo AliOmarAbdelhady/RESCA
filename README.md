@@ -1,4 +1,4 @@
-# RescueVision: Multimodal Deep Learning System for Disaster Damage Assessment
+# RESCA: Multimodal Deep Learning System for Disaster Damage Assessment
 
 A complete AI pipeline for automated post-disaster damage assessment using satellite and UAV imagery.
 
@@ -24,7 +24,7 @@ A complete AI pipeline for automated post-disaster damage assessment using satel
 ### Installation
 
 ```bash
-cd RescueVision
+cd RESCA
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -86,12 +86,12 @@ python scripts/export_report.py \
 ## Project Structure
 
 ```
-RescueVision/
+RESCA/
 ├── configs/           # YAML experiment configurations
 ├── data/              # Raw and processed datasets
 ├── notebooks/         # Kaggle-ready training notebooks
 ├── scripts/           # CLI entry points
-├── src/rescuevision/  # Core Python package
+├── src/resca/  # Core Python package
 │   ├── data/          # Dataset parsing, preprocessing, transforms
 │   ├── models/        # Model architectures (U-Net, Siamese, DINOv2, etc.)
 │   ├── training/      # Training loops, optimizers, callbacks

@@ -7,13 +7,13 @@ import sys
 
 from torch.utils.data import DataLoader
 
-from rescuevision.data.datasets import XBDChangeDetectionDataset
-from rescuevision.data.transforms import get_segmentation_transforms
-from rescuevision.models.losses import BCEDiceLoss
-from rescuevision.models.siamese_unet import SiameseUNet
-from rescuevision.training.train_change_detection import train_change_detection
-from rescuevision.utils.config import load_config
-from rescuevision.utils.seed import set_seed
+from resca.data.datasets import XBDChangeDetectionDataset
+from resca.data.transforms import get_segmentation_transforms
+from resca.models.losses import BCEDiceLoss
+from resca.models.siamese_unet import SiameseUNet
+from resca.training.train_change_detection import train_change_detection
+from resca.utils.config import load_config
+from resca.utils.seed import set_seed
 
 
 def main():

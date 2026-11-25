@@ -1,6 +1,6 @@
 """Generate the per-domain logical ERD figures (PlantUML) for Section 3.3.3.
 
-Reads the live RescueVision catalog through psql (standard PG* variables), so
+Reads the live RESCA catalog through psql (standard PG* variables), so
 the figures always match database/schema. One .puml per domain is written to
 figures/src/. Columns are shown with PK/FK markers and compact types;
 references to tables in other domains are written on the column ("→ incidents")
@@ -57,7 +57,7 @@ OUT = Path(__file__).resolve().parent.parent / "figures" / "src"
 
 
 def q(sql):
-    db = os.environ.get("PGDATABASE", "rescuevision")
+    db = os.environ.get("PGDATABASE", "resca")
     r = subprocess.run(["psql", "-X", "-At", "-F", "\t", "-d", db, "-c", sql],
                        check=True, capture_output=True, text=True)
     return [line.split("\t") for line in r.stdout.splitlines() if line]

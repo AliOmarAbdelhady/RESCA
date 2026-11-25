@@ -22,4 +22,4 @@ src/
 - If two surfaces would otherwise redefine the same domain concept, the concept
   belongs here.
 - Adding an event type = add zod schema + regenerate nothing else; both apps get
-  compile-time knowledge of it through `@rescuevision/api/realtime`.
+  compile-time knowledge of it through `@resca/api/realtime`.

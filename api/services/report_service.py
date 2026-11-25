@@ -61,8 +61,8 @@ def generate_report_for_case(case_id: str) -> dict | None:
         meta = json.load(f)
     summary = meta.get("summary", {})
 
-    from rescuevision.reporting.template_report import generate_report
-    from rescuevision.reporting.pdf_export import export_report_pdf
+    from resca.reporting.template_report import generate_report
+    from resca.reporting.pdf_export import export_report_pdf
 
     _, md_text = generate_report(summary, case_id=case_id)
     (case_dir / "report.md").write_text(md_text)

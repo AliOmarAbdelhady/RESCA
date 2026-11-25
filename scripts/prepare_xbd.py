@@ -5,7 +5,7 @@ import argparse
 import logging
 import sys
 
-from rescuevision.data.xbd_preprocess import preprocess_xbd
+from resca.data.xbd_preprocess import preprocess_xbd
 
 
 def main():

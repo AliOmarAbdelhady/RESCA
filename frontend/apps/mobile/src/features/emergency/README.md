@@ -3,7 +3,7 @@
 The one-tap lifeline. Scope:
 
 - SOS trigger flow (hold-to-confirm), note + photo attachment
-- emits `sos` WebSocket event via `@rescuevision/api/realtime`
+- emits `sos` WebSocket event via `@resca/api/realtime`
 - escalation state machine (triggered → acknowledged by command → resolved)
 - "share my location" request handling when command asks for a fix
 

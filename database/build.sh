@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
-# Build the RescueVision database from scratch.
+# Build the RESCA database from scratch.
 #
 #   ./database/build.sh                 # schema + reference data + demo scenario
 #   ./database/build.sh --no-demo       # schema + reference data only
-#   DB_NAME=rv_test ./database/build.sh # another database name
+#   DB_NAME=resca_test ./database/build.sh # another database name
 #
 # Connection uses the standard libpq variables (PGHOST, PGPORT, PGUSER, PGPASSWORD).
 # WARNING: drops and recreates $DB_NAME.
 set -euo pipefail
 
-DB_NAME="${DB_NAME:-rescuevision}"
+DB_NAME="${DB_NAME:-resca}"
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WITH_DEMO=1
 [[ "${1:-}" == "--no-demo" ]] && WITH_DEMO=0

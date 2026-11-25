@@ -1,4 +1,4 @@
-# RescueVision repository guidance
+# RESCA repository guidance
 
 ## Current focus
 

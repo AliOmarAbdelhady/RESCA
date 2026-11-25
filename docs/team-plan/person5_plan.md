@@ -12,7 +12,7 @@ design responds to the constraints in Section 1.7 [Project I guide, p. 3].
 
 Section 3.3 is finished when a reader can do three things without help:
 
-1. Explain how RescueVision is organised and why it is organised that way.
+1. Explain how RESCA is organised and why it is organised that way.
 2. Follow any requirement in Section 3.2 to the diagram and design decision that satisfies it.
 3. Tell proposed design illustrations apart from screenshots of working software.
 

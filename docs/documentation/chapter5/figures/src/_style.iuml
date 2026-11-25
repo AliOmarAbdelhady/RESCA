@@ -1,4 +1,4 @@
-' Shared style for the Chapter Five figures (print-friendly RescueVision palette).
+' Shared style for the Chapter Five figures (print-friendly RESCA palette).
 ' Ink #1A2538, slate #5C7A96, panel tint #EAF1F8, accent cyan #0091A8 (print-safe),
 ' alert amber #E07400. Text is never smaller than 11 pt at the exported size.
 skinparam dpi 200
