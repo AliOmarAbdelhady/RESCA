@@ -61,7 +61,7 @@ Event cursors must be gap-free in commit order. A Postgres sequence alone is not
 
 ## CPU-only limits
 
-- No GPU anywhere in production. Models run as ONNX on CPU with threads set to physical cores.
+- No GPU anywhere in production (training and testing use GPUs; see [AI.md](AI.md)). Models run as ONNX on CPU with threads set to physical cores.
 - Heavy batch work (orthomosaic stitching, 3D tiles, area-wide sweeps) is done before the demo and loaded by hash.
 - No language model runs on the server.
 - One user at a time is the demo target. Budgets in the area docs are measured on the real server before they are trusted.
