@@ -16,9 +16,9 @@ ai/
   model-cards/<model>-<version>.md
 ```
 
-Features: `building-damage` (F1), `flood-road-segmentation` (F2), `person-detection` (F3), `person-tracking` (F4), `compound-hazards` (F5), `reports-retrieval` (F6). Existing notebooks move into these folders with history when the owner approves the cleanup.
+Features: `building-damage` (F1), `flood-road-segmentation` (F2), `person-detection` (F3), `person-tracking` (F4), `compound-hazards` (F5), `reports-retrieval` (F6). Today: `building-damage` has v1 to v4 and `flood-road-segmentation` has v1 and v2. Each version folder has a README listing its notebooks. v1 to v3 hold several notebooks each and predate the layout below. v4 also holds its own research code (`src/`, `tests/`, `configs/`, `scripts/`, `notes/`) because it is still an experiment. Code moves into `ai/src/resca_ai` only once it has proved itself, and from then on it must pass every gate.
 
-### What a version folder holds
+### What a new version folder holds
 
 ```
 ai/kaggle/building-damage/v3/

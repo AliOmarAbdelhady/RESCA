@@ -1,2 +1,0 @@
-"""RescueVision research package."""
-
