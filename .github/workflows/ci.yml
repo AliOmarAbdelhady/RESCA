@@ -1,0 +1,162 @@
+# One required check: "ci/ok" (rule G3, docs/DEV_WORKFLOW.md).
+# Every job runs on every pull request and decides inside itself whether its area
+# changed. A job that has nothing to check passes with a notice; a job whose area
+# exists but whose gate is missing fails (fail closed).
+name: ci
+
+# Owner rule: workflows run for the main branch only (pull requests into main,
+# and pushes to main). Pushes to other branches do not run CI.
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  OWNER_LOGIN: AliOmarAbdelhady
+
+jobs:
+  policy:
+    name: policy (locked paths)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    permissions:
+      contents: read
+      issues: read
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Was the owner-approved label added by the owner?
+        id: approval
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          actor=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${PR}/events" --paginate \
+            -q '[.[] | select(.event=="labeled" and .label.name=="owner-approved")] | last | .actor.login // ""')
+          labeled=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${PR}" -q '[.labels[].name] | index("owner-approved") != null')
+          if [ "$labeled" = "true" ] && [ "$actor" = "$OWNER_LOGIN" ]; then
+            echo "approved=1" >> "$GITHUB_OUTPUT"
+          else
+            echo "approved=0" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Check locked paths against the base branch's list
+        env:
+          RESCA_LOCKED_CHANGE_APPROVED: ${{ steps.approval.outputs.approved }}
+        run: |
+          base="${{ github.event.pull_request.base.sha }}"
+          if ! git cat-file -e "$base:.github/locked-paths.txt" 2>/dev/null; then
+            echo "::notice::base branch has no lock list yet (bootstrap PR); nothing to enforce"; exit 0
+          fi
+          # Run the base branch's copy of the checker, so a PR cannot weaken it.
+          git show "$base:tools/policy/check_locked_paths.py" > /tmp/check_locked_paths.py
+          python3 /tmp/check_locked_paths.py \
+            --base "${{ github.event.pull_request.base.sha }}" \
+            --head "${{ github.event.pull_request.head.sha }}"
+
+  secrets:
+    name: secrets (gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Scan the commits in this change
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            range="${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}"
+          else
+            range="${{ github.event.before }}..${{ github.sha }}"
+            git cat-file -e "${{ github.event.before }}" 2>/dev/null || range="${{ github.sha }}~1..${{ github.sha }}"
+          fi
+          docker run --rm -v "$PWD:/repo" -w /repo ghcr.io/gitleaks/gitleaks:v8.30.1 \
+            git --redact --no-banner --log-opts="$range" .
+
+  database:
+    name: database (schema + checks.sql)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Did the database change?
+        id: changed
+        run: |
+          base="${{ github.event.pull_request.base.sha || github.event.before }}"
+          if git cat-file -e "$base" 2>/dev/null && ! git diff --name-only "$base" HEAD | grep -q '^database/'; then
+            echo "run=0" >> "$GITHUB_OUTPUT"; echo "::notice::database/ unchanged; gate not needed"
+          else
+            echo "run=1" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Build the schema in a disposable PostGIS 18 and run the self-checks
+        if: steps.changed.outputs.run == '1'
+        run: |
+          docker run -d --name db -e POSTGRES_PASSWORD=ci -v "$PWD:/repo" postgis/postgis:18-3.6
+          docker exec db bash -c "apt-get update -qq && apt-get install -y -qq postgresql-18-pgrouting postgresql-18-pgvector >/dev/null"
+          docker restart db
+          until docker exec db pg_isready -U postgres >/dev/null 2>&1; do sleep 1; done
+          docker exec -e PGUSER=postgres -e PGPASSWORD=ci -e PGHOST=localhost db bash /repo/database/build.sh
+
+  python:
+    name: python (ruff)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@1db35dd8eee11c5894872e0b383ae6c406cf738d # v10.4.0
+      - name: Lint and format-check the application Python
+        run: |
+          paths=$(for p in backend ai tools; do [ -d "$p" ] && find "$p" -name '*.py' -print -quit | grep -q . && echo "$p"; done)
+          if [ -z "$paths" ]; then echo "::notice::no application Python yet"; exit 0; fi
+          uvx ruff@0.17.6 check $paths
+          uvx ruff@0.17.6 format --check $paths
+          if [ -f backend/pyproject.toml ]; then
+            echo "::error::backend exists: add mypy --strict, lint-imports and pytest to this job (docs/BACKEND.md gates)"; exit 1
+          fi
+
+  frontend:
+    name: frontend (lint, types, tests)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Run the frontend gates once code exists
+        working-directory: frontend
+        run: |
+          code=$(find apps packages -type f \( -name '*.ts' -o -name '*.tsx' \) -not -path '*/node_modules/*' | head -1)
+          if [ -z "$code" ]; then echo "::notice::no frontend code yet"; exit 0; fi
+          if [ ! -f pnpm-lock.yaml ]; then
+            echo "::error::frontend code exists but pnpm-lock.yaml is missing (rule X5)"; exit 1
+          fi
+          corepack enable
+          pnpm install --frozen-lockfile
+          pnpm run lint
+          pnpm run typecheck
+          pnpm run test
+
+  ok:
+    name: ci/ok
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [policy, secrets, database, python, frontend]
+    steps:
+      - name: Every gate passed or had nothing to check
+        run: |
+          echo '${{ toJSON(needs) }}' > needs.json
+          python3 - <<'EOF'
+          import json, sys
+          needs = json.load(open("needs.json"))
+          bad = {k: v["result"] for k, v in needs.items() if v["result"] not in ("success", "skipped")}
+          # "policy" is skipped only on pushes to main; any other skip is a failure.
+          bad.update({k: "skipped" for k, v in needs.items() if v["result"] == "skipped" and k != "policy"})
+          if bad:
+              sys.exit(f"ci/ok failed: {bad}")
+          print("ci/ok: all gates green")
+          EOF

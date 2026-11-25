@@ -9,12 +9,12 @@ urgency badges, role guards — so the product speaks one vocabulary everywhere.
 
 ```
 src/
-  damage.ts      # DAMAGE_CLASSES: id, label, color (green→yellow→orange→red scale)
+  damage.ts      # DAMAGE_CLASSES: id, i18n label key, severity token name (no colour values, W1)
   urgency.ts     # urgency levels + thresholds
   geo.ts         # GeoJSON feature types, coordinate helpers, distance units
-  user.ts        # roles (COMMANDER / ANALYST / RESPONDER) + permissions matrix
-  events.ts      # zod schemas for every WebSocket event (position, sos,
-                 #   job-progress, victim) — validated at the socket boundary
+  user.ts        # roles (COMMANDER / ANALYST / FIELD_RESPONDER / AGENCY_ADMIN) + permissions matrix
+  events.ts      # zod schemas for every SSE event envelope (C2): position, sos,
+                 #   job-progress, victim; validated at the stream boundary
 ```
 
 ## Rules

@@ -1,0 +1,35 @@
+# Fast local checks on staged files (docs/DEV_WORKFLOW.md). CI repeats them and is
+# the authority. Install once with `make bootstrap`. Never commit with --no-verify.
+repos:
+  - repo: local
+    hooks:
+      - id: locked-paths
+        name: locked paths (owner-only files, rule G2)
+        entry: python3 tools/policy/check_locked_paths.py --staged
+        language: system
+        pass_filenames: false
+        always_run: true
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+        args: ["--maxkb=1024"]  # model weights and datasets never enter Git (rule A1)
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: check-json
+      - id: check-toml
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.6
+    hooks:
+      - id: ruff-check
+      - id: ruff-format
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.1
+    hooks:
+      - id: gitleaks

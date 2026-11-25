@@ -1,0 +1,30 @@
+# Paths only the owner may change (rule G2, docs/DEV_WORKFLOW.md).
+# One glob per line. "**" matches any number of folders.
+# CI reads this file from the base branch, so a pull request cannot unlock itself.
+
+# Agent instructions
+AGENTS.md
+**/AGENTS.md
+CLAUDE.md
+GEMINI.md
+
+# Architecture, decisions and workflow
+docs/ARCHITECTURE.md
+docs/DECISIONS.md
+docs/DEV_WORKFLOW.md
+docs/RULES_INDEX.md
+
+# CI, review and policy
+.github/**
+tools/policy/**
+
+# Gates and their thresholds
+Makefile
+.pre-commit-config.yaml
+ruff.toml
+.importlinter
+frontend/eslint.config.js
+frontend/packages/config/**
+
+# Database security model
+database/schema/15_security.sql

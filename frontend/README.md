@@ -17,7 +17,7 @@ frontend/
 └── tooling/        # generate-api script, docker configs
 ```
 
-**Read [`docs/FRONTEND_ARCHITECTURE.md`](../docs/FRONTEND_ARCHITECTURE.md) before
+**Read [`docs/FRONTEND.md`](../docs/FRONTEND.md) before
 writing code** — it defines the dependency law, folder responsibilities, data flows,
 and the decisions behind them.
 
@@ -35,5 +35,5 @@ pnpm lint
 
 ## The one rule
 
-Apps import packages. Packages never import apps. All HTTP/WebSocket traffic goes
+Apps import packages. Packages never import apps. All HTTP and SSE traffic goes
 through `packages/api` — no `fetch`/`axios` in feature code, ever.

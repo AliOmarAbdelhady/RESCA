@@ -1,0 +1,20 @@
+# The owner reviews every change to these paths (rule G2). Keep this list in step
+# with .github/locked-paths.txt, which CI enforces.
+
+AGENTS.md                         @AliOmarAbdelhady
+**/AGENTS.md                      @AliOmarAbdelhady
+CLAUDE.md                         @AliOmarAbdelhady
+GEMINI.md                         @AliOmarAbdelhady
+/docs/ARCHITECTURE.md             @AliOmarAbdelhady
+/docs/DECISIONS.md                @AliOmarAbdelhady
+/docs/DEV_WORKFLOW.md             @AliOmarAbdelhady
+/docs/RULES_INDEX.md              @AliOmarAbdelhady
+/.github/                         @AliOmarAbdelhady
+/tools/policy/                    @AliOmarAbdelhady
+/Makefile                         @AliOmarAbdelhady
+/.pre-commit-config.yaml          @AliOmarAbdelhady
+/ruff.toml                        @AliOmarAbdelhady
+/.importlinter                    @AliOmarAbdelhady
+/frontend/eslint.config.js        @AliOmarAbdelhady
+/frontend/packages/config/        @AliOmarAbdelhady
+/database/schema/15_security.sql  @AliOmarAbdelhady
