@@ -2,16 +2,21 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
-from typing import Callable, Iterable
+from typing import Callable
 
 import numpy as np
 import torch
 from PIL import Image, ImageDraw
 from torch.utils.data import Dataset
+from shapely import wkt
+from shapely.geometry import shape
+from shapely.validation import make_valid
 
 from .contracts import ContractError, SampleRecord
+from .xbd_audited_pre_geometries import AUDITED_PRE_INVALID_WKT as _AUDITED_PRE_INVALID_WKT
 
 
 _DAMAGE_IDS = {
@@ -105,7 +110,7 @@ def _rasterize_xbd_label(path: Path, *, width: int, height: int) -> tuple[np.nda
     damage = np.full((height, width), 255, dtype=np.uint8)
     loc_valid = np.ones((height, width), dtype=bool)
     damage_valid = np.zeros((height, width), dtype=bool)
-    for feature in payload.get("features", []):
+    for feature in _xbd_pixel_features(payload):
         properties = feature.get("properties") or {}
         if properties.get("feature_type", "building") not in {"building", "building_polygon", "building-footprint"}:
             continue
@@ -113,9 +118,14 @@ def _rasterize_xbd_label(path: Path, *, width: int, height: int) -> tuple[np.nda
         if isinstance(subtype, str):
             subtype = subtype.strip().lower().replace("_", "-").replace(" ", "-")
         class_id = _DAMAGE_IDS.get(subtype)
-        for polygon in _polygons(feature.get("geometry")):
+        geometry = _feature_geometry(feature)
+        polygons = [geometry] if geometry.geom_type == "Polygon" else list(geometry.geoms)
+        for polygon in polygons:
             mask = Image.new("L", (width, height), 0)
-            ImageDraw.Draw(mask).polygon(polygon, fill=1)
+            draw = ImageDraw.Draw(mask)
+            draw.polygon(list(polygon.exterior.coords), fill=1)
+            for interior in polygon.interiors:
+                draw.polygon(list(interior.coords), fill=0)
             polygon_mask = np.asarray(mask, dtype=bool)
             loc[polygon_mask] = 1
             if class_id is not None:
@@ -124,19 +134,43 @@ def _rasterize_xbd_label(path: Path, *, width: int, height: int) -> tuple[np.nda
     return loc, damage, loc_valid, damage_valid
 
 
-def _polygons(geometry: object) -> Iterable[list[tuple[float, float]]]:
-    if not isinstance(geometry, dict):
-        return []
-    kind = geometry.get("type")
-    coordinates = geometry.get("coordinates")
-    if kind == "Polygon" and isinstance(coordinates, list):
-        return [
-            [(float(point[0]), float(point[1])) for point in coordinates[0] if len(point) >= 2]
-        ] if coordinates and coordinates[0] else []
-    if kind == "MultiPolygon" and isinstance(coordinates, list):
-        return [
-            [(float(point[0]), float(point[1])) for point in polygon[0] if len(point) >= 2]
-            for polygon in coordinates
-            if polygon and polygon[0]
-        ]
-    return []
+def _xbd_pixel_features(payload: object) -> list[dict]:
+    if not isinstance(payload, dict):
+        raise ContractError("label must be an object containing pixel features")
+    features = payload.get("features")
+    if isinstance(features, dict):
+        features = features.get("xy")
+    if not isinstance(features, list) or any(not isinstance(f, dict) for f in features):
+        raise ContractError("label must contain a list of pixel features (features.xy)")
+    return features
+
+
+def _feature_geometry(feature: dict):
+    try:
+        geometry = wkt.loads(feature["wkt"]) if "wkt" in feature else shape(feature["geometry"])
+        # One xBD post-event polygon has a self-intersection. Its exact WKT
+        # and UID were audited remotely; make_valid preserves its raster and
+        # only separates a zero-area line. Other invalid polygons still fail.
+        raw = feature.get("wkt")
+        uid = (feature.get("properties") or {}).get("uid")
+        # For audited pre-event polygons preserve the original outline exactly;
+        # make_valid changes some ground-truth rasters. The UID and source WKT
+        # must both match the complete-dataset diagnostic.
+        if (not geometry.is_valid and geometry.geom_type == "Polygon"
+                and not geometry.is_empty and isinstance(raw, str)
+                and _AUDITED_PRE_INVALID_WKT.get(uid) == hashlib.sha256(raw.encode("utf-8")).hexdigest()):
+            return geometry
+        if (not geometry.is_valid and isinstance(raw, str)
+                and uid == "2aaab43d-9165-49eb-8dee-a16d86f40e57"
+                and hashlib.sha256(raw.encode("utf-8")).hexdigest() == "37d44ceb038269bdc5d8699faada029ebc67ab4512934308c5a2660f9bd3b71b"):
+            repaired = make_valid(geometry)
+            parts = list(getattr(repaired, "geoms", []))
+            polygons = [part for part in parts if part.geom_type == "Polygon"]
+            if len(polygons) != 1 or any(part.geom_type not in {"Polygon", "LineString"} for part in parts):
+                raise ValueError("known geometry repair changed unexpectedly")
+            geometry = polygons[0]
+        if geometry.geom_type not in {"Polygon", "MultiPolygon"} or geometry.is_empty or not geometry.is_valid:
+            raise ValueError("expected a valid non-empty Polygon or MultiPolygon")
+        return geometry
+    except Exception as exc:
+        raise ContractError(f"invalid building pixel geometry: {exc}") from exc

@@ -14,6 +14,7 @@ from PIL import Image
 
 from .artifacts import sha256_file, write_json_atomic
 from .contracts import ContractError, SampleRecord
+from .datasets import _xbd_pixel_features, _feature_geometry
 
 
 class DatasetAuditError(ValueError):
@@ -175,23 +176,17 @@ def _read_label_features(path: Path) -> list[dict[str, Any]]:
         payload = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         raise DatasetAuditError(f"corrupt label JSON: {path}") from exc
-    if not isinstance(payload, dict) or payload.get("type") != "FeatureCollection":
-        raise DatasetAuditError(f"label is not a FeatureCollection: {path}")
-    features = payload.get("features")
-    if not isinstance(features, list):
-        raise DatasetAuditError(f"label features must be a list: {path}")
-    if any(not isinstance(feature, dict) for feature in features):
-        raise DatasetAuditError(f"label contains a non-object feature: {path}")
-    return features
+    try:
+        return _xbd_pixel_features(payload)
+    except ContractError as exc:
+        raise DatasetAuditError(f"invalid pixel features in {path}: {exc}") from exc
 
 
 def _validate_geometry(feature: dict[str, Any]) -> None:
-    geometry = feature.get("geometry")
-    if not isinstance(geometry, dict) or geometry.get("type") not in {"Polygon", "MultiPolygon"}:
-        raise DatasetAuditError("building feature must have Polygon or MultiPolygon geometry")
-    coordinates = geometry.get("coordinates")
-    if not isinstance(coordinates, list) or not coordinates:
-        raise DatasetAuditError("building geometry has no coordinates")
+    try:
+        _feature_geometry(feature)
+    except ContractError as exc:
+        raise DatasetAuditError(str(exc)) from exc
 
 
 def _normalise_subtype(value: Any) -> int | None:

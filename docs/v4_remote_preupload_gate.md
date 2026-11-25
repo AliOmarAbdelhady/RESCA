@@ -70,5 +70,22 @@ for two epochs with 16 optimizer steps and produced a finite validation-loss
 decrease. The all-record resumable run must keep the same immutable input
 attachments and publish its epoch checkpoints before it can be used for scoring.
 
+The all-record resumable run completed on the Tesla T4 with three epoch
+checkpoints, 7,980 optimizer steps and 417 grouped validation samples. The
+epoch-3 checkpoint and report were downloaded and hash-verified. Training loss
+is only an optimization diagnostic; the official held-out scorer is still
+required before reporting accuracy or damage scores.
+
+**27 October correction:** the audited xBD features use WKT, while the D0
+notebook's rasterizer accepts only `geometry` objects. The former runs establish
+remote execution and record coverage but do not establish valid building or
+damage supervision. Do not use their checkpoints for model evaluation or
+continued supervised training. The CPU inventory did not validate target
+rasterization or split leakage. The private CPU diagnostic confirmed 162,787
+WKT features and zero accepted by the old parser. The corrected shared parser
+passed ten remote tests and a 20-label real-data sample; an all-label geometry
+audit is running. A validated split, a corrected training notebook and a new
+training smoke are prerequisites for any further full training or scoring.
+
 The complete source inventory and multi-task mixing policy are recorded in
 `configs/v4/dataset_registry.yaml` and `docs/v4_all_dataset_training_policy.md`.

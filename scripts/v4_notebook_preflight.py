@@ -19,6 +19,14 @@ class NotebookPreflightError(ValueError):
 
 
 _EXPECTED: dict[str, dict[str, set[str]]] = {
+    "06_xbd_grouped_manifest_audit.ipynb": {
+        "required": {"manifest_sha256", "cross_split_image_hashes", "rv4_xbd_grouped_manifest"},
+        "forbidden": set(),
+    },
+    "00_xbd_label_schema_diagnostic.ipynb": {
+        "required": {"old_parser_accepted_geometry", "{key}_wkt_features", "rv4_label_diagnostic"},
+        "forbidden": set(),
+    },
     "00_data_and_split_audit.ipynb": {
         "required": {"INPUT_ROOT", "rv4_cpu_audit", "label_schema_ok"},
         "forbidden": set(),
