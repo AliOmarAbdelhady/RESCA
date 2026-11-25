@@ -1,0 +1,41 @@
+# Python lint and format rules (docs/BACKEND.md, rules X1, X6, B1).
+# Locked: only the owner changes this file. Never add a per-line "noqa" to get a
+# check green; fix the code or ask the owner for a scoped, dated exception.
+
+target-version = "py312"
+line-length = 100
+
+# Legacy and prototype code is not application code; it is rebuilt, not linted.
+extend-exclude = [
+  "api", "scripts", "notebooks", "dashboard", "configs", "mapping", "mahmoudERD",
+  "docs", "prototypes", "ai/kaggle",
+]
+
+[lint]
+select = [
+  "E", "W", "F",   # pycodestyle and pyflakes: syntax, unused imports and variables
+  "I",             # import order
+  "B",             # bugbear: likely bugs, including B904 raise ... from
+  "BLE",           # BLE001: no catch-all `except Exception` without re-raise
+  "S",             # bandit security rules, including S110/S112 try-except-pass/continue
+  "TRY",           # exception anti-patterns
+  "ASYNC",         # blocking calls inside async code
+  "C90",           # complexity
+  "ERA",           # commented-out code
+  "UP",            # modern syntax for the target version
+  "SIM", "RET", "PL", "PT", "N", "DTZ", "T20",
+]
+ignore = [
+  "PLR2004",  # magic-value comparisons: too noisy for tests and protocol codes
+]
+
+[lint.mccabe]
+max-complexity = 10
+
+[lint.per-file-ignores]
+"**/tests/**" = ["S101", "PLR2004"]  # assert is how pytest tests
+# The policy tools call git with fixed argument lists and print their verdict.
+"tools/policy/**" = ["S603", "S607", "T20"]
+
+[format]
+quote-style = "double"

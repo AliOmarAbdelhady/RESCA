@@ -1,0 +1,291 @@
+# Module boundaries for the FastAPI backend (docs/BACKEND.md, rule B1).
+# Locked. Package: backend/src/resca_api. One module per database domain
+# (database/schema/02-11), plus resca_api.core for shared plumbing.
+[importlinter]
+root_package = resca_api
+
+[importlinter:contract:layers]
+name = Inside every domain: router -> service -> repository, never upward
+type = layers
+containers =
+    resca_api.identity
+    resca_api.incidents
+    resca_api.imagery
+    resca_api.citizens
+    resca_api.buildings
+    resca_api.roads
+    resca_api.cases
+    resca_api.hazards
+    resca_api.routing
+    resca_api.reports
+layers =
+    router
+    service
+    repository
+
+[importlinter:contract:identity-public-only]
+name = identity uses other domains only through their service module
+type = forbidden
+source_modules =
+    resca_api.identity
+forbidden_modules =
+    resca_api.incidents.router
+    resca_api.incidents.repository
+    resca_api.imagery.router
+    resca_api.imagery.repository
+    resca_api.citizens.router
+    resca_api.citizens.repository
+    resca_api.buildings.router
+    resca_api.buildings.repository
+    resca_api.roads.router
+    resca_api.roads.repository
+    resca_api.cases.router
+    resca_api.cases.repository
+    resca_api.hazards.router
+    resca_api.hazards.repository
+    resca_api.routing.router
+    resca_api.routing.repository
+    resca_api.reports.router
+    resca_api.reports.repository
+
+[importlinter:contract:incidents-public-only]
+name = incidents uses other domains only through their service module
+type = forbidden
+source_modules =
+    resca_api.incidents
+forbidden_modules =
+    resca_api.identity.router
+    resca_api.identity.repository
+    resca_api.imagery.router
+    resca_api.imagery.repository
+    resca_api.citizens.router
+    resca_api.citizens.repository
+    resca_api.buildings.router
+    resca_api.buildings.repository
+    resca_api.roads.router
+    resca_api.roads.repository
+    resca_api.cases.router
+    resca_api.cases.repository
+    resca_api.hazards.router
+    resca_api.hazards.repository
+    resca_api.routing.router
+    resca_api.routing.repository
+    resca_api.reports.router
+    resca_api.reports.repository
+
+[importlinter:contract:imagery-public-only]
+name = imagery uses other domains only through their service module
+type = forbidden
+source_modules =
+    resca_api.imagery
+forbidden_modules =
+    resca_api.identity.router
+    resca_api.identity.repository
+    resca_api.incidents.router
+    resca_api.incidents.repository
+    resca_api.citizens.router
+    resca_api.citizens.repository
+    resca_api.buildings.router
+    resca_api.buildings.repository
+    resca_api.roads.router
+    resca_api.roads.repository
+    resca_api.cases.router
+    resca_api.cases.repository
+    resca_api.hazards.router
+    resca_api.hazards.repository
+    resca_api.routing.router
+    resca_api.routing.repository
+    resca_api.reports.router
+    resca_api.reports.repository
+
+[importlinter:contract:citizens-public-only]
+name = citizens uses other domains only through their service module
+type = forbidden
+source_modules =
+    resca_api.citizens
+forbidden_modules =
+    resca_api.identity.router
+    resca_api.identity.repository
+    resca_api.incidents.router
+    resca_api.incidents.repository
+    resca_api.imagery.router
+    resca_api.imagery.repository
+    resca_api.buildings.router
+    resca_api.buildings.repository
+    resca_api.roads.router
+    resca_api.roads.repository
+    resca_api.cases.router
+    resca_api.cases.repository
+    resca_api.hazards.router
+    resca_api.hazards.repository
+    resca_api.routing.router
+    resca_api.routing.repository
+    resca_api.reports.router
+    resca_api.reports.repository
+
+[importlinter:contract:buildings-public-only]
+name = buildings uses other domains only through their service module
+type = forbidden
+source_modules =
+    resca_api.buildings
+forbidden_modules =
+    resca_api.identity.router
+    resca_api.identity.repository
+    resca_api.incidents.router
+    resca_api.incidents.repository
+    resca_api.imagery.router
+    resca_api.imagery.repository
+    resca_api.citizens.router
+    resca_api.citizens.repository
+    resca_api.roads.router
+    resca_api.roads.repository
+    resca_api.cases.router
+    resca_api.cases.repository
+    resca_api.hazards.router
+    resca_api.hazards.repository
+    resca_api.routing.router
+    resca_api.routing.repository
+    resca_api.reports.router
+    resca_api.reports.repository
+
+[importlinter:contract:roads-public-only]
+name = roads uses other domains only through their service module
+type = forbidden
+source_modules =
+    resca_api.roads
+forbidden_modules =
+    resca_api.identity.router
+    resca_api.identity.repository
+    resca_api.incidents.router
+    resca_api.incidents.repository
+    resca_api.imagery.router
+    resca_api.imagery.repository
+    resca_api.citizens.router
+    resca_api.citizens.repository
+    resca_api.buildings.router
+    resca_api.buildings.repository
+    resca_api.cases.router
+    resca_api.cases.repository
+    resca_api.hazards.router
+    resca_api.hazards.repository
+    resca_api.routing.router
+    resca_api.routing.repository
+    resca_api.reports.router
+    resca_api.reports.repository
+
+[importlinter:contract:cases-public-only]
+name = cases uses other domains only through their service module
+type = forbidden
+source_modules =
+    resca_api.cases
+forbidden_modules =
+    resca_api.identity.router
+    resca_api.identity.repository
+    resca_api.incidents.router
+    resca_api.incidents.repository
+    resca_api.imagery.router
+    resca_api.imagery.repository
+    resca_api.citizens.router
+    resca_api.citizens.repository
+    resca_api.buildings.router
+    resca_api.buildings.repository
+    resca_api.roads.router
+    resca_api.roads.repository
+    resca_api.hazards.router
+    resca_api.hazards.repository
+    resca_api.routing.router
+    resca_api.routing.repository
+    resca_api.reports.router
+    resca_api.reports.repository
+
+[importlinter:contract:hazards-public-only]
+name = hazards uses other domains only through their service module
+type = forbidden
+source_modules =
+    resca_api.hazards
+forbidden_modules =
+    resca_api.identity.router
+    resca_api.identity.repository
+    resca_api.incidents.router
+    resca_api.incidents.repository
+    resca_api.imagery.router
+    resca_api.imagery.repository
+    resca_api.citizens.router
+    resca_api.citizens.repository
+    resca_api.buildings.router
+    resca_api.buildings.repository
+    resca_api.roads.router
+    resca_api.roads.repository
+    resca_api.cases.router
+    resca_api.cases.repository
+    resca_api.routing.router
+    resca_api.routing.repository
+    resca_api.reports.router
+    resca_api.reports.repository
+
+[importlinter:contract:routing-public-only]
+name = routing uses other domains only through their service module
+type = forbidden
+source_modules =
+    resca_api.routing
+forbidden_modules =
+    resca_api.identity.router
+    resca_api.identity.repository
+    resca_api.incidents.router
+    resca_api.incidents.repository
+    resca_api.imagery.router
+    resca_api.imagery.repository
+    resca_api.citizens.router
+    resca_api.citizens.repository
+    resca_api.buildings.router
+    resca_api.buildings.repository
+    resca_api.roads.router
+    resca_api.roads.repository
+    resca_api.cases.router
+    resca_api.cases.repository
+    resca_api.hazards.router
+    resca_api.hazards.repository
+    resca_api.reports.router
+    resca_api.reports.repository
+
+[importlinter:contract:reports-public-only]
+name = reports uses other domains only through their service module
+type = forbidden
+source_modules =
+    resca_api.reports
+forbidden_modules =
+    resca_api.identity.router
+    resca_api.identity.repository
+    resca_api.incidents.router
+    resca_api.incidents.repository
+    resca_api.imagery.router
+    resca_api.imagery.repository
+    resca_api.citizens.router
+    resca_api.citizens.repository
+    resca_api.buildings.router
+    resca_api.buildings.repository
+    resca_api.roads.router
+    resca_api.roads.repository
+    resca_api.cases.router
+    resca_api.cases.repository
+    resca_api.hazards.router
+    resca_api.hazards.repository
+    resca_api.routing.router
+    resca_api.routing.repository
+
+[importlinter:contract:core-has-no-domains]
+name = Shared core code never imports a domain
+type = forbidden
+source_modules =
+    resca_api.core
+forbidden_modules =
+    resca_api.identity
+    resca_api.incidents
+    resca_api.imagery
+    resca_api.citizens
+    resca_api.buildings
+    resca_api.roads
+    resca_api.cases
+    resca_api.hazards
+    resca_api.routing
+    resca_api.reports

@@ -1,0 +1,114 @@
+/*
+ * RESCA design tokens for Tailwind v4 (docs/FRONTEND.md, rule W1). Locked.
+ *
+ * This file is the ONLY place a colour, font, radius, shadow or layer value is
+ * written. The default Tailwind palette is switched off, so `bg-red-500` does not
+ * exist; components use the semantic names below (`bg-surface`, `text-fg-muted`,
+ * `bg-severity-critical`, `text-agency`).
+ *
+ * Brand values come from docs/brand/identity/tokens.json. Severity values are
+ * starting values: check contrast (WCAG 2.2 AA) before the first release and change
+ * them only here. Severity colours mean the same thing for every agency and role.
+ */
+@import "tailwindcss";
+
+@theme {
+  /* Remove every default value we do not define ourselves. */
+  --color-*: initial;
+  --font-*: initial;
+  --shadow-*: initial;
+  --radius-*: initial;
+
+  /* Brand (tokens.json) */
+  --color-brand-night: #050810;
+  --color-brand-navy: #080e1a;
+  --color-brand-midnight: #0d1626;
+  --color-brand-panel: #152138;
+  --color-brand-cyan: #00e5ff;
+  --color-brand-amber: #ff8c1a;
+  --color-brand-steel: #8ea8c0;
+  --color-brand-light: #eceef2;
+  --color-brand-ink: #1a2538;
+  --color-brand-slate: #5c7a96;
+  --color-white: #ffffff;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* Fonts (tokens.json); Arabic falls back to a system Arabic face until one is chosen */
+  --font-display: "Oswald", "Noto Kufi Arabic", sans-serif;
+  --font-sans: "Inter", "Noto Sans Arabic", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-full: 9999px;
+
+  --shadow-panel: 0 4px 16px 0 rgb(5 8 16 / 0.35);
+  --shadow-overlay: 0 12px 32px 0 rgb(5 8 16 / 0.5);
+}
+
+/* Semantic tokens: what components use. They follow the theme and the agency. */
+@theme inline {
+  --color-surface: var(--rs-surface);
+  --color-surface-raised: var(--rs-surface-raised);
+  --color-fg: var(--rs-fg);
+  --color-fg-muted: var(--rs-fg-muted);
+  --color-border: var(--rs-border);
+  --color-accent: var(--rs-accent);
+  --color-agency: var(--rs-agency);
+
+  /* Safety colours: identical in every agency preset (rule W12). */
+  --color-severity-critical: var(--rs-severity-critical);
+  --color-severity-high: var(--rs-severity-high);
+  --color-severity-moderate: var(--rs-severity-moderate);
+  --color-severity-low: var(--rs-severity-low);
+  --color-severity-info: var(--rs-severity-info);
+  --color-status-ok: var(--rs-status-ok);
+}
+
+:root,
+[data-theme="dark"] {
+  --rs-surface: var(--color-brand-navy);
+  --rs-surface-raised: var(--color-brand-panel);
+  --rs-fg: var(--color-white);
+  --rs-fg-muted: var(--color-brand-steel);
+  --rs-border: var(--color-brand-midnight);
+  --rs-accent: var(--color-brand-cyan);
+  --rs-agency: var(--color-brand-cyan);
+
+  --rs-severity-critical: #ff4d4f;
+  --rs-severity-high: var(--color-brand-amber);
+  --rs-severity-moderate: #f5c542;
+  --rs-severity-low: #4cc38a;
+  --rs-severity-info: var(--color-brand-cyan);
+  --rs-status-ok: #4cc38a;
+}
+
+[data-theme="light"] {
+  --rs-surface: var(--color-brand-light);
+  --rs-surface-raised: var(--color-white);
+  --rs-fg: var(--color-brand-ink);
+  --rs-fg-muted: var(--color-brand-slate);
+  --rs-border: #c9d1db;
+  --rs-accent: #007f8f;
+
+  --rs-severity-critical: #c62828;
+  --rs-severity-high: #b85c00;
+  --rs-severity-moderate: #8a6d00;
+  --rs-severity-low: #1e7d4f;
+  --rs-severity-info: #007f8f;
+  --rs-status-ok: #1e7d4f;
+}
+
+/*
+ * Agency accent for role dashboards (view presets set data-agency on the shell).
+ * Red, orange, yellow and green are reserved for severity, so agency accents use
+ * only blue, teal, magenta and violet hues and appear only in chrome (header,
+ * tags), never on data a responder acts on.
+ */
+/* Values match agency_type in database/schema/01_types.sql. */
+[data-agency="government"] { --rs-agency: var(--color-brand-cyan); }
+[data-agency="police"] { --rs-agency: #3d7bff; }
+[data-agency="ems"] { --rs-agency: #22b8a7; }
+[data-agency="fire"] { --rs-agency: #d946a8; }
