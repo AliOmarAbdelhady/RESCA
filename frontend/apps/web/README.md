@@ -11,7 +11,7 @@ no SSR/SEO, so a static SPA served beside the FastAPI backend.
 
 ```
 src/
-  routes/               # React Router route tree + guards (role-based)
+  routes/               # TanStack Router file-based routes + guards (role-based)
   layouts/              # AppShell (sidebar/topbar), AuthLayout
   pages/                # one folder per route — composition only
     dashboard/          #   overview stats & urgency

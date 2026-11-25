@@ -1,6 +1,6 @@
 # Rules index
 
-Locked. Every rule ID, the one document that defines it, and how it is enforced. Rules are not copied between documents; link here instead. The research behind them is in [archive/architecture-debate/rules_research_codex.md](archive/architecture-debate/rules_research_codex.md).
+Locked. Every rule ID, the one document that defines it, and how it is enforced. Rules are not copied between documents; link here instead. The research behind them remains in Git history at commit `7c1dcde` (`docs/archive/architecture-debate/rules_research_codex.md`).
 
 | IDs | Area | Defined in | Main gate |
 |---|---|---|---|

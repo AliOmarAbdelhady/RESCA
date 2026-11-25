@@ -1,6 +1,6 @@
 # packages/api — THE GATEWAY ★
 
-The only code in the frontend that speaks HTTP or WebSocket. Both apps (`web`,
+The only code in the frontend that speaks HTTP or SSE (live events). Both apps (`web`,
 `mobile`) and any future client consume this package — never the network directly.
 
 ```
@@ -16,7 +16,7 @@ src/
     routing.ts          #   emergency route planning
     tracking.ts         #   responder positions, SOS
     auth.ts             #   login/refresh/me
-  realtime/             # WebSocket client: auto-reconnect, typed event bus
+  realtime/             # SSE client: resumes with Last-Event-ID, typed event bus
                         #   events: position · sos · job-progress · victim
   query/                # TanStack Query hooks + query-key factories
                         #   (useCase, useRunPrediction, useLivePositions...)
@@ -27,10 +27,10 @@ src/
 
 - Types are **generated from FastAPI's `/openapi.json`**, never hand-written.
 - **No platform code here**: no `localStorage`, no `expo-*`. Apps inject
-  `{ baseUrl, wsUrl, tokenStore }` at bootstrap.
+  `{ baseUrl, eventsUrl }` at bootstrap.
 - React appears only in `query/` (hooks shared by both apps).
 - Realtime payloads are validated with zod schemas from `@resca/contracts`
-  at the socket boundary.
+  at the stream boundary. Commands (SOS, reports) are HTTP POSTs with an Idempotency-Key.
 
 ## After any backend schema change
 

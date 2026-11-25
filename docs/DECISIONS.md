@@ -1,6 +1,6 @@
 # Decisions
 
-Locked. Each line is a decision (DEC-nn) the owner took on 25 November 2026 after the architecture debate (the debate is kept in [archive/architecture-debate/](archive/architecture-debate/)). To change one, the owner edits this file in its own pull request. Agents propose changes in PR text only.
+Locked. Each line is a decision (DEC-nn) the owner took on 25 November 2026. The architecture debate behind them was deleted after these decisions were taken; it remains in Git history at commit `7c1dcde` under `docs/archive/architecture-debate/`. To change one, the owner edits this file in its own pull request. Agents propose changes in PR text only.
 
 | # | Area | Decision | Why | Rejected |
 |---|---|---|---|---|
@@ -10,7 +10,7 @@ Locked. Each line is a decision (DEC-nn) the owner took on 25 November 2026 afte
 | DEC-04 | Mobile | Expo (React Native) with Expo Router and development builds; NativeWind + React Native Reusables, Reanimated/Moti | Native offline maps, background GPS and SQLite need dev builds; shares API client and types | Expo Go, Flutter |
 | DEC-05 | Maps | MapLibre GL (web and mobile) with deck.gl overlays; one map engine | One camera and selection model | CesiumJS |
 | DEC-06 | 3D | Building extrusion and precomputed OpenDroneMap 3D Tiles drawn in the browser | Nothing 3D runs on the CPU server during the demo | Server-side 3D, Gaussian splat training |
-| DEC-07 | AI serving | One FastAPI + ONNX Runtime (or OpenVINO) template per model family; int8 only where measured faster; one heavy job at a time | CPU-only server; benchmarks in the archive | LitServe, Triton, one container for all models |
+| DEC-07 | AI serving | One FastAPI + ONNX Runtime (or OpenVINO) template per model family; int8 only where measured faster; one heavy job at a time | CPU-only server; benchmarks in [AI.md](AI.md#cpu-notes) | LitServe, Triton, one container for all models |
 | DEC-08 | Live updates | Server-Sent Events from an append-only incident event log; mobile catches up with `/events?since=` | Resumable after a drop, no extra broker | WebSocket + Redis, polling |
 | DEC-09 | Jobs | PostgreSQL job queue (Procrastinate, `SKIP LOCKED`) plus a transactional outbox | Job and business write commit together | Celery, RabbitMQ, Kafka |
 | DEC-10 | Files | SeaweedFS (S3 API); pre-signed uploads and downloads | Maintained; MinIO's repository is archived | MinIO |

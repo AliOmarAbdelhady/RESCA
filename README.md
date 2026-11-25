@@ -18,5 +18,3 @@ make help        list commands
 make bootstrap   install git hooks
 make check       run every gate
 ```
-
-The previous README, describing the earlier ML pipeline, is in [docs/archive/legacy-README.md](docs/archive/legacy-README.md).

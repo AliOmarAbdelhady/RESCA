@@ -46,4 +46,4 @@ Request: job ID, input object key and its hash, coordinate system, units, reques
 
 ## CPU notes
 
-Benchmarks on a 4-core laptop CPU are in [archive/architecture-debate/cpu_demo_feasibility.md](archive/architecture-debate/cpu_demo_feasibility.md): static int8 helped convolution models 2 to 8 times; dynamic int8 made SegFormer 4 times slower. Set threads to physical cores, never hyperthreads. Contabo's AMD CPUs lack AVX-512, so re-measure there.
+Benchmarks on a 4-core laptop CPU (Intel i5-1135G7, ONNX Runtime 1.32, OpenVINO 2026.4, 25 November 2026): static int8 helped convolution models 2 to 8 times; dynamic int8 made SegFormer 4 times slower. Set threads to physical cores, never hyperthreads. Contabo's AMD CPUs lack AVX-512, so re-measure there.

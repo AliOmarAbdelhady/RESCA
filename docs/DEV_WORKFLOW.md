@@ -11,6 +11,14 @@ Locked. How every change, by a person or an AI agent, gets from idea to `main`.
 - Never commit secrets, `.env` files, model weights, datasets, notebook outputs or large binaries (pre-commit blocks files over 1 MB).
 - Never delete or rewrite a teammate's work (`mahmoudERD/`, `mapping/`, `docs/documentation/`); move it with `git mv` only after the owner agrees.
 
+## Docs stay small and current
+
+- The docs in `docs/` and the `AGENTS.md` files are the only guidance. There is no archive folder: Git history is the archive.
+- A PR that changes behaviour updates the doc that describes it, in the same PR.
+- Delete a Markdown file as soon as it will not be used again: superseded plans, finished research, debate notes, one-off reports. Keep a decision's outcome in `DECISIONS.md` and delete the notes behind it.
+- Working notes (agent scratch files, research drafts) never enter `main`. Keep them out of the repository or delete them before the PR.
+- Teammates' report material (`docs/documentation/`, `docs/team-plan/`) and evidence (`mapping/`, `mahmoudERD/`) are kept until the owner says otherwise.
+
 ## Contract first
 
 An API, event or AI-service contract change is its own PR and merges before the code that uses it (C1). Generated clients are regenerated, never edited.

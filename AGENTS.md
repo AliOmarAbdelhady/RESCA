@@ -28,7 +28,6 @@ REST for commands, SSE for live updates, a Postgres job queue for heavy work, on
 | `contracts/` | OpenAPI, event and AI-service contracts | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md#contracts) |
 | `deploy/` | Compose, Caddy, secrets, runbooks | [docs/DEPLOY.md](docs/DEPLOY.md) |
 | `docs/documentation/` | the graduation report | [docs/documentation/REPORT_GUIDE.md](docs/documentation/REPORT_GUIDE.md) |
-| `docs/archive/` | old research and debate | do not read unless asked |
 | `api/`, `scripts/`, `configs/`, `notebooks/`, `dashboard/` | legacy code from before the rebuild | do not extend; replaced by the folders above |
 | `mapping/`, `mahmoudERD/` | teammates' prototype evidence | never edit or delete |
 
@@ -50,6 +49,7 @@ After you edit, check every item and report each one:
 7. Tests added for the changed behaviour; bug fixes have a failing-first test (T1).
 8. `make check` passed, or the unrun gates are named.
 9. No locked file changed.
+10. Docs updated in the same PR, and any Markdown file your change made obsolete deleted (no stale docs; Git history is the archive).
 
 ## Locked files
 
