@@ -1,7 +1,5 @@
 # RescueVision — Brand Identity
 
-> **Real-time Emergency Sensing, Coordination & Assessment** — the brand tagline; it appears on every lockup, banner and hero image.
-
 The mark is a human iris whose pupil holds the front glass of a camera lens: an eye that sees from above.
 
 | Folder | Contents |
@@ -22,7 +20,7 @@ The mark is a human iris whose pupil holds the front glass of a camera lens: an 
 Navy `#080E1A` · Deep Night `#050810` · Midnight `#0D1626` · Signal Cyan `#00E5FF` · Rescue Amber `#FF8C1A` · Steel `#8EA8C0` · Slate `#5C7A96` · Ink `#1A2538` · Light `#ECEEF2` · White `#FFFFFF`
 
 ## Type
-Oswald 700 for both the wordmark (uppercase, -0.015em) and the tagline (uppercase, +0.06em, sized to the wordmark's width), JetBrains Mono 500 (tags).
+Oswald 700 for the wordmark (uppercase, -0.015em), JetBrains Mono 500 (tags).
 
 ## Usage
-Use the supplied files. Keep clear space of at least a quarter of the mark's diameter. Don't recolour, stretch, rotate or add effects to the mark. Dark theme: white/steel "RescueVision" wordmark, steel-blue tagline (legacy PNG assets still carry the old wordmark and need new artwork). Light theme: ink wordmark on `#ECEEF2`. The eye is sharpest at or below ~1000 px wide; it is built from a photograph, so very large prints should use the @2x/3x files at most.
+Use the supplied files. Keep clear space of at least a quarter of the mark's diameter. Don't recolour, stretch, rotate or add effects to the mark. Dark theme: white/steel "RescueVision" wordmark (legacy PNG assets still carry the old wordmark and need new artwork). Light theme: ink wordmark on `#ECEEF2`. The eye is sharpest at or below ~1000 px wide; it is built from a photograph, so very large prints should use the @2x/3x files at most.

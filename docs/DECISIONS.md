@@ -23,6 +23,6 @@ Locked. Each line is a decision (DEC-nn) the owner took on 25 November 2026. The
 | DEC-17 | Secrets | SOPS + age encrypted files; per-service secret mounts | Secrets never in Git or images | Plain `.env` in the repo |
 | DEC-18 | Training | Free Kaggle or Colab GPUs, or teammates' own GPU laptops (local training and testing allowed); notebooks in `ai/kaggle/<feature>/vN/` | Free compute | Training on the server |
 | DEC-19 | Agent rules | Strict rules with automatic gates in the area docs; owner-only files listed in `.github/locked-paths.txt` | Written rules alone get broken | Rules in prose only |
-| DEC-20 | Name | RescueVision (Real-time Emergency Sensing, Coordination & Assessment) for now; rescuevision.com costs about US$1,000, so a name with a free .com is being chosen | No domain budget | |
+| DEC-20 | Name | RescueVision; domain rescuevision.app | No domain budget | |
 
 Defaults that are numbers (rate limits, page sizes, latency budgets, coverage) live in the area docs as starting budgets. Measure on the real server before treating them as final.

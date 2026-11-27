@@ -1,6 +1,6 @@
 # RescueVision
 
-Real-time Emergency Sensing, Coordination & Assessment: one live picture of a disaster for police, EMS, fire and government. Drone and satellite imagery become damage maps, people in need of help, hazard alerts and safe routes, each confirmed by a person.
+One live picture of a disaster for police, EMS, fire and government. Drone and satellite imagery become damage maps, people in need of help, hazard alerts and safe routes, each confirmed by a person.
 
 Status: the database is built and self-tested; the application is being built from the plan below. Graduation project, held to the standard of a national emergency system.
 

@@ -8,10 +8,9 @@
   --rescuevision-rescue-amber:#FF8C1A;  /* accent / alert */
   --rescuevision-white:       #FFFFFF;
   --rescuevision-steel:       #8EA8C0;  /* secondary text on dark */
-  --rescuevision-steel-tag:   #9EB4CA;  /* tagline on dark */
   --rescuevision-light-bg:    #ECEEF2;  /* light theme background */
   --rescuevision-ink:         #1A2538;  /* light theme text */
-  --rescuevision-slate:       #5C7A96;  /* secondary text and tagline on light */
-  --rescuevision-font-display: 'Oswald', 'Arial Narrow', sans-serif;  /* 700 titles, 500 tagline */
+  --rescuevision-slate:       #5C7A96;  /* secondary text on light */
+  --rescuevision-font-display: 'Oswald', 'Arial Narrow', sans-serif;  /* 700 titles */
   --rescuevision-font-mono:    'JetBrains Mono', monospace;           /* 500 tags */
 }
