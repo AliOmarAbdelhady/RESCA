@@ -4,8 +4,10 @@ Reads section_3_3.md and figures/png/, converts them to WordprocessingML that
 matches the report template (Times New Roman 12 pt body, 1.5 spacing, justified;
 Report Table/Figure Caption styles; shaded table headers), and replaces
 everything between the "3.3 SYSTEM DESIGN" heading and "Chapter Four" in
-docs/documentation/main/Project 1 Docs.source. It also appends the new
-references. Then it rebuilds the DOCX with build_docx.py.
+docs/documentation/main/Project 1 Docs.source. Citations are written as
+[@key] (keys in docs/documentation/sources/references.md); the script then runs
+docs/documentation/tools/build_report.py, which numbers every citation in the
+report, rebuilds the reference list and rebuilds the DOCX.
 
     python3 docs/documentation/chapter5/tools/build_section.py
 
@@ -36,17 +38,6 @@ TEXT_WIDTH_TWIPS = 8900
 EMU_PER_PX = 914400 / 200          # figures are rendered at 200 dpi
 MAX_W_EMU = 5_562_600              # same maximum width as the Chapter 4 figures
 MAX_H_EMU = 7_200_000              # 20 cm, leaves room for the caption
-
-NEW_REFERENCES = [
-    "[27] Object Management Group, “OMG Unified Modeling Language (OMG UML), Version 2.5.1,” "
-    "OMG Document formal/17-12-05, Dec. 2017. [Online]. Available: https://www.omg.org/spec/UML/2.5.1/",
-    "[28] Software, Systems and Enterprise — Architecture Description, ISO/IEC/IEEE 42010:2022, 2022.",
-    "[29] The PostgreSQL Global Development Group, “Row Security Policies,” PostgreSQL 18 Documentation. "
-    "[Online]. Available: https://www.postgresql.org/docs/18/ddl-rowsecurity.html",
-    "[30] PostGIS Project Steering Committee, “PostGIS Manual.” [Online]. Available: https://postgis.net/docs/",
-    "[31] E. W. Dijkstra, “A note on two problems in connexion with graphs,” Numerische Mathematik, "
-    "vol. 1, no. 1, pp. 269–271, 1959.",
-]
 
 # A hyphen inside an identifier (FR-HZ-06, UC-04, 3-39); ordinary compounds may still wrap.
 ID_HYPHEN = re.compile(r"(?<=[A-Z0-9])-(?=[A-Z0-9])")
@@ -254,16 +245,6 @@ def main():
         c4 = xml.index(">Chapter Four<", a)
         b = max(xml.rfind("<w:p>", a, c4), xml.rfind("<w:p ", a, c4))
     xml = xml[:a] + new + xml[b:]
-
-    # References: append [27] onwards after the last ReportReference paragraph, once.
-    if "[27] Object Management Group" not in xml:
-        refs = [m.end() for m in re.finditer(r'<w:pStyle w:val="ReportReference"/>.*?</w:p>', xml, re.S)]
-        at = refs[-1]
-        ref_xml = "".join(
-            '<w:p><w:pPr><w:pStyle w:val="ReportReference"/></w:pPr>'
-            f'<w:r><w:rPr>{FONT}<w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr>'
-            f'<w:t xml:space="preserve">{esc(r)}</w:t></w:r></w:p>' for r in NEW_REFERENCES)
-        xml = xml[:at] + ref_xml + xml[at:]
     DOC_XML.write_text(xml, encoding="utf-8")
 
     rel_xml = RELS.read_text(encoding="utf-8")
@@ -277,8 +258,9 @@ def main():
         if stale.name not in used:
             stale.unlink()
 
-    subprocess.run([sys.executable, str(DOCS / "build_docx.py"), "build", str(DOCX)], check=True)
-    print(f"Section 3.3 inserted: {len(rels)} figures; DOCX rebuilt at {DOCX}")
+    print(f"Section 3.3 inserted: {len(rels)} figures")
+    # Number the [@key] citations, rebuild the reference list and the DOCX.
+    subprocess.run([sys.executable, str(DOCS / "tools" / "build_report.py")], check=True)
 
 
 if __name__ == "__main__":

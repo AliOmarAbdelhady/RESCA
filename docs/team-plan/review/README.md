@@ -1,5 +1,7 @@
 # Report Review, 23 November 2026
 
+> **Status, 27 November 2026.** The fixes requested below were applied to Main, and the references were renumbered (now [1] to [72]), so the numbers quoted in these files are out of date. What was done and what is still open is recorded under "Review fixes" and "Open items" in the [report guide](../../documentation/REPORT_GUIDE.md). Each owner confirms the changes to their part.
+
 This folder records a full review of the merged report, `docs/documentation/main/Project 1 Docs.docx`, at `main` commit `807715c` plus the Section 3.3 citation fixes made with this review. Each chapter was checked against three sources:
 
 - the team work plan, [`documentation-work-plan.md`](../documentation-work-plan.md), which sets each person's scope and the report rules;
