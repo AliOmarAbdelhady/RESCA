@@ -3,7 +3,7 @@
 This folder records a full review of the merged report, `docs/documentation/main/Project 1 Docs.docx`, at `main` commit `807715c` plus the Section 3.3 citation fixes made with this review. Each chapter was checked against three sources:
 
 - the team work plan, [`documentation-work-plan.md`](../documentation-work-plan.md), which sets each person's scope and the report rules;
-- the approved platform design, [`2026-11-23-resca-database-erd-design.md`](../../superpowers/specs/2026-11-23-resca-database-erd-design.md), and the implemented schema in `database/`;
+- the approved platform design, [`2026-11-23-rescuevision-database-erd-design.md`](../../superpowers/specs/2026-11-23-rescuevision-database-erd-design.md), and the implemented schema in `database/`;
 - Section 3.3 System Design, [`section_3_3.md`](../../documentation/chapter5/section_3_3.md), and Section 3.2 Requirements, which the other chapters must not contradict.
 
 Every finding quotes the report text it refers to. Nothing here changes anyone's section; each owner decides how to fix their part.

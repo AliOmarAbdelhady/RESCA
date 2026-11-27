@@ -7,21 +7,21 @@ import numpy as np
 import pytest
 import torch
 
-from resca_ai.v4.models.defects import (
+from rescuevision_ai.v4.models.defects import (
     DefectHead,
     build_multilabel_classification_target,
     build_multilabel_mask_target,
     multilabel_macro_f1,
 )
-from resca_ai.v4.models.post_only import (
+from rescuevision_ai.v4.models.post_only import (
     POST_ONLY_CLASSES,
     PostOnlyLabelError,
     encode_post_only_label,
     post_only_macro_f1,
 )
-from resca_ai.v4.specialist_datasets import load_defect_manifest, load_post_only_manifest
-from resca_ai.v4.contracts import load_experiment
-from resca_ai.v4.task_adapters import TaskAdapterError, assert_grouped_split_integrity
+from rescuevision_ai.v4.specialist_datasets import load_defect_manifest, load_post_only_manifest
+from rescuevision_ai.v4.contracts import load_experiment
+from rescuevision_ai.v4.task_adapters import TaskAdapterError, assert_grouped_split_integrity
 
 
 def test_post_only_ontology_has_five_non_interchangeable_classes() -> None:

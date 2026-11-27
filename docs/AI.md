@@ -9,21 +9,21 @@ In production the server is CPU-only: models run as ONNX (or OpenVINO) inside sm
 ```
 ai/
   kaggle/<feature>/v1/, v2/, …     one folder per experiment version (the notebooks)
-  src/resca_ai/                   shared, tested code: datasets, transforms, models, metrics, export
+  src/rescuevision_ai/                   shared, tested code: datasets, transforms, models, metrics, export
   serving/
     template/                     the one FastAPI + ONNX Runtime service template
     damage/  vision/  embed/      one folder per model family, built from the template
   model-cards/<model>-<version>.md
 ```
 
-Features: `building-damage` (F1), `flood-road-segmentation` (F2), `person-detection` (F3), `person-tracking` (F4), `compound-hazards` (F5), `reports-retrieval` (F6). Today: `building-damage` has v1 to v4 and `flood-road-segmentation` has v1 and v2. Each version folder has a README listing its notebooks. v1 to v3 hold several notebooks each and predate the layout below. v4 also holds its own research code (`src/`, `tests/`, `configs/`, `scripts/`, `notes/`) because it is still an experiment. Code moves into `ai/src/resca_ai` only once it has proved itself, and from then on it must pass every gate.
+Features: `building-damage` (F1), `flood-road-segmentation` (F2), `person-detection` (F3), `person-tracking` (F4), `compound-hazards` (F5), `reports-retrieval` (F6). Today: `building-damage` has v1 to v4 and `flood-road-segmentation` has v1 and v2. Each version folder has a README listing its notebooks. v1 to v3 hold several notebooks each and predate the layout below. v4 also holds its own research code (`src/`, `tests/`, `configs/`, `scripts/`, `notes/`) because it is still an experiment. Code moves into `ai/src/rescuevision_ai` only once it has proved itself, and from then on it must pass every gate.
 
 ### What a new version folder holds
 
 ```
 ai/kaggle/building-damage/v3/
   README.md          goal, what changed from v2, result, decision (promote or not)
-  notebook.ipynb     thin: installs resca_ai at a pinned commit, runs it, no logic of its own
+  notebook.ipynb     thin: installs rescuevision_ai at a pinned commit, runs it, no logic of its own
   config.yaml        every setting: data revision, split hash, seeds, model, training
   manifest.json      dataset revision and licence, code commit, environment, hashes
   results.json       metrics on validation and, after selection is frozen, on test

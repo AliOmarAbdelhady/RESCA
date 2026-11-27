@@ -4,9 +4,9 @@ from pathlib import Path
 
 import torch
 
-from resca_ai.v4.data_audit import audit_dataset
-from resca_ai.v4.datasets import PairedDataset
-from resca_ai.v4.transforms import HorizontalFlip
+from rescuevision_ai.v4.data_audit import audit_dataset
+from rescuevision_ai.v4.datasets import PairedDataset
+from rescuevision_ai.v4.transforms import HorizontalFlip
 from tests.v4.test_data_audit import _write_xbd_sample
 
 

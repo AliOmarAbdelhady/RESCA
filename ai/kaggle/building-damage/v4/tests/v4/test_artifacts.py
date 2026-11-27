@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from resca_ai.v4.artifacts import (
+from rescuevision_ai.v4.artifacts import (
     ArtifactIntegrityError,
     build_artifact_manifest,
     sha256_file,
@@ -14,7 +14,7 @@ from resca_ai.v4.artifacts import (
     validate_resume,
     write_json_atomic,
 )
-from resca_ai.v4.contracts import ContractError, load_experiment
+from rescuevision_ai.v4.contracts import ContractError, load_experiment
 
 
 def test_sha256_and_validate_artifact_detect_corruption(tmp_path: Path) -> None:

@@ -4,7 +4,7 @@ import numpy as np
 import torch
 from torch import nn
 
-from resca_ai.v4.inference import InferenceRecipe, predict_pair
+from rescuevision_ai.v4.inference import InferenceRecipe, predict_pair
 
 
 class _ConstantPairModel(nn.Module):

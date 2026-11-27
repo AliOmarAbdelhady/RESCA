@@ -1,9 +1,9 @@
-# RESCA Database
+# RescueVision Database
 
-PostgreSQL schema for the RESCA multi-agency disaster-response platform:
+PostgreSQL schema for the RescueVision multi-agency disaster-response platform:
 56 tables in 8 domains, built on PostGIS (maps), pgRouting (rescue routes) and
 pgvector (similar past cases). Design rationale:
-[`docs/superpowers/specs/2026-11-23-resca-database-erd-design.md`](../docs/superpowers/specs/2026-11-23-resca-database-erd-design.md).
+[`docs/superpowers/specs/2026-11-23-rescuevision-database-erd-design.md`](../docs/superpowers/specs/2026-11-23-rescuevision-database-erd-design.md).
 
 ## Requirements
 
@@ -28,10 +28,10 @@ sudo -u postgres createuser --superuser "$USER"     # local development only
 ```bash
 ./database/build.sh             # schema + security + reference data + demo scenario + self-checks
 ./database/build.sh --no-demo   # schema + reference data only
-DB_NAME=resca_test ./database/build.sh
+DB_NAME=rescuevision_test ./database/build.sh
 ```
 
-`build.sh` **drops and recreates** the target database (default `resca`).
+`build.sh` **drops and recreates** the target database (default `rescuevision`).
 It uses the standard libpq variables (`PGHOST`, `PGPORT`, `PGUSER`, `PGPASSWORD`).
 
 ## Layout
@@ -65,10 +65,10 @@ deny) and adds 4 group roles. Applications never connect as the owner.
 
 | Role | Used by | Sees |
 |---|---|---|
-| `resca_app` | the API, acting for a signed-in agency user | only incidents their agency has **actively joined** (Platform Admin: all); rules per role/permission below |
-| `resca_worker` | AI / Celery pipeline | everything (service account, no user context) |
-| `resca_citizen` | public citizen app | only that citizen's own profile, requests and uploads |
-| `resca_readonly` | analytics / BI | operational data read-only; no credentials, sessions, citizens or audit log |
+| `rescuevision_app` | the API, acting for a signed-in agency user | only incidents their agency has **actively joined** (Platform Admin: all); rules per role/permission below |
+| `rescuevision_worker` | AI / Celery pipeline | everything (service account, no user context) |
+| `rescuevision_citizen` | public citizen app | only that citizen's own profile, requests and uploads |
+| `rescuevision_readonly` | analytics / BI | operational data read-only; no credentials, sessions, citizens or audit log |
 
 What the policies enforce (all derived from `users.role_code` →
 `role_permissions`, re-checked on every request, so a suspended user is locked
@@ -94,11 +94,11 @@ out immediately):
 Create the login roles once per server (choose your own passwords):
 
 ```sql
-CREATE ROLE resca_api      LOGIN PASSWORD '...' IN ROLE resca_app;
-CREATE ROLE resca_worker   LOGIN PASSWORD '...' IN ROLE resca_worker;
-CREATE ROLE resca_citizen  LOGIN PASSWORD '...' IN ROLE resca_citizen;
-CREATE ROLE resca_bi       LOGIN PASSWORD '...' IN ROLE resca_readonly;
-GRANT CONNECT ON DATABASE resca TO resca_app, resca_worker, resca_citizen, resca_readonly;
+CREATE ROLE rescuevision_api      LOGIN PASSWORD '...' IN ROLE rescuevision_app;
+CREATE ROLE rescuevision_worker   LOGIN PASSWORD '...' IN ROLE rescuevision_worker;
+CREATE ROLE rescuevision_citizen  LOGIN PASSWORD '...' IN ROLE rescuevision_citizen;
+CREATE ROLE rescuevision_bi       LOGIN PASSWORD '...' IN ROLE rescuevision_readonly;
+GRANT CONNECT ON DATABASE rescuevision TO rescuevision_app, rescuevision_worker, rescuevision_citizen, rescuevision_readonly;
 ```
 
 Per request the API sets who is acting, inside the request's transaction
@@ -117,7 +117,7 @@ Try it in `psql` as the demo paramedic:
 ```sql
 BEGIN;
 SELECT app.set_session_user((SELECT id FROM users WHERE email = 'para1@ems.demo'));
-SET LOCAL ROLE resca_app;
+SET LOCAL ROLE rescuevision_app;
 SELECT count(*) FROM incidents;          -- 1: their agency joined it
 SELECT count(*) FROM notifications;      -- only their own
 SELECT password_hash FROM users;         -- ERROR: permission denied
@@ -126,9 +126,9 @@ ROLLBACK;
 
 ## Regenerating the ERD
 
-`docs/database/resca-erd.drawio` is generated from the live catalog (not
+`docs/database/rescuevision-erd.drawio` is generated from the live catalog (not
 hand-written). With a built database reachable through the usual libpq variables
-(defaults: `localhost:55432`, user `postgres`, database `resca`):
+(defaults: `localhost:55432`, user `postgres`, database `rescuevision`):
 
 ```bash
 python3 database/tools/generate_drawio_erd.py

@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 import numpy as np
-from resca_ai.v4.evaluation import OfficialAccumulator
+from rescuevision_ai.v4.evaluation import OfficialAccumulator
 
 INPUT = Path('/kaggle/input')
 EXPECTED_REPORT = 'ddf61ec9857025a51586213c5f6f3de0e8b0d547b95512867c23751167836f2b'

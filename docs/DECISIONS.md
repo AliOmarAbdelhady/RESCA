@@ -5,7 +5,7 @@ Locked. Each line is a decision (DEC-nn) the owner took on 25 November 2026. The
 | # | Area | Decision | Why | Rejected |
 |---|---|---|---|---|
 | DEC-01 | Shape | Modular monolith core plus separate AI containers | Fits six students and one database with row-level security; AI isolated behind HTTP | Microservices per domain |
-| DEC-02 | Backend | FastAPI (Python 3.12), one package `resca_api`, one module per database domain | One server language with AI, GIS and PDF work; the frontend already generates types from `/openapi.json`; explicit transactions suit RLS | NestJS, Go |
+| DEC-02 | Backend | FastAPI (Python 3.12), one package `rescuevision_api`, one module per database domain | One server language with AI, GIS and PDF work; the frontend already generates types from `/openapi.json`; explicit transactions suit RLS | NestJS, Go |
 | DEC-03 | Web | Vite + React + TanStack Router, TanStack Query/Table/Form, Zod, Zustand, Tailwind v4, shadcn/ui, Motion, Lucide, Sonner, shadcn charts, i18next | Typed URL state for the map console; logged-in tool needs no server rendering | TanStack Start, Next.js, React Router |
 | DEC-04 | Mobile | Expo (React Native) with Expo Router and development builds; NativeWind + React Native Reusables, Reanimated/Moti | Native offline maps, background GPS and SQLite need dev builds; shares API client and types | Expo Go, Flutter |
 | DEC-05 | Maps | MapLibre GL (web and mobile) with deck.gl overlays; one map engine | One camera and selection model | CesiumJS |
@@ -23,6 +23,6 @@ Locked. Each line is a decision (DEC-nn) the owner took on 25 November 2026. The
 | DEC-17 | Secrets | SOPS + age encrypted files; per-service secret mounts | Secrets never in Git or images | Plain `.env` in the repo |
 | DEC-18 | Training | Free Kaggle or Colab GPUs, or teammates' own GPU laptops (local training and testing allowed); notebooks in `ai/kaggle/<feature>/vN/` | Free compute | Training on the server |
 | DEC-19 | Agent rules | Strict rules with automatic gates in the area docs; owner-only files listed in `.github/locked-paths.txt` | Written rules alone get broken | Rules in prose only |
-| DEC-20 | Name | RESCA (Real-time Emergency Sensing, Coordination & Assessment) for now; resca.com costs about US$1,000, so a name with a free .com is being chosen | No domain budget | |
+| DEC-20 | Name | RescueVision (Real-time Emergency Sensing, Coordination & Assessment) for now; rescuevision.com costs about US$1,000, so a name with a free .com is being chosen | No domain budget | |
 
 Defaults that are numbers (rate limits, page sizes, latency budgets, coverage) live in the area docs as starting budgets. Measure on the real server before treating them as final.

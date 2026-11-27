@@ -16,7 +16,7 @@ from .training import train
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="python -m resca_ai.v4.cli")
+    parser = argparse.ArgumentParser(prog="python -m rescuevision_ai.v4.cli")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     audit = subparsers.add_parser("audit")

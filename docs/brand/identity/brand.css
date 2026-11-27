@@ -1,17 +1,17 @@
-/* RESCA — brand tokens */
+/* RescueVision — brand tokens */
 :root {
-  --resca-deep-night:  #050810;
-  --resca-navy:        #080E1A;  /* primary dark background */
-  --resca-midnight:    #0D1626;
-  --resca-panel:       #152138;
-  --resca-signal-cyan: #00E5FF;  /* accent / interface */
-  --resca-rescue-amber:#FF8C1A;  /* accent / alert */
-  --resca-white:       #FFFFFF;
-  --resca-steel:       #8EA8C0;  /* secondary text on dark */
-  --resca-steel-tag:   #9EB4CA;  /* tagline on dark */
-  --resca-light-bg:    #ECEEF2;  /* light theme background */
-  --resca-ink:         #1A2538;  /* light theme text */
-  --resca-slate:       #5C7A96;  /* secondary text and tagline on light */
-  --resca-font-display: 'Oswald', 'Arial Narrow', sans-serif;  /* 700 titles, 500 tagline */
-  --resca-font-mono:    'JetBrains Mono', monospace;           /* 500 tags */
+  --rescuevision-deep-night:  #050810;
+  --rescuevision-navy:        #080E1A;  /* primary dark background */
+  --rescuevision-midnight:    #0D1626;
+  --rescuevision-panel:       #152138;
+  --rescuevision-signal-cyan: #00E5FF;  /* accent / interface */
+  --rescuevision-rescue-amber:#FF8C1A;  /* accent / alert */
+  --rescuevision-white:       #FFFFFF;
+  --rescuevision-steel:       #8EA8C0;  /* secondary text on dark */
+  --rescuevision-steel-tag:   #9EB4CA;  /* tagline on dark */
+  --rescuevision-light-bg:    #ECEEF2;  /* light theme background */
+  --rescuevision-ink:         #1A2538;  /* light theme text */
+  --rescuevision-slate:       #5C7A96;  /* secondary text and tagline on light */
+  --rescuevision-font-display: 'Oswald', 'Arial Narrow', sans-serif;  /* 700 titles, 500 tagline */
+  --rescuevision-font-mono:    'JetBrains Mono', monospace;           /* 500 tags */
 }

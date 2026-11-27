@@ -8,15 +8,15 @@ import pytest
 import torch
 from torch import nn
 
-from resca_ai.v4.artifacts import ArtifactIntegrityError
-from resca_ai.v4.bundle import (
+from rescuevision_ai.v4.artifacts import ArtifactIntegrityError
+from rescuevision_ai.v4.bundle import (
     BundleSpec,
     bundle_preprocessing_identity,
     load_inference_bundle,
     prediction_digest,
     write_inference_bundle,
 )
-from resca_ai.v4.inference import InferenceRecipe, predict_pair
+from rescuevision_ai.v4.inference import InferenceRecipe, predict_pair
 
 
 class _ConstantPairModel(nn.Module):

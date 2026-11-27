@@ -5,7 +5,7 @@ import argparse
 import logging
 import sys
 
-from resca.data.floodnet_preprocess import prepare_floodnet
+from rescuevision.data.floodnet_preprocess import prepare_floodnet
 
 
 def main():

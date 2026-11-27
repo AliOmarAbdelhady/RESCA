@@ -3,7 +3,7 @@ from __future__ import annotations
 import torch
 from torch import nn
 
-from resca_ai.v4.models.distillation import (
+from rescuevision_ai.v4.models.distillation import (
     FrozenFeatureTeacher,
     FeatureProjection,
     feature_distillation_loss,

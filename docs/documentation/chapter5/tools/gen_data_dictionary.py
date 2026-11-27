@@ -33,7 +33,7 @@ order by c.relname, a.attnum
 
 
 def main():
-    rows = subprocess.run(["psql", "-d", "resca", "-AtF", "\t", "-c", SQL],
+    rows = subprocess.run(["psql", "-d", "rescuevision", "-AtF", "\t", "-c", SQL],
                           check=True, capture_output=True, text=True).stdout.splitlines()
     cols = {}
     for line in rows:

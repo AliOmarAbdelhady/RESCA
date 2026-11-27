@@ -20,7 +20,7 @@ function App() {
               R
             </div>
             <div>
-              <h1 className="text-xl font-bold">RESCA</h1>
+              <h1 className="text-xl font-bold">RescueVision</h1>
               <p className="text-sm text-gray-300">
                 Disaster Damage Assessment Dashboard
               </p>
@@ -83,7 +83,7 @@ function App() {
 
       {/* Footer */}
       <footer className="bg-gray-100 border-t mt-12 py-4 text-center text-sm text-gray-500">
-        RESCA v0.1.0 &mdash; Research Prototype. Not a replacement for official emergency assessment.
+        RescueVision v0.1.0 &mdash; Research Prototype. Not a replacement for official emergency assessment.
       </footer>
     </div>
   )

@@ -15,7 +15,7 @@ parser.add_argument("output_dir", type=Path)
 args = parser.parse_args()
 archive_buffer = io.BytesIO()
 with zipfile.ZipFile(archive_buffer, "w", zipfile.ZIP_DEFLATED) as archive:
-    for path in sorted((root / "src/resca_ai").rglob("*.py")):
+    for path in sorted((root / "src/rescuevision_ai").rglob("*.py")):
         archive.write(path, path.relative_to(root))
     archive.write(root / "scripts/v4_train_class_audit.py", "stage.py")
 archive_bytes = archive_buffer.getvalue()

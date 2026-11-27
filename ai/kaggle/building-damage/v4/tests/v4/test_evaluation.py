@@ -3,7 +3,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from resca_ai.v4.evaluation import EvaluationInputError, OfficialAccumulator
+from rescuevision_ai.v4.evaluation import EvaluationInputError, OfficialAccumulator
 
 
 def test_perfect_prediction_reaches_one_and_records_global_counts() -> None:

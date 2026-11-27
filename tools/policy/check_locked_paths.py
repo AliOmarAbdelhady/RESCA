@@ -8,7 +8,7 @@ The list of locked paths is read from the base revision (CI) or from HEAD
 (pre-commit), never from the change under review, so a change cannot unlock
 itself. Renames count as touching both the old and the new path.
 
-An approved owner change passes when RESCA_LOCKED_CHANGE_APPROVED=1. CI sets it
+An approved owner change passes when RESCUEVISION_LOCKED_CHANGE_APPROVED=1. CI sets it
 only when the owner added the "owner-approved" label; locally the owner sets it
 by hand. Agents must never set it (AGENTS.md, Never list).
 """
@@ -99,7 +99,7 @@ def main() -> int:
         return 0
 
     listing = "\n".join(f"  - {p}" for p in touched)
-    if os.environ.get("RESCA_LOCKED_CHANGE_APPROVED") == "1":
+    if os.environ.get("RESCUEVISION_LOCKED_CHANGE_APPROVED") == "1":
         print(f"locked-paths: owner-approved change to:\n{listing}")
         return 0
 
@@ -107,7 +107,8 @@ def main() -> int:
         "locked-paths: this change touches files only the owner may change:\n"
         f"{listing}\n"
         "Agents: revert these files and describe the change you need in the PR text.\n"
-        "Owner: add the 'owner-approved' label (CI) or set RESCA_LOCKED_CHANGE_APPROVED=1 (local).",
+        "Owner: add the 'owner-approved' label (CI) or set "
+        "RESCUEVISION_LOCKED_CHANGE_APPROVED=1 (local).",
         file=sys.stderr,
     )
     return 1

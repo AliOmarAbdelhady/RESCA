@@ -2,7 +2,7 @@ import pytest
 import torch
 import torch.nn.functional as F
 
-from resca_ai.v4.losses import masked_damage_cross_entropy
+from rescuevision_ai.v4.losses import masked_damage_cross_entropy
 
 
 def test_uniform_weights_match_baseline_loss_and_gradient():

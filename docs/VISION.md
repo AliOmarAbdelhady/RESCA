@@ -1,6 +1,6 @@
 # Vision
 
-RESCA (Real-time Emergency Sensing, Coordination & Assessment) gives every agency in a disaster one shared, live picture: what is damaged, where people need help, which roads are safe, and which hazards are forming. It turns drone and satellite imagery into decisions a person confirms.
+RescueVision gives every agency in a disaster one shared, live picture: what is damaged, where people need help, which roads are safe, and which hazards are forming. It turns drone and satellite imagery into decisions a person confirms.
 
 This is a graduation project built to the standard of a national emergency system: security, correctness and honest limits come before features.
 

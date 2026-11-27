@@ -48,7 +48,7 @@ The list is `.github/locked-paths.txt`: agent guides, `ARCHITECTURE.md`, `DECISI
 
 - CI reads the list and the checker from the **base** branch, so a PR cannot unlock itself.
 - A PR touching a locked file fails unless the owner adds the `owner-approved` label; CI checks that the owner's account added it.
-- Locally, the pre-commit hook blocks commits to locked files. The owner may set `RESCA_LOCKED_CHANGE_APPROVED=1` for an owner change.
+- Locally, the pre-commit hook blocks commits to locked files. The owner may set `RESCUEVISION_LOCKED_CHANGE_APPROVED=1` for an owner change.
 - Agents never add the label, never set that variable, never edit the list. If a locked file is wrong, describe the change in the PR text and stop.
 - Limit: an agent working with the owner's own GitHub token appears as the owner. Give agents a separate token without label rights where possible.
 

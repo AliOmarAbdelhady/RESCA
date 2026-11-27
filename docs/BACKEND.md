@@ -1,11 +1,11 @@
 # Backend
 
-FastAPI, Python 3.12, SQLAlchemy 2 (async) with asyncpg, Pydantic v2. One package `backend/src/resca_api`, run as `api` (HTTP) or `worker` (jobs). Read [ARCHITECTURE.md](ARCHITECTURE.md) first.
+FastAPI, Python 3.12, SQLAlchemy 2 (async) with asyncpg, Pydantic v2. One package `backend/src/rescuevision_api`, run as `api` (HTTP) or `worker` (jobs). Read [ARCHITECTURE.md](ARCHITECTURE.md) first.
 
 ## Layout
 
 ```
-backend/src/resca_api/
+backend/src/rescuevision_api/
   core/            settings, db session, auth, errors, logging, rate limits (imports no domain)
   <domain>/        identity, incidents, imagery, citizens, buildings, roads, cases, hazards, routing, reports
     router.py      HTTP only: parse, call one service function, return the response model

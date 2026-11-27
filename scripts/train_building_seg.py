@@ -8,13 +8,13 @@ import sys
 import torch
 from torch.utils.data import DataLoader
 
-from resca.data.datasets import XBDSegmentationDataset
-from resca.data.transforms import get_segmentation_transforms
-from resca.models.losses import BCEDiceLoss
-from resca.models.unet import create_unet
-from resca.training.train_segmentation import train_segmentation
-from resca.utils.config import load_config
-from resca.utils.seed import set_seed
+from rescuevision.data.datasets import XBDSegmentationDataset
+from rescuevision.data.transforms import get_segmentation_transforms
+from rescuevision.models.losses import BCEDiceLoss
+from rescuevision.models.unet import create_unet
+from rescuevision.training.train_segmentation import train_segmentation
+from rescuevision.utils.config import load_config
+from rescuevision.utils.seed import set_seed
 
 
 def main():
