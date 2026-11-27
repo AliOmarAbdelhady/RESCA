@@ -2,9 +2,9 @@
 
 Read this first. It applies to every AI coding agent and every person working in this repository. Locked: only the owner changes it.
 
-## What RESCA is
+## What RescueVision is
 
-RESCA (Real-time Emergency Sensing, Coordination & Assessment) gives police, EMS, fire and government one live picture of a disaster: damage from drone and satellite imagery, people who need help, hazards such as flood water near live power, and safe routes. It is a graduation project held to the standard of a national emergency system. Full picture: [docs/VISION.md](docs/VISION.md).
+RescueVision gives police, EMS, fire and government one live picture of a disaster: damage from drone and satellite imagery, people who need help, hazards such as flood water near live power, and safe routes. It is a graduation project held to the standard of a national emergency system. Full picture: [docs/VISION.md](docs/VISION.md).
 
 ## System map
 
@@ -21,7 +21,7 @@ REST for commands, SSE for live updates, a Postgres job queue for heavy work, on
 
 | Folder | What | Read before touching |
 |---|---|---|
-| `backend/` | FastAPI app and worker (`resca_api`) | [docs/BACKEND.md](docs/BACKEND.md) |
+| `backend/` | FastAPI app and worker (`rescuevision_api`) | [docs/BACKEND.md](docs/BACKEND.md) |
 | `frontend/` | web console, Expo app, shared packages | [docs/FRONTEND.md](docs/FRONTEND.md) |
 | `database/` | schema, migrations, seeds, self-checks | [docs/DATABASE.md](docs/DATABASE.md) |
 | `ai/` | Kaggle experiments, shared ML code, model services | [docs/AI.md](docs/AI.md) |
@@ -59,7 +59,7 @@ Only the owner may change the files in `.github/locked-paths.txt`: all `AGENTS.m
 
 - Push to `main` or `dev`, branch from `main`, open a PR into `main` from anything but `dev`, force-push a shared branch, or merge your own PR.
 - Change architecture, decisions, the workflow, CI, gates or the database security model.
-- Add the `owner-approved` label or set `RESCA_LOCKED_CHANGE_APPROVED`.
+- Add the `owner-approved` label or set `RESCUEVISION_LOCKED_CHANGE_APPROVED`.
 - Weaken, skip or delete a test; add `eslint-disable`, `noqa` or `type: ignore` to get green (P2).
 - Commit secrets, `.env` files, model weights, datasets or notebook outputs.
 - Delete or rewrite a teammate's work.

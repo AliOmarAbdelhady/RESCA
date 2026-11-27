@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mxfile host="RESCA ERD generator">
+<mxfile host="RescueVision ERD generator">
   <diagram id="p1" name="Overview">
     <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1000" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="p1-title" value="RESCA · Domain Map (8 domains, 56 tables)" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=24;fontColor=#000000;fontStyle=1;" vertex="1" parent="1">
+        <mxCell id="p1-title" value="RescueVision · Domain Map (8 domains, 56 tables)" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=24;fontColor=#000000;fontStyle=1;" vertex="1" parent="1">
           <mxGeometry x="40.0" y="26.0" width="1800.0" height="42.0" as="geometry" />
         </mxCell>
         <mxCell id="p1-sub" value="Boxes list tables only. Each line is one domain pair that has foreign keys; the label is the number of FKs (audit ‘who did it’ links excluded)." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=12;fontColor=#555555;" vertex="1" parent="1">
@@ -10479,7 +10479,7 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="p10-title" value="RESCA · Full ERD (56 tables, grouped by domain)" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=22;fontColor=#000000;fontStyle=1;" vertex="1" parent="1">
+        <mxCell id="p10-title" value="RescueVision · Full ERD (56 tables, grouped by domain)" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=22;fontColor=#000000;fontStyle=1;" vertex="1" parent="1">
           <mxGeometry x="40.0" y="20.0" width="2000.0" height="40.0" as="geometry" />
         </mxCell>
         <mxCell id="p10-sub" value="Domain clusters; PK/FK/UQ markers; crow's foot at the child, bar/circle at the parent. Audit ‘who did it’ user FKs are shown as rows only." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;fontColor=#555555;" vertex="1" parent="1">

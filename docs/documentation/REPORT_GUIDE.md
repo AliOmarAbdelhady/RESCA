@@ -1,4 +1,4 @@
-# RESCA graduation report guide
+# RescueVision graduation report guide
 
 How the team works on the Project I report. Paths in backticks are from the repository root. For building the application, read the root [AGENTS.md](../../AGENTS.md).
 

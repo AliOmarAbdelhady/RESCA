@@ -1,2 +1,0 @@
-"""RESCA AI research package."""
-

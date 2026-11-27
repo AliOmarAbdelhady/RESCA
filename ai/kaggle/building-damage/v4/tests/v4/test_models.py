@@ -5,7 +5,7 @@ from types import SimpleNamespace
 import torch
 from torch import nn
 
-from resca_ai.v4.models.dinov3 import (
+from rescuevision_ai.v4.models.dinov3 import (
     FrozenDINOv3Features,
     TokenGridError,
     extract_spatial_tokens,

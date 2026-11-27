@@ -180,7 +180,7 @@
           <w:szCs w:val="32"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">RESCA</w:t>
+        <w:t xml:space="preserve">RescueVision</w:t>
       </w:r>
       <w:r w:rsidDel="00000000" w:rsidR="00000000" w:rsidRPr="00000000">
         <w:rPr>
@@ -2239,7 +2239,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P1 · Opening paragraph: broad disaster-response context narrowing to RESCA (funnel approach). Status: NOT STARTED]</w:t>
+        <w:t xml:space="preserve">[P1 · Opening paragraph: broad disaster-response context narrowing to RescueVision (funnel approach). Status: NOT STARTED]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000062">
@@ -2587,7 +2587,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P1 · SRS 1.3 · How RESCA is intended to support understanding of an affected area and coordination of assistance. Status: NOT STARTED]</w:t>
+        <w:t xml:space="preserve">[P1 · SRS 1.3 · How RescueVision is intended to support understanding of an affected area and coordination of assistance. Status: NOT STARTED]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="0000006E">
@@ -3043,7 +3043,7 @@
           <w:szCs w:val="24"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Table 1-4: Applicable constraints. [P1 · table goes below · columns: Category | Relevance to RESCA | Effect on the proposal]</w:t>
+        <w:t xml:space="preserve">Table 1-4: Applicable constraints. [P1 · table goes below · columns: Category | Relevance to RescueVision | Effect on the proposal]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="0000007E">
@@ -3304,7 +3304,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P2 · Theme review: compare several sources, state agreements, differences and what it means for RESCA. Status: DRAFT MERGED IN MAIN]</w:t>
+        <w:t xml:space="preserve">[P2 · Theme review: compare several sources, state agreements, differences and what it means for RescueVision. Status: DRAFT MERGED IN MAIN]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000087">
@@ -3650,7 +3650,7 @@
           <w:szCs w:val="24"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Table 2-2: Core studies and applicability to RESCA. [P2 · Drafted in Main]</w:t>
+        <w:t xml:space="preserve">Table 2-2: Core studies and applicability to RescueVision. [P2 · Drafted in Main]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000093">
@@ -3708,7 +3708,7 @@
           <w:shd w:fill="fff299" w:val="clear"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">[P2 · The supported gap that justifies RESCA. No claim that it is unique or better than every system. Status: DRAFT MERGED IN MAIN]</w:t>
+        <w:t xml:space="preserve">[P2 · The supported gap that justifies RescueVision. No claim that it is unique or better than every system. Status: DRAFT MERGED IN MAIN]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="00000095">
@@ -3902,7 +3902,7 @@
           <w:szCs w:val="20"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Figure 3-1: Proposed RESCA workflow. [P3 · plain-language workflow: review information, view people and hazards on the map, assess, coordinate, update status · goes above this caption]</w:t>
+        <w:t xml:space="preserve">Figure 3-1: Proposed RescueVision workflow. [P3 · plain-language workflow: review information, view people and hazards on the map, assess, coordinate, update status · goes above this caption]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="0000009B">
@@ -5447,7 +5447,7 @@
           <w:szCs w:val="20"/>
           <w:rtl w:val="0"/>
         </w:rPr>
-        <w:t xml:space="preserve">Figure 3-2: Conceptual architecture of RESCA. [P5 · editable diagram · goes above this caption]</w:t>
+        <w:t xml:space="preserve">Figure 3-2: Conceptual architecture of RescueVision. [P5 · editable diagram · goes above this caption]</w:t>
       </w:r>
     </w:p>
     <w:p w:rsidR="00000000" w:rsidDel="00000000" w:rsidP="00000000" w:rsidRDefault="00000000" w:rsidRPr="00000000" w14:paraId="000000D8">

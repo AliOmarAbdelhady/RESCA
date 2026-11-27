@@ -1,4 +1,4 @@
-# RESCA — Documentation Work Plan
+# RescueVision — Documentation Work Plan
 
 **Six people. Every required section. One professional graduation report.**
 
@@ -6,17 +6,17 @@
 
 ## The purpose of this guide
 
-Divide the writing and preparation of the university documents among six people. Each assignment explains what to write, how to relate it to RESCA, what report material to prepare, and how to check that the section is complete.
+Divide the writing and preparation of the university documents among six people. Each assignment explains what to write, how to relate it to RescueVision, what report material to prepare, and how to check that the section is complete.
 
 ## The project idea the report describes
 
-RESCA is a proposed disaster-response platform for police, ambulance teams, hospitals, and other emergency organizations. Its intended website and mobile application present an affected area in 2D and 3D, show people who may need assistance and reported hazards, and support coordination and route guidance.
+RescueVision is a proposed disaster-response platform for police, ambulance teams, hospitals, and other emergency organizations. Its intended website and mobile application present an affected area in 2D and 3D, show people who may need assistance and reported hazards, and support coordination and route guidance.
 
 > The deliverables in this plan are written sections, literature comparisons, report tables, conceptual diagrams, captions, references, and a carefully assembled PDF.
 
 Use the supplied Project I guide for required content [1] and the supplied Word template for organization and formatting [2]. Preserve the project idea while writing at the level required for the report.
 
-Prepared for the RESCA team | 21 October 2026. Work is ordered by document dependencies, without a timeline.
+Prepared for the RescueVision team | 21 October 2026. Work is ordered by document dependencies, without a timeline.
 
 > This revised guide supersedes the previous work allocation. It assigns documentation work only.
 
@@ -67,7 +67,7 @@ The Project I guide asks for a merged requirements/design report [1]. The Word t
 
 Write the report introduction and SRS 1.1 Purpose, 1.2 Intended Audience, 1.3 Intended Use, 1.4 Scope, 1.5 Definitions, 1.6 Applicable Standards, and 1.7 Constraints [1].
 
-### What to write about RESCA
+### What to write about RescueVision
 
 - **Background and motivation:** explain why emergency organizations need a shared understanding of affected streets, hazards and people awaiting assistance. Support factual claims with credible sources.
 - **Problem statement:** describe fragmented information, difficulty locating assistance needs, changing street conditions and coordination challenges. Avoid claiming that every organization currently works in the same way.
@@ -77,7 +77,7 @@ Write the report introduction and SRS 1.1 Purpose, 1.2 Intended Audience, 1.3 In
 
 ### How to prepare the section
 
-Start with a one-paragraph project definition agreed by all six. Then write from broad context to the specific RESCA problem and proposed response. Create a scope table and a glossary so later chapters use the same vocabulary. Complete the constraint categories shown on page 10.
+Start with a one-paragraph project definition agreed by all six. Then write from broad context to the specific RescueVision problem and proposed response. Create a scope table and a glossary so later chapters use the same vocabulary. Complete the constraint categories shown on page 10.
 
 For 1.6, record only applicable standards/conventions agreed for the project and explain their purpose. Do not invent an adoption or compliance claim. If the supervisor must decide an item, record it as an open decision in the team review notes.
 
@@ -93,7 +93,7 @@ Introduction text; purpose/audience/use paragraphs; objectives and scope tables;
 
 Write Literature Review and Background, including related research, similar systems, market/use context, comparison and the proposal's justification. Maintain references for the whole report [1,2].
 
-### What to write about RESCA
+### What to write about RescueVision
 
 Organize the review by questions: how disaster information is presented; how affected areas are understood in 2D/3D; how people needing assistance are identified and followed; how hazards affect movement; and how organizations coordinate a response. Discuss the research findings at the level needed to justify the proposal.
 
@@ -101,7 +101,7 @@ Organize the review by questions: how disaster information is presented; how aff
 
 - Agree research themes with Person 1. Search for relevant academic papers and official descriptions of comparable systems. Record the search terms, source, date and selection reason.
 - Ask each member to submit source notes relevant to their section. Verify title, authors, publication details and the link before accepting an entry.
-- For each important source, explain its purpose, approach in plain language, useful findings, limitations and relevance to RESCA. Read beyond the abstract before making detailed claims.
+- For each important source, explain its purpose, approach in plain language, useful findings, limitations and relevance to RescueVision. Read beyond the abstract before making detailed claims.
 - Compare several works within each theme. Identify agreements, differences and unresolved needs. End each theme by explaining what it means for the proposed project.
 - Prepare a related-systems table with purpose, intended users, relevant capabilities, documented limitations and source. Mark unknown information as not established by the source.
 
@@ -113,7 +113,7 @@ A thematic chapter outline; the written review; a study-summary table; a related
 
 Do not make the review a list of paper summaries. Do not describe a proposed capability as a proven advantage. A separate published paper is not explicitly required in the supplied course guide; the required research component is the literature review [1].
 
-> **Finished when:** the chapter compares evidence, explains why RESCA is worth proposing, and supports its claims with verifiable references. **Reviewer:** Person 6.
+> **Finished when:** the chapter compares evidence, explains why RescueVision is worth proposing, and supports its claims with verifiable references. **Reviewer:** Person 6.
 
 ## Person 3 — Write the system description
 
@@ -121,7 +121,7 @@ Do not make the review a list of paper summaries. Do not describe a proposed cap
 
 Write SRS 2.1 Methodology, 2.2 User Requirements and Privileges, 2.3 Assumptions / Constraints / Limitations / Dependencies, and 2.4 Intended Technologies at the report's agreed descriptive level [1].
 
-### What to write about RESCA
+### What to write about RescueVision
 
 - **System overview:** describe what the proposed platform is for and how a user moves from viewing an affected area to coordinating assistance.
 - **Methodology:** explain the proposed workflow in ordinary language: information is reviewed, people and hazards are presented on a map, an authorized user assesses the situation, a response is coordinated, and its status is updated.
@@ -139,7 +139,7 @@ Keep 2.4 because the course guide includes it. Describe the intended website, mo
 
 System-description text; user-role/privilege table; feature-summary table; workflow figure and caption; assumptions/limitations/dependencies list; relevant source notes. Pass these to Persons 4 and 5 before their final wording is settled.
 
-> **Finished when:** the reader can explain who uses RESCA, what they do, and which assumptions limit the proposal. **Reviewer:** Person 1.
+> **Finished when:** the reader can explain who uses RescueVision, what they do, and which assumptions limit the proposal. **Reviewer:** Person 1.
 
 ## Person 4 — Write the requirements and use cases
 
@@ -147,7 +147,7 @@ System-description text; user-role/privilege table; feature-summary table; workf
 
 Write SRS 3.1 Functional Requirements, 3.2 External Interface Requirements, 3.3 System Features and Use Cases, and 3.4 Nonfunctional Requirements [1]. This is a writing task describing expected behavior.
 
-### What to write about RESCA
+### What to write about RescueVision
 
 Cover the agreed capabilities: viewing an incident area in 2D/3D; examining a person or hazard marker; reviewing person-tracking information; confirming an assistance need; coordinating a response; viewing route guidance; and updating response status.
 
@@ -195,7 +195,7 @@ For a sequence diagram, show the order of a user's actions and the system's expe
 
 Written design chapter; editable diagrams and screen illustrations; figure captions; a diagram-to-requirement mapping; a short rationale for important choices. Label proposed screen illustrations clearly so they are not mistaken for screenshots of a completed product.
 
-> **Finished when:** every diagram is explained, matches the requirements, and helps a reader understand the proposed RESCA experience. **Reviewer:** Person 4.
+> **Finished when:** every diagram is explained, matches the requirements, and helps a reader understand the proposed RescueVision experience. **Reviewer:** Person 4.
 
 ## Person 6 — Complete and assemble the report
 
@@ -231,11 +231,11 @@ Use this as an authoring checklist for Person 1. Keep the course guide's heading
 |---|---|
 | 1.1 Purpose | A paragraph explaining the purpose of the requirements document and the decisions it supports. |
 | 1.2 Intended Audience | Who reads it: team, supervisor, assessors and intended emergency-service stakeholders; what each needs from it. |
-| 1.3 Intended Use | How RESCA is intended to support understanding of an affected area and coordination of assistance. |
+| 1.3 Intended Use | How RescueVision is intended to support understanding of an affected area and coordination of assistance. |
 | 1.4 Scope | Problem, objectives, goals, boundaries and clear success criteria for the proposed project. |
 | 1.5 Definitions | A glossary of the project's recurring terms; an overview of main features, challenges, risks and proposed mitigations. |
 | 1.6 Applicable Standards | Names and purposes of standards/conventions actually agreed as applicable. Avoid unsupported compliance statements. |
-| 1.7 Applicable Constraints | A table covering each category listed below, its relevance to RESCA and its effect on the proposal. |
+| 1.7 Applicable Constraints | A table covering each category listed below, its relevance to RescueVision and its effect on the proposal. |
 
 ### Cover all of the constraint categories
 
@@ -243,7 +243,7 @@ Cost/economics; environment; legal and ethical responsibilities; social consider
 
 For example, privacy affects how the report describes access to person-related information; language and accessibility affect how emergency users can understand warnings; environmental conditions limit what information may be available. Explain relevance without making unsupported legal or operational claims.
 
-> **Completion check:** no required heading is silently omitted; every paragraph is specific to RESCA; assumptions and unresolved decisions are recognizable.
+> **Completion check:** no required heading is silently omitted; every paragraph is specific to RescueVision; assumptions and unresolved decisions are recognizable.
 
 ## Complete the description and requirements
 
@@ -292,7 +292,7 @@ Introduce the figure before it appears, explain it afterward, and connect it to 
 
 ### Read with a purpose
 
-Use the papers to support the problem, understand related work and justify the proposal. For each selected paper, record the research question, a plain-language summary, relevant findings, limitations and the part of the RESCA report it informs.
+Use the papers to support the problem, understand related work and justify the proposal. For each selected paper, record the research question, a plain-language summary, relevant findings, limitations and the part of the RescueVision report it informs.
 
 | Research note field | What the author records |
 |---|---|
@@ -304,7 +304,7 @@ Use the papers to support the problem, understand related work and justify the p
 
 ### Turn reading into a critical review
 
-Compare several sources within a theme. Explain where they agree, how their aims differ, and which practical questions remain. Then connect that comparison to RESCA. Avoid unsupported claims that the proposed project is unique or better than every existing system.
+Compare several sources within a theme. Explain where they agree, how their aims differ, and which practical questions remain. Then connect that comparison to RescueVision. Avoid unsupported claims that the proposed project is unique or better than every existing system.
 
 ### Write and reference professionally
 
@@ -323,7 +323,7 @@ These are illustrative starting points. The assigned authors should refine them 
 
 ### Problem statement example
 
-Emergency organizations responding to a disaster need to understand where assistance may be required and which surrounding conditions may affect access. RESCA proposes a shared view of the affected area, combining 2D and 3D presentation with person-related observations, hazard warnings and response information. The project aims to help authorized users interpret the situation and coordinate assistance while keeping human decisions central.
+Emergency organizations responding to a disaster need to understand where assistance may be required and which surrounding conditions may affect access. RescueVision proposes a shared view of the affected area, combining 2D and 3D presentation with person-related observations, hazard warnings and response information. The project aims to help authorized users interpret the situation and coordinate assistance while keeping human decisions central.
 
 ### Requirement examples
 
@@ -409,7 +409,7 @@ Provide your completed section text; the tables/figures it refers to; editable f
 
 ### Three review passes
 
-**Content:** check required headings and RESCA relevance. **Consistency:** compare terms, objectives, requirements and figures across chapters. **Presentation:** check styles, numbering, citations, contents and every exported page.
+**Content:** check required headings and RescueVision relevance. **Consistency:** compare terms, objectives, requirements and figures across chapters. **Presentation:** check styles, numbering, citations, contents and every exported page.
 
 > Start by agreeing the project definition and scope. Then give each person the section list in this guide. Completion means a reviewed contribution ready to merge into the graduation report.
 

@@ -16,7 +16,7 @@ parser.add_argument('--mode', choices=('bounded', 'full'), required=True)
 args = parser.parse_args()
 buffer = io.BytesIO()
 with zipfile.ZipFile(buffer, 'w', zipfile.ZIP_DEFLATED) as archive:
-    for path in sorted((root / 'src/resca_ai').rglob('*.py')):
+    for path in sorted((root / 'src/rescuevision_ai').rglob('*.py')):
         archive.write(path, path.relative_to(root))
     archive.write(root / 'scripts/v4_d0_epoch3_ablation_stage.py', 'stage.py')
 archive = buffer.getvalue()

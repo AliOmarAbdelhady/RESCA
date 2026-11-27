@@ -3,10 +3,10 @@
 --
 -- Roles (cluster-wide, NOLOGIN groups; login roles are created per deployment
 -- and granted membership, see database/README.md):
---   resca_app      the API acting for a signed-in agency user (RLS applies)
---   resca_worker   the AI / Celery pipeline (full data access, no user context)
---   resca_citizen  the public citizen channel (own requests only)
---   resca_readonly analytics and reporting (read-only, no personal data)
+--   rescuevision_app      the API acting for a signed-in agency user (RLS applies)
+--   rescuevision_worker   the AI / Celery pipeline (full data access, no user context)
+--   rescuevision_citizen  the public citizen channel (own requests only)
+--   rescuevision_readonly analytics and reporting (read-only, no personal data)
 --
 -- Per request the API runs, inside its transaction:
 --   SELECT app.set_session_user('<user uuid>');      -- agency staff
@@ -22,7 +22,7 @@ CREATE SCHEMA IF NOT EXISTS app;
 DO $$
 DECLARE r text;
 BEGIN
-  FOREACH r IN ARRAY ARRAY['resca_app', 'resca_worker', 'resca_citizen', 'resca_readonly'] LOOP
+  FOREACH r IN ARRAY ARRAY['rescuevision_app', 'rescuevision_worker', 'rescuevision_citizen', 'rescuevision_readonly'] LOOP
     IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = r) THEN
       EXECUTE format('CREATE ROLE %I NOLOGIN', r);
     END IF;
@@ -254,33 +254,33 @@ ALTER VIEW v_routing_edges           SET (security_invoker = true);
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
 REVOKE ALL ON ALL TABLES IN SCHEMA public FROM PUBLIC;
 REVOKE EXECUTE ON ALL FUNCTIONS IN SCHEMA app FROM PUBLIC;
-GRANT USAGE ON SCHEMA public, app TO resca_app, resca_worker, resca_citizen, resca_readonly;
+GRANT USAGE ON SCHEMA public, app TO rescuevision_app, rescuevision_worker, rescuevision_citizen, rescuevision_readonly;
 
-GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO resca_app, resca_worker;
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO resca_readonly;
-GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO resca_app, resca_worker, resca_citizen;
-GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA app TO resca_app, resca_worker, resca_citizen, resca_readonly;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO rescuevision_app, rescuevision_worker;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO rescuevision_readonly;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO rescuevision_app, rescuevision_worker, rescuevision_citizen;
+GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA app TO rescuevision_app, rescuevision_worker, rescuevision_citizen, rescuevision_readonly;
 GRANT EXECUTE ON FUNCTION evaluate_hazard_rules(uuid), resolve_compound_alert(uuid, uuid, text, boolean)
-  TO resca_app, resca_worker;
-REVOKE EXECUTE ON FUNCTION app.get_login(citext) FROM resca_citizen, resca_readonly, resca_worker;
+  TO rescuevision_app, rescuevision_worker;
+REVOKE EXECUTE ON FUNCTION app.get_login(citext) FROM rescuevision_citizen, rescuevision_readonly, rescuevision_worker;
 
 -- Citizen channel: only its own tables.
-GRANT SELECT, UPDATE ON citizens TO resca_citizen;
-GRANT SELECT, INSERT ON citizen_requests, media_files, citizen_request_media TO resca_citizen;
+GRANT SELECT, UPDATE ON citizens TO rescuevision_citizen;
+GRANT SELECT, INSERT ON citizen_requests, media_files, citizen_request_media TO rescuevision_citizen;
 
 -- Password hashes are not readable by any app role (sign-in uses app.get_login).
-REVOKE SELECT ON users FROM resca_app, resca_worker, resca_readonly;
+REVOKE SELECT ON users FROM rescuevision_app, rescuevision_worker, rescuevision_readonly;
 DO $$
 DECLARE cols text;
 BEGIN
   SELECT string_agg(quote_ident(attname), ', ' ORDER BY attnum) INTO cols
   FROM pg_attribute WHERE attrelid = 'users'::regclass AND attnum > 0 AND NOT attisdropped
     AND attname <> 'password_hash';
-  EXECUTE format('GRANT SELECT (%s) ON users TO resca_app, resca_worker', cols);
+  EXECUTE format('GRANT SELECT (%s) ON users TO rescuevision_app, rescuevision_worker', cols);
 END $$;
 
 -- Analytics never sees credentials, sessions, citizens' identities or the audit trail.
-REVOKE SELECT ON user_sessions, user_devices, citizens, audit_log FROM resca_readonly;
+REVOKE SELECT ON user_sessions, user_devices, citizens, audit_log FROM rescuevision_readonly;
 
 -- Partitions have no policies of their own: block direct access so nobody can
 -- read responder_positions_2026_11 and skip RLS on the parent.
@@ -289,7 +289,7 @@ DECLARE p regclass;
 BEGIN
   FOR p IN SELECT c.oid::regclass FROM pg_class c
            WHERE c.relnamespace = 'public'::regnamespace AND c.relispartition AND c.relkind = 'r' LOOP
-    EXECUTE format('REVOKE ALL ON %s FROM resca_app, resca_worker, resca_citizen, resca_readonly', p);
+    EXECUTE format('REVOKE ALL ON %s FROM rescuevision_app, rescuevision_worker, rescuevision_citizen, rescuevision_readonly', p);
   END LOOP;
 END $$;
 
@@ -304,15 +304,15 @@ BEGIN
              AND NOT c.relispartition AND c.relname <> 'spatial_ref_sys' LOOP
     EXECUTE format('ALTER TABLE %I ENABLE ROW LEVEL SECURITY', t);
     -- The AI pipeline acts on behalf of the platform, not a user.
-    EXECUTE format('CREATE POLICY service_all ON %I FOR ALL TO resca_worker USING (true) WITH CHECK (true)', t);
+    EXECUTE format('CREATE POLICY service_all ON %I FOR ALL TO rescuevision_worker USING (true) WITH CHECK (true)', t);
     IF t NOT IN ('users', 'user_sessions', 'user_devices', 'citizens', 'audit_log') THEN
-      EXECUTE format('CREATE POLICY analytics_read ON %I FOR SELECT TO resca_readonly USING (true)', t);
+      EXECUTE format('CREATE POLICY analytics_read ON %I FOR SELECT TO rescuevision_readonly USING (true)', t);
     END IF;
   END LOOP;
 END $$;
 
 ------------------------------------------------------------------------------
--- resca_app policies (agency users). Shorthands used below:
+-- rescuevision_app policies (agency users). Shorthands used below:
 --   visible  : incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[])
 --   perm(x)  : (SELECT app.has_permission('x'))
 --   me       : (SELECT app.current_user_id())
@@ -323,81 +323,81 @@ END $$;
 ------------------------------------------------------------------------------
 
 -- D1 Identity & Access ------------------------------------------------------
-CREATE POLICY agencies_read ON agencies FOR SELECT TO resca_app
+CREATE POLICY agencies_read ON agencies FOR SELECT TO rescuevision_app
   USING ((SELECT app.current_user_id()) IS NOT NULL);
-CREATE POLICY agencies_admin ON agencies FOR ALL TO resca_app
+CREATE POLICY agencies_admin ON agencies FOR ALL TO rescuevision_app
   USING ((SELECT app.has_permission('agency.manage')))
   WITH CHECK ((SELECT app.has_permission('agency.manage')));
-CREATE POLICY agencies_own_update ON agencies FOR UPDATE TO resca_app
+CREATE POLICY agencies_own_update ON agencies FOR UPDATE TO rescuevision_app
   USING (id = (SELECT app.current_agency_id()) AND (SELECT app.has_permission('user.manage')))
   WITH CHECK (id = (SELECT app.current_agency_id()));
 
-CREATE POLICY roles_read ON roles FOR SELECT TO resca_app USING (true);
-CREATE POLICY roles_admin ON roles FOR ALL TO resca_app
+CREATE POLICY roles_read ON roles FOR SELECT TO rescuevision_app USING (true);
+CREATE POLICY roles_admin ON roles FOR ALL TO rescuevision_app
   USING ((SELECT app.has_permission('agency.manage'))) WITH CHECK ((SELECT app.has_permission('agency.manage')));
-CREATE POLICY permissions_read ON permissions FOR SELECT TO resca_app USING (true);
-CREATE POLICY permissions_admin ON permissions FOR ALL TO resca_app
+CREATE POLICY permissions_read ON permissions FOR SELECT TO rescuevision_app USING (true);
+CREATE POLICY permissions_admin ON permissions FOR ALL TO rescuevision_app
   USING ((SELECT app.has_permission('agency.manage'))) WITH CHECK ((SELECT app.has_permission('agency.manage')));
-CREATE POLICY role_permissions_read ON role_permissions FOR SELECT TO resca_app USING (true);
-CREATE POLICY role_permissions_admin ON role_permissions FOR ALL TO resca_app
+CREATE POLICY role_permissions_read ON role_permissions FOR SELECT TO rescuevision_app USING (true);
+CREATE POLICY role_permissions_admin ON role_permissions FOR ALL TO rescuevision_app
   USING ((SELECT app.has_permission('agency.manage'))) WITH CHECK ((SELECT app.has_permission('agency.manage')));
 
-CREATE POLICY users_read ON users FOR SELECT TO resca_app
+CREATE POLICY users_read ON users FOR SELECT TO rescuevision_app
   USING (id = (SELECT app.current_user_id())
          OR agency_id = ANY ((SELECT app.partner_agency_ids())::uuid[])
          OR (SELECT app.is_platform_admin()));
-CREATE POLICY users_self_update ON users FOR UPDATE TO resca_app
+CREATE POLICY users_self_update ON users FOR UPDATE TO rescuevision_app
   USING (id = (SELECT app.current_user_id()))
   WITH CHECK (id = (SELECT app.current_user_id()));     -- column guard limits which fields
-CREATE POLICY users_agency_admin ON users FOR ALL TO resca_app
+CREATE POLICY users_agency_admin ON users FOR ALL TO rescuevision_app
   USING ((SELECT app.has_permission('user.manage'))
          AND ((SELECT app.is_platform_admin()) OR agency_id = (SELECT app.current_agency_id())))
   WITH CHECK ((SELECT app.has_permission('user.manage'))
               AND ((SELECT app.is_platform_admin())
                    OR (agency_id = (SELECT app.current_agency_id()) AND role_code <> 'PLATFORM_ADMIN')));
 
-CREATE POLICY user_sessions_own ON user_sessions FOR ALL TO resca_app
+CREATE POLICY user_sessions_own ON user_sessions FOR ALL TO rescuevision_app
   USING (user_id = (SELECT app.current_user_id())) WITH CHECK (user_id = (SELECT app.current_user_id()));
-CREATE POLICY user_devices_own ON user_devices FOR ALL TO resca_app
+CREATE POLICY user_devices_own ON user_devices FOR ALL TO rescuevision_app
   USING (user_id = (SELECT app.current_user_id())) WITH CHECK (user_id = (SELECT app.current_user_id()));
 
-CREATE POLICY teams_read ON teams FOR SELECT TO resca_app
+CREATE POLICY teams_read ON teams FOR SELECT TO rescuevision_app
   USING (agency_id = ANY ((SELECT app.partner_agency_ids())::uuid[]) OR (SELECT app.is_platform_admin()));
-CREATE POLICY teams_manage ON teams FOR ALL TO resca_app
+CREATE POLICY teams_manage ON teams FOR ALL TO rescuevision_app
   USING ((SELECT app.has_permission('team.manage')) AND agency_id = (SELECT app.current_agency_id()))
   WITH CHECK ((SELECT app.has_permission('team.manage')) AND agency_id = (SELECT app.current_agency_id()));
-CREATE POLICY team_members_read ON team_members FOR SELECT TO resca_app
+CREATE POLICY team_members_read ON team_members FOR SELECT TO rescuevision_app
   USING (EXISTS (SELECT 1 FROM teams t WHERE t.id = team_members.team_id));
-CREATE POLICY team_members_manage ON team_members FOR ALL TO resca_app
+CREATE POLICY team_members_manage ON team_members FOR ALL TO rescuevision_app
   USING ((SELECT app.has_permission('team.manage'))
          AND EXISTS (SELECT 1 FROM teams t WHERE t.id = team_members.team_id AND t.agency_id = (SELECT app.current_agency_id())))
   WITH CHECK ((SELECT app.has_permission('team.manage'))
          AND EXISTS (SELECT 1 FROM teams t WHERE t.id = team_members.team_id AND t.agency_id = (SELECT app.current_agency_id())));
-CREATE POLICY vehicles_read ON vehicles FOR SELECT TO resca_app
+CREATE POLICY vehicles_read ON vehicles FOR SELECT TO rescuevision_app
   USING (agency_id = ANY ((SELECT app.partner_agency_ids())::uuid[]) OR (SELECT app.is_platform_admin()));
-CREATE POLICY vehicles_manage ON vehicles FOR ALL TO resca_app
+CREATE POLICY vehicles_manage ON vehicles FOR ALL TO rescuevision_app
   USING ((SELECT app.has_permission('team.manage')) AND agency_id = (SELECT app.current_agency_id()))
   WITH CHECK ((SELECT app.has_permission('team.manage')) AND agency_id = (SELECT app.current_agency_id()));
 
 -- D2 Incidents & Operations --------------------------------------------------
-CREATE POLICY incidents_read ON incidents FOR SELECT TO resca_app
+CREATE POLICY incidents_read ON incidents FOR SELECT TO rescuevision_app
   USING (id = ANY ((SELECT app.visible_incident_ids())::uuid[]) OR lead_agency_id = (SELECT app.current_agency_id())
          -- an invited agency can see the incident it is being asked to join
          OR id = ANY ((SELECT app.invited_incident_ids())::uuid[]));
-CREATE POLICY incidents_create ON incidents FOR INSERT TO resca_app
+CREATE POLICY incidents_create ON incidents FOR INSERT TO rescuevision_app
   WITH CHECK ((SELECT app.has_permission('incident.create'))
               AND ((SELECT app.is_platform_admin()) OR lead_agency_id = (SELECT app.current_agency_id())));
-CREATE POLICY incidents_lead_update ON incidents FOR UPDATE TO resca_app
+CREATE POLICY incidents_lead_update ON incidents FOR UPDATE TO rescuevision_app
   USING ((SELECT app.has_permission('incident.create'))
          AND ((SELECT app.is_platform_admin()) OR lead_agency_id = (SELECT app.current_agency_id())))
   WITH CHECK ((SELECT app.is_platform_admin()) OR lead_agency_id = (SELECT app.current_agency_id()));
-CREATE POLICY incidents_admin_delete ON incidents FOR DELETE TO resca_app USING ((SELECT app.is_platform_admin()));
+CREATE POLICY incidents_admin_delete ON incidents FOR DELETE TO rescuevision_app USING ((SELECT app.is_platform_admin()));
 
-CREATE POLICY incident_agencies_read ON incident_agencies FOR SELECT TO resca_app
+CREATE POLICY incident_agencies_read ON incident_agencies FOR SELECT TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]) OR agency_id = (SELECT app.current_agency_id()));
 -- Only the lead agency's commanders invite or change participation; invited
 -- agencies answer through app.respond_to_invitation().
-CREATE POLICY incident_agencies_lead_manage ON incident_agencies FOR ALL TO resca_app
+CREATE POLICY incident_agencies_lead_manage ON incident_agencies FOR ALL TO rescuevision_app
   USING ((SELECT app.has_permission('incident.invite'))
          AND ((SELECT app.is_platform_admin())
               OR incident_id = ANY ((SELECT app.led_incident_ids())::uuid[])))
@@ -405,28 +405,28 @@ CREATE POLICY incident_agencies_lead_manage ON incident_agencies FOR ALL TO resc
          AND ((SELECT app.is_platform_admin())
               OR incident_id = ANY ((SELECT app.led_incident_ids())::uuid[])));
 
-CREATE POLICY zones_read ON zones FOR SELECT TO resca_app
+CREATE POLICY zones_read ON zones FOR SELECT TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
-CREATE POLICY zones_write ON zones FOR ALL TO resca_app
+CREATE POLICY zones_write ON zones FOR ALL TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]) AND (SELECT app.has_permission('mission.create')))
   WITH CHECK (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]) AND (SELECT app.has_permission('mission.create')));
 
-CREATE POLICY missions_read ON missions FOR SELECT TO resca_app
+CREATE POLICY missions_read ON missions FOR SELECT TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
 -- Commanders manage their own agency's missions inside joined incidents.
-CREATE POLICY missions_manage ON missions FOR ALL TO resca_app
+CREATE POLICY missions_manage ON missions FOR ALL TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]) AND (SELECT app.has_permission('mission.create'))
          AND ((SELECT app.is_platform_admin()) OR agency_id = (SELECT app.current_agency_id())))
   WITH CHECK (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]) AND (SELECT app.has_permission('mission.create'))
          AND ((SELECT app.is_platform_admin()) OR agency_id = (SELECT app.current_agency_id())));
 -- Assigned responders update progress (column guard: status fields only).
-CREATE POLICY missions_assignee_update ON missions FOR UPDATE TO resca_app
+CREATE POLICY missions_assignee_update ON missions FOR UPDATE TO rescuevision_app
   USING (id = ANY ((SELECT app.my_mission_ids())::uuid[]) AND (SELECT app.has_permission('mission.update_status')))
   WITH CHECK (id = ANY ((SELECT app.my_mission_ids())::uuid[]));
 
-CREATE POLICY mission_assignments_read ON mission_assignments FOR SELECT TO resca_app
+CREATE POLICY mission_assignments_read ON mission_assignments FOR SELECT TO rescuevision_app
   USING (EXISTS (SELECT 1 FROM missions m WHERE m.id = mission_assignments.mission_id));
-CREATE POLICY mission_assignments_manage ON mission_assignments FOR ALL TO resca_app
+CREATE POLICY mission_assignments_manage ON mission_assignments FOR ALL TO rescuevision_app
   USING ((SELECT app.has_permission('mission.assign'))
          AND EXISTS (SELECT 1 FROM missions m WHERE m.id = mission_assignments.mission_id
                      AND ((SELECT app.is_platform_admin()) OR m.agency_id = (SELECT app.current_agency_id()))))
@@ -434,276 +434,276 @@ CREATE POLICY mission_assignments_manage ON mission_assignments FOR ALL TO resca
          AND EXISTS (SELECT 1 FROM missions m WHERE m.id = mission_assignments.mission_id
                      AND ((SELECT app.is_platform_admin()) OR m.agency_id = (SELECT app.current_agency_id()))));
 -- The assignee accepts or declines (column guard: response only).
-CREATE POLICY mission_assignments_respond ON mission_assignments FOR UPDATE TO resca_app
+CREATE POLICY mission_assignments_respond ON mission_assignments FOR UPDATE TO rescuevision_app
   USING (mission_id = ANY ((SELECT app.my_mission_ids())::uuid[]))
   WITH CHECK (mission_id = ANY ((SELECT app.my_mission_ids())::uuid[]));
 
-CREATE POLICY mission_status_history_read ON mission_status_history FOR SELECT TO resca_app
+CREATE POLICY mission_status_history_read ON mission_status_history FOR SELECT TO rescuevision_app
   USING (EXISTS (SELECT 1 FROM missions m WHERE m.id = mission_status_history.mission_id));
 
 -- D3 Imagery & AI ------------------------------------------------------------
-CREATE POLICY capture_sessions_read ON capture_sessions FOR SELECT TO resca_app
+CREATE POLICY capture_sessions_read ON capture_sessions FOR SELECT TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
-CREATE POLICY capture_sessions_upload ON capture_sessions FOR ALL TO resca_app
+CREATE POLICY capture_sessions_upload ON capture_sessions FOR ALL TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]) AND (SELECT app.has_permission('imagery.upload')))
   WITH CHECK (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]) AND (SELECT app.has_permission('imagery.upload')));
 
-CREATE POLICY images_read ON images FOR SELECT TO resca_app
+CREATE POLICY images_read ON images FOR SELECT TO rescuevision_app
   USING (EXISTS (SELECT 1 FROM capture_sessions s WHERE s.id = images.session_id));
-CREATE POLICY images_upload ON images FOR INSERT TO resca_app
+CREATE POLICY images_upload ON images FOR INSERT TO rescuevision_app
   WITH CHECK ((SELECT app.has_permission('imagery.upload'))
               AND EXISTS (SELECT 1 FROM capture_sessions s WHERE s.id = images.session_id));
-CREATE POLICY raster_products_read ON raster_products FOR SELECT TO resca_app
+CREATE POLICY raster_products_read ON raster_products FOR SELECT TO rescuevision_app
   USING (EXISTS (SELECT 1 FROM capture_sessions s WHERE s.id = raster_products.session_id));
 
-CREATE POLICY ai_models_read ON ai_models FOR SELECT TO resca_app USING (true);
-CREATE POLICY ai_models_admin ON ai_models FOR ALL TO resca_app
+CREATE POLICY ai_models_read ON ai_models FOR SELECT TO rescuevision_app USING (true);
+CREATE POLICY ai_models_admin ON ai_models FOR ALL TO rescuevision_app
   USING ((SELECT app.has_permission('model.manage'))) WITH CHECK ((SELECT app.has_permission('model.manage')));
 
-CREATE POLICY processing_jobs_read ON processing_jobs FOR SELECT TO resca_app
+CREATE POLICY processing_jobs_read ON processing_jobs FOR SELECT TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
-CREATE POLICY processing_jobs_request ON processing_jobs FOR INSERT TO resca_app
+CREATE POLICY processing_jobs_request ON processing_jobs FOR INSERT TO rescuevision_app
   WITH CHECK (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]) AND (SELECT app.has_permission('analysis.run'))
               AND requested_by = (SELECT app.current_user_id()));
-CREATE POLICY inference_runs_read ON inference_runs FOR SELECT TO resca_app
+CREATE POLICY inference_runs_read ON inference_runs FOR SELECT TO rescuevision_app
   USING (EXISTS (SELECT 1 FROM processing_jobs j WHERE j.id = inference_runs.job_id));
 
 -- F1 Buildings & Cost -------------------------------------------------------
-CREATE POLICY buildings_read ON buildings FOR SELECT TO resca_app
+CREATE POLICY buildings_read ON buildings FOR SELECT TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
-CREATE POLICY buildings_write ON buildings FOR ALL TO resca_app
+CREATE POLICY buildings_write ON buildings FOR ALL TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]) AND (SELECT app.has_permission('analysis.run')))
   WITH CHECK (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]) AND (SELECT app.has_permission('analysis.run')));
 
-CREATE POLICY building_assessments_read ON building_assessments FOR SELECT TO resca_app
+CREATE POLICY building_assessments_read ON building_assessments FOR SELECT TO rescuevision_app
   USING (EXISTS (SELECT 1 FROM buildings b WHERE b.id = building_assessments.building_id));
-CREATE POLICY building_assessments_review ON building_assessments FOR ALL TO resca_app
+CREATE POLICY building_assessments_review ON building_assessments FOR ALL TO rescuevision_app
   USING ((SELECT app.has_permission('assessment.review'))
          AND EXISTS (SELECT 1 FROM buildings b WHERE b.id = building_assessments.building_id))
   WITH CHECK ((SELECT app.has_permission('assessment.review'))
          AND EXISTS (SELECT 1 FROM buildings b WHERE b.id = building_assessments.building_id));
 
-CREATE POLICY cost_profiles_read ON cost_profiles FOR SELECT TO resca_app USING (true);
-CREATE POLICY cost_profiles_edit ON cost_profiles FOR ALL TO resca_app
+CREATE POLICY cost_profiles_read ON cost_profiles FOR SELECT TO rescuevision_app USING (true);
+CREATE POLICY cost_profiles_edit ON cost_profiles FOR ALL TO rescuevision_app
   USING ((SELECT app.has_permission('cost.edit_profile'))) WITH CHECK ((SELECT app.has_permission('cost.edit_profile')));
-CREATE POLICY cost_profile_unit_rates_read ON cost_profile_unit_rates FOR SELECT TO resca_app USING (true);
-CREATE POLICY cost_profile_unit_rates_edit ON cost_profile_unit_rates FOR ALL TO resca_app
+CREATE POLICY cost_profile_unit_rates_read ON cost_profile_unit_rates FOR SELECT TO rescuevision_app USING (true);
+CREATE POLICY cost_profile_unit_rates_edit ON cost_profile_unit_rates FOR ALL TO rescuevision_app
   USING ((SELECT app.has_permission('cost.edit_profile'))) WITH CHECK ((SELECT app.has_permission('cost.edit_profile')));
-CREATE POLICY cost_profile_repair_ratios_read ON cost_profile_repair_ratios FOR SELECT TO resca_app USING (true);
-CREATE POLICY cost_profile_repair_ratios_edit ON cost_profile_repair_ratios FOR ALL TO resca_app
+CREATE POLICY cost_profile_repair_ratios_read ON cost_profile_repair_ratios FOR SELECT TO rescuevision_app USING (true);
+CREATE POLICY cost_profile_repair_ratios_edit ON cost_profile_repair_ratios FOR ALL TO rescuevision_app
   USING ((SELECT app.has_permission('cost.edit_profile'))) WITH CHECK ((SELECT app.has_permission('cost.edit_profile')));
 
-CREATE POLICY cost_estimates_read ON cost_estimates FOR SELECT TO resca_app
+CREATE POLICY cost_estimates_read ON cost_estimates FOR SELECT TO rescuevision_app
   USING (EXISTS (SELECT 1 FROM buildings b WHERE b.id = cost_estimates.building_id));
-CREATE POLICY cost_estimates_write ON cost_estimates FOR INSERT TO resca_app
+CREATE POLICY cost_estimates_write ON cost_estimates FOR INSERT TO rescuevision_app
   WITH CHECK ((SELECT app.has_permission('assessment.review'))
               AND EXISTS (SELECT 1 FROM buildings b WHERE b.id = cost_estimates.building_id));
 
 -- F2 Roads & Routing ----------------------------------------------------------
-CREATE POLICY road_nodes_read ON road_nodes FOR SELECT TO resca_app
+CREATE POLICY road_nodes_read ON road_nodes FOR SELECT TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
-CREATE POLICY road_nodes_write ON road_nodes FOR ALL TO resca_app
+CREATE POLICY road_nodes_write ON road_nodes FOR ALL TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]) AND (SELECT app.has_permission('analysis.run')))
   WITH CHECK (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]) AND (SELECT app.has_permission('analysis.run')));
 
-CREATE POLICY road_segments_read ON road_segments FOR SELECT TO resca_app
+CREATE POLICY road_segments_read ON road_segments FOR SELECT TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
 -- Analysts load the network; the hazard engine (run by analysts or alert
 -- resolvers) opens and closes roads.
-CREATE POLICY road_segments_write ON road_segments FOR ALL TO resca_app
+CREATE POLICY road_segments_write ON road_segments FOR ALL TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[])
          AND ((SELECT app.has_permission('analysis.run')) OR (SELECT app.has_permission('alert.resolve'))))
   WITH CHECK (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[])
          AND ((SELECT app.has_permission('analysis.run')) OR (SELECT app.has_permission('alert.resolve'))));
 
-CREATE POLICY road_condition_observations_read ON road_condition_observations FOR SELECT TO resca_app
+CREATE POLICY road_condition_observations_read ON road_condition_observations FOR SELECT TO rescuevision_app
   USING (EXISTS (SELECT 1 FROM road_segments s WHERE s.id = road_condition_observations.segment_id));
-CREATE POLICY road_condition_observations_report ON road_condition_observations FOR INSERT TO resca_app
+CREATE POLICY road_condition_observations_report ON road_condition_observations FOR INSERT TO rescuevision_app
   WITH CHECK ((SELECT app.has_permission('hazard.report'))
               AND reported_by = (SELECT app.current_user_id())
               AND EXISTS (SELECT 1 FROM road_segments s WHERE s.id = road_condition_observations.segment_id));
 
-CREATE POLICY routes_read ON routes FOR SELECT TO resca_app
+CREATE POLICY routes_read ON routes FOR SELECT TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
-CREATE POLICY routes_plan ON routes FOR ALL TO resca_app
+CREATE POLICY routes_plan ON routes FOR ALL TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[])
          AND ((SELECT app.has_permission('route.plan')) OR (SELECT app.has_permission('alert.resolve'))))
   WITH CHECK (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[])
          AND ((SELECT app.has_permission('route.plan')) OR (SELECT app.has_permission('alert.resolve'))));
-CREATE POLICY route_segments_read ON route_segments FOR SELECT TO resca_app
+CREATE POLICY route_segments_read ON route_segments FOR SELECT TO rescuevision_app
   USING (EXISTS (SELECT 1 FROM routes r WHERE r.id = route_segments.route_id));
-CREATE POLICY route_segments_plan ON route_segments FOR ALL TO resca_app
+CREATE POLICY route_segments_plan ON route_segments FOR ALL TO rescuevision_app
   USING ((SELECT app.has_permission('route.plan')) AND EXISTS (SELECT 1 FROM routes r WHERE r.id = route_segments.route_id))
   WITH CHECK ((SELECT app.has_permission('route.plan')) AND EXISTS (SELECT 1 FROM routes r WHERE r.id = route_segments.route_id));
 
 -- F3/F4 Persons & Cases -------------------------------------------------------
-CREATE POLICY person_tracks_read ON person_tracks FOR SELECT TO resca_app
+CREATE POLICY person_tracks_read ON person_tracks FOR SELECT TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
-CREATE POLICY person_detections_read ON person_detections FOR SELECT TO resca_app
+CREATE POLICY person_detections_read ON person_detections FOR SELECT TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
 
-CREATE POLICY facilities_read ON facilities FOR SELECT TO resca_app
+CREATE POLICY facilities_read ON facilities FOR SELECT TO rescuevision_app
   USING ((SELECT app.current_user_id()) IS NOT NULL);
-CREATE POLICY facilities_manage ON facilities FOR ALL TO resca_app
+CREATE POLICY facilities_manage ON facilities FOR ALL TO rescuevision_app
   USING ((SELECT app.has_permission('team.manage'))
          AND ((SELECT app.is_platform_admin()) OR agency_id = (SELECT app.current_agency_id())))
   WITH CHECK ((SELECT app.has_permission('team.manage'))
          AND ((SELECT app.is_platform_admin()) OR agency_id = (SELECT app.current_agency_id())));
 
-CREATE POLICY assistance_cases_read ON assistance_cases FOR SELECT TO resca_app
+CREATE POLICY assistance_cases_read ON assistance_cases FOR SELECT TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
-CREATE POLICY assistance_cases_verify ON assistance_cases FOR ALL TO resca_app
+CREATE POLICY assistance_cases_verify ON assistance_cases FOR ALL TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]) AND (SELECT app.has_permission('case.verify')))
   WITH CHECK (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]) AND (SELECT app.has_permission('case.verify')));
 -- A responder can open a case they found in the field …
-CREATE POLICY assistance_cases_field_report ON assistance_cases FOR INSERT TO resca_app
+CREATE POLICY assistance_cases_field_report ON assistance_cases FOR INSERT TO rescuevision_app
   WITH CHECK (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]) AND (SELECT app.has_permission('hazard.report'))
               AND source = 'RESPONDER_REPORT' AND reported_by = (SELECT app.current_user_id()));
 -- … and update cases on missions they are assigned to (column guard applies).
-CREATE POLICY assistance_cases_field_update ON assistance_cases FOR UPDATE TO resca_app
+CREATE POLICY assistance_cases_field_update ON assistance_cases FOR UPDATE TO rescuevision_app
   USING (assigned_mission_id = ANY ((SELECT app.my_mission_ids())::uuid[]) AND (SELECT app.has_permission('case.update')))
   WITH CHECK (assigned_mission_id = ANY ((SELECT app.my_mission_ids())::uuid[]));
 
-CREATE POLICY case_events_read ON case_events FOR SELECT TO resca_app
+CREATE POLICY case_events_read ON case_events FOR SELECT TO rescuevision_app
   USING (EXISTS (SELECT 1 FROM assistance_cases c WHERE c.id = case_events.case_id));
-CREATE POLICY case_events_add ON case_events FOR INSERT TO resca_app
+CREATE POLICY case_events_add ON case_events FOR INSERT TO rescuevision_app
   WITH CHECK (actor_id = (SELECT app.current_user_id())
               AND EXISTS (SELECT 1 FROM assistance_cases c WHERE c.id = case_events.case_id));
 
 -- F5 Hazards & Alerts ---------------------------------------------------------
-CREATE POLICY infrastructure_assets_read ON infrastructure_assets FOR SELECT TO resca_app
+CREATE POLICY infrastructure_assets_read ON infrastructure_assets FOR SELECT TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
-CREATE POLICY infrastructure_assets_write ON infrastructure_assets FOR ALL TO resca_app
+CREATE POLICY infrastructure_assets_write ON infrastructure_assets FOR ALL TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[])
          AND ((SELECT app.has_permission('analysis.run')) OR (SELECT app.has_permission('alert.resolve'))))
   WITH CHECK (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[])
          AND ((SELECT app.has_permission('analysis.run')) OR (SELECT app.has_permission('alert.resolve'))));
 
-CREATE POLICY hazards_read ON hazards FOR SELECT TO resca_app
+CREATE POLICY hazards_read ON hazards FOR SELECT TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
-CREATE POLICY hazards_report ON hazards FOR INSERT TO resca_app
+CREATE POLICY hazards_report ON hazards FOR INSERT TO rescuevision_app
   WITH CHECK (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]) AND (SELECT app.has_permission('hazard.report'))
               AND origin = 'RESPONDER_REPORTED' AND reported_by = (SELECT app.current_user_id()));
-CREATE POLICY hazards_manage ON hazards FOR UPDATE TO resca_app
+CREATE POLICY hazards_manage ON hazards FOR UPDATE TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[])
          AND ((SELECT app.has_permission('alert.resolve')) OR (SELECT app.has_permission('case.verify'))))
   WITH CHECK (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
 
-CREATE POLICY hazard_rules_read ON hazard_rules FOR SELECT TO resca_app USING (true);
-CREATE POLICY hazard_rules_admin ON hazard_rules FOR ALL TO resca_app
+CREATE POLICY hazard_rules_read ON hazard_rules FOR SELECT TO rescuevision_app USING (true);
+CREATE POLICY hazard_rules_admin ON hazard_rules FOR ALL TO rescuevision_app
   USING ((SELECT app.has_permission('rule.manage'))) WITH CHECK ((SELECT app.has_permission('rule.manage')));
 
-CREATE POLICY compound_alerts_read ON compound_alerts FOR SELECT TO resca_app
+CREATE POLICY compound_alerts_read ON compound_alerts FOR SELECT TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
-CREATE POLICY compound_alerts_engine ON compound_alerts FOR ALL TO resca_app
+CREATE POLICY compound_alerts_engine ON compound_alerts FOR ALL TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[])
          AND ((SELECT app.has_permission('analysis.run')) OR (SELECT app.has_permission('alert.resolve'))))
   WITH CHECK (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[])
          AND ((SELECT app.has_permission('analysis.run')) OR (SELECT app.has_permission('alert.resolve'))));
-CREATE POLICY compound_alert_sources_read ON compound_alert_sources FOR SELECT TO resca_app
+CREATE POLICY compound_alert_sources_read ON compound_alert_sources FOR SELECT TO rescuevision_app
   USING (EXISTS (SELECT 1 FROM compound_alerts a WHERE a.id = compound_alert_sources.alert_id));
-CREATE POLICY compound_alert_sources_engine ON compound_alert_sources FOR INSERT TO resca_app
+CREATE POLICY compound_alert_sources_engine ON compound_alert_sources FOR INSERT TO rescuevision_app
   WITH CHECK (EXISTS (SELECT 1 FROM compound_alerts a WHERE a.id = compound_alert_sources.alert_id)
               AND ((SELECT app.has_permission('analysis.run')) OR (SELECT app.has_permission('alert.resolve'))));
-CREATE POLICY alert_closed_segments_read ON alert_closed_segments FOR SELECT TO resca_app
+CREATE POLICY alert_closed_segments_read ON alert_closed_segments FOR SELECT TO rescuevision_app
   USING (EXISTS (SELECT 1 FROM compound_alerts a WHERE a.id = alert_closed_segments.alert_id));
-CREATE POLICY alert_closed_segments_engine ON alert_closed_segments FOR INSERT TO resca_app
+CREATE POLICY alert_closed_segments_engine ON alert_closed_segments FOR INSERT TO rescuevision_app
   WITH CHECK (EXISTS (SELECT 1 FROM compound_alerts a WHERE a.id = alert_closed_segments.alert_id)
               AND ((SELECT app.has_permission('analysis.run')) OR (SELECT app.has_permission('alert.resolve'))));
 
 -- Citizens & media (staff side) ----------------------------------------------
-CREATE POLICY citizens_staff_read ON citizens FOR SELECT TO resca_app
+CREATE POLICY citizens_staff_read ON citizens FOR SELECT TO rescuevision_app
   USING ((SELECT app.has_permission('case.verify'))
          AND EXISTS (SELECT 1 FROM citizen_requests r WHERE r.citizen_id = citizens.id));
-CREATE POLICY citizens_admin_block ON citizens FOR UPDATE TO resca_app
+CREATE POLICY citizens_admin_block ON citizens FOR UPDATE TO rescuevision_app
   USING ((SELECT app.is_platform_admin())) WITH CHECK ((SELECT app.is_platform_admin()));
 
-CREATE POLICY citizen_requests_staff_read ON citizen_requests FOR SELECT TO resca_app
+CREATE POLICY citizen_requests_staff_read ON citizen_requests FOR SELECT TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]) AND (SELECT app.has_permission('case.verify')));
-CREATE POLICY citizen_requests_staff_verify ON citizen_requests FOR UPDATE TO resca_app
+CREATE POLICY citizen_requests_staff_verify ON citizen_requests FOR UPDATE TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]) AND (SELECT app.has_permission('case.verify')))
   WITH CHECK (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
-CREATE POLICY citizen_request_media_staff_read ON citizen_request_media FOR SELECT TO resca_app
+CREATE POLICY citizen_request_media_staff_read ON citizen_request_media FOR SELECT TO rescuevision_app
   USING (EXISTS (SELECT 1 FROM citizen_requests r WHERE r.id = citizen_request_media.request_id));
 
-CREATE POLICY media_files_read ON media_files FOR SELECT TO resca_app
+CREATE POLICY media_files_read ON media_files FOR SELECT TO rescuevision_app
   USING (uploaded_by_user = (SELECT app.current_user_id())
          OR EXISTS (SELECT 1 FROM citizen_request_media m WHERE m.media_id = media_files.id)
          OR EXISTS (SELECT 1 FROM case_events e WHERE e.media_id = media_files.id)
          OR EXISTS (SELECT 1 FROM sos_alerts s WHERE s.media_id = media_files.id));
-CREATE POLICY media_files_upload ON media_files FOR INSERT TO resca_app
+CREATE POLICY media_files_upload ON media_files FOR INSERT TO rescuevision_app
   WITH CHECK (uploaded_by_user = (SELECT app.current_user_id()) AND uploaded_by_citizen IS NULL);
 
 -- Field channel -----------------------------------------------------------------
-CREATE POLICY responder_positions_read ON responder_positions FOR SELECT TO resca_app
+CREATE POLICY responder_positions_read ON responder_positions FOR SELECT TO rescuevision_app
   USING (user_id = (SELECT app.current_user_id()) OR incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
-CREATE POLICY responder_positions_share ON responder_positions FOR INSERT TO resca_app
+CREATE POLICY responder_positions_share ON responder_positions FOR INSERT TO rescuevision_app
   WITH CHECK (user_id = (SELECT app.current_user_id()) AND (SELECT app.has_permission('position.share')));
-CREATE POLICY responder_last_positions_read ON responder_last_positions FOR SELECT TO resca_app
+CREATE POLICY responder_last_positions_read ON responder_last_positions FOR SELECT TO rescuevision_app
   USING (user_id = (SELECT app.current_user_id()) OR incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
 
-CREATE POLICY sos_alerts_read ON sos_alerts FOR SELECT TO resca_app
+CREATE POLICY sos_alerts_read ON sos_alerts FOR SELECT TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
-CREATE POLICY sos_alerts_raise ON sos_alerts FOR INSERT TO resca_app
+CREATE POLICY sos_alerts_raise ON sos_alerts FOR INSERT TO rescuevision_app
   WITH CHECK (user_id = (SELECT app.current_user_id()) AND (SELECT app.has_permission('sos.raise'))
               AND incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
-CREATE POLICY sos_alerts_respond ON sos_alerts FOR UPDATE TO resca_app
+CREATE POLICY sos_alerts_respond ON sos_alerts FOR UPDATE TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]) AND (SELECT app.has_permission('sos.respond')))
   WITH CHECK (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
 
-CREATE POLICY notifications_own ON notifications FOR SELECT TO resca_app
+CREATE POLICY notifications_own ON notifications FOR SELECT TO rescuevision_app
   USING (user_id = (SELECT app.current_user_id()));
-CREATE POLICY notifications_mark_read ON notifications FOR UPDATE TO resca_app
+CREATE POLICY notifications_mark_read ON notifications FOR UPDATE TO rescuevision_app
   USING (user_id = (SELECT app.current_user_id())) WITH CHECK (user_id = (SELECT app.current_user_id()));
 -- Command staff and the hazard engine may notify people working the incident.
-CREATE POLICY notifications_send ON notifications FOR INSERT TO resca_app
+CREATE POLICY notifications_send ON notifications FOR INSERT TO rescuevision_app
   WITH CHECK (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[])
               AND ((SELECT app.has_permission('mission.assign')) OR (SELECT app.has_permission('analysis.run'))
                    OR (SELECT app.has_permission('alert.resolve'))));
 
 -- Reports: drafts stay inside the authoring agency until approved; shared
 -- reports are visible to the agencies they were shared with.
-CREATE POLICY reports_read ON reports FOR SELECT TO resca_app
+CREATE POLICY reports_read ON reports FOR SELECT TO rescuevision_app
   USING ((incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[])
           AND (status IN ('APPROVED', 'PUBLISHED')
                OR EXISTS (SELECT 1 FROM users u WHERE u.id = reports.generated_by
                           AND u.agency_id = (SELECT app.current_agency_id()))))
          OR id = ANY ((SELECT app.shared_report_ids())::uuid[])
          OR (SELECT app.is_platform_admin()));
-CREATE POLICY reports_generate ON reports FOR INSERT TO resca_app
+CREATE POLICY reports_generate ON reports FOR INSERT TO rescuevision_app
   WITH CHECK (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]) AND (SELECT app.has_permission('report.generate'))
               AND generated_by = (SELECT app.current_user_id()));
-CREATE POLICY reports_approve ON reports FOR UPDATE TO resca_app
+CREATE POLICY reports_approve ON reports FOR UPDATE TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]) AND (SELECT app.has_permission('report.approve')))
   WITH CHECK (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
 
-CREATE POLICY report_shares_read ON report_shares FOR SELECT TO resca_app
+CREATE POLICY report_shares_read ON report_shares FOR SELECT TO rescuevision_app
   USING (agency_id = (SELECT app.current_agency_id()) OR EXISTS (SELECT 1 FROM reports r WHERE r.id = report_shares.report_id));
-CREATE POLICY report_shares_share ON report_shares FOR INSERT TO resca_app
+CREATE POLICY report_shares_share ON report_shares FOR INSERT TO rescuevision_app
   WITH CHECK ((SELECT app.has_permission('report.share'))
               AND EXISTS (SELECT 1 FROM reports r WHERE r.id = report_shares.report_id));
 
-CREATE POLICY image_embeddings_read ON image_embeddings FOR SELECT TO resca_app
+CREATE POLICY image_embeddings_read ON image_embeddings FOR SELECT TO rescuevision_app
   USING (incident_id = ANY ((SELECT app.visible_incident_ids())::uuid[]));
 
-CREATE POLICY audit_log_admin_read ON audit_log FOR SELECT TO resca_app
+CREATE POLICY audit_log_admin_read ON audit_log FOR SELECT TO rescuevision_app
   USING ((SELECT app.is_platform_admin()));
 
 ------------------------------------------------------------------------------
--- resca_citizen policies (public citizen channel)
+-- rescuevision_citizen policies (public citizen channel)
 ------------------------------------------------------------------------------
-CREATE POLICY citizens_self ON citizens FOR SELECT TO resca_citizen
+CREATE POLICY citizens_self ON citizens FOR SELECT TO rescuevision_citizen
   USING (id = (SELECT app.current_citizen_id()));
-CREATE POLICY citizens_self_update ON citizens FOR UPDATE TO resca_citizen
+CREATE POLICY citizens_self_update ON citizens FOR UPDATE TO rescuevision_citizen
   USING (id = (SELECT app.current_citizen_id())) WITH CHECK (id = (SELECT app.current_citizen_id()) AND NOT is_blocked);
-CREATE POLICY citizen_requests_own ON citizen_requests FOR SELECT TO resca_citizen
+CREATE POLICY citizen_requests_own ON citizen_requests FOR SELECT TO rescuevision_citizen
   USING (citizen_id = (SELECT app.current_citizen_id()));
-CREATE POLICY citizen_requests_submit ON citizen_requests FOR INSERT TO resca_citizen
+CREATE POLICY citizen_requests_submit ON citizen_requests FOR INSERT TO rescuevision_citizen
   WITH CHECK (citizen_id = (SELECT app.current_citizen_id()) AND status = 'RECEIVED'
               AND NOT EXISTS (SELECT 1 FROM citizens c WHERE c.id = (SELECT app.current_citizen_id()) AND c.is_blocked));
-CREATE POLICY media_files_citizen ON media_files FOR ALL TO resca_citizen
+CREATE POLICY media_files_citizen ON media_files FOR ALL TO rescuevision_citizen
   USING (uploaded_by_citizen = (SELECT app.current_citizen_id()))
   WITH CHECK (uploaded_by_citizen = (SELECT app.current_citizen_id()) AND uploaded_by_user IS NULL);
-CREATE POLICY citizen_request_media_citizen ON citizen_request_media FOR ALL TO resca_citizen
+CREATE POLICY citizen_request_media_citizen ON citizen_request_media FOR ALL TO rescuevision_citizen
   USING (EXISTS (SELECT 1 FROM citizen_requests r WHERE r.id = citizen_request_media.request_id))
   WITH CHECK (EXISTS (SELECT 1 FROM citizen_requests r WHERE r.id = citizen_request_media.request_id));

@@ -60,7 +60,7 @@ jobs:
           fi
       - name: Check locked paths against the base branch's list
         env:
-          RESCA_LOCKED_CHANGE_APPROVED: ${{ steps.approval.outputs.approved }}
+          RESCUEVISION_LOCKED_CHANGE_APPROVED: ${{ steps.approval.outputs.approved }}
         run: |
           base="${{ github.event.pull_request.base.sha }}"
           if ! git cat-file -e "$base:.github/locked-paths.txt" 2>/dev/null; then

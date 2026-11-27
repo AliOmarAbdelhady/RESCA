@@ -1,4 +1,4 @@
-# RESCA building damage V4: research and proposed experiment plan
+# RescueVision building damage V4: research and proposed experiment plan
 
 Research checked: 21 October 2026. At authoring time this was **planning only; no training, notebook rewrite, dependency installation, or model/data download had been performed.** The implementation has since started on the `codex/building-damage-v4` branch; gate status and evidence are tracked in [the V4 experiment registry](v4_experiments.md). Research PDFs were read separately from the project datasets. This document remains the research plan and does not report a new measured score.
 
@@ -16,9 +16,9 @@ Use official xView2 combined F1 above 0.82 as a provisional project milestone, t
 
 ## 1. What was reviewed and what is currently supported
 
-Read the repository README; model cards; dataset guide; experiment table; graduation research plan; `claude_view.md`; the Kaggle notebook inventory; detailed source in the RV2 full-joint, native-preprocessing, RV3 training/rescore/smoke notebooks; and the local RV2 summaries. Notebook review was static: no cells executed. The separate chat “Plan RESCA project completion” concerns documentation allocation and the larger response platform; it is not evidence of completed building-model training.
+Read the repository README; model cards; dataset guide; experiment table; graduation research plan; `claude_view.md`; the Kaggle notebook inventory; detailed source in the RV2 full-joint, native-preprocessing, RV3 training/rescore/smoke notebooks; and the local RV2 summaries. Notebook review was static: no cells executed. The separate chat “Plan RescueVision project completion” concerns documentation allocation and the larger response platform; it is not evidence of completed building-model training.
 
-The latest local commit is `f89a61f` (21 October 2026), removing training/core source. The checkout has scripts and notebooks referring to `src/resca_ai`, but that directory is absent. Do not assume the current README's runnable package claims describe this checkout. Recovering or replacing the intended package is a future implementation decision, not something done in this research.
+The latest local commit is `f89a61f` (21 October 2026), removing training/core source. The checkout has scripts and notebooks referring to `src/rescuevision_ai`, but that directory is absent. Do not assume the current README's runnable package claims describe this checkout. Recovering or replacing the intended package is a future implementation decision, not something done in this research.
 
 ### Local result evidence
 
@@ -292,7 +292,7 @@ Memory-bounded caches, deterministic artifact names, resumable execution and per
 
 The later map/API output should associate a building ID and geometry with input dates/viewpoints, source/model revisions, quality/coverage flags, severity probabilities, damage-type probabilities, visible component/defect masks, measurement uncertainty, review state and evidence image references. Keep reported/observed hazards distinct from inferred ones. Component defects can coexist; whole-building grades remain a separate summary.
 
-This gives the larger RESCA 2D/3D platform auditable evidence without requiring unrelated rescue-routing, person-tracking or app development in this building-model research phase.
+This gives the larger RescueVision 2D/3D platform auditable evidence without requiring unrelated rescue-routing, person-tracking or app development in this building-model research phase.
 
 ## 12. Remaining decisions and research limits
 
@@ -335,11 +335,11 @@ Tool names in this section are short names in the `mcp__kaggle__` namespace. Re-
 These are future files to create; none are implemented by this plan:
 
 - `configs/v4/`: dataset adapters, model/experiment configurations and frozen evaluation recipes. Keep secrets out of configurations.
-- `src/resca_ai/v4/data_audit.py`: build and validate immutable data/split manifests; each record includes dataset revision, image identity, event/scene/building group, split, paths and label-validity metadata.
-- `src/resca_ai/v4/evaluation.py`: official scorer adapter, independent object/defect metrics and complete-coverage reports.
-- `src/resca_ai/v4/training.py`: shared train/resume entry point consuming one experiment configuration, one manifest and an optional resume checkpoint; produces a run directory with the contract below.
-- `src/resca_ai/v4/models/`: separate paired DINOv3, paired CNN, post-only and defect modules implementing the research gates. Do not restore the removed package wholesale without checking its dependencies and intended scope.
-- `src/resca_ai/v4/artifacts.py`: validate run metadata, checkpoint/probability hashes and dependency compatibility before downstream use.
+- `src/rescuevision_ai/v4/data_audit.py`: build and validate immutable data/split manifests; each record includes dataset revision, image identity, event/scene/building group, split, paths and label-validity metadata.
+- `src/rescuevision_ai/v4/evaluation.py`: official scorer adapter, independent object/defect metrics and complete-coverage reports.
+- `src/rescuevision_ai/v4/training.py`: shared train/resume entry point consuming one experiment configuration, one manifest and an optional resume checkpoint; produces a run directory with the contract below.
+- `src/rescuevision_ai/v4/models/`: separate paired DINOv3, paired CNN, post-only and defect modules implementing the research gates. Do not restore the removed package wholesale without checking its dependencies and intended scope.
+- `src/rescuevision_ai/v4/artifacts.py`: validate run metadata, checkpoint/probability hashes and dependency compatibility before downstream use.
 - `scripts/v4_submit_spec.py`: prepare notebook text and the MCP request specification without submitting it. Submission remains an explicit orchestration action.
 - `ai/kaggle/building-damage/v4/00_data_and_split_audit.ipynb` through `07_final_evaluation.ipynb`: thin wrappers for the eight stages defined in section 10.
 - `tests/v4/`: targeted checks for scorer parity, split overlap, label validity, inference stitching and checkpoint resume. These verify consequential behavior; no notebook-only duplicate test suite.

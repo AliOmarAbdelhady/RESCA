@@ -10,9 +10,9 @@ services:
       - ./outputs:/app/outputs
       - ./data:/app/data
     environment:
-      - RESCA_CONFIG=configs/inference.yaml
-      - RESCA_OUTPUTS=outputs
-      - RESCA_FAISS=outputs/faiss
+      - RESCUEVISION_CONFIG=configs/inference.yaml
+      - RESCUEVISION_OUTPUTS=outputs
+      - RESCUEVISION_FAISS=outputs/faiss
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s

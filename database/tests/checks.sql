@@ -170,13 +170,13 @@ DO $$
 DECLARE n int; ok boolean;
 BEGIN
   -- No session user: default deny.
-  PERFORM pg_temp.act_as('resca_app', NULL);
+  PERFORM pg_temp.act_as('rescuevision_app', NULL);
   IF (SELECT count(*) FROM incidents) + (SELECT count(*) FROM users) + (SELECT count(*) FROM buildings) <> 0 THEN
-    RAISE EXCEPTION 'RLS: resca_app without a session user can read data';
+    RAISE EXCEPTION 'RLS: rescuevision_app without a session user can read data';
   END IF;
 
   -- Outsider agency sees no incident data and only its own people.
-  PERFORM pg_temp.act_as('resca_app', 'chief@outsider.test');
+  PERFORM pg_temp.act_as('rescuevision_app', 'chief@outsider.test');
   IF (SELECT count(*) FROM incidents WHERE NOT is_historical) <> 0
      OR (SELECT count(*) FROM buildings) <> 0 OR (SELECT count(*) FROM assistance_cases) <> 0
      OR (SELECT count(*) FROM compound_alerts) <> 0 THEN
@@ -187,7 +187,7 @@ BEGIN
   END IF;
 
   -- A joined agency sees the incident and its data.
-  PERFORM pg_temp.act_as('resca_app', 'para1@ems.demo');
+  PERFORM pg_temp.act_as('rescuevision_app', 'para1@ems.demo');
   IF (SELECT count(*) FROM incidents) = 0 OR (SELECT count(*) FROM buildings) = 0
      OR (SELECT count(*) FROM compound_alerts) = 0 THEN
     RAISE EXCEPTION 'RLS: a participating responder cannot see the incident';
@@ -206,11 +206,11 @@ BEGIN
   END;
 
   -- Draft reports stay inside the authoring agency (GOV analyst wrote it).
-  PERFORM pg_temp.act_as('resca_app', 'chief@fire.demo');
+  PERFORM pg_temp.act_as('rescuevision_app', 'chief@fire.demo');
   IF (SELECT count(*) FROM reports WHERE status = 'DRAFT') <> 0 THEN
     RAISE EXCEPTION 'RLS: another agency can read a draft report';
   END IF;
-  PERFORM pg_temp.act_as('resca_app', 'coordinator@gov.demo');
+  PERFORM pg_temp.act_as('rescuevision_app', 'coordinator@gov.demo');
   IF (SELECT count(*) FROM reports WHERE status = 'DRAFT') = 0 THEN
     RAISE EXCEPTION 'RLS: the authoring agency cannot read its draft report';
   END IF;
@@ -218,7 +218,7 @@ BEGIN
   -- Password hashes are not readable by the API role.
   BEGIN
     PERFORM password_hash FROM users LIMIT 1;
-    RAISE EXCEPTION 'Privileges: resca_app can read password hashes';
+    RAISE EXCEPTION 'Privileges: rescuevision_app can read password hashes';
   EXCEPTION WHEN insufficient_privilege THEN NULL;
   END;
   IF (SELECT count(*) FROM app.get_login('coordinator@gov.demo')) <> 1 THEN
@@ -228,23 +228,23 @@ BEGIN
   -- Partitions cannot be read directly (they would bypass the parent's RLS).
   BEGIN
     PERFORM 1 FROM responder_positions_default LIMIT 1;
-    RAISE EXCEPTION 'Privileges: resca_app can read a partition directly';
+    RAISE EXCEPTION 'Privileges: rescuevision_app can read a partition directly';
   EXCEPTION WHEN insufficient_privilege THEN NULL;
   END;
 
   -- Platform Admin sees every incident and the audit trail.
-  PERFORM pg_temp.act_as('resca_app', 'admin@resca.local');
+  PERFORM pg_temp.act_as('rescuevision_app', 'admin@rescuevision.local');
   SELECT count(*) INTO n FROM incidents;
   IF n <> (SELECT count(*) FROM incidents) OR n = 0 OR NOT EXISTS (SELECT 1 FROM audit_log) THEN
     RAISE EXCEPTION 'RLS: platform admin cannot see all incidents / audit log';
   END IF;
 
   -- The read-only analytics role never sees citizens' identities.
-  PERFORM pg_temp.act_as('resca_readonly', NULL);
-  IF (SELECT count(*) FROM buildings) = 0 THEN RAISE EXCEPTION 'resca_readonly cannot read buildings'; END IF;
+  PERFORM pg_temp.act_as('rescuevision_readonly', NULL);
+  IF (SELECT count(*) FROM buildings) = 0 THEN RAISE EXCEPTION 'rescuevision_readonly cannot read buildings'; END IF;
   BEGIN
     PERFORM 1 FROM citizens LIMIT 1;
-    RAISE EXCEPTION 'Privileges: resca_readonly can read citizens';
+    RAISE EXCEPTION 'Privileges: rescuevision_readonly can read citizens';
   EXCEPTION WHEN insufficient_privilege THEN NULL;
   END;
 
@@ -257,7 +257,7 @@ DECLARE m uuid;
 BEGIN
   SELECT ma.mission_id INTO m FROM mission_assignments ma JOIN users u ON u.id = ma.user_id
   WHERE u.email = 'officer@police.demo' LIMIT 1;
-  PERFORM pg_temp.act_as('resca_app', 'officer@police.demo');
+  PERFORM pg_temp.act_as('rescuevision_app', 'officer@police.demo');
   UPDATE missions SET status = 'IN_PROGRESS' WHERE id = m;
   IF NOT FOUND THEN RAISE EXCEPTION 'RLS: assignee cannot update their mission status'; END IF;
   BEGIN
@@ -283,14 +283,14 @@ DO $$
 DECLARE c uuid;
 BEGIN
   SELECT id INTO c FROM citizens WHERE phone = '+20 100 000 9999';
-  PERFORM pg_temp.act_as('resca_citizen', NULL);
+  PERFORM pg_temp.act_as('rescuevision_citizen', NULL);
   PERFORM app.set_session_citizen(c);
   IF (SELECT count(*) FROM citizen_requests) <> 0 OR (SELECT count(*) FROM citizens) <> 1 THEN
     RAISE EXCEPTION 'RLS: a citizen can see other citizens'' data';
   END IF;
   BEGIN
     PERFORM 1 FROM buildings LIMIT 1;
-    RAISE EXCEPTION 'Privileges: resca_citizen can read operational data';
+    RAISE EXCEPTION 'Privileges: rescuevision_citizen can read operational data';
   EXCEPTION WHEN insufficient_privilege THEN NULL;
   END;
   EXECUTE 'RESET ROLE';
@@ -301,10 +301,10 @@ DO $$
 DECLARE a uuid; reopened int;
 BEGIN
   SELECT id INTO a FROM compound_alerts WHERE title LIKE 'Electrified Water%' AND status <> 'RESOLVED' LIMIT 1;
-  PERFORM pg_temp.act_as('resca_app', 'chief@fire.demo');
+  PERFORM pg_temp.act_as('rescuevision_app', 'chief@fire.demo');
   reopened := resolve_compound_alert(a, app.current_user_id(), 'RLS test');
   IF reopened = 0 THEN RAISE EXCEPTION 'Hazard engine under RLS reopened no roads'; END IF;
-  PERFORM pg_temp.act_as('resca_app', 'analyst@gov.demo');
+  PERFORM pg_temp.act_as('rescuevision_app', 'analyst@gov.demo');
   PERFORM evaluate_hazard_rules((SELECT id FROM incidents WHERE code = 'INC-2026-0001'));
   EXECUTE 'RESET ROLE';
   RAISE NOTICE 'Security checks passed: RLS isolation, column guards, audit, citizen channel, engine under RLS (% roads reopened)', reopened;

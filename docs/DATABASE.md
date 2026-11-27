@@ -12,7 +12,7 @@ PostgreSQL 18 with PostGIS 3.6, pgRouting and pgvector. 56 tables in ten domains
 | `database/seed/` | `01` reference data (always); `02` fictional demo scenario (demo profile only). |
 | `database/tests/checks.sql` | Self-checks run by `build.sh` and `make check-db`. |
 
-Roles: `resca_app` (API, RLS applies), `resca_worker` (jobs), `resca_citizen` (citizen channel), `resca_readonly` (reports and analysis). Migrations run with a separate owner credential.
+Roles: `rescuevision_app` (API, RLS applies), `rescuevision_worker` (jobs), `rescuevision_citizen` (citizen channel), `rescuevision_readonly` (reports and analysis). Migrations run with a separate owner credential.
 
 ## Rules
 

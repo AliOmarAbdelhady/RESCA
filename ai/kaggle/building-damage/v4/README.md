@@ -1,6 +1,6 @@
 # Building damage v4: DINOv3 research
 
-DINOv3-based research line with audited xBD labels and splits. Unlike v1 to v3, this version holds its own code: `src/resca_ai/v4` (package), `tests/v4`, `configs/v4`, `scripts/` (Kaggle staging) and `notes/` (plan, experiment registry, policies). Notebooks marked *DO NOT RUN FOR SUPERVISED TRAINING* say why in their first cell.
+DINOv3-based research line with audited xBD labels and splits. Unlike v1 to v3, this version holds its own code: `src/rescuevision_ai/v4` (package), `tests/v4`, `configs/v4`, `scripts/` (Kaggle staging) and `notes/` (plan, experiment registry, policies). Notebooks marked *DO NOT RUN FOR SUPERVISED TRAINING* say why in their first cell.
 
 Run the tests from this folder:
 
@@ -10,7 +10,7 @@ PYTHONPATH=src:. python -m pytest tests/v4 -q
 
 They need PyTorch; a GPU is fine (see [docs/AI.md](../../../../docs/AI.md)). Known: `test_notebook_wrappers` fails because its list of notebooks predates `00_xbd_label_schema_diagnostic`, `06_xbd_grouped_manifest_audit` and `01_reference_evaluation`.
 
-This code is not linted by CI yet (`ai/kaggle` is the experiment area). Parts that prove themselves move into `ai/src/resca_ai` and must then pass every gate.
+This code is not linted by CI yet (`ai/kaggle` is the experiment area). Parts that prove themselves move into `ai/src/rescuevision_ai` and must then pass every gate.
 
 | Notebook | Title |
 |---|---|

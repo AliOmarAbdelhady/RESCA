@@ -5,7 +5,7 @@
 SHELL := /bin/bash
 .DEFAULT_GOAL := help
 DB_PORT ?= 55432
-DB_CONTAINER ?= resca-check-db
+DB_CONTAINER ?= rescuevision-check-db
 
 .PHONY: help bootstrap check check-policy check-secrets check-static check-db check-api check-ui check-ml
 

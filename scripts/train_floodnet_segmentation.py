@@ -9,13 +9,13 @@ import torch
 from torch.utils.data import DataLoader
 from transformers import SegformerForSemanticSegmentation
 
-from resca.constants import NUM_FLOODNET_CLASSES
-from resca.data.floodnet_preprocess import FloodNetDataset
-from resca.data.transforms import get_segmentation_transforms
-from resca.models.losses import WeightedCEDiceLoss
-from resca.training.train_segmentation import train_segmentation
-from resca.utils.config import load_config
-from resca.utils.seed import set_seed
+from rescuevision.constants import NUM_FLOODNET_CLASSES
+from rescuevision.data.floodnet_preprocess import FloodNetDataset
+from rescuevision.data.transforms import get_segmentation_transforms
+from rescuevision.models.losses import WeightedCEDiceLoss
+from rescuevision.training.train_segmentation import train_segmentation
+from rescuevision.utils.config import load_config
+from rescuevision.utils.seed import set_seed
 
 
 def main():

@@ -4,9 +4,9 @@ from pathlib import Path
 
 import torch
 
-from resca_ai.v4.artifacts import validate_resume
-from resca_ai.v4.models.cnn import PairedCNN
-from resca_ai.v4.training import (
+from rescuevision_ai.v4.artifacts import validate_resume
+from rescuevision_ai.v4.models.cnn import PairedCNN
+from rescuevision_ai.v4.training import (
     capture_rng_state,
     load_checkpoint,
     restore_rng_state,

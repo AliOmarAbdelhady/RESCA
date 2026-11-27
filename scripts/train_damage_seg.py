@@ -9,15 +9,15 @@ import numpy as np
 import torch
 from torch.utils.data import DataLoader
 
-from resca.constants import NUM_DAMAGE_CLASSES
-from resca.data.datasets import XBDDamageSegmentationDataset
-from resca.data.transforms import get_segmentation_transforms
-from resca.models.losses import WeightedCEDiceLoss, compute_class_weights
-from resca.models.unet import create_unet
-from resca.training.train_segmentation import train_segmentation
-from resca.utils.config import load_config
-from resca.utils.seed import set_seed
-from resca.utils.weight_init import adapt_first_conv
+from rescuevision.constants import NUM_DAMAGE_CLASSES
+from rescuevision.data.datasets import XBDDamageSegmentationDataset
+from rescuevision.data.transforms import get_segmentation_transforms
+from rescuevision.models.losses import WeightedCEDiceLoss, compute_class_weights
+from rescuevision.models.unet import create_unet
+from rescuevision.training.train_segmentation import train_segmentation
+from rescuevision.utils.config import load_config
+from rescuevision.utils.seed import set_seed
+from rescuevision.utils.weight_init import adapt_first_conv
 
 
 def main():

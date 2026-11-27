@@ -1,4 +1,4 @@
-// RESCA frontend lint rules (docs/FRONTEND.md). Locked: only the owner changes this
+// RescueVision frontend lint rules (docs/FRONTEND.md). Locked: only the owner changes this
 // file. Never silence a rule with an eslint-disable comment to get green; fix the
 // code, or ask the owner for a scoped exception added here with a reason.
 //
@@ -89,15 +89,15 @@ export default tseslint.config(
       "no-restricted-imports": [
         "error",
         {
-          paths: [{ name: "axios", message: "Use the generated client in @resca/api (W4)." }],
+          paths: [{ name: "axios", message: "Use the generated client in @rescuevision/api (W4)." }],
           patterns: [
-            { group: ["@radix-ui/*"], message: "Use the wrapped component from @resca/ui (W2)." },
+            { group: ["@radix-ui/*"], message: "Use the wrapped component from @rescuevision/ui (W2)." },
             { group: ["**/*.mock", "**/*.mock.*", "**/mocks/**"], message: "No fake data in screens (W4)." },
             { group: ["../../*"], message: "Import through the package or feature entry point, not deep relative paths." },
           ],
         },
       ],
-      "no-restricted-globals": ["error", { name: "fetch", message: "Use the generated client in @resca/api (W4)." }],
+      "no-restricted-globals": ["error", { name: "fetch", message: "Use the generated client in @rescuevision/api (W4)." }],
     },
   },
 

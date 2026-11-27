@@ -9,9 +9,9 @@ import pytest
 import yaml
 from PIL import Image
 
-from resca_ai.v4.data_audit import DatasetAuditError, audit_dataset
-from resca_ai.v4.datasets import load_manifest
-from resca_ai.v4.cli import _resolve
+from rescuevision_ai.v4.data_audit import DatasetAuditError, audit_dataset
+from rescuevision_ai.v4.datasets import load_manifest
+from rescuevision_ai.v4.cli import _resolve
 
 
 def _write_xbd_sample(

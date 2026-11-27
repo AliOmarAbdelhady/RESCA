@@ -1,12 +1,12 @@
-# RESCA
+# RescueVision
 
-Real-time Emergency Sensing, Coordination & Assessment: one live picture of a disaster for police, EMS, fire and government. Drone and satellite imagery become damage maps, people in need of help, hazard alerts and safe routes, each confirmed by a person.
+One live picture of a disaster for police, EMS, fire and government. Drone and satellite imagery become damage maps, people in need of help, hazard alerts and safe routes, each confirmed by a person.
 
 Status: the database is built and self-tested; the application is being built from the plan below. Graduation project, held to the standard of a national emergency system.
 
 | Start here | |
 |---|---|
-| [docs/VISION.md](docs/VISION.md) | What RESCA does and for whom |
+| [docs/VISION.md](docs/VISION.md) | What RescueVision does and for whom |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | How it fits together, end to end |
 | [docs/DECISIONS.md](docs/DECISIONS.md) | Every technology choice and why |
 | [AGENTS.md](AGENTS.md) | Rules for AI coding agents and contributors |

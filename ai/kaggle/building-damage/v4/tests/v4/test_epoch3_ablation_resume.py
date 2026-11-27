@@ -6,7 +6,7 @@ import torch
 import torch.nn.functional as F
 
 import scripts.v4_d0_epoch3_ablation_stage as stage
-from resca_ai.v4.losses import masked_damage_cross_entropy
+from rescuevision_ai.v4.losses import masked_damage_cross_entropy
 
 
 def test_epoch2_resume_produces_same_uniform_update_as_baseline(tmp_path):

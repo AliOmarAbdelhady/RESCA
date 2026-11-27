@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import torch
 
-from resca_ai.v4.training import (
+from rescuevision_ai.v4.training import (
     masked_binary_bce_dice_loss,
     masked_damage_ce_dice_loss,
     optimizer_step_due,
