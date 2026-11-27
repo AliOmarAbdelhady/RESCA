@@ -1,15 +1,15 @@
-# RESCA — Database & ERD Design
+# RescueVision — Database & ERD Design
 
 **Date:** 2026-11-23 · **Status:** Approved and implemented in `database/` (PostgreSQL 18.7) · **Target:** PostgreSQL 16 + PostGIS 3 + pgRouting 3 + pgvector
 
-RESCA is a multi-agency disaster-response platform for **Government, Police, Ambulance (EMS) and Fire** services. This document defines the product features and the complete relational data model that supports them.
+RescueVision is a multi-agency disaster-response platform for **Government, Police, Ambulance (EMS) and Fire** services. This document defines the product features and the complete relational data model that supports them.
 
 ---
 
 ## 1. Product features
 
 ### F1 · Before/After Damage Assessment & Restoration Cost Estimation
-RESCA compares pre-disaster and post-disaster satellite or drone imagery of the same area. For every building it extracts the footprint and grades its condition on the international xBD scale (*No Damage, Minor, Major, Destroyed*), with a probability for each grade. Each building then receives an **indicative restoration cost**: repair ratio for its damage grade (FEMA HAZUS-based) × floor area (footprint × floors) × local construction cost per m². The cost is shown as a low–high range, with every assumption visible and editable. Results roll up into per-building reports, area totals and a reconstruction-priority list.
+RescueVision compares pre-disaster and post-disaster satellite or drone imagery of the same area. For every building it extracts the footprint and grades its condition on the international xBD scale (*No Damage, Minor, Major, Destroyed*), with a probability for each grade. Each building then receives an **indicative restoration cost**: repair ratio for its damage grade (FEMA HAZUS-based) × floor area (footprint × floors) × local construction cost per m². The cost is shown as a low–high range, with every assumption visible and editable. Results roll up into per-building reports, area totals and a reconstruction-priority list.
 
 ### F2 · 2D/3D Situational Mapping & Rescue Route Planning
 Drone photos are stitched into one georeferenced map. A **2D operational map** (MapLibre) and a **3D city view** (CesiumJS, buildings extruded and colored by damage) display the same layers: damage, people, hazards and routes. The street network becomes a routable graph. Blocked roads detected by AI, flooded segments, debris and nearby collapsed buildings raise each segment's travel cost or close it. The system computes the safest fastest route for a rescue team from its staging area to a victim or zone, plus alternatives, and recomputes when the map changes. Vehicle capability matters: a 4x4 may cross shallow water and an ambulance may not.

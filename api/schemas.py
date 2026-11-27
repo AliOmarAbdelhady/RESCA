@@ -1,4 +1,4 @@
-"""Pydantic schemas for the RESCA API."""
+"""Pydantic schemas for the RescueVision API."""
 
 from __future__ import annotations
 

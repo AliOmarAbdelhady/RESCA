@@ -1,8 +1,8 @@
 {
-  "name": "resca-frontend",
+  "name": "rescuevision-frontend",
   "private": true,
   "version": "0.1.0",
-  "description": "RESCA frontend platform: Expo mobile app + React web dashboard + shared API gateway (monorepo)",
+  "description": "RescueVision frontend platform: Expo mobile app + React web dashboard + shared API gateway (monorepo)",
   "packageManager": "pnpm@9.15.0",
   "engines": {
     "node": ">=20.0.0"

@@ -1,6 +1,6 @@
 import pytest
 
-from resca_ai.v4.ablation_audit import validate_training_audit
+from rescuevision_ai.v4.ablation_audit import validate_training_audit
 
 
 def valid_report():

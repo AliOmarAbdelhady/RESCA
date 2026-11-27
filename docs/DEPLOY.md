@@ -32,4 +32,4 @@ deploy/
 
 ## When the AI services are down
 
-The rest of RESCA keeps working: reports, alerts, routing and SOS do not depend on AI. The UI shows "AI unavailable" on affected views; queued analysis resumes when the service returns (B10).
+The rest of RescueVision keeps working: reports, alerts, routing and SOS do not depend on AI. The UI shows "AI unavailable" on affected views; queued analysis resumes when the service returns (B10).

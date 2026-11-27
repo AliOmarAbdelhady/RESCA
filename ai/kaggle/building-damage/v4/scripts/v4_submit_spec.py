@@ -9,8 +9,8 @@ import json
 from pathlib import Path
 from typing import Any
 
-from resca_ai.v4.artifacts import write_json_atomic
-from resca_ai.v4.contracts import ExperimentConfig, load_experiment
+from rescuevision_ai.v4.artifacts import write_json_atomic
+from rescuevision_ai.v4.contracts import ExperimentConfig, load_experiment
 
 
 class SubmissionSpecError(ValueError):
@@ -30,7 +30,7 @@ def build_submission_spec(config_path: Path, *, stage: str, out_dir: Path) -> Pa
     config = load_experiment(config_path)
     source_text = (
         "# V4 Kaggle wrapper source; package artifact must be attached immutably.\n"
-        "from resca_ai.v4.cli import main\n"
+        "from rescuevision_ai.v4.cli import main\n"
         "main()\n"
     )
     immutable_inputs = {

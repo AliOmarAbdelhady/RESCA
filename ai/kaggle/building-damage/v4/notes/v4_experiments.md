@@ -1,4 +1,4 @@
-# RESCA V4 experiment registry
+# RescueVision V4 experiment registry
 
 This registry records the V4 implementation gates separately from model scores. A
 passing local test does not imply a Kaggle run, an artifact transfer, or useful
@@ -46,7 +46,7 @@ an authenticated Kaggle/Colab runtime and return verifiable artifacts.
 | K35 | Epoch-2 output verification | ERROR (v1–v3) | Private CPU script `aliomarsaleh/rv4-d0-epoch-2-output-verification`: v1 and v2 failed because no K20 manifest was found. MCP `kernelDataSources` and `kernelDataSourcesSetter` individually did not provide the mount. Version 3 attempted both fields with `QuickSave` as a metadata-only probe; Kaggle nevertheless executed and failed while parsing the script as a notebook, and metadata still omitted both input sources. No checkpoint or prediction verification occurred. | Resolve input attachment and script/notebook format before re-running; inputs required are outputs of K20 and K33. Do not claim artifact verification or resume K33 until verified. Successful reconstruction will still not establish independent target-rasterizer parity. |
 | K36 | Epoch-2 output verification repair | PASS | Private CPU script `aliomarsaleh/rv4-epoch2-output-verification-repair`, version 1 COMPLETE; verified K20 manifest SHA-256 `4c4a2a19c96198eda84088efcb8dcfbf6eb4d6f6c41b2336853e5cc0c038e619`, K33 checkpoint SHA-256 `39a7fbf4e56ee35d165853bd49c5c127fa406486d0e2ccbf4dd6b313ca2a7372`, all 139 prediction hashes and reconstructed counts and combined F1 `0.23689101489132758`. K33 report SHA-256 `c46c70fe848e34d87d5391a5223baa0b5e8337bf9f629fdbd788ef71b5f25ea4`. | Stored artifact integrity and metric reconstruction pass. This does not establish independent target-rasterizer parity or official test performance. Minor and major damage F1 remain zero. |
 | K37 | Weighted damage loss baseline regression | PASS (expected RED) | Private CPU script `aliomarsaleh/rv4-weighted-loss-red`, version 1 COMPLETE; against an embedded copy of the existing unweighted baseline, 5 expected failures and 2 passes demonstrate that weighting and weight validation are not provided by the baseline. | Use as regression evidence, not a training result. |
-| K38 | Weighted damage loss unit checks | PASS (bounded CPU) | Private CPU script `aliomarsaleh/rv4-weighted-loss-green`, version 2 COMPLETE; 9 tests passed against embedded `src/resca_ai/v4/losses.py`, including uniform loss/gradient equivalence, weighted mean, ignored labels, empty mask, per-class gradients, invalid labels and weight rejection. | Helper tested on Kaggle CPU only; it is not yet integrated into a training stage, tested with real labels or validated on GPU. Do not claim an improved accuracy result. |
+| K38 | Weighted damage loss unit checks | PASS (bounded CPU) | Private CPU script `aliomarsaleh/rv4-weighted-loss-green`, version 2 COMPLETE; 9 tests passed against embedded `src/rescuevision_ai/v4/losses.py`, including uniform loss/gradient equivalence, weighted mean, ignored labels, empty mask, per-class gradients, invalid labels and weight rejection. | Helper tested on Kaggle CPU only; it is not yet integrated into a training stage, tested with real labels or validated on GPU. Do not claim an improved accuracy result. |
 | K39 | Epoch-3 ablation synthetic resume comparison | PASS (bounded CPU) | Private CPU script `aliomarsaleh/rv4-epoch3-ablation-resume-test`, versions 1 and 2 COMPLETE; one test passed for restoration of a synthetic epoch-2 full-mode checkpoint including optimizer/RNG and equality of one unweighted versus uniform-weight update. Dataset and production checkpoint are not used. | K34 artifact integrity and real-data GPU rehearsals remain pending; the draft has not been used for training. This synthetic test does not establish full-run numerical determinism. |
 | K40 | Training-audit identity validation | PASS (synthetic CPU) | `aliomarsaleh/rv4-ablation-audit-red` v1 demonstrated six expected failures for an unchecked audit; `aliomarsaleh/rv4-ablation-audit-green` v1 passed seven tests on the validator for changed counts, label order, manifest and train/validation coverage. | The K34 output file itself remains unverified; the draft checks it, records its hash and rejects report fields inconsistent with K34 stdout when mounted. |
 | K41 | Paired epoch-3 preparation comparison | PASS (packaging only) | Private CPU script `aliomarsaleh/rv4-epoch3-package-test`, version 1 COMPLETE, ran `scripts/v4_prepare_epoch3_ablation.py` remotely: both bounded arms use the same source archive SHA-256 `d1a016602938da33710a625e0654957cae1d8b3887ee9e8481d396d3d8c57905`, same metadata inputs and GPU request, and differ only in arm configuration. No training cells were executed. | Source archive was generated in the test environment and must be re-identified if the source changes. Actual mounts, K34 file, production checkpoint restore and GPU rehearsal remain unverified. |
@@ -72,17 +72,17 @@ an authenticated Kaggle/Colab runtime and return verifiable artifacts.
 
 ## Current V4 interfaces
 
-- `resca_ai.v4.contracts`: `ExperimentConfig` and immutable `SampleRecord`.
-- `resca_ai.v4.artifacts`: atomic JSON, SHA-256 validation, complete-file manifests and resume compatibility checks.
-- `resca_ai.v4.data_audit`: `audit_dataset(root, adapter, out_dir)` for an xBD-shaped raw tree.
-- `resca_ai.v4.datasets`: `load_manifest` and `PairedDataset` with separate localization and damage validity masks.
-- `resca_ai.v4.evaluation`: `OfficialAccumulator` for the external `0..4` encoding. Internal `255` ignore values must be resolved before scoring.
-- `resca_ai.v4.models.distillation`: frozen-teacher wrapper, trainable feature projection, normalized valid-patch loss and cache identity for the DINOv3 7B teacher branch.
-- `resca_ai.v4.models.post_only`: five-class post-event typology label map, independent macro-F1 and footprint-conditioned classification head.
-- `resca_ai.v4.models.defects`: explicit absent/negative/positive annotation handling, overlapping dense masks and independent sigmoid channels.
-- `resca_ai.v4.task_adapters`: grouped structure/photo split-integrity checks shared by specialist datasets.
-- `resca_ai.v4.specialist_datasets`: strict post-only and defect JSONL adapters that preserve annotation-unit, footprint-source and missing-label provenance.
-- `resca_ai.v4.bundle`: self-contained checkpoint hash, preprocessing identity, label-map/recipe metadata and deterministic reference-prediction digest.
+- `rescuevision_ai.v4.contracts`: `ExperimentConfig` and immutable `SampleRecord`.
+- `rescuevision_ai.v4.artifacts`: atomic JSON, SHA-256 validation, complete-file manifests and resume compatibility checks.
+- `rescuevision_ai.v4.data_audit`: `audit_dataset(root, adapter, out_dir)` for an xBD-shaped raw tree.
+- `rescuevision_ai.v4.datasets`: `load_manifest` and `PairedDataset` with separate localization and damage validity masks.
+- `rescuevision_ai.v4.evaluation`: `OfficialAccumulator` for the external `0..4` encoding. Internal `255` ignore values must be resolved before scoring.
+- `rescuevision_ai.v4.models.distillation`: frozen-teacher wrapper, trainable feature projection, normalized valid-patch loss and cache identity for the DINOv3 7B teacher branch.
+- `rescuevision_ai.v4.models.post_only`: five-class post-event typology label map, independent macro-F1 and footprint-conditioned classification head.
+- `rescuevision_ai.v4.models.defects`: explicit absent/negative/positive annotation handling, overlapping dense masks and independent sigmoid channels.
+- `rescuevision_ai.v4.task_adapters`: grouped structure/photo split-integrity checks shared by specialist datasets.
+- `rescuevision_ai.v4.specialist_datasets`: strict post-only and defect JSONL adapters that preserve annotation-unit, footprint-source and missing-label provenance.
+- `rescuevision_ai.v4.bundle`: self-contained checkpoint hash, preprocessing identity, label-map/recipe metadata and deterministic reference-prediction digest.
 
 The Kaggle notebooks under `ai/kaggle/building-damage/v4/` are intentionally thin
 wrappers. They read environment-provided immutable inputs and call the V4

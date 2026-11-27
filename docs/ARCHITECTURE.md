@@ -1,6 +1,6 @@
 # Architecture
 
-Locked. How RESCA fits together, end to end. The reasons are in [DECISIONS.md](DECISIONS.md). Rule IDs (B4, C2…) point to [RULES_INDEX.md](RULES_INDEX.md).
+Locked. How RescueVision fits together, end to end. The reasons are in [DECISIONS.md](DECISIONS.md). Rule IDs (B4, C2…) point to [RULES_INDEX.md](RULES_INDEX.md).
 
 ## Containers
 

@@ -6,10 +6,10 @@ import hashlib
 import pytest
 import numpy as np
 from PIL import Image, ImageDraw
-import resca_ai.v4.datasets as datasets
+import rescuevision_ai.v4.datasets as datasets
 
-from resca_ai.v4.contracts import ContractError
-from resca_ai.v4.datasets import _rasterize_xbd_label
+from rescuevision_ai.v4.contracts import ContractError
+from rescuevision_ai.v4.datasets import _rasterize_xbd_label
 
 
 def _write_label(path, features):

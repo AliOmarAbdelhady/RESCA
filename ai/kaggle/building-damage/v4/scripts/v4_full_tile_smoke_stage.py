@@ -18,8 +18,8 @@ from PIL import Image
 from torch import nn
 from torch.nn import functional as F
 
-from resca_ai.v4.datasets import _rasterize_xbd_label
-from resca_ai.v4.evaluation import OfficialAccumulator
+from rescuevision_ai.v4.datasets import _rasterize_xbd_label
+from rescuevision_ai.v4.evaluation import OfficialAccumulator
 
 MANIFEST_HASH = "4c4a2a19c96198eda84088efcb8dcfbf6eb4d6f6c41b2336853e5cc0c038e619"
 DATA_ROOT = Path("/kaggle/input/datasets/tunguz/xview2-challenge-dataset-train-and-test/train/train")

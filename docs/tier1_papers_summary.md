@@ -1,12 +1,12 @@
 # Tier 1 Papers: Summaries
 
-Summaries of the seven most important papers for RESCA (ranks 1–7 in [research_papers.md](research_papers.md)). Each one explains what the paper is about, its key idea, its main result, how RESCA uses it and what it does not solve. Citations use IEEE numeric style; the full references are at the end.
+Summaries of the seven most important papers for RescueVision (ranks 1–7 in [research_papers.md](research_papers.md)). Each one explains what the paper is about, its key idea, its main result, how RescueVision uses it and what it does not solve. Citations use IEEE numeric style; the full references are at the end.
 
 > These summaries were written from knowledge of the papers and the model settings in `configs/`. Check each number against the original paper before submitting the report.
 
 ## At a glance
 
-| Rank | Paper | Used in RESCA for | Config file(s) |
+| Rank | Paper | Used in RescueVision for | Config file(s) |
 |---|---|---|---|
 | 1 | U-Net [1] | Building segmentation, damage segmentation, change detection | `building_seg_unet.yaml`, `damage_seg_unet_6ch.yaml`, `change_siamese_unet.yaml` |
 | 2 | ResNet [2] | ResNet34 encoder for the building U-Net, Siamese U-Net and ChangeFormer | `building_seg_unet.yaml`, `change_siamese_unet.yaml`, `changeformer_xbd.yaml` |
@@ -28,15 +28,15 @@ Summaries of the seven most important papers for RESCA (ranks 1–7 in [research
 
 **Main result.** U-Net won the ISBI 2015 cell-tracking challenge by a large margin. It needed only a few dozen training images and segmented a 512×512 image in under a second on a GPU [1].
 
-**How RESCA uses it.** U-Net is the main architecture of the project:
+**How RescueVision uses it.** U-Net is the main architecture of the project:
 
 - building segmentation from the pre-disaster image (3 channels, ResNet34 encoder);
 - damage segmentation from the pre and post images stacked together (6 channels, EfficientNet-B3 encoder, 5 classes);
 - a Siamese version for change detection, which runs both images through shared encoders.
 
-Building outlines need sharp boundaries, so the skip connections matter directly for RESCA's building masks.
+Building outlines need sharp boundaries, so the skip connections matter directly for RescueVision's building masks.
 
-**What it does not solve.** U-Net was not designed for satellite images or for comparing two dates. RESCA adapts it by stacking the before/after images (6 channels) or using a Siamese design. Its accuracy on a new disaster still depends on how similar that disaster is to the training data (xBD [8]).
+**What it does not solve.** U-Net was not designed for satellite images or for comparing two dates. RescueVision adapts it by stacking the before/after images (6 channels) or using a Siamese design. Its accuracy on a new disaster still depends on how similar that disaster is to the training data (xBD [8]).
 
 ---
 
@@ -50,7 +50,7 @@ Building outlines need sharp boundaries, so the skip connections matter directly
 
 **Main result.** The paper trained networks of up to 152 layers on ImageNet. An ensemble reached 3.57% top-5 error and won the ILSVRC 2015 classification challenge [2].
 
-**How RESCA uses it.** ResNet34, pretrained on ImageNet, is the encoder of:
+**How RescueVision uses it.** ResNet34, pretrained on ImageNet, is the encoder of:
 
 - the building segmentation U-Net;
 - the Siamese U-Net for change detection;
@@ -72,7 +72,7 @@ Starting from ImageNet weights means the encoder already recognises edges, textu
 
 **Main result.** EfficientNet-B7 reached 84.3% top-1 accuracy on ImageNet while being 8.4 times smaller and 6.1 times faster than the best previous network [3]. Smaller versions gave strong accuracy for far less computation.
 
-**How RESCA uses it.** EfficientNet-B3, pretrained on ImageNet, is used as:
+**How RescueVision uses it.** EfficientNet-B3, pretrained on ImageNet, is used as:
 
 - the encoder of the 6-channel damage segmentation U-Net;
 - the backbone of the per-building damage classifier (4 classes), as an alternative to DINOv3.
@@ -93,7 +93,7 @@ B3 is a practical middle size: accurate enough for damage levels, small enough t
 
 **Main result.** The authors report that frozen DINOv3 features outperform earlier self-supervised and weakly supervised models across many benchmarks, with the largest gains on dense tasks such as segmentation [4]. Meta also released versions pretrained on **SAT-493M**, a set of 493 million satellite images from Maxar at 0.6 m resolution [4].
 
-**How RESCA uses it.** The per-building damage classifier uses a frozen self-supervised backbone with a small MLP head that predicts 4 damage levels from building crops. This makes training fast and reduces overfitting when labelled damage examples are limited. The satellite-pretrained DINOv3 versions are a closer match to xBD imagery than models trained only on everyday photos.
+**How RescueVision uses it.** The per-building damage classifier uses a frozen self-supervised backbone with a small MLP head that predicts 4 damage levels from building crops. This makes training fast and reduces overfitting when labelled damage examples are limited. The satellite-pretrained DINOv3 versions are a closer match to xBD imagery than models trained only on everyday photos.
 
 > **Note:** `configs/dinov2_damage_classifier.yaml` still loads `facebook/dinov2-base`. Update the config to a DINOv3 checkpoint before reporting DINOv3 results.
 
@@ -114,7 +114,7 @@ B3 is a practical middle size: accurate enough for damage levels, small enough t
 
 **Main result.** SegFormer gave better accuracy than previous methods with far fewer parameters. The largest version (B5) reached 84.0% mIoU on the Cityscapes validation set, and it was more robust to image corruptions than CNN-based models [5].
 
-**How RESCA uses it.** SegFormer is used for:
+**How RescueVision uses it.** SegFormer is used for:
 
 - FloodNet segmentation (10 classes), with `segformer-b2` pretrained on ADE20K;
 - alternative building segmentation (B2, 2 classes) and damage segmentation (B3, 5 classes, 6-channel input) on xBD.
@@ -135,7 +135,7 @@ This allows a direct comparison between CNN-based U-Nets and a Transformer-based
 
 **Main result.** The Transformer set new state-of-the-art translation scores (28.4 BLEU on English–German) at a fraction of the training cost of earlier models [6].
 
-**How RESCA uses it.** Indirectly, but fundamentally. Three model families in the project are Transformers:
+**How RescueVision uses it.** Indirectly, but fundamentally. Three model families in the project are Transformers:
 
 - **SegFormer** (segmentation);
 - **DINOv3** (building damage classifier, a Vision Transformer);
@@ -161,7 +161,7 @@ This paper is the reason those models exist and should be cited when explaining 
 
 **Main result.** FCN improved PASCAL VOC 2012 segmentation to 62.2% mean IoU, a 20% relative improvement over earlier methods, while running much faster [7].
 
-**How RESCA uses it.** Indirectly. Every segmentation model in the project (U-Net, Siamese U-Net, SegFormer) follows the FCN idea of a dense, pixel-level output trained end to end. U-Net extends FCN's skip connections into a full symmetric decoder.
+**How RescueVision uses it.** Indirectly. Every segmentation model in the project (U-Net, Siamese U-Net, SegFormer) follows the FCN idea of a dense, pixel-level output trained end to end. U-Net extends FCN's skip connections into a full symmetric decoder.
 
 **What it does not solve.** FCN's outputs are coarse around object edges. Later designs, including U-Net, were created to recover sharper boundaries, which matter for building outlines.
 
@@ -170,9 +170,9 @@ This paper is the reason those models exist and should be cited when explaining 
 ## How the seven papers connect
 
 - **FCN [7]** introduced pixel-level prediction → **U-Net [1]** refined it with a symmetric decoder and skip connections.
-- **ResNet [2]** and **EfficientNet [3]** provide the pretrained CNN encoders inside RESCA's U-Nets.
+- **ResNet [2]** and **EfficientNet [3]** provide the pretrained CNN encoders inside RescueVision's U-Nets.
 - **Attention Is All You Need [6]** introduced the Transformer → **SegFormer [5]** and **DINOv3 [4]** apply it to images.
-- RESCA uses both lines (CNN U-Nets and Transformers), so the report can compare them on the same xBD [8] and FloodNet [9] data.
+- RescueVision uses both lines (CNN U-Nets and Transformers), so the report can compare them on the same xBD [8] and FloodNet [9] data.
 
 ## References
 

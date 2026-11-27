@@ -1,6 +1,6 @@
 # backend/AGENTS.md
 
-FastAPI app and worker, package `src/resca_api`. Read [docs/BACKEND.md](../docs/BACKEND.md) before any change. Locked.
+FastAPI app and worker, package `src/rescuevision_api`. Read [docs/BACKEND.md](../docs/BACKEND.md) before any change. Locked.
 
 Gate: `make check-static check-api` (and `make check-db` if SQL changes).
 

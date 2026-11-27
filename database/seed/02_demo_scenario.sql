@@ -44,7 +44,7 @@ BEGIN
 
   -- password_hash values are placeholders; the API stores argon2 hashes.
   INSERT INTO users (agency_id, role_code, full_name, email, password_hash, status) VALUES
-    (NULL, 'PLATFORM_ADMIN', 'Platform Admin', 'admin@resca.local', 'demo-not-a-real-hash', 'ACTIVE') RETURNING id INTO u_admin;
+    (NULL, 'PLATFORM_ADMIN', 'Platform Admin', 'admin@rescuevision.local', 'demo-not-a-real-hash', 'ACTIVE') RETURNING id INTO u_admin;
   INSERT INTO users (agency_id, role_code, full_name, email, password_hash, job_title, status) VALUES
     (a_gov, 'COMMANDER', 'Demo Crisis Coordinator', 'coordinator@gov.demo', 'demo-not-a-real-hash', 'Crisis Coordinator', 'ACTIVE') RETURNING id INTO u_gov_cmd;
   INSERT INTO users (agency_id, role_code, full_name, email, password_hash, job_title, status) VALUES

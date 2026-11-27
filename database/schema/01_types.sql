@@ -1,4 +1,4 @@
--- RESCA database: enumerated types
+-- RescueVision database: enumerated types
 -- Fixed vocabularies live here. Anything agencies may edit (roles, permissions,
 -- hazard rules, cost profiles) is a lookup table instead.
 

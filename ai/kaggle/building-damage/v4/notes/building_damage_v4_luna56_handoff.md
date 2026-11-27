@@ -12,7 +12,7 @@
 
 ## Global constraints
 
-**Execution boundary:** the RESCA laptop is source-only for this project.
+**Execution boundary:** the RescueVision laptop is source-only for this project.
 Do not run pytest, the V4 CLI, notebooks, model downloads, data audits, or
 training on its CPU/GPU. Runtime validation and all accelerator work must run
 in an authenticated Kaggle or Colab session, with outputs returned as hashed
@@ -38,11 +38,11 @@ not evidence for a remote gate.
 
 ## First actions once implementation is authorized
 
-Read repository instructions, `git status`, `pyproject.toml`, current configs, the research document, and this file. Confirm whether `src/resca_ai` is still absent. Inspect relevant history without restoring it automatically. Create a short status entry listing what is present, missing, already running, and safe to reuse. Discover Kaggle tools and current schemas again. Start with L1–L3 locally; do not jump straight to the 7B model or a full GPU run.
+Read repository instructions, `git status`, `pyproject.toml`, current configs, the research document, and this file. Confirm whether `src/rescuevision_ai` is still absent. Inspect relevant history without restoring it automatically. Create a short status entry listing what is present, missing, already running, and safe to reuse. Discover Kaggle tools and current schemas again. Start with L1–L3 locally; do not jump straight to the 7B model or a full GPU run.
 
 ## Proposed files and boundaries
 
-Keep all new research code under `src/resca_ai/v4/`, with minimal package initializers. Existing CLI/API imports refer to removed legacy modules; implementing V4 does not justify silently faking those modules or claiming the whole API is repaired.
+Keep all new research code under `src/rescuevision_ai/v4/`, with minimal package initializers. Existing CLI/API imports refer to removed legacy modules; implementing V4 does not justify silently faking those modules or claiming the whole API is repaired.
 
 | File | Responsibility |
 |---|---|
@@ -151,7 +151,7 @@ Initial frozen-head recipe: native 512 crops, AdamW head learning rate `3e-4`, w
 
 **Files:** create `cli.py`, `scripts/v4_submit_spec.py`, thin notebooks, `tests/v4/test_submission_spec.py` and `outputs/v4/registry.jsonl` at execution time.
 
-**CLI contract to implement:** `python3 -m resca_ai.v4.cli audit --config PATH`; `train --config PATH [--resume PATH]`; `evaluate --config PATH --checkpoint PATH`; `profile --config PATH`; `predict --config PATH --checkpoint PATH --pre-image PATH --post-image PATH --out-dir PATH`. Submission builder accepts `--config`, `--stage` and `--out-dir`; it only writes reviewable source/specification artifacts and performs no network submission.
+**CLI contract to implement:** `python3 -m rescuevision_ai.v4.cli audit --config PATH`; `train --config PATH [--resume PATH]`; `evaluate --config PATH --checkpoint PATH`; `profile --config PATH`; `predict --config PATH --checkpoint PATH --pre-image PATH --post-image PATH --out-dir PATH`. Submission builder accepts `--config`, `--stage` and `--out-dir`; it only writes reviewable source/specification artifacts and performs no network submission.
 
 Notebook source loads a pinned package artifact, verifies its checksum, resolves attached input hashes and invokes one CLI stage. Never clone the moving default branch. Package/environment provenance must be available before importing the experiment. Keep dependency installation failures fatal. Do not reinstall the entire unrelated geospatial/reporting stack into every training job.
 

@@ -5,9 +5,9 @@ FloodNet segmentation with SegFormer-B2 (local `07_` and Kaggle E9), plus transf
 | Notebook | Title |
 |---|---|
 | `07_floodnet_segmentation.ipynb` | 07 - FloodNet Segmentation (SegFormer-B2) |
-| `rv_floodnet_repro.ipynb` | RESCA - FloodNet transform repro (CPU) |
-| `rv_floodnet_tilepack.ipynb` | RESCA - FloodNet tile pack (CPU) |
-| `rv_floodnet_train_smp.ipynb` | RESCA - FloodNet train from tar (SMP SegFormer) |
-| `rv_train_floodnet_segformer.ipynb` | RESCA - E9 FloodNet SegFormer B2 |
+| `rv_floodnet_repro.ipynb` | RescueVision - FloodNet transform repro (CPU) |
+| `rv_floodnet_tilepack.ipynb` | RescueVision - FloodNet tile pack (CPU) |
+| `rv_floodnet_train_smp.ipynb` | RescueVision - FloodNet train from tar (SMP SegFormer) |
+| `rv_train_floodnet_segformer.ipynb` | RescueVision - E9 FloodNet SegFormer B2 |
 
 Results are recorded in each notebook's Kaggle run; none are copied here until they are re-verified.

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Generate the RESCA ERD as draw.io XML from the live PostgreSQL catalog.
+"""Generate the RescueVision ERD as draw.io XML from the live PostgreSQL catalog.
 
 Reads pg_class / pg_attribute / pg_constraint / pg_index through `psql` (no
 Python database driver required) and writes:
 
-    docs/database/resca-erd.drawio
+    docs/database/rescuevision-erd.drawio
 
 Pages:
     1      Overview        domain map only (fits 1920x1080)
@@ -42,11 +42,11 @@ PG_ENV = {
     "PGPORT": os.environ.get("PGPORT", "55432"),
     "PGUSER": os.environ.get("PGUSER", "postgres"),
     "PGPASSWORD": os.environ.get("PGPASSWORD", "test"),
-    "PGDATABASE": os.environ.get("PGDATABASE", "resca"),
+    "PGDATABASE": os.environ.get("PGDATABASE", "rescuevision"),
 }
 
 OUT_PATH = (
-    Path(__file__).resolve().parents[2] / "docs" / "database" / "resca-erd.drawio"
+    Path(__file__).resolve().parents[2] / "docs" / "database" / "rescuevision-erd.drawio"
 )
 
 # --------------------------------------------------------------------------
@@ -158,7 +158,7 @@ def psql(sql: str) -> list[list[str]]:
     if proc.returncode != 0:
         sys.stderr.write(proc.stderr)
         raise SystemExit(
-            "psql failed (is resca reachable at "
+            "psql failed (is rescuevision reachable at "
             f"{PG_ENV['PGHOST']}:{PG_ENV['PGPORT']}?)"
         )
     return [line.split("\t") for line in proc.stdout.splitlines() if line.strip()]
@@ -630,7 +630,7 @@ def table_edges(fks: list[ForeignKey], names: set[str], internal_only: bool) -> 
 def emit_overview(mxfile, tables: dict[str, Table], fks: list[ForeignKey], stats: dict) -> None:
     model, root = new_page(mxfile, "p1", "Overview")
     add_text(root, "p1-title", 40, 26, 1800, 42,
-             "RESCA \u00b7 Domain Map (8 domains, 56 tables)", size=24, bold=True)
+             "RescueVision \u00b7 Domain Map (8 domains, 56 tables)", size=24, bold=True)
     add_text(root, "p1-sub", 40, 70, 1800, 22,
              "Boxes list tables only. Each line is one domain pair that has foreign keys; "
              "the label is the number of FKs (audit \u2018who did it\u2019 links excluded).",
@@ -779,7 +779,7 @@ def emit_full_page(mxfile, page_no: int, tables: dict[str, Table], fks: list[For
     model, root = new_page(mxfile, f"p{page_no}", "Full ERD")
     page_tag = f"p{page_no}"
     add_text(root, f"{page_tag}-title", PAGE_MARGIN, 20, 2000, 40,
-             "RESCA \u00b7 Full ERD (56 tables, grouped by domain)", size=22, bold=True)
+             "RescueVision \u00b7 Full ERD (56 tables, grouped by domain)", size=22, bold=True)
     add_text(root, f"{page_tag}-sub", PAGE_MARGIN, 60, 2200, 22,
              "Domain clusters; PK/FK/UQ markers; crow's foot at the child, bar/circle at "
              "the parent. Audit \u2018who did it\u2019 user FKs are shown as rows only.",
@@ -1065,7 +1065,7 @@ def main() -> None:
     if unknown:
         raise SystemExit(f"Domain names absent from the database: {unknown}")
 
-    mxfile = ET.Element("mxfile", host="RESCA ERD generator")
+    mxfile = ET.Element("mxfile", host="RescueVision ERD generator")
     stats: dict = {"pages": []}
     emit_overview(mxfile, tables, fks, stats)
     for page_no, (domain_key, *_rest) in enumerate(DOMAINS, start=2):

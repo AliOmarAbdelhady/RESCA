@@ -5,8 +5,8 @@ import argparse
 import logging
 import sys
 
-from resca.retrieval.build_index import build_faiss_index
-from resca.utils.config import load_config
+from rescuevision.retrieval.build_index import build_faiss_index
+from rescuevision.utils.config import load_config
 
 
 def main():

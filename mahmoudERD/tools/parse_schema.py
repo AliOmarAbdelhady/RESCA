@@ -1,4 +1,4 @@
-"""Parse RESCA PostgreSQL DDL files into a simple table/column/FK model."""
+"""Parse RescueVision PostgreSQL DDL files into a simple table/column/FK model."""
 from __future__ import annotations
 
 import re
